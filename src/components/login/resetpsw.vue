@@ -1,0 +1,108 @@
+<template>	
+	<div class="login">
+		<div class="box">
+			<div style="font-size:25px;">重置您的密码</div>
+			<el-form ref="form" :model="form">
+				<el-form-item>
+					<el-input type="password" class="width" v-model="form.psw" placeholder="请输入6-16位密码"></el-input>
+				</el-form-item>
+				<el-form-item>
+					<el-input type="password" class="width" v-model="form.password" placeholder="请再输入一次密码" @keyup.enter.native="next"></el-input>
+				</el-form-item>
+				<el-form-item>
+					<el-button type="primary" class="submit" @click="next">保存并继续</el-button>
+				</el-form-item>
+			</el-form>
+			<p style="margin-top:20px;text-align:center;">点击“保存并继续”,即表示您确认接收服务条款喝隐私政策。</p>
+		</div>
+	</div>
+</template>
+<script>
+	export default{
+		components:{
+
+		},
+		data(){
+			return{
+				form:{
+					psw:"",
+					password:""
+				}
+			}
+		},
+		props: {},
+		watch:{
+
+		},
+		methods:{
+			next(){
+				var  _this = this
+				if (this.form.psw==this.form.password && this.form.psw.length>=6 && this.form.password.length>=6 && this.form.psw.length<16 && this.form.password.length<16) {
+					let param = new FormData();
+					  let resetToken =sessionStorage.getItem('resetToken');
+					  
+					  param.append('password', this.form.password);
+					  param.append('updateToken',resetToken);
+					  this.$ajax.post('/user/updatePassword',param).then(function (response) {
+					  	if (response.data.complete=="SUCCESS") {
+					  		_this.$message({
+					          message: '恭喜你，修改密码成功',
+					          type: 'success'
+					        })
+					  		_this.$router.push({
+				        		path: '/login'
+				     		})
+					  	}					  	
+					  }).catch(function (error) {
+					     _this.$message("服务器异常")
+					  });
+				}else if (!this.form.psw || !this.form.password){
+					_this.$message("输入密码不能为空")
+				}else if (this.form.psw != this.form.password){
+					_this.$message("两次输入密码不一致")
+				}
+        	  
+			  
+        
+        	}
+		},
+		computed:{
+
+		},
+		created () {},
+		mounted () {},
+	  	destroyed () {}
+	} 
+</script>
+<style scoped>
+	.login{
+		width: 100%;
+	}
+	.box{
+		width: 500px;
+		height: 400px;
+		background: white;
+		margin: 100px auto;
+		border-radius: 5px;
+		padding: 35px;
+	}
+	.el-input{
+		margin-top: 20px;
+		height: 50px;
+		border:0;
+	}
+	.yzminput{
+		width: 270px;
+	}
+	.yzm{
+		width: 170px;
+		margin-left: 30px;
+	}
+	.width{
+		width: 470px;
+	}
+	.submit{
+		width: 470px;
+		margin-top: 30px;
+	}
+</style>
