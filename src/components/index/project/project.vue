@@ -1,7 +1,7 @@
 
 <template>	
 	<div class="project">
-		<div class="box" v-for="(item,index) in project">
+		<div class="box" v-for="(item,index) in project" :key="index">
 			<div class="status">
 				<el-progress :text-inside="true" :stroke-width="17" :percentage="item.completeAmount" ></el-progress>
 				<img style="position:absolute;top:0;left0;z-index:-1;width:100%;height:100%;" v-lazy="item.fileServer+'/'+item.imageUrl" alt="" :onerror="defaultImg">
@@ -23,17 +23,15 @@
 					<el-button type="primary" plain v-if='item.examineType=="EXAMINE_PASS" && item.completeAmount==100'  @click="Flow(item.id)">查看体验创意</el-button>
 				</div>
 			</div>
-			<div class="button">
-				<i class="el-icon-more" @click="removebox(index)"></i>
-				<div class="removebox" v-show="smallbox">
-					<div class="button" v-if="item.isNotDelete==true"><el-button type="danger"  class="newidea" @click="remove(item.id)">删除</el-button></div>
-					<div class="button" v-if="item.isNotDelete==false"><el-button type="danger" disabled class="newidea" >无法删除</el-button></div>
-				</div>
-			</div>
-
-			
-			<!-- <div class="button" v-if="item.isNotDelete==true"><el-button type="danger"  class="newidea" @click="remove(item.id)">删除</el-button></div>
-			<div class="button" v-if="item.isNotDelete==false"><el-button type="danger" disabled class="newidea" >无法删除</el-button></div> -->
+			<el-dropdown trigger="click">
+			      <span class="el-dropdown-link">
+			       <i class="el-icon-more"></i>
+			      </span>
+			      <el-dropdown-menu slot="dropdown">
+			        <el-dropdown-item><div class="button" v-if="item.isNotDelete==true"><el-button type="danger"  class="newidea" @click="remove(item.id)">删除</el-button></div></el-dropdown-item>
+			        <el-dropdown-item><div class="button" v-if="item.isNotDelete==false"><el-button type="danger" disabled class="newidea" >无法删除</el-button></div></el-dropdown-item>
+			      </el-dropdown-menu>
+			</el-dropdown>
 		</div>
 	</div>
 </template>
@@ -46,7 +44,7 @@
 			return{
 				defaultImg: 'this.src="' + require('../img/logo.png') + '"',
 				project:[],
-				smallbox:false
+				smallbox:null
 			}
 		},
 		props: {},
@@ -55,7 +53,18 @@
 		},
 		methods:{
 			removebox(index){
-				this.smallbox=!this.smallbox
+				// this.ss = !this.ss
+				// this.smallbox = !this.smallbox;
+				this.smallbox = index
+				// if (this.ss == true) {
+				// // 	console.log(index,this.smallbox)
+				// 	this.smallbox = !index
+				// 	this.ss = false
+				// }
+				// else{
+				// 	this.smallbox = index
+				// 	this.ss = true
+				// }
 			},
 			//查看用户创建完的体验
 			Flow(id){
