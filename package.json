@@ -20,6 +20,7 @@
     "vue-calendar-component": "^2.4.3",
     "vue-cropper": "^0.2.9",
     "vue-fullcalendar": "^1.0.9",
+    "vue-lazyload": "^1.2.3",
     "vue-router": "^3.0.1",
     "vuex": "latest"
   },
