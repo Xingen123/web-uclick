@@ -7,13 +7,13 @@
 			<div style="font-size:18px;margin-top:20px;">{{title}}</div>
 
 			<a  class="upload">
-				<img :src="front"  style="width:360px;height:240px;"   alt="">
+				<img v-lazy="front"  style="width:360px;height:240px;"   alt="">
 				<span v-show="frText">添加正面身份证照片</span>				
     			<input class="change"  name="file" ref="file" type="file"  accept="image/png,image/gif,image/jpeg" @change="update"/>
 			</a>
 			
 			<a  class="upload uploadtwo" >
-				<img :src="reverse"  style="width:360px;height:240px;" alt="">
+				<img v-lazy="reverse"  style="width:360px;height:240px;" alt="">
 				<span v-show="reText">添加反面身份证照片</span>				
     			<input class="change"  name="file" ref="file" type="file"  accept="image/png,image/gif,image/jpeg" @change="updat"/>
 			</a>

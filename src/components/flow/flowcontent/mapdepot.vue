@@ -3,6 +3,8 @@
 		<div style="font-size: 28px;">添加更多照片</div>
 		<p style="margin-top:25px;color:#505050;width:550px;">根据数据显示，配有6张以上图片的体验往往更受欢迎。去添加更多图片让体验获得更多预定吧！</p>
 
+		
+		
 		<!-- 提示 -->
 		<p class="tishi"  @click="fun">更多解释{{msg}}</p>
 		<div v-show="code" class="box">
@@ -10,7 +12,7 @@
 				<div class="right"></span>选择与标题描述一致的图片</div>
 				<div class="right"></span>图片尺寸比例为3:4，大小需小于500KB</div>
 				<div class="right"></span>图片以人物为主，人物场景图片最佳</div>
-				<div class="right"></span>选择姿势自然的体验图片</div>
+				<div class="right"></span>选择有感染力、姿势自然的图片</div>
 			</div>
 			<div class="smalltwo">
 				<div class="not"></span>不要使用闪光灯或太厚重的滤镜</div>
@@ -19,10 +21,28 @@
 				<div class="not"></span>图片主题不可突出儿童、标识、酒类或裸体</div>
 			</div>
 		</div>
+		<!-- 视频 -->
+		<div style="margin-top:50px;color:#505050;font-size: 18px;">视频</div>
 
 
+		<a  class="upVideo" style="margin-top:10px;">
+			<i class="el-icon-upload"></i>
+			<video class="videoB" :src="videoB"   autoplay loop id="video"></video>
+    		<input class="chVideo" type="file" v-show="videoBox" accept="video/*"  @change="upVideo($event)"/>
+
+    		<!-- 有视频悬浮 -->
+    		<div v-show="vid" class="smallVideo" @click="Videochange" >
+				预览<div class="Videoremove" @click.stop="Videoremove()"></div>
+			</div>
+		</a>
+	
+
+
+
+
+		<!-- 图片 -->
 		<div style="margin-top:50px;color:#505050;font-size: 18px;">图库</div>
-		<div class="photo">
+		<div class="photo" >
 			<div  class="imgbox"  v-for="(item,index) in photoItem">
 					<div class="smallbg" @click="cropper(item.fileServer,item.imgUrl,item.id)">
 						编辑
@@ -32,12 +52,12 @@
 			</div>
 		</div>
 
-		<a  class="upload" v-show="none">+
+		<a  class="upload" v-show="none"><i class="el-icon-picture-outline"></i>
     		<input class="change"  name="file" type="file" accept="image/png,image/gif,image/jpeg,image/jpg" @change="update($event, 1)"/>
 		</a>
 		
 		
-		<el-button type="primary" plain style="margin-top:50px;font-size: 18px;" @click="next" :disabled="disabled">下一步</el-button>
+		<el-button type="primary" plain style="margin:50px 0 ;font-size: 18px;" @click="next" :disabled="disabled">下一步</el-button>
 		<div class="bg" v-show="bg">
 			<div class="back" @click="bg=false"></div>
 			<div class="text">编辑图库照片</div>
@@ -79,6 +99,9 @@ import vueCropper from '@/components/login/vue-cropper'
 		},
 		data(){
 			return{
+				vid:false,
+				videoBox:true,
+				videoB:"",
 				code:false,
 				msg:"...",
 				value3:0,
@@ -110,6 +133,97 @@ import vueCropper from '@/components/login/vue-cropper'
 
 		},
 		methods:{
+			// 点击预览
+
+			Videochange(){
+				var docElm = document.getElementById('video'); 
+				console.log(docElm)
+				//W3C
+				if(docElm.requestFullscreen){
+
+				docElm.requestFullscreen();
+
+				}
+				//FireFox
+				else if (docElm.mozRequestFullScreen) {
+
+				docElm.mozRequestFullScreen();
+
+				}
+				//Chrome等
+				else if (docElm.webkitRequestFullScreen) {
+
+				docElm.webkitRequestFullScreen();
+
+				}
+				//IE11
+				else if (elem.msRequestFullscreen) {
+
+				elem.msRequestFullscreen();
+
+				}
+			},
+			//点击删除视频
+			Videoremove(){
+				console.log("删除")
+				let _this = this
+
+				let param = new FormData(); //创建form对象
+
+				let tokenone =sessionStorage.getItem('encryptToken')
+				let detailId =sessionStorage.getItem('detailId')
+
+			    param.append('id',detailId) 
+
+				param.append('token',tokenone)
+
+				_this.$ajax.post('delete/webRecommendVideo',param).then(response=>{
+					if (response.data.complete=="SUCCESS") {
+						_this.videoB = ""
+						_this.videoBox = true
+
+						_this.$message({
+								    message: '删除成功',
+								    type: 'success'
+						})	  
+						_this.vid=false
+					}
+				})  
+			},
+			upVideo(e){
+				let file = e.target.files[0]
+				// this.videoB =  window.URL.createObjectURL(file)
+				// this.videoBox = false
+				this.Up(file)
+				 console.log("选择视频成功")
+			},
+
+			//上传视频
+			Up(videoFile){
+console.log("调用上传接口")
+				let _this = this
+
+				let param = new FormData(); //创建form对象
+
+				let tokenone =sessionStorage.getItem('encryptToken');
+				let detailId =sessionStorage.getItem('detailId');
+
+			    param.append('id',detailId); 
+			   
+				param.append('token',tokenone);
+
+				param.append('videoFile',videoFile);
+
+				console.log('id',detailId,'token',tokenone,'videoFile',videoFile)	
+				_this.$ajax.post('create/webRecommendVideo',param).then(response=>{
+					
+					if (response.data.complete=="SUCCESS") {
+						_this.videoB = response.data.videoUrl
+						_this.vid=true
+					}
+				})  
+
+			},
 			slider(){
 					this.fin(this.value3)
 			},
@@ -147,7 +261,7 @@ import vueCropper from '@/components/login/vue-cropper'
 						  	param.append('token',tokenone);
 						    param.append('imageFile',data);//通过append向form对象添加数据
 						    _this.$ajax.post('update/webRecommendPicture',param).then(response=>{
-						    	console.log(response)
+						    	
 						    	if (response.data.complete=="SUCCESS") {
 						    		_this.bg=false
 						       		_this.photo()
@@ -174,6 +288,7 @@ import vueCropper from '@/components/login/vue-cropper'
 						    param.append('id',id); 
 						  	param.append('token',tokenone);
 						    _this.$ajax.post('delete/webRecommendPicture',param).then(response=>{
+						    	
 						    	 _this.photo() 
 						    	 _this.none=true
 						    	 _this.$message({
@@ -200,6 +315,11 @@ import vueCropper from '@/components/login/vue-cropper'
 			    param.append('id',detailId); 
 			  	param.append('token',tokenone);
 			    this.$ajax.post('query/webRecommendPicture',param).then(response=>{
+			    	if (response.data.videoUrl) {
+			    		_this.videoB = response.data.videoUrl
+			    		_this.vid = true
+			    	}
+			    	
 					if(response.data.recomemndPictureInfoList.length>0){
 			       	global.$emit("tabthree",true)
 			       	_this.photoItem=response.data.recomemndPictureInfoList
@@ -240,7 +360,23 @@ import vueCropper from '@/components/login/vue-cropper'
 				    param.append('id',detailId); 
 				  	param.append('token',tokenone);
 				    param.append('imageFile',file);//通过append向form对象添加数据
+
+				 //    var config= {
+					//  onUploadProgress:function (progressEvent){
+					//   var complete = (progressEvent.loaded / progressEvent.total * 100 | 0) + '%'
+					//   // _this.progress = complete
+					 
+					//  }
+					// }
+
+
+					// this.$ajax.post(`create/webRecommendPicture`,param, config).then((res) => {
+				 //        // if (res.data.status === 'success') {
+				 //            console.log(res)
+				 //        // }
+				 //    })
 				    this.$ajax.post('create/webRecommendPicture',param).then(response=>{
+				    	console.log(response.loaded)
 				    	if (response.data.recomemndPictureInfoList.length==6) {
 				    		_this.none=false
 				    	}
@@ -421,6 +557,7 @@ import vueCropper from '@/components/login/vue-cropper'
 		width: 200px;
 		height: 260px;
 		margin-left: 10px;
+		border-radius: 5px;
 	}
 	.photo>div>img:last-child{
 		
@@ -438,13 +575,43 @@ import vueCropper from '@/components/login/vue-cropper'
 		line-height:260px;
 		text-align: center;
 		transition: 0.4s all;
-		
+		border-radius: 5px;
 		display: none;
 		width: 200px;
 		height: 260px;
 		background: rgba(0,0,0,0.5);
 		position: absolute;
 		left: 10px;
+	}
+/*	.smallVideo{
+		position: relative;
+	}*/
+	.smallVideo{
+		color: white;
+		line-height:260px;
+		text-align: center;
+		transition: 0.4s all;
+		display: none;
+		width: 200px;
+		height: 260px;
+		background: rgba(0,0,0,0.5);
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	.Videoremove{
+		width: 25px;
+		height: 25px;
+		position: absolute;
+		z-index: 1;
+		top: 10px;
+		right: 5px;
+		background: url(img/remove.png) no-repeat;
+		background-size: 100% 100%; 
+	}
+	.upVideo:hover .smallVideo{
+		cursor:pointer;
+		display: block;
 	}
 	.remove{
 		width: 25px;
@@ -460,6 +627,39 @@ import vueCropper from '@/components/login/vue-cropper'
 	display: block;
 	width: 200px;
 	height: 260px;
+	border-radius:5px; 
+	margin-left: 10px;
+	text-align: center;
+    line-height: 260px;
+    position: relative;
+    border: 1px solid #999;
+    text-decoration: none;
+    color: #666;
+}
+.chVideo{
+		width: 200px;
+	height: 260px;
+    position: absolute;
+    overflow: hidden;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.videoB{
+	display: block;
+	position: absolute;
+	right: 0;
+    top: 0;
+	width: 200px;
+	height: 260px;
+	object-fit: fill;
+}
+.upVideo{
+		display: block;
+	width: 200px;
+	height: 260px;
+	border-radius:5px; 
 	margin-left: 10px;
 	text-align: center;
     line-height: 260px;

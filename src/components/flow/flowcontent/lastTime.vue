@@ -43,35 +43,38 @@ import global from '@/components/flow/global/global'
 		      var detailId=sessionStorage.getItem('detailId');
 			  param.append('id',detailId);
 			  this.$ajax.post('query/webRecommendDetail',param).then(function (response) {
-			  	if (response.data.serverProvide!=null) {
-			  		global.$emit("tabnine",true)
+			  	
+			  	if (response.data.readyTime) {
+			  		global.$emit("tabtenFive",true)
 			  		_this.disabled=false
-			  		_this.value5=response.data.serverProvide
+			  		_this.lasttime = response.data.readyTime
 			  	}
 			  }).catch(function (error) {
 			      console.log(error);
 			  })
 			},
 			//像后台发送用户输入的内容
-			thing(){			
+			thing(){		
+
 			  var _this=this
+
 		      let param = new FormData();
-		      console.log(this.value5)
-		      //获取cookie里面的token
+
 		      var tokenone =sessionStorage.getItem('encryptToken');
-			  param.append('token',tokenone);
-			  //获取cookie里面的recommenid
 		      var detailId=sessionStorage.getItem('detailId');
+
+			  param.append('token',tokenone);
+		      
 			  param.append('id',detailId);
-			  param.append('serverProvide',this.value5);
+
+			  param.append('readyTime',this.lasttime);
 			  this.$ajax.post('create/webRecommendDetail',param).then(function (response) {
 			  	if (response.data.complete=="SUCCESS") {
-			  		global.$emit("tabnine",true)
+			  		global.$emit("tabtenFive",true)
 			  		 _this.$router.push({
 				        path: '/flow/remark'
 				    })
 			  	}
-			  	console.log(response)
 			  }).catch(function (error) {
 			      console.log(error);
 			  })

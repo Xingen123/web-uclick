@@ -86,8 +86,7 @@ import global from '@/components/flow/global/global'
 			thing(){			
 			  var _this=this
 		      let param = new FormData();
-		      console.log(this.value5)
-		      //获取cookie里面的token
+		      		      //获取cookie里面的token
 		      var tokenone =sessionStorage.getItem('encryptToken');
 			  param.append('token',tokenone);
 			  //获取cookie里面的recommenid

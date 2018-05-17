@@ -4,7 +4,8 @@
 		<p style="margin-top:25px;color:#505050;width:550px;">除了个人魅力，体验本身是另一个吸引体验者的主要因素。有趣的活动、详细的流程、贴心的提示以及体验中随机出现的小惊喜都能让每个体验者爱上此次体验。
 </p>
 		<el-input type="textarea"
-  :rows="8"  placeholder="例子：咖啡烘焙是了解咖啡最本质的方式，冲泡咖啡需要控制参数、了解萃取的原理，这些仿佛成了人与美好事物之间的沟壑。但其实，探索和尝试才是触达美好事物的核心基础。这次活动，你不需要有经验，我们不讲学术，只体验最真实的咖啡……
+  :rows="8"  placeholder="例：作为时尚博主，我认为的“高级”拍照大法除了时尚博主类型的街拍，就是在咖啡店或艺术展的高级摆拍了：） 这次体验我会带你去逛北京最适合拍照的3家咖啡店，喝咖啡吃甜点，享受的同时你也会收获一组时尚博主质感的街拍。
+  ……
 " style="margin-top:50px;width:500px;font-size:20px;" v-model="input"  :maxlength="1500"  @input="descInput"></el-input>
 		<p v-show="button" style="line-height:40px;">还剩{{number}}个字</p>
 		<el-button type="primary" plain style="width:100px;margin-top:50px;display:block;" @click="go" v-show="next">下一步</el-button>

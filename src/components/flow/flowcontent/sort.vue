@@ -1,7 +1,7 @@
 <template>	
 	<div class="sort">
 		<div style="font-size: 28px;">您提供的体验是什么类型的？</div>
-		<p style="line-height:55px;">一个清晰的体验类别可以帮助您交到更合拍的朋友。</p>
+		<p style="color:#505050;width:550px;">一个清晰的体验类别可以帮助您交到更合拍的朋友。如果您的体验同时也属于其他类别，便请再添加一个类别。</p>
 		<el-select v-model="value" placeholder="请选择" style="margin-top:40px;width:400px;" v-on:input="inputFunc">
 	    <el-option
 	      v-for="item in options"
@@ -72,7 +72,6 @@ import global from '@/components/flow/global/global'
 		      var tokenone =sessionStorage.getItem('encryptToken');
 			  param.append('token',tokenone); 
 			  this.$ajax.post('query/webRecommendType',param).then(function (response) {
-			  	// console.log(response)
 			  	let webTypeInfoList=response.data.webTypeInfoList
 			  	// console.log(webTypeInfoList)
 			  	_this.options=webTypeInfoList	

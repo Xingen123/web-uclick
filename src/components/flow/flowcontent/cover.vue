@@ -8,7 +8,7 @@
 				<div class="right"></span>选择与标题描述一致的图片</div>
 				<div class="right"></span>图片尺寸比例为3:2，大小需小于1M</div>
 				<div class="right"></span>图片以人物为主，人物场景图片最佳</div>
-				<div class="right"></span>选择姿势自然的体验图片</div>
+				<div class="right"></span>选择有感染力、姿势自然的图片</div>
 			</div>
 			<div class="smalltwo">
 				<div class="not"></span>不要使用闪光灯或太厚重的滤镜</div>
@@ -19,7 +19,7 @@
 		</div>
 		<!-- 标题 -->
 		<div style="margin-top:60px;font-size: 20px;">体验标题</div>
-		<p style="margin-top:5px;color:#505050;">一个能吸引更多目光的标题应当简介清晰且描述性强，以第一人称为主会更佳亲切哦。</p>
+		<p style="margin-top:5px;color:#505050;">例：尚珈丞 | 在网红咖啡店拍出最时尚的你</p>
 		<el-input v-model="input" @input="descInput" placeholder="请输入内容" :maxlength="20" style="margin-top:20px;width:500px;"></el-input>
 		<p  style="line-height:40px;">还剩{{number}}个字</p>
 		<div style="margin-top:60px;font-size: 20px;">封面照片</div>
@@ -27,8 +27,8 @@
 		<div v-show="photo" style="margin-top:10px;font-size:20px;">缩略图</div>
 		<p v-show="photo">调整封面图，按您的喜好出现</p>
 		<div v-show="photo" style="width:300px;height:200px;position:relative;" class="bigbox">
-			<img v-lazy="img"   style="width:300px;height:200px;position:absolute;top:0;left:0;border:none;" alt="" >
-			<div style="width:300px;height:200px;background:black;color:white;text-align:center;line-height:200px;position:absolute;cursor:pointer;z-index:1;" class="smallbox" @click="bgtrue"><div class="remove" @click.stop="dialogVisible=true"></div>编辑</div>
+			<img v-lazy="img"   style="width:300px;height:200px;position:absolute;top:0;left:0;border:none;border-radius:5px;" alt="" >
+			<div style="width:300px;height:200px;background:black;color:white;text-align:center;line-height:200px;border-radius:5px;position:absolute;cursor:pointer;z-index:1;" class="smallbox" @click="bgtrue"><div class="remove" @click.stop="dialogVisible=true"></div>编辑</div>
 		</div>
 
 		<!-- 确认删除上传图片的弹框 -->
@@ -172,7 +172,7 @@ import axios from 'axios'
 			  			_this.photo=true			  
         				_this.img =response.data.fileServer+'/'+response.data.imageUrl
         				_this.example2.img =response.data.fileServer+'/'+response.data.imageUrl
-        				console.log(response.data.fileServer+'/'+response.data.imageUrl) 	     			  										
+    			  										
         											  			
 			  		}		  
 			  	}
@@ -262,7 +262,7 @@ import axios from 'axios'
 						  // param.append("title",this.input)  
 						  param.append("imageFile",data) 
 						  _this.$ajax.post('create/webRecommend',param).then(function (response) {
-						  	console.log(response)
+
 						  	if (response.data.complete=="SUCCESS") {
 						  		_this.example2.img = window.URL.createObjectURL(data)
 						  		_this.img = window.URL.createObjectURL(data)
@@ -508,7 +508,7 @@ import axios from 'axios'
 	height: 40px;
     position: relative;
     display: inline-block;
-    background:#03A0E3;
+    background:#409EFF;
     border: 1px solid #99D3F5;
     border-radius: 4px;
     padding: 4px 12px;
@@ -525,7 +525,7 @@ import axios from 'axios'
     font-size: 100px;
     right: 0;
     top: 0;
-    opacity: 0;
+    /*opacity: 0;*/
 }
 
 </style>

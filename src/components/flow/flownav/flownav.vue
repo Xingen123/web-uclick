@@ -108,18 +108,18 @@
                     </div>
                 </router-link>
             </li> 
-           <!--  <li>
+            <li>
                 <router-link to="/flow/lastTime">
                     <div>
                         <span>最后报名时间</span>
-                        <span v-show="tenFive" class="right"></span>
+                        <span v-show="tenFive"  class="right"></span>
                     </div>
                 </router-link>
-            </li>        -->                  
+            </li>                         
             <li>
                 <router-link to="/flow/remark">
                     <div>
-                        <span>备注</span>
+                        <span>体验前的叮嘱</span>
                         <span v-show="ten" class="right"></span>
                     </div>
                 </router-link>
@@ -132,12 +132,15 @@
                     </div>
                 </router-link>
             </li>
-            <li>
+            <li style="margin-bottom:50px;">
                 <router-link to="/flow/submit">
                     <div>
                         <span>提交</span>
                     </div>
                 </router-link>
+            </li>          
+             <li>
+               
             </li>
         </ul>
     </div>
@@ -163,7 +166,7 @@ import global from '@/components/flow/global/global'
               tenTwo:false,
               tenThree:false,
               tenFour:false,
-              // tenFive:false
+              tenFive:false
             }
         },
         props: { },
@@ -184,6 +187,7 @@ import global from '@/components/flow/global/global'
               var recommend =sessionStorage.getItem('recommendId');
               param.append('id',recommend);  
               this.$ajax.post('query/webConvoySelected',param).then(function (response) {
+
                 if (response.data.complete=="SUCCESS"){
                     _this.one=response.data.completeAmount[0]
                     _this.two=response.data.completeAmount[1] 
@@ -199,7 +203,7 @@ import global from '@/components/flow/global/global'
                     _this.tenTwo=response.data.completeAmount[11] 
                     _this.tenThree=response.data.completeAmount[12] 
                     _this.tenFour=response.data.completeAmount[13]     
-                    // _this.tenFive=response.data.completeAmount[14]   
+                    _this.tenFive=response.data.completeAmount[14]   
                 }
               }).catch(function (error) {
                   console.log(error);
@@ -257,6 +261,9 @@ import global from '@/components/flow/global/global'
             global.$on("tabtenF",function(tenFour) {
                _this.tenFour=tenFour
             })
+            global.$on("tabtenFive",function(tenFive) {
+               _this.tenFive=tenFive
+            })
            this.allState()
         },
         destroyed () {}
@@ -281,15 +288,14 @@ import global from '@/components/flow/global/global'
     }
     .box{
         width:230px;
-        /*height:100%;*/
+        height:100%;
         position: fixed;
         left: 0;
         z-index: 1;
-        top: 60px;
+        top:60px;
         overflow:scroll;
-        /*background: #686868;*/
+        overflow-x:hidden;
         padding-left: 40px;
-        padding-bottom: 50px;
     }
 
 

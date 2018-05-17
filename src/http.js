@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === 'development') {
    console.log("开发环境")
 } else {
   axios.defaults.baseURL = config.build.env.API_ROOT
- console.log("生产环境")
+ // console.log("生产环境")
 
 }
 

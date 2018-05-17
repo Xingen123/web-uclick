@@ -2,10 +2,10 @@
 	<div>
 		<div class="advent">
 		<div style="font-size:28px;">即将到来的体验</div>
-		<div style="width:100%;height:300px;border:1px solid #DCDFE6;margin-top:10px;">
+		<div style="width:100%;height:300px;margin-top:10px;">
 		  	<el-table
 		    :data="tableData5"
-		    style="width: 100%"
+		    style="width: 100%;border:1px solid #DCDFE6;"
 		    max-height="300" >
 		    <el-table-column
 		      fixed
@@ -34,6 +34,11 @@
 		      width="300">
 		    </el-table-column>
 		    <el-table-column
+		      prop="recommendAmount"
+		      label="价格"
+		      width="150">
+		    </el-table-column>
+		    <el-table-column
 		      prop="amount"
 		      label="预计收益"
 		      width="300">
@@ -52,7 +57,7 @@
 		          删除
 		        </el-button>
 
-		        <el-button
+
 		          v-if="scope.row.isNotDelete==false"
 		          type="text"
 		          style="color:red;"
@@ -69,10 +74,10 @@
 
 		<div class="record">
 			<div style="font-size:28px;">交易记录</div>
-			<div style="width:100%;height:300px;border:1px solid #DCDFE6;margin-top:10px;">
+			<div style="width:100%;height:300px;margin-top:10px;">
 			  	<el-table
 			    :data="tableData4"
-			    style="width: 100%"
+			    style="width: 100%;border:1px solid #DCDFE6;"
 			    max-height="300" >
 				<el-table-column
 			      fixed
@@ -99,6 +104,11 @@
 			      prop="address"
 			      label="体验地点"
 			      width="300">
+			    </el-table-column>
+			    <el-table-column
+			      prop="recommendAmount"
+			      label="价格"
+			      width="150">
 			    </el-table-column>
 			    <el-table-column
 			      prop="amount"

@@ -2,7 +2,7 @@
 	<div class="slogan">
 		<div style="font-size: 28px;">添加一句副标题</div>
 		<p style="margin-top:25px;color:#505050;width:550px;">添加一个能表达体验活动特点的副标题，会让大家在第一时间里对您的体验印象更加深刻！</p>
-		<el-input  type="text" placeholder="SCAA认证烘焙师带你体验手冲咖啡世界" style="margin-top:50px;width:500px;" v-model="input"  :maxlength="50"  @input="descInput"></el-input>
+		<el-input  type="text" placeholder="例：谁说时尚博主才会接拍，你也可以！" style="margin-top:50px;width:500px;" v-model="input"  :maxlength="50"  @input="descInput"></el-input>
 		<p v-show="button" style="line-height:40px;">还剩{{number}}个字</p>
 		<el-button type="primary" plain style="width:100px;margin-top:50px;display:block;" @click="what" v-show="next">下一步</el-button>
 		<div style="margin-top:50px;" v-show="button">

@@ -2,7 +2,7 @@
 	<div class="price">
 		<div style="font-size: 28px;">设置每位体验者的体验价格</div>
 		<el-input type="number" v-model="input" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="display:block;margin-top:50px;width:400px;" @input="descInput" placeholder="请输入价格"></el-input>
-	  <el-button type="primary"  style="display:block;margin-top:150px;width:120px;" :disabled="disabled" @click="cover">保存并继续</el-button>
+	 
 
 	  <div class="counter">
 	  	<div style="font-size:28px;">价格计算器</div>
@@ -16,6 +16,8 @@
 </el-tooltip>之后，您收获的金额</p>
 
 	  </div>
+
+	   <el-button type="primary"  style="display:block;margin-top:150px;width:120px;" :disabled="disabled" @click="cover">保存并继续</el-button>
 	</div>
 </template>
 <script>
@@ -120,9 +122,7 @@ import global from '@/components/flow/global/global'
 	border: 1px solid #DBDBDB;
 	border-radius: 5px;
 	padding: 20px;
-	position: absolute;
-	left:820px;
-	top: 120px;
+	margin-top: 50px;
 }
 @media screen and (max-width: 600px) {
      .counter{

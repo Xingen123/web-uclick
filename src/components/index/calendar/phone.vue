@@ -3,8 +3,16 @@
 	<div class="box">
 		<div >
 			<div class="small">
-				<div style="width:100%;height:30px;line-height:30px; background:#333237;text-align:center; color:white;"><div style="float:left;margin-left:10px;font-size:20px;line-height:30px;"> < </div>{{title}} <div style="float:right;margin-right:10px;font-size:30px;line-height:10px;">...</div></div>
-				<div style="width:100%;"><img width="100%" v-lazy="head" alt=""></div>
+				<div style="width:100%;height:30px;line-height:30px; background:#333237;text-align:center; color:white;">
+					<i class="el-icon-arrow-left" style="float:left;margin-left:10px;line-height:30px;"></i>
+					{{title}} 
+					<i class="el-icon-more" style="float:right;margin-right:10px;line-height:30px;"></i>
+				</div>
+				<el-carousel indicator-position="outside" height="400px" style="width:100%;">
+					<el-carousel-item v-for="(item,index) in imglist" :key="index">
+					    <img v-lazy="imghead +'/'+ item.imgUrl" alt="" width="100%">
+					</el-carousel-item>
+				</el-carousel>
 				<div class="active">
 					<div style="font-weight: bold;margin-top:5px;">{{name}}</div>
 					<p style="margin-top:5px;color:gray;padding-bottom:10px; border-bottom:1px solid #E4E7ED;">{{title}}</p>
@@ -24,11 +32,7 @@
 					<p style="font-size:14px;margin-top:5px; color:#909399;">{{defaultTime}}</p>
 					<div style="padding-top:10px;border-top:1px solid #E4E7ED;margin-top:10px;">参加者要求</div>
 					<p style="font-size:14px;margin-top:5px; color:#909399;">{{joinerReqire}}</p>
-					<el-carousel indicator-position="outside" height="220px" style="margin-top:10px;">
-					    <el-carousel-item v-for="(item,index) in imglist" :key="index">
-					      <img v-lazy="imghead +'/'+ item.imgUrl" alt="" width="100%">
-					    </el-carousel-item>
-					</el-carousel>
+
 				</div>
 				
 			</div>
@@ -78,7 +82,6 @@
               this.$ajax.post('query/webConvoy',param).then(function (response) {
                 if (response.data.complete=="SUCCESS"){
                 		_this.imghead=response.data.fileServer
-                		_this.head=response.data.fileServer+'/'+response.data.imageUrl
                 		_this.name=response.data.recommendTypeName
                 		_this.title=response.data.title
                 		_this.age=response.data.age
@@ -89,7 +92,9 @@
                 		_this.price=response.data.price
                 		_this.serverAmount=response.data.serverAmount    		
                 		_this.addressDetail=response.data.addressDetail
-                		_this.imglist=response.data.recomemndPictureInfoList
+                		// //封面图片
+                		let b = response.data.recomemndPictureInfoList
+                		_this.imglist=b
                 		_this.createMap(response.data.longitude,response.data.latitude)
                 }
               }).catch(function (error) {
@@ -155,21 +160,24 @@
 		    }
     }
 .phone{
- 	width: 370px;
- 	height: 650px;
+ 	width: 330px;
+ 	height: 550px;
  	padding-top: 70px;
  	background:url(../img/phone.png) no-repeat;
 	background-size: 100% 100%;
 	margin: 10px auto;
-	margin-top: 100px;
+	margin-top: 80px;
 }
 .small{	
-	width:340px;
-	height: 550px;
+	width:300px;
+	height: 450px;
 	border:1px solid #E4E7ED;
 	margin:0 auto;
-	overflow:auto
-} 
+	overflow:auto;
+}
+ .small::-webkit-scrollbar {
+    display: none;
+}
 .active{
 	padding-left: 10px;
 	padding-right: 10px;

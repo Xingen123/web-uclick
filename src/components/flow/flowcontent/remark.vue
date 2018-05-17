@@ -3,7 +3,7 @@
 		<div style="font-size: 28px;">体验前的叮嘱</div>
 		<p style="margin-top:25px;color:#505050;width:550px;">对于此次体验，您还需要体验者提前做好什么准备？提前告知体验者体验中可能遇到的问题，体验者会切身感受到被重视。</p>
 		<el-input type="textarea"
-  :rows="8"  placeholder="列如:参加手冲咖啡体验前请勿使用薄荷类产品清洁口腔、尽量不要喷浓烈香水哦。" style="margin-top:50px;width:500px;font-size:20px;" v-model="input"  :maxlength="250"  @input="descInput"></el-input>
+  :rows="8"  placeholder="例： 1、本次体验费用不包含探店时的餐饮消费哦。2、参加体验的途中注意行车安全，你的安全比手作皮具更让我关心。" style="margin-top:50px;width:500px;font-size:20px;" v-model="input"  :maxlength="250"  @input="descInput"></el-input>
 		<p v-show="button" style="line-height:40px;">还剩{{number}}个字</p>
 		<el-button type="primary" plain style="width:100px;margin-top:50px;display:block;" @click="go" v-show="next">下一步</el-button>
 		<div style="margin-top:50px;" v-show="button">

@@ -4,7 +4,10 @@
 		<p style="margin-top:25px;color:#505050;width:550px;">用一段能够表达您性格的语言来介绍一下您自己，这是您与体验者的第一次正面沟通。告诉大家为何您是开展此次体验的最佳人选，有趣的个性和真诚的语言能让体验者更愿意与您交朋友。
 </p>
 		<el-input type="textarea"
-  :rows="8"  placeholder="例子：Hi，我是长街，一个出身于茶叶商贸之家的SCAA国际认证的高级烘焙师。从2009年接触手冲咖啡，到今天已经将近10年，现在拥有自己的工作室。喝过数不清的豆子，去过世界很多的咖啡园……
+  :rows="8"  placeholder="例：Hello，我是尚珈丞，一家甲方公司的高管。Work-Life balance是我们“斜杠青年”的目标，带你看看我的标签：type A工作狂/北京网红店收割机可能是最年轻副总裁/美国运动委员会CPT/兼职时博/业余摄影师。
+
+主业之余我还是一名时尚博主，有大量拍摄需求，于是想到了在咖啡店拍照的方式，也因此收割了北京80%以上的“网红店”，甚至知道每家店的哪个座位能拍出时尚大片。
+……
 " style="margin-top:50px;width:500px;font-size:20px;" v-model="input"  :maxlength="1500"  @input="descInput"></el-input>
 		<p  style="line-height:40px;">还剩{{number}}个字</p>
 

@@ -71,7 +71,7 @@ import global from '@/components/flow/global/global'
 			  	if (response.data.complete=="SUCCESS") {
 				  	global.$emit("tabtenTR",true)		
 				  	_this.$router.push({
-				        path: '/flow/remark'
+				        path: '/flow/lastTime'
 				    })
 			  	}
 			  	

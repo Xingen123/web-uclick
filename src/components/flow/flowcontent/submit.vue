@@ -55,8 +55,7 @@
 			  //获取cookie里面的recommenid
 		      var recommend =sessionStorage.getItem('recommendId');
 			  param.append('id',recommend);  
-			  this.$ajax.post('query/webConvoySelected',param).then(function (response) {	
-			  	console.log(response)		
+			  this.$ajax.post('query/webConvoySelected',param).then(function (response) {		
 			  	if (response.data.complete=="SUCCESS") {
 
 			  		//判断用户是否填写完14个input

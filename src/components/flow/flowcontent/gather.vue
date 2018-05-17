@@ -100,8 +100,9 @@ import global from '@/components/flow/global/global'
 				  param.append('addressDetail',this.address_detail);
 				  param.append('longitude',this.userlocation.lng);
 				  param.append('latitude',this.userlocation.lat);
-				  console.log(this.userlocation.lng,this.userlocation.lat)
+				  console.log(this.form.city,this.form.specificAddress,this.address_detail)
 				  this.$ajax.post('create/webRecommendDetail',param).then(function (response) {
+
 				  	if (response.data.complete=="SUCCESS") {
 				  		global.$emit("tabseven",true)
 				  		_this.$router.push({
@@ -114,6 +115,7 @@ import global from '@/components/flow/global/global'
 			},
 			//保存标题
 			next(){
+				console.log(this.form.specificAddress)
 				// alert(this.userlocation.lat)
 				if (this.tive==true) {
 					this.mapgo()	

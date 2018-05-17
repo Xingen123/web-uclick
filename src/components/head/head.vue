@@ -154,7 +154,7 @@ z-index: 2;
 		/*transition: 0.4s all;*/
 		padding-left: 15px;	
 		position: absolute;
-		padding-bottom: 13px;
+		padding-bottom: 10px;
 		left:135px;
 		top: 20px;
 	}

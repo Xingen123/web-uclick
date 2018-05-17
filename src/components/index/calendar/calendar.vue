@@ -1,7 +1,7 @@
 <template>
 	<div class="bigbox">
 			<head-er></head-er>
-			<div class="calendar">	
+			<div class="calendar" style="padding-top:70px;">	
 		<fullCalendar :events="events" v-on:dayClick="day" v-on:eventClick="event1"></fullCalendar>
 		<el-dialog
 		  title="添加的体验项目的具体时间"
@@ -42,17 +42,25 @@
 		      minTime: startTime
 		    }">
 		  </el-time-select>
-		  <el-button  native-type="" style="margin-top:50px;" @click="really">确 定 添 加</el-button>
+		  <div style="font-size:20px;text-align:left;margin-top:20px;">体验价格</div> 
+			<div style="margin-top:20px;text-align:center;padding-left:30px;">
+				<el-input type="number"  @input="desage" style="width:250px;" v-model="price" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"  ></el-input>
+				<br>
+				<span style="line-height:30px;">您设置的默认价格是 ￥{{num}}</span>	
+			</div>
+		  <el-button  native-type="" style="display:block;margin:0 auto; margin-top:20px;" @click="really">确 定 添 加</el-button>
 		</div>
 		</el-dialog>
 		<el-dialog
-		  title="时间表"
+		  title="时间价格表"
 		  :visible.sync="remove"
 		  width="30%"
 		  center>
-		  <div v-for="trim in events">
+		  <div style="font-size:20px;"><span>时间</span> <span style="margin-left:250px;">价格</span></div>
+		  <div v-for="trim in events" style="margin-top:10px;">
 		 		<span>{{trim.start}}</span>
 		 		<span>{{trim.title}}</span>
+		 		<span style="margin-left:90px;">{{trim.recommendAmount}}</span>
 		 </div>	
 		</el-dialog>
 	</div>
@@ -70,6 +78,8 @@
 		},
 		data(){
 			return{
+				price:"",
+				num:0,
 				yea:"",
 				name:"",
 				box:false,
@@ -91,6 +101,12 @@
 
 		},
 		methods:{
+			desage(){
+				let priceLth = this.price.length;
+				if (priceLth>2) {
+					this.price=""
+				}
+			},
 			//查询全部的内容
 			allTime(){
 			  var _this=this
@@ -99,8 +115,11 @@
 			  param.append('token',tokenone);
 			  param.append('id',this.$route.params.id);
 			  this.$ajax.post('query/webRecommendTime',param).then(function (response) {
+			  	console.log(response)
 			  	if (response.data.complete=="SUCCESS"){
+			  		_this.num=response.data.defaultAmount
 			  		_this.events=response.data.webTimeInfoList
+			  		_this.price=response.data.recommendAmount
 			  	}
 			  }).catch(function (error) {
 			      console.log(error);
@@ -136,21 +155,36 @@
 			add(){
 				var _this=this
 			    let param = new FormData();
+
 			    var tokenone =sessionStorage.getItem('encryptToken');
+
+				var cookieyear =sessionStorage.getItem('cookieyear');		
+
 				param.append('token',tokenone);
+
 				param.append('id',this.$route.params.id);
-				//获取存放的cookie
-				var cookieyear =sessionStorage.getItem('cookieyear');			
+
 				param.append('startTime',cookieyear+" "+this.startTime+":00");//开始时间
+
 				param.append('endTime',cookieyear+" "+this.endTime+":00");//结束时间
+
+				param.append('recommendAmount',this.price);//该日期的价格
+				
 				this.$ajax.post('create/webRecommendTime',param).then(function (response) {
+
 			  	if (response.data.complete=="SUCCESS"){
+
 			  		var nowT =sessionStorage.getItem('cookieyear');
+
 			  		_this.newTime(nowT)
+
 				  	_this.box=false
+
 				  	_this.creat=true
+
 				  	_this.allTime()
 			  	}
+
 			  }).catch(function (error) {
 			      console.log(error);
 			  });

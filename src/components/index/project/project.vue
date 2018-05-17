@@ -4,12 +4,13 @@
 		<div class="box" v-for="(item,index) in project" :key="index">
 			<div class="status">
 				<el-progress :text-inside="true" :stroke-width="17" :percentage="item.completeAmount" ></el-progress>
-				<img style="position:absolute;top:0;left0;z-index:-1;width:100%;height:100%;" v-lazy="item.fileServer+'/'+item.imageUrl" alt="" :onerror="defaultImg">
+				<img style="position:absolute;top:2px;left0;z-index:-1;width:100%;height:100%;border-radius:5px;" v-lazy="item.fileServer+'/'+item.imageUrl" alt="" :onerror="defaultImg">
 			</div>
 			<div class="content">
 				<div style="font-size:25px;">{{item.title}}</div>
 				<p>在您提交体验前,还需要完成几个步骤。</p>
-				<div>
+				<div style="margin-top:25px;">
+
 					<!-- 创建中 -->
 					<el-button type="primary"  class="next" v-if="item.completeAmount<100" @click="nextFlow(item.id)">继续</el-button>
 
@@ -18,18 +19,24 @@
 					<el-button type="primary" plain class="next" v-if='item.examineType=="SUBMIT_EXAMINE" && item.completeAmount==100' @click="$router.push({
 			       	 path: '/verification'
 			      	})">身份验证</el-button>
+
+
 					<!-- 审核完成 -->		
 					<el-button type="primary"  plain class="next" v-if='item.examineType=="EXAMINE_PASS" && item.completeAmount==100' @click="time(item.detailId)">体验时间</el-button>			
 					<el-button type="primary" plain v-if='item.examineType=="EXAMINE_PASS" && item.completeAmount==100'  @click="Flow(item.id)">查看体验创意</el-button>
+
+
 				</div>
 			</div>
-			<el-dropdown trigger="click">
+			
+			<el-dropdown trigger="click" style="margin-top:25px;">
 			      <span class="el-dropdown-link">
 			       <i class="el-icon-more"></i>
 			      </span>
-			      <el-dropdown-menu slot="dropdown">
-			        <el-dropdown-item><div class="button" v-if="item.isNotDelete==true"><el-button type="danger"  class="newidea" @click="remove(item.id)">删除</el-button></div></el-dropdown-item>
-			        <el-dropdown-item><div class="button" v-if="item.isNotDelete==false"><el-button type="danger" disabled class="newidea" >无法删除</el-button></div></el-dropdown-item>
+			      <el-dropdown-menu slot="dropdown" >
+			        <el-dropdown-item v-if="item.isNotDelete==true" ><el-button type="text" @click="remove(item.id)">删除体验</el-button></el-dropdown-item>
+			        <el-dropdown-item ><el-button type="text" v-if='item.examineType=="EXAMINE_PASS"' @click="revocation(item.id)">申请修改体验信息</el-button></el-dropdown-item>
+			        <el-dropdown-item :disabled="true"  v-if="item.isNotDelete==false">无法删除体验</el-dropdown-item>
 			      </el-dropdown-menu>
 			</el-dropdown>
 		</div>
@@ -52,19 +59,23 @@
 
 		},
 		methods:{
-			removebox(index){
-				// this.ss = !this.ss
-				// this.smallbox = !this.smallbox;
-				this.smallbox = index
-				// if (this.ss == true) {
-				// // 	console.log(index,this.smallbox)
-				// 	this.smallbox = !index
-				// 	this.ss = false
-				// }
-				// else{
-				// 	this.smallbox = index
-				// 	this.ss = true
-				// }
+			revocation(id){
+			  var _this=this
+		      let param = new FormData();
+		      var tokenone =sessionStorage.getItem('encryptToken');
+			  param.append('token',tokenone); 
+			  param.append('id',id);  
+			  this.$ajax.post('update/recommendStatus',param).then(function (response) {
+			  	if (response.data.complete=="SUCCESS") {
+			  		_this.dsds()
+			  		_this.$message({
+					    type: 'success',
+					    message: '删除成功!'
+					});
+			  	}
+			  }).catch(function (error) {
+			      console.log(error);
+			  });
 			},
 			//查看用户创建完的体验
 			Flow(id){
@@ -196,7 +207,7 @@
 	padding-left: 20px;
 }
 .el-icon-more{
-	font-size: 30px;
+	font-size: 28px;
 }
 .content>p{
 	line-height: 50px;
