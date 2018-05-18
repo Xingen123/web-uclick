@@ -44,7 +44,7 @@
 		  </el-time-select>
 		  <div style="font-size:20px;text-align:left;margin-top:20px;">体验价格</div> 
 			<div style="margin-top:20px;text-align:center;padding-left:30px;">
-				<el-input type="number"  @input="desage" style="width:250px;" v-model="price" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"  ></el-input>
+				<el-input type="number"  style="width:250px;" v-model="price" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"  ></el-input>
 				<br>
 				<span style="line-height:30px;">您设置的默认价格是 ￥{{num}}</span>	
 			</div>
@@ -92,8 +92,7 @@
 				//弹出框
 				eventsday:[],
 				centerDialogVisible: false,
-				events:[
-				]
+				events:[]
 			}
 		},
 		props: {},
@@ -101,12 +100,7 @@
 
 		},
 		methods:{
-			desage(){
-				let priceLth = this.price.length;
-				if (priceLth>2) {
-					this.price=""
-				}
-			},
+
 			//查询全部的内容
 			allTime(){
 			  var _this=this

@@ -22,22 +22,20 @@
 			</div>
 		</div>
 		<!-- 视频 -->
-		<div style="margin-top:50px;color:#505050;font-size: 18px;">视频</div>
+		<!-- <div style="margin-top:50px;color:#505050;font-size: 18px;">视频</div>
 
 
 		<a  class="upVideo" style="margin-top:10px;">
 			<i class="el-icon-upload"></i>
 			<video class="videoB" :src="videoB"   autoplay loop id="video"></video>
-    		<input class="chVideo" type="file" v-show="videoBox" accept="video/*"  @change="upVideo($event)"/>
+    		<input class="chVideo" type="file" v-show="videoBox" accept="video/*"  @change="upVideo($event)"/> -->
 
     		<!-- 有视频悬浮 -->
-    		<div v-show="vid" class="smallVideo" @click="Videochange" >
+    		<!-- <div v-show="vid" class="smallVideo" @click="Videochange" >
 				预览<div class="Videoremove" @click.stop="Videoremove()"></div>
 			</div>
-		</a>
+		</a> -->
 	
-
-
 
 
 		<!-- 图片 -->

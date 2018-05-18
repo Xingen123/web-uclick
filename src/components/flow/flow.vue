@@ -3,7 +3,7 @@
 		<head-er></head-er>
 		<flow-nav ></flow-nav>
 		<router-view class="content" ></router-view>
-		<phone-ui ></phone-ui>	
+		<phone-ui class="ph-none"></phone-ui>	
 	</div>
 </template>
 <script>
@@ -73,4 +73,11 @@
 	top: 20px;
 	right: 200px;
 }
+
+@media screen and (max-width: 1400px) {
+    .ph-none{
+		display: none
+	}
+}
+
 </style>

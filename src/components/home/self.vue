@@ -52,6 +52,7 @@
 				  v-model="inputValue"
 				  ref="saveTagInput"
 				  size="small"
+				  :maxlength="5"
 				  @keyup.enter.native="handleInputConfirm"
 				  @blur="handleInputConfirm"
 				>
@@ -98,6 +99,7 @@
 				}
 			},
 			handleClose(tag) {
+				console.log(1)
 		        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
 		      },
 
@@ -110,12 +112,20 @@
 
 		      handleInputConfirm() {
 		        let inputValue = this.inputValue;
+		        let dynamicTags = this.dynamicTags.length;
 		        if (inputValue) {
-		          this.dynamicTags.push(inputValue);
+		        	if (dynamicTags<6) {
+		        		this.dynamicTags.push(inputValue);
+		        	}else{
+		        		this.$message({
+				          showClose: true,
+				          message: '最多添加6个标签',
+				          type: 'warning'
+				        });
+		        	}		          	
 		        }
 		        this.inputVisible = false;
 		        this.inputValue = '';
-
 		      },
 
 		      label(name){

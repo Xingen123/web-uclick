@@ -35,8 +35,8 @@
 			      </span>
 			      <el-dropdown-menu slot="dropdown" >
 			        <el-dropdown-item v-if="item.isNotDelete==true" ><el-button type="text" @click="remove(item.id)">删除体验</el-button></el-dropdown-item>
-			        <el-dropdown-item ><el-button type="text" v-if='item.examineType=="EXAMINE_PASS"' @click="revocation(item.id)">申请修改体验信息</el-button></el-dropdown-item>
-			        <el-dropdown-item :disabled="true"  v-if="item.isNotDelete==false">无法删除体验</el-dropdown-item>
+			        <el-dropdown-item v-if='item.examineType=="EXAMINE_PASS"'><el-button type="text"  @click="revocation(item.id)">申请修改体验信息</el-button></el-dropdown-item>
+			        <el-dropdown-item v-if="item.isNotDelete==false" :disabled="true" >无法删除体验</el-dropdown-item>
 			      </el-dropdown-menu>
 			</el-dropdown>
 		</div>
@@ -60,22 +60,33 @@
 		},
 		methods:{
 			revocation(id){
-			  var _this=this
-		      let param = new FormData();
-		      var tokenone =sessionStorage.getItem('encryptToken');
-			  param.append('token',tokenone); 
-			  param.append('id',id);  
-			  this.$ajax.post('update/recommendStatus',param).then(function (response) {
-			  	if (response.data.complete=="SUCCESS") {
-			  		_this.dsds()
-			  		_this.$message({
-					    type: 'success',
-					    message: '删除成功!'
-					});
-			  	}
-			  }).catch(function (error) {
-			      console.log(error);
-			  });
+					var _this=this
+				this.$confirm('再次修改体验内容将会导致您的体验暂时下架，并且，再对修改的内容审核通过之前，您都无法在app中看到此体验，参与者也无法购买，是否继续?', '提示', {
+		          confirmButtonText: '确定',
+		          cancelButtonText: '取消',
+		          type: 'warning'
+		        }).then(() => {
+			      let param = new FormData();
+			      var tokenone =sessionStorage.getItem('encryptToken');
+				  param.append('token',tokenone); 
+				  param.append('id',id);  
+				  _this.$ajax.post('update/recommendStatus',param).then(function (response) {
+				  	if (response.data.complete=="SUCCESS") {
+				  		_this.dsds()
+				  		_this.$message({
+						    type: 'success',
+						    message: '申请下架成功，请等待...'
+						});
+				  	}
+				  }).catch(function (error) {
+				      console.log(error);
+				  });
+				}).catch(() => {
+		          _this.$message({
+		            type: 'info',
+		            message: '已取消下架'
+		          });          
+		        });  
 			},
 			//查看用户创建完的体验
 			Flow(id){
@@ -182,6 +193,7 @@
 <style scoped>
 .project{
 	width: 100%;
+	position:absolute;
 }
 .box{
 	width: 60%;

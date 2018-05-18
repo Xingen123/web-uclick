@@ -57,7 +57,7 @@
 		          删除
 		        </el-button>
 
-
+ 				<el-button
 		          v-if="scope.row.isNotDelete==false"
 		          type="text"
 		          style="color:red;"
@@ -93,7 +93,7 @@
 			    <el-table-column
 			      prop="startTime"
 			      label="时间"
-			      width="120">
+			      width="150">
 			    </el-table-column>
 			    <el-table-column
 			      prop="personAmount"
