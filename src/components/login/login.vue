@@ -142,8 +142,9 @@
 <style scoped>
 	.box{
 		width: 500px;
-		height: 400px;
-		background: white;
+		height: 350px;
+		background: rgba(0,0,0,0.4);
+		color: white;
 		margin:0 auto;
 		/*position: absolute;*/
 		margin-top: 150px;
@@ -165,5 +166,5 @@
 	.submit{
 		width: 470px;
 		margin-top: 10px;
-	}
+	} 
 </style>

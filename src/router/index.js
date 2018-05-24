@@ -98,6 +98,7 @@ export default new Router({
       component:Time,
       meta:{
         title:"截图"
+        // requiresAuth: true
       }
     },
     {

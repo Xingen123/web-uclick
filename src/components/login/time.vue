@@ -1,105 +1,76 @@
 <template>
-<div class="wrapper">
-				<vueCropper
-					ref="cropper2"
-					:img="example2.img"
-					:full="example2.full"
-					:outputSize="example2.size"
-					:outputType="example2.outputType"
-					:info="example2.info"
-					:canScale="example2.canScale"
-					:autoCrop="example2.autoCrop"
-					:autoCropWidth="example2.autoCropWidth"
-					:autoCropHeight="example2.autoCropHeight"
-					:fixed="example2.fixed"
-					:fixedNumber="example2.fixedNumber"
-				></vueCropper>
-		<input type="file"  @change="uploadImg($event, 1)"/>
-		<button @click="finish('blob')" class="btn">preview(base64)</button>
-		<img :src="urlimg" alt="">
-</div>
+    <div class="color-list">
+      	<div class="color-item"  v-for="color in colors" v-dragging="{ item: color, list: colors, group: 'color' }" :key="color.id">
+          	<img :src="color.sequence" alt="">
+  		</div>
+  		<button @click="register">dadasdasd</button>
+    </div>
 </template>
-<script>
-import vueCropper from '@/components/login/vue-cropper'
 
+<script>
 export default {
-	data() {
-		return {
-			urlimg:"",
-			example2: {
-				img: 'http://101.200.156.70/video/3.png',
-				info: true,
-				size: 1,
-				outputType: 'jpeg',
-				canScale: false,
-				autoCrop: true,
-				// 只有自动截图开启 宽度高度才生效
-				autoCropWidth: 300,
-				autoCropHeight: 250,
-				// 开启宽度和高度比例
-				fixed: true,
-				fixedNumber: [4, 3]
-			}
+    data () {
+        return {
+			colors: [
+                    {id: '1', sequence: 'https://www.baidu.com/img/bd_logo1.png'},
+                    {id: '2', sequence: 'https://fengyuanchen.github.io/cropper/images/picture.jpg'},
+                    {id: '3', sequence: 'http://ofyaji162.bkt.clouddn.com/touxiang.jpg'},
+                    {id: '4', sequence: 'http://ofyaji162.bkt.clouddn.com/bg1.jpg'},
+                    {id: '5', sequence: 'https://o90cnn3g2.qnssl.com/0C3ABE8D05322EAC3120DDB11F9D1F72.png'},
+                    {id: '6', sequence: 'http://ofyaji162.bkt.clouddn.com/bg1.jpg'}
+            ]
+        }
+    },
+    methods: {
+    	register(){
+        		var _this=this  
+
+		        let param = new FormData();
+		        let a =JSON.stringify(this.colors);
+		        param.append('ceshi', a);
+				
+				this.$ajax.post('web/ceShi',param).then(function (response) {
+
+					console.log(response)
+
+				}).catch(function (error) {
+
+					console.log(error)
+
+				});
 		}
-	},
-	methods: {
-		uploadImg (e, num) {
-			//上传图片
-			// this.option.img
-			var file = e.target.files[0]
-			if (!/\.(gif|jpg|jpeg|png|bmp|GIF|JPG|PNG)$/.test(e.target.value)) {
-				 alert('图片类型必须是.gif,jpeg,jpg,png,bmp中的一种')
-				 return false
-			 }
-			var reader = new FileReader()
-			reader.onload = (e) => {
-				let data
-				if (typeof e.target.result === 'object') {
-					// 把Array Buffer转化为blob 如果是base64不需要
-					data = window.URL.createObjectURL(new Blob([e.target.result]))
-				} else {
-					data = e.target.result
-				}
-				if (num === 1) {
-					this.example2.img = data
-				}
-			}
-			// 转化为base64
-			// reader.readAsDataURL(file)
-			// 转化为blob
-			reader.readAsArrayBuffer(file)
-		},
-		finish (type) {
-			var _this=this
-			if (type === 'blob') {
-				this.$refs.cropper2.getCropBlob((data) => {
-					_this.urlimg= window.URL.createObjectURL(data)
-				})
-			} else {
-				this.$refs.cropper.getCropData((data) => {
-					test.location.href = data
-				})
-			}
-		}
-	},
-	components: {
-		vueCropper
-	},
-	beforeCreate() {
-			console.log('beforeCreate')
-		},
-		created () {
-			console.log('created')
-		},
-		mounted () {
-			console.log('mounted')
-		},
-	  	destroyed () {}
+    },
+    //这里挺重要的，因为我们一般排序完要重新提交排序后的数据给后台保存，以便下一次安装我们所需要的顺序显示，这里的list就可以帮我们做到这一点，但是我们需要给数据添加一个uniqueId标志。然后在排序完后或者列表对应的顺序和uniqueId提交给后台，我也不知道我说的咋样。
+    mounted () {
+        this.$dragging.$on('dragged', ({ value }) => {
+          console.log(value.item)
+          let a =JSON.stringify(value.list) ;
+
+          console.log(typeof value.list,typeof a,a)
+          console.log(value.group)
+        })
+    }
 }
 </script>
 <style>
-	.wrapper{
-		width: 500px;
-		height: 500px;
-	}
+.color-list{
+	width: 700px;
+	height:600px;
+	overflow: hidden;
+	border: 1px solid red;
+}
+    .color-item{
+    	float: left;
+
+    	width: 200px;
+    	height: 250px;
+        border:1px solid #f1f1f1;
+        padding:10px 5px;
+        margin:5px 10px;
+        border-radius: 4px;
+    }
+.color-item>img{
+	width: 100%;
+	height: 100%;
+}
 </style>

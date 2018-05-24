@@ -20,9 +20,10 @@ body {
 /*@font-face {font-family:"PingFang-Regular";src:url(../../static/fonts/PingFang-Regular.ttf);}*/
 .login {
     width:100%;
-    height:100vh;
-    background:url(bg.jpg) no-repeat;
-    background-size:100% 100%;
+    height:100%;
+    background:url(bj.jpg) no-repeat;
+    overflow: hidden;
+    background-size:cover;
     position:absolute;
 }
 #app {

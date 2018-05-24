@@ -27,6 +27,9 @@ import store from './store/store'
 import VueLazyLoad from 'vue-lazyload'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css' 
+import VueDND from 'awe-dnd'
+
+Vue.use(VueDND)
 Vue.use(ElementUI)
 Vue.use(Vuex)
 Vue.use(VueLazyLoad,{

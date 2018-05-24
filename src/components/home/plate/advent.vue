@@ -74,7 +74,7 @@
 
 		<div class="record">
 			<div style="font-size:28px;">交易记录</div>
-			<div style="width:100%;height:300px;margin-top:10px;">
+			<div style="width:100%;height:300px;margin-top:10px;overflow-x:hidden;">
 			  	<el-table
 			    :data="tableData4"
 			    style="width: 100%;border:1px solid #DCDFE6;"
@@ -93,7 +93,7 @@
 			    <el-table-column
 			      prop="startTime"
 			      label="时间"
-			      width="150">
+			      width="120">
 			    </el-table-column>
 			    <el-table-column
 			      prop="personAmount"

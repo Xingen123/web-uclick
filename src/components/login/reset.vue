@@ -8,7 +8,7 @@
 					<el-input type="text" class="width" placeholder="手机号" v-model="form.phone"></el-input>
 				</el-form-item>
 					<el-input type="text" style="width:200px;display:inline-block;" placeholder="请输入验证码" v-model="form.yzm" @keyup.enter.native="next"></el-input>
-				<el-button type="primary" plain class="yzm"  @click="disabled()" :plain="true" :disabled="!form.show">
+				<el-button type="primary"  class="yzm"  @click="disabled()" :disabled="!form.show">
 					<span v-show="form.show">获取验证码</span>
 	         		<span v-show="!form.show">{{form.count}} s</span>
 				</el-button>
@@ -150,8 +150,9 @@ const TIME_COUNT = 60;
 	}
 	.box{
 		width: 500px;
-		height: 400px;
-		background: white;
+		height: 350px;
+		background: rgba(0,0,0,0.4);
+		color: white;
 		margin: 150px auto;
 		border-radius: 5px;
 		padding: 35px;

@@ -5,33 +5,37 @@
 			<div class="small">
 				<div style="width:100%;height:30px;line-height:30px; background:#333237;text-align:center; color:white;">
 					<i class="el-icon-arrow-left" style="float:left;margin-left:10px;line-height:30px;"></i>
-					{{title}} 
+					{{obj}} 
 					<i class="el-icon-more" style="float:right;margin-right:10px;line-height:30px;"></i>
 				</div>
-				<el-carousel indicator-position="outside" height="400px" style="width:100%;">
-					<el-carousel-item v-for="(item,index) in imglist" :key="index">
+				<el-carousel v-if="imglist.length>0" indicator-position="outside" height="400px" style="width:100%;">
+					<el-carousel-item  v-for="(item,index) in imglist" :key="index">
 					    <img v-lazy="imghead +'/'+ item.imgUrl" alt="" width="100%">
 					</el-carousel-item>
 				</el-carousel>
 				<div class="active">
-					<div style="font-weight: bold;margin-top:5px;">{{name}}</div>
-					<p style="margin-top:5px;color:gray;padding-bottom:10px; border-bottom:1px solid #E4E7ED;">{{title}}</p>
+					<div style="font-weight: bold;padding-top:10px;border-top:1px solid #E4E7ED;">{{name}}</div>
+					<p v-if="title" style="color:gray;padding-bottom:10px; border-bottom:1px solid #E4E7ED;">{{title}}</p>
 					<div v-for="item in webItemInfoList" style="padding-top:10px; padding-bottom:10px;border-bottom:1px solid #E4E7ED;">
-						<div style="font-size:16px;">{{item.name}}</div>
+						<div style="font-size:16px;">体验内容</div>
 						<p style="font-size:14px;margin-top:5px; color:#909399;">{{item.brief}}</p>
 					</div>
-					<div style="margin-top:5px;font-size:16px;">体验地点</div>
-					<div style="margin-top:5px;font-size:14px;color:#909399;">{{addressDetail}}</div>
-					 <div style="width:100%;height:250px;margin-top:10px;" id="dituContent"></div>
-					<div style="padding-top:10px;border-top:1px solid #E4E7ED;margin-top:10px;">价格</div>
-					<p style="font-size:14px;margin-top:5px; color:#909399;">￥{{age}}</p>
-					<div style="padding-top:10px;border-top:1px solid #E4E7ED;margin-top:10px;">最多参加人数</div>
-					<p style="font-size:14px;margin-top:5px; color:#909399;">{{serverAmount}}</p>
-					<div style="padding-top:10px;border-top:1px solid #E4E7ED;margin-top:10px;">参加者最低年龄{{age}}岁</div>
-					<div style="padding-top:10px;border-top:1px solid #E4E7ED;margin-top:10px;">体验时间</div>
-					<p style="font-size:14px;margin-top:5px; color:#909399;">{{defaultTime}}</p>
-					<div style="padding-top:10px;border-top:1px solid #E4E7ED;margin-top:10px;">参加者要求</div>
-					<p style="font-size:14px;margin-top:5px; color:#909399;">{{joinerReqire}}</p>
+					<div style="width:100%;border-bottom:1px solid #E4E7ED;padding-bottom:10px;" v-show="mapA">
+						<div  style="margin-top:5px;font-size:16px;">体验地点</div>
+						<div  style="margin-top:5px;font-size:14px;color:#909399;">{{addressDetail}}</div>
+						<div  style="width:100%;height:250px;" id="dituContent"></div>
+					</div>
+					
+					<div  v-if="price" style="padding-top:10px;">价格</div>
+					<p    v-if="price" style="font-size:14px;margin-top:5px; color:#909399;border-bottom:1px solid #E4E7ED;padding-bottom:10px;">￥{{price}}</p>
+					<div  v-if="serverAmount" style="padding-top:10px;">最多参加人数</div>
+					<p style="font-size:14px;margin-top:5px; color:#909399;border-bottom:1px solid #E4E7ED;padding-bottom:10px;">{{serverAmount}}人</p>
+					<div  v-if="age" style="padding-top:10px;">参加者最低年龄</div>
+					<p style="font-size:14px;margin-top:5px; color:#909399;border-bottom:1px solid #E4E7ED;padding-bottom:10px;">{{age}}岁</p>
+					<div  v-if="defaultTime" style="padding-top:10px;">体验时间</div>
+					<p style="font-size:14px;margin-top:5px; color:#909399;border-bottom:1px solid #E4E7ED;padding-bottom:10px;">{{defaultTime}}</p>
+					<div  v-if="joinerReqire" style="padding-top:10px;">参加者要求</div>
+					<p style="font-size:14px;margin-top:5px; color:#909399;border-bottom:1px solid #E4E7ED;padding-bottom:10px;">{{joinerReqire}}</p>
 
 				</div>
 				
@@ -46,6 +50,7 @@
 		},
 		data(){
 			return{
+			  obj:"",
 			  head:"",
 			  name:"",
 			  title:"",
@@ -59,7 +64,8 @@
 			  serverAmount:"",
 			  addressDetail:"",
 			  imglist:[],
-			  imghead:""
+			  imghead:"",
+			  mapA:false
 			}
 		},
 		props: {
@@ -80,9 +86,15 @@
               var recommend =sessionStorage.getItem('recommendId');
               param.append('id',recommend);  
               this.$ajax.post('query/webConvoy',param).then(function (response) {
+              	console.log(response)
                 if (response.data.complete=="SUCCESS"){
+                	if (response.data.addressDetail) {
+                		_this.addressDetail=response.data.addressDetail
+                		_this.mapA=true
+                	}
                 		_this.imghead=response.data.fileServer
-                		_this.name=response.data.recommendTypeName
+                		_this.obj=response.data.recommendTypeName
+                		_this.name=response.data.name
                 		_this.title=response.data.title
                 		_this.age=response.data.age
                 		_this.defaultTime=response.data.defaultTime
@@ -91,7 +103,7 @@
                 		_this.joinerReqire=response.data.joinerReqire
                 		_this.price=response.data.price
                 		_this.serverAmount=response.data.serverAmount    		
-                		_this.addressDetail=response.data.addressDetail
+                		
                 		// //封面图片
                 		let b = response.data.recomemndPictureInfoList
                 		_this.imglist=b
@@ -124,6 +136,7 @@
 	} 
 </script>
 <style scoped>
+
     .phone{
         animation-duration: 1s;
         animation-name: key;

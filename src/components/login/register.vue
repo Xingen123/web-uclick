@@ -6,7 +6,7 @@
 			<el-input type="text" class="width" placeholder="手机号" v-model="phone"></el-input>
 			<div>
 				<el-input type="text" class="yzminput" placeholder="请输入验证码" v-model="verifyCode"></el-input>
-				<el-button type="primary" plain class="yzm"  @click="disabled()" :plain="true" :disabled="!show">
+				<el-button type="primary" class="yzm"  @click="disabled()"  :disabled="!show">
 					<span v-show="show">获取验证码</span>
          			<span v-show="!show" class="count">{{count}} s</span>
 				</el-button>
@@ -156,8 +156,9 @@ import axios from 'axios'
 
 	.box{
 		width: 500px;
-		height: 400px;
-		background: white;
+		height: 350px;
+		background: rgba(0,0,0,0.4);
+		color: white;
 		margin: 150px auto;
 		border-radius: 5px;
 		padding: 35px;

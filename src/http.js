@@ -15,21 +15,24 @@ if (process.env.NODE_ENV === 'development') {
 
 }
 
-// axios 配置
-// axios.defaults.baseURL = 'http://192.168.199.240:8080/clicks/diy'
-// axios.defaults.baseURL = 'http://wechat.clicksdiy.com/clicks/diy'
+
 
 // axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 axios.defaults.headers = {'Content-Type': 'multipart/form-data'}
+
 axios.defaults.timeout = 9000
+
 // http请求拦截器
 var loadinginstace
 axios.interceptors.request.use(config => {
+
+
+// console.log(config.url)
  // element ui Loading方法
- loadinginstace = Loading.service({ fullscreen: true ,text:"loading..."})
-// if (store.state.token) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
-//             config.headers.Authorization = `token ${store.state.token}`;
-//         }
+if (config.url != "web/ceShi") {
+	 loadinginstace = Loading.service({ fullscreen: true ,text:"loading..."})
+}
+
  return config;
 }, error => {
  loadinginstace.close()
@@ -38,6 +41,7 @@ axios.interceptors.request.use(config => {
  })
  return Promise.reject(error)
 })
+
 // http响应拦截器
 axios.interceptors.response.use(data => {// 响应成功关闭loading
  loadinginstace.close()
@@ -52,37 +56,3 @@ axios.interceptors.response.use(data => {// 响应成功关闭loading
 })
  
 export default axios
-// http request 拦截器
-// axios.interceptors.request.use(
-//   config => {
-// //     if (store.state.token){
-// //       config.headers.Authorization = 'token ${store.state.token}';
-// //     }
-//     return config;
-//   },
-//   err => {
-//     return Promise.reject(err);
-//   });
-
-// // http response 拦截器
-// axios.interceptors.response.use(
-//   response => {
-//     return response;
-//   },
-//   error => {
-    // if (error.response) {
-//       switch (error.response.status) {
-//         case 401:
-//           // 401 清除token信息并跳转到登录页面
-//           store.commit(types.LOGOUT);
-//           router.replace({
-//             path: 'login',
-//             query: {redirect: router.currentRoute.fullPath}
-//           })
-//       }
-//     }
-//     // console.log(JSON.stringify(error));//console : Error: Request failed with status code 402
-    // return Promise.reject(error.response.data)
-  // });
-
-// export default axios
