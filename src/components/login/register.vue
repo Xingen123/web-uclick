@@ -2,18 +2,18 @@
 	<div class="login">
 		<div class="box">
 			<div style="font-size:25px;">手机号注册</div>
-			<div>已有账号？ <span style="color:#409EFF;margin-left10px;cursor:pointer;" @click="routerLogin">登录</span></div>
-			<el-input type="text" class="width" placeholder="手机号" v-model="phone"></el-input>
+			<div>已有账号？ <span style="color:#409EFF;margin-left10px;cursor:pointer;font-weight:bold;" @click="routerLogin">登录</span></div>
+			<input type="text" class="width" placeholder="手机号" v-model="phone">
 			<div>
-				<el-input type="text" class="yzminput" placeholder="请输入验证码" v-model="verifyCode"></el-input>
+				<input type="text" class="yzminput" placeholder="请输入验证码" v-model="verifyCode">
 				<el-button type="primary" class="yzm"  @click="disabled()"  :disabled="!show">
 					<span v-show="show">获取验证码</span>
          			<span v-show="!show" class="count">{{count}} s</span>
 				</el-button>
 			</div>
-			<el-input type="password" class="width" placeholder="请输入6-16位密码" :minlength="6" :maxlength="16" v-model="password" @keyup.enter.native="next"></el-input>
+			<input type="password" class="width" placeholder="请输入6-16位密码" :minlength="6" :maxlength="16" v-model="password" @keyup.enter.native="next">
 			
-			<el-button type="primary" class="submit" @click="next">注册</el-button>
+			<el-button type="primary" class="submit" @click="next">Sign in</el-button>
 		</div>
 	</div>
 </template>
@@ -169,17 +169,80 @@ import axios from 'axios'
 		border:0;
 	}
 	.yzminput{
-		width: 270px;
+		width: 260px;
+		height: 42px;
+	margin-top: 20px;
+    padding: 0 15px;
+    background: #2d2d2d;
+    background: rgba(45,45,45,.5);
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #3d3d3d;
+    border: 1px solid rgba(255,255,255,.15);
+    -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
 	}
 	.yzm{
 		width: 170px;
 		margin-left: 30px;
 	}
+	        input::-webkit-input-placeholder{
+            color:#fff;
+        }
+        input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+            color:#fff;
+        }
+        input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+            color:#fff;
+        }
+        input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+            color:#fff;
+        }
 	.width{
-		width: 470px;
+	width: 470px;
+	height: 42px;
+	margin-top: 20px;
+    padding: 0 15px;
+    background: #2d2d2d;
+    background: rgba(45,45,45,.5);
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #3d3d3d;
+    border: 1px solid rgba(255,255,255,.15);
+    -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
 	}
+
 	.submit{
-		width: 470px;
-		margin-top: 30px;
-	}
+		width:502px;
+		margin-top: 10px;
+/*		display: block;
+		margin:0 auto; 
+		margin-top: 20px;*/
+		/*font-weight: bold;*/
+		font-size: 18px;
+		    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s;
+	} 
 </style>

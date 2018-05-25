@@ -4,16 +4,14 @@
 			<div style="font-size:25px;">重置密码</div>
 			<div style="margin-top:20px;font-size:18px;">请输入与您的账号相关的手机号码,我们会给您发送验证码来重置密码</div>
 			<el-form ref="form" :model="form">
-				<el-form-item >
-					<el-input type="text" class="width" placeholder="手机号" v-model="form.phone"></el-input>
-				</el-form-item>
-					<el-input type="text" style="width:200px;display:inline-block;" placeholder="请输入验证码" v-model="form.yzm" @keyup.enter.native="next"></el-input>
+				<input type="text" class="width" placeholder="手机号" v-model="form.phone">
+				<input type="text" class="widthtwo" placeholder="请输入验证码" v-model="form.yzm" @keyup.enter.native="next">
 				<el-button type="primary"  class="yzm"  @click="disabled()" :disabled="!form.show">
 					<span v-show="form.show">获取验证码</span>
 	         		<span v-show="!form.show">{{form.count}} s</span>
 				</el-button>
 	
-				<el-button type="primary" style="width:470px;margin-top:30px;margin-left:-2px; display:block;" @click="next">下一步</el-button>
+				<el-button type="primary" style="width:502px;margin-top:30px;margin-left:-2px; display:block;font-sizefont-size: 18px;" @click="next">下一步</el-button>
 			</el-form>
 		</div>
 	</div>
@@ -161,12 +159,68 @@ const TIME_COUNT = 60;
 		height: 50px;
 		border:0;
 	}
+	.widthtwo{
+		width:200px;
+		height: 42px;
+		line-height: 42px;
+		display:inline-block;
+		margin-top: 20px;
+    padding: 0 15px;
+    background: #2d2d2d;
+    background: rgba(45,45,45,.5);
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #3d3d3d;
+    border: 1px solid rgba(255,255,255,.15);
+    -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+	}
 	.yzm{
 		width: 170px;
 		margin-left: 90px;
 	}
+		        input::-webkit-input-placeholder{
+            color:#fff;
+        }
+        input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+            color:#fff;
+        }
+        input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+            color:#fff;
+        }
+        input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+            color:#fff;
+        }
 	.width{
-		width: 470px;
-		margin-top: 40px;
+	width: 470px;
+	height: 42px;
+	margin-top: 20px;
+    padding: 0 15px;
+    background: #2d2d2d;
+    background: rgba(45,45,45,.5);
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #3d3d3d;
+    border: 1px solid rgba(255,255,255,.15);
+    -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
 	}
 </style>

@@ -2,20 +2,17 @@
 	<div class="login">
 		<div class="box">
 			<div style="font-size:25px;">登录Blueglass</div>
-			<div>还没有账号？ <span style="color:#409EFF;margin-left10px;cursor:pointer;" @click="register">注册</span></div>
+			<div>还没有账号？ <span style="color:#409EFF;margin-left10px;cursor:pointer;font-weight:bold;" @click="register">注册</span></div>
 			<el-form ref="form" :model="form">
+				<input type="text" class="width" placeholder="手机号" v-model="phone" >
+				<input type="password" class="width" placeholder="密码" v-model="password" @keyup.enter.native="next">
 				<el-form-item>
-					<el-input type="text" class="width" placeholder="手机号" v-model="phone" ></el-input>
-				</el-form-item>
-				<el-form-item>
-					<el-input type="password" class="width" placeholder="密码" v-model="password" @keyup.enter.native="next"></el-input>
-				</el-form-item>
-				<el-form-item>
-					<el-checkbox v-model="form.checked">记住我</el-checkbox><span style="color:#409EFF;float:right;margin-right:30px;cursor:pointer;"  @click="reset">忘记密码</span>
+					<el-checkbox style="font-weight:bold;" v-model="form.checked">记住我</el-checkbox>
+					<span style="color:#409EFF;float:right;margin-right:30px;cursor:pointer;font-weight:bold;"  @click="reset">忘记密码</span>
 				</el-form-item >
 				
 				<el-form-item>
-					<el-button type="primary" class="submit" @click="next">登录</el-button>
+					<el-button type="primary" class="submit" @click="next">Sign in</el-button>
 				</el-form-item>
 			</el-form>
 		</div>
@@ -140,6 +137,7 @@
 	} 
 </script>
 <style scoped>
+
 	.box{
 		width: 500px;
 		height: 350px;
@@ -159,12 +157,51 @@
 		width: 170px;
 		margin-left: 30px;
 	}
+	        input::-webkit-input-placeholder{
+            color:#fff;
+        }
+        input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+            color:#fff;
+        }
+        input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+            color:#fff;
+        }
+        input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+            color:#fff;
+        }
 	.width{
-		width: 470px;
-		margin-top: 20px;
+	width: 470px;
+	height: 42px;
+	margin-top: 20px;
+    padding: 0 15px;
+    background: #2d2d2d;
+    background: rgba(45,45,45,.5);
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #3d3d3d;
+    border: 1px solid rgba(255,255,255,.15);
+    -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
 	}
 	.submit{
-		width: 470px;
+		width: 502px;
 		margin-top: 10px;
+		/*font-weight: bold;*/
+		font-size: 18px;
+		    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s;
 	} 
+
 </style>

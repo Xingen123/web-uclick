@@ -3,12 +3,8 @@
 		<div class="box">
 			<div style="font-size:25px;">重置您的密码</div>
 			<el-form ref="form" :model="form">
-				<el-form-item>
-					<el-input type="password" class="width" v-model="form.psw" placeholder="请输入6-16位密码"></el-input>
-				</el-form-item>
-				<el-form-item>
-					<el-input type="password" class="width" v-model="form.password" placeholder="请再输入一次密码" @keyup.enter.native="next"></el-input>
-				</el-form-item>
+				<input type="password" class="width" v-model="form.psw" placeholder="请输入6-16位密码">
+				<input type="password" class="width" v-model="form.password" placeholder="请再输入一次密码" @keyup.enter.native="next">
 				<el-form-item>
 					<el-button type="primary" class="submit" @click="next">保存并继续</el-button>
 				</el-form-item>
@@ -83,7 +79,7 @@
 		height: 350px;
 		background: rgba(0,0,0,0.4);
 		color: white;
-		margin: 100px auto;
+		margin: 150px auto;
 		border-radius: 5px;
 		padding: 35px;
 	}
@@ -99,8 +95,40 @@
 		width: 170px;
 		margin-left: 30px;
 	}
+		        input::-webkit-input-placeholder{
+            color:#fff;
+        }
+        input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+            color:#fff;
+        }
+        input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+            color:#fff;
+        }
+        input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+            color:#fff;
+        }
 	.width{
-		width: 470px;
+	width: 470px;
+	height: 42px;
+	margin-top: 20px;
+    padding: 0 15px;
+    background: #2d2d2d;
+    background: rgba(45,45,45,.5);
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #3d3d3d;
+    border: 1px solid rgba(255,255,255,.15);
+    -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
 	}
 	.submit{
 		width: 470px;

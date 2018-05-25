@@ -29,13 +29,13 @@
 					<div  v-if="price" style="padding-top:10px;">价格</div>
 					<p    v-if="price" style="font-size:14px;margin-top:5px; color:#909399;border-bottom:1px solid #E4E7ED;padding-bottom:10px;">￥{{price}}</p>
 					<div  v-if="serverAmount" style="padding-top:10px;">最多参加人数</div>
-					<p style="font-size:14px;margin-top:5px; color:#909399;border-bottom:1px solid #E4E7ED;padding-bottom:10px;">{{serverAmount}}人</p>
+					<p    v-if="serverAmount" style="font-size:14px;margin-top:5px; color:#909399;border-bottom:1px solid #E4E7ED;padding-bottom:10px;">{{serverAmount}}人</p>
 					<div  v-if="age" style="padding-top:10px;">参加者最低年龄</div>
-					<p style="font-size:14px;margin-top:5px; color:#909399;border-bottom:1px solid #E4E7ED;padding-bottom:10px;">{{age}}岁</p>
+					<p    v-if="age" style="font-size:14px;margin-top:5px; color:#909399;border-bottom:1px solid #E4E7ED;padding-bottom:10px;">{{age}}岁</p>
 					<div  v-if="defaultTime" style="padding-top:10px;">体验时间</div>
-					<p style="font-size:14px;margin-top:5px; color:#909399;border-bottom:1px solid #E4E7ED;padding-bottom:10px;">{{defaultTime}}</p>
+					<p    v-if="defaultTime" style="font-size:14px;margin-top:5px; color:#909399;border-bottom:1px solid #E4E7ED;padding-bottom:10px;">{{defaultTime}}</p>
 					<div  v-if="joinerReqire" style="padding-top:10px;">参加者要求</div>
-					<p style="font-size:14px;margin-top:5px; color:#909399;border-bottom:1px solid #E4E7ED;padding-bottom:10px;">{{joinerReqire}}</p>
+					<p    v-if="joinerReqire" style="font-size:14px;margin-top:5px; color:#909399;border-bottom:1px solid #E4E7ED;padding-bottom:10px;">{{joinerReqire}}</p>
 
 				</div>
 				
@@ -74,6 +74,7 @@
 		watch:{ 
 		  '$route' (to, from) {  
 		    // data数据操作  
+		    console.log(to,from)
 		    this.allState()
 		  }  
 		},
@@ -119,8 +120,7 @@
 		        map.centerAndZoom(point,18);//设定地图的中心点和坐标并将地图显示在地图容器中
 				var marker = new BMap.Marker(point);  // 创建标注
 				map.addOverlay(marker);               // 将标注添加到地图中
-		    }
-             
+		    }       
 		},
 		computed:{
 

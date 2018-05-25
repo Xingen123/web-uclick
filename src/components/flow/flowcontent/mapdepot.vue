@@ -41,12 +41,19 @@
 		<!-- 图片 -->
 		<div style="margin-top:50px;color:#505050;font-size: 18px;">图库</div>
 		<div class="photo" >
-			<div  class="imgbox"  v-for="(item,index) in photoItem">
-					<div class="smallbg" @click="cropper(item.fileServer,item.imgUrl,item.id)">
+			<div  class="imgbox"  v-for="items in photoItem" v-dragging="{ item: items, list: photoItem, group: 'color' }" :key="items.id">
+					<div class="smallbg" @click="cropper(items.fileServer,items.imgUrl,items.id)">
 						编辑
-						<div class="remove" @click.stop="remove(item.id)"></div>
+						<div class="remove" @click.stop="remove(items.id)"></div>
 					</div>
-					<img v-lazy='item.fileServer +"/"+item.imgUrl' alt="">
+					<img v-lazy='items.fileServer +"/"+items.imgUrl' alt="">
+					<!-- <div class="smallbg" @click="cropper(color.sequence,color.id)">
+						编辑
+						<div class="remove" @click.stop="remove(color.id)"></div>
+					</div>
+
+
+					<img :src="color.sequence" alt=""> -->
 			</div>
 		</div>
 
@@ -124,6 +131,14 @@ import vueCropper from '@/components/login/vue-cropper'
 					// fixedNumber: [3,4],
 					// original:true
 				}
+				// colors: [
+    //                 {id: '1', sequence: 'https://www.baidu.com/img/bd_logo1.png'},
+    //                 {id: '2', sequence: 'https://fengyuanchen.github.io/cropper/images/picture.jpg'},
+    //                 {id: '3', sequence: 'http://ofyaji162.bkt.clouddn.com/touxiang.jpg'},
+    //                 {id: '4', sequence: 'http://ofyaji162.bkt.clouddn.com/bg1.jpg'},
+    //                 {id: '5', sequence: 'https://o90cnn3g2.qnssl.com/0C3ABE8D05322EAC3120DDB11F9D1F72.png'},
+    //                 {id: '6', sequence: ''}
+    //         	]
 			}
 		},
 		props: {},
@@ -198,7 +213,7 @@ import vueCropper from '@/components/login/vue-cropper'
 
 			//上传视频
 			Up(videoFile){
-console.log("调用上传接口")
+				console.log("调用上传接口")
 				let _this = this
 
 				let param = new FormData(); //创建form对象
@@ -248,7 +263,7 @@ console.log("调用上传接口")
 			finish (type) {
 			// 输出
 			var _this=this
-			if (type === 'blob') {
+			if (type === 'blob'){
 					this.$refs.cropper2.getCropBlob((data) => {
 						// _this.example2.img = window.URL.createObjectURL(data)		
 							let param = new FormData(); //创建form对象
@@ -313,6 +328,7 @@ console.log("调用上传接口")
 			    param.append('id',detailId); 
 			  	param.append('token',tokenone);
 			    this.$ajax.post('query/webRecommendPicture',param).then(response=>{
+			    	console.log(response.data.recomemndPictureInfoList)
 			    	if (response.data.videoUrl) {
 			    		_this.videoB = response.data.videoUrl
 			    		_this.vid = true
@@ -385,7 +401,23 @@ console.log("调用上传接口")
 				    })  
 				}        
       
-			}
+			},
+			register(){
+        		var _this=this  
+		        let param = new FormData();
+            	let itemsId = this.photoItem.map(item =>item.id)
+		        param.append('pictureSort',itemsId);
+				
+    			this.$ajax.post('sort/webRecommendPicture',param).then(function (response) {
+
+    				console.log(response)
+
+    			}).catch(function (error) {
+
+    				console.log(error)
+
+    			});
+		  }
 		},
 		computed:{
 
@@ -393,6 +425,9 @@ console.log("调用上传接口")
 		created () {},
 		mounted () {
 			this.photo()
+			this.$dragging.$on('dragend', () => {
+	          this.register()
+	        })
 		},
 	  	destroyed () {}
 	} 

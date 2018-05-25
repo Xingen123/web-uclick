@@ -29,7 +29,7 @@ axios.interceptors.request.use(config => {
 
 // console.log(config.url)
  // element ui Loading方法
-if (config.url != "web/ceShi") {
+if (config.url != "sort/webRecommendPicture") {
 	 loadinginstace = Loading.service({ fullscreen: true ,text:"loading..."})
 }
 

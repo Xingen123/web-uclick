@@ -1,8 +1,8 @@
 <template>
     <div class="color-list">
       	<div class="color-item"  v-for="color in colors" v-dragging="{ item: color, list: colors, group: 'color' }" :key="color.id">
-          	<img :src="color.sequence" alt="">
-  		</div>
+              <img :src="color.sequence" alt="">          	
+  		  </div>
   		<button @click="register">dadasdasd</button>
     </div>
 </template>
@@ -17,7 +17,7 @@ export default {
                     {id: '3', sequence: 'http://ofyaji162.bkt.clouddn.com/touxiang.jpg'},
                     {id: '4', sequence: 'http://ofyaji162.bkt.clouddn.com/bg1.jpg'},
                     {id: '5', sequence: 'https://o90cnn3g2.qnssl.com/0C3ABE8D05322EAC3120DDB11F9D1F72.png'},
-                    {id: '6', sequence: 'http://ofyaji162.bkt.clouddn.com/bg1.jpg'}
+                    {id: '6', sequence: ''}
             ]
         }
     },
@@ -26,28 +26,28 @@ export default {
         		var _this=this  
 
 		        let param = new FormData();
-		        let a =JSON.stringify(this.colors);
-		        param.append('ceshi', a);
+            let itemsId = this.colors.map(item =>item.id)
+		        // let a =JSON.stringify(itemsId);
+		        param.append('pictureSort',itemsId);
 				
-				this.$ajax.post('web/ceShi',param).then(function (response) {
+    				this.$ajax.post('sort/webRecommendPicture',param).then(function (response) {
 
-					console.log(response)
+    					console.log(response)
 
-				}).catch(function (error) {
+    				}).catch(function (error) {
 
-					console.log(error)
+    					console.log(error)
 
-				});
-		}
+    				});
+		  }
     },
     //这里挺重要的，因为我们一般排序完要重新提交排序后的数据给后台保存，以便下一次安装我们所需要的顺序显示，这里的list就可以帮我们做到这一点，但是我们需要给数据添加一个uniqueId标志。然后在排序完后或者列表对应的顺序和uniqueId提交给后台，我也不知道我说的咋样。
     mounted () {
         this.$dragging.$on('dragged', ({ value }) => {
-          console.log(value.item)
-          let a =JSON.stringify(value.list) ;
 
-          console.log(typeof value.list,typeof a,a)
-          console.log(value.group)
+        })
+        this.$dragging.$on('dragend', () => {
+          this.register()
         })
     }
 }
