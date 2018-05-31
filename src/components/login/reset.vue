@@ -11,9 +11,10 @@
 	         		<span v-show="!form.show">{{form.count}} s</span>
 				</el-button>
 	
-				<el-button type="primary" style="width:502px;margin-top:30px;margin-left:-2px; display:block;font-sizefont-size: 18px;" @click="next">下一步</el-button>
+				<el-button type="primary" class="submit" @click="next">下一步</el-button>
 			</el-form>
 		</div>
+		<p class="bottomtext" style="color:white;font-size:3.5em;text-align:center;font-weight:bold;margin-top:80px;">去和有意思的人成为朋友</p>
 	</div>
 </template>
 <script>
@@ -147,13 +148,22 @@ const TIME_COUNT = 60;
 		width: 100%;
 	}
 	.box{
-		width: 500px;
+		width:33%;
+		max-width: 500px;
+		min-width: 300px;
 		height: 350px;
 		background: rgba(0,0,0,0.4);
 		color: white;
-		margin: 150px auto;
+		margin:0 auto;
+		/*position: absolute;*/
+		margin-top: 150px;
 		border-radius: 5px;
 		padding: 35px;
+	}
+	@media screen and (max-width:600px) {
+	    .box{
+	      height: 300px;
+	    }
 	}
 	.el-input{
 		height: 50px;
@@ -186,7 +196,7 @@ const TIME_COUNT = 60;
 	}
 	.yzm{
 		width: 170px;
-		margin-left: 90px;
+		margin-left: 70px;
 	}
 		        input::-webkit-input-placeholder{
             color:#fff;
@@ -201,7 +211,7 @@ const TIME_COUNT = 60;
             color:#fff;
         }
 	.width{
-	width: 470px;
+	width:90%;
 	height: 42px;
 	margin-top: 20px;
     padding: 0 15px;
@@ -222,5 +232,39 @@ const TIME_COUNT = 60;
     -o-transition: all .2s;
     -moz-transition: all .2s;
     -webkit-transition: all .2s;
+	}
+	.submit{
+		width:99%;
+		margin-top:30px;
+		margin-left:-2px; 
+		display:block;
+		font-sizefont-size: 18px;
+	}
+	@media screen and (max-width:1450px) {
+			.yzm{
+				width: 170px;
+				margin-left: 0px;
+				margin-top: 15px;
+			}
+	}
+	@media screen and (max-width:600px) {
+	    .width{
+	    	height: 35px;
+	    }
+	    .widthtwo{
+	    	width:100px;
+	    	height: 35px;
+	    }
+	    .yzm{
+			width: 112px;
+			height: 35px;
+			line-height: 10px;
+			margin-left: 50px;
+		}
+	    .submit{
+	    	width:100%;
+	    	height: 35px;
+	    	line-height: 10px;
+	    }
 	}
 </style>

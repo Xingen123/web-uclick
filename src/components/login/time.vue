@@ -4,6 +4,7 @@
               <img :src="color.sequence" alt="">          	
   		  </div>
   		<button @click="register">dadasdasd</button>
+        <button @click="order">order</button>
     </div>
 </template>
 
@@ -22,11 +23,38 @@ export default {
         }
     },
     methods: {
+        order(){
+          var param = {
+
+                        "header": {
+                            "faceCode": "user.userLogin", 
+                            "token": "3252af018d851ba3a7af2a3881feb282",
+                            "terminal": "IOS",
+                            "version": "1.0"
+                        },
+                        "body": {
+                            "mobile": "13888888888",
+                            "verifyCode":"1029"
+                        }
+                  }
+
+          this.$ajax.post('http://124.205.200.90/user/login',{
+            param
+          }).then(function (response) {
+                
+                console.log(response)
+
+            }).catch(function (error) {
+
+                console.log(error)
+
+            });
+        },
     	register(){
         		var _this=this  
 
 		        let param = new FormData();
-            let itemsId = this.colors.map(item =>item.id)
+                let itemsId = this.colors.map(item =>item.id)
 		        // let a =JSON.stringify(itemsId);
 		        param.append('pictureSort',itemsId);
 				

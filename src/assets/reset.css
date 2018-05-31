@@ -25,10 +25,33 @@ body {
     overflow: hidden;
     background-size:100%;
     position:absolute;
+    transition: all .2s;
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
 }
 @media screen and (min-width:1920px) {
     .login{
        background-size:cover;
+    }
+}
+@media screen and (max-width:1700px) {
+    .login{
+       background-size:cover;
+    }
+}
+@media screen and (max-width:600px) {
+    .bottomtext{
+        display: none;
+    }
+    .login {
+        width:100%;
+        min-width: 300px;
+        background:url(smallbj.png) no-repeat;
+        overflow: hidden;
+        background-size:100%;
+        position:absolute;
+
     }
 }
 #app {

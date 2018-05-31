@@ -20,7 +20,7 @@
 		<!-- 标题 -->
 		<div style="margin-top:60px;font-size: 20px;">体验标题</div>
 		<p style="margin-top:5px;color:#505050;">例：尚珈丞 | 在网红咖啡店拍出最时尚的你</p>
-		<el-input v-model="input" @input="descInput" placeholder="请输入内容" :maxlength="20" style="margin-top:20px;width:500px;"></el-input>
+		<el-input v-model="input" @input="descInput" placeholder="请输入内容" :maxlength="30" style="margin-top:20px;width:500px;"></el-input>
 		<p  style="line-height:40px;">还剩{{number}}个字</p>
 		<div style="margin-top:60px;font-size: 20px;">封面照片</div>
 		<!-- 图片 -->
@@ -95,7 +95,7 @@ import axios from 'axios'
 		},
 		data(){
 			return{
-				number:20,
+				number:30,
 				imageData:"",
 				//标题
 				dialogVisible: false,
@@ -137,7 +137,7 @@ import axios from 'axios'
 			},
 			descInput(){
 				var txtVal = this.input.length;
- 				this.number =20 - txtVal;
+ 				this.number =30 - txtVal;
  				if (txtVal>0) {
 					this.disabled=false
 				}else{
@@ -165,7 +165,7 @@ import axios from 'axios'
 			  	if (response.data.complete=="SUCCESS") {  	
 			  		_this.input=response.data.title
 			  		if (response.data.title) {
-			  			_this.number=20-response.data.title.length
+			  			_this.number=30-response.data.title.length
 			  		}	
 			  		if (response.data.imageUrl!=null && response.data.title!="") {
 			  			global.$emit("tabtwo",true)

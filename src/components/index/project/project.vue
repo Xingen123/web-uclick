@@ -236,5 +236,9 @@
 .newidea{
 	width: 100px;
 }
-
+@media screen and (max-width:600px) {
+	.content{
+	    padding-left: 0;
+	}
+}
 </style>

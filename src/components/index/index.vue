@@ -88,4 +88,10 @@
 		font-size: 20px;
 		float: right;
 	}
+	@media screen and (max-width:600px) {
+	    .newidea{
+	     	float: left;
+	     	margin-top: 20px;
+	    }
+	}
 </style>

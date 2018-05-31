@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'development') {
 // axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 axios.defaults.headers = {'Content-Type': 'multipart/form-data'}
 
-axios.defaults.timeout = 9000
+axios.defaults.timeout = 5000
 
 // http请求拦截器
 var loadinginstace

@@ -16,6 +16,7 @@
 				</el-form-item>
 			</el-form>
 		</div>
+		<p class="bottomtext" style="color:white;font-size:3.5em;text-align:center;font-weight:bold;margin-top:80px;">去和有意思的人成为朋友</p>
 	</div>
 </template>
 <script>
@@ -62,7 +63,7 @@
 		    },
 		    //登录
 		    login(){
-		    	var _this=this
+		      var _this=this
 		      let param = new FormData();
 			  param.append('mobile', this.phone);
 			  param.append('password', this.password);
@@ -139,7 +140,9 @@
 <style scoped>
 
 	.box{
-		width: 500px;
+		width:33%;
+		max-width: 500px;
+		min-width: 300px;
 		height: 350px;
 		background: rgba(0,0,0,0.4);
 		color: white;
@@ -149,17 +152,14 @@
 		border-radius: 5px;
 		padding: 35px;
 	}
-
-	.yzminput{
-		width: 270px;
+	@media screen and (max-width:600px) {
+	    .box{
+	      height: 300px;
+	    }
 	}
-	.yzm{
-		width: 170px;
-		margin-left: 30px;
-	}
-	        input::-webkit-input-placeholder{
+	 input::-webkit-input-placeholder{
             color:#fff;
-        }
+     }
         input::-moz-placeholder{   /* Mozilla Firefox 19+ */
             color:#fff;
         }
@@ -170,7 +170,7 @@
             color:#fff;
         }
 	.width{
-	width: 470px;
+	width:90%;
 	height: 42px;
 	margin-top: 20px;
     padding: 0 15px;
@@ -192,8 +192,9 @@
     -moz-transition: all .2s;
     -webkit-transition: all .2s;
 	}
+
 	.submit{
-		width: 502px;
+		width:95%;
 		margin-top: 10px;
 		/*font-weight: bold;*/
 		font-size: 18px;
@@ -203,5 +204,13 @@
     -webkit-transition: all .2s;
     -ms-transition: all .2s;
 	} 
-
+	@media screen and (max-width:600px) {
+	    .width{
+	    	height: 35px;
+	    }
+	    .submit{
+	    	height: 35px;
+	    	line-height: 10px;
+	    }
+	}
 </style>
