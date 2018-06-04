@@ -99,7 +99,7 @@
 				}
 			},
 			handleClose(tag) {
-				console.log(1)
+				
 		        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
 		      },
 

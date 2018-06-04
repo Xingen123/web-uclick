@@ -122,10 +122,10 @@
 .index{
 width: 100%;
 background: white;
-position: fixed;
-top:0;
-left: 0;
-z-index: 2;
+/*position: fixed;*/
+/*top:0;*/
+/*left: 0;*/
+/*z-index: 100;*/
 }
 	.header{
 		width: 100%;

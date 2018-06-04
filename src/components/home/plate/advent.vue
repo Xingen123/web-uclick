@@ -144,7 +144,7 @@
 		methods:{
 			deleteRow(index, rows){
 				var _this=this
-				console.log(rows[index.$index].id)
+				
 				this.$alert('确认删除吗？', '删除', {
 		        confirmButtonText: '确定',
 		        callback: action => {

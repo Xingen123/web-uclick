@@ -20,9 +20,6 @@
 	</div>
 </template>
 <script>
-// import md5 from 'js-md5';
-// const a = "sdadsa";
-// console.log(`####${md5(a)}`) 
 	export default{
 		components:{
 

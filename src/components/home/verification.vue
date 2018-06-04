@@ -82,7 +82,7 @@ import Header from "@/components/head/head"
 		        }else{
 		        	let param = new FormData();
 			      	var tokenone =sessionStorage.getItem('encryptToken');
-				  	console.log(tokenone)
+				  	
 				  	param.append('token',tokenone);
 				  	param.append('imageFile',file);//身份证正面
 				  	this.$ajax.post('update/webUser',param).then(function (response) {

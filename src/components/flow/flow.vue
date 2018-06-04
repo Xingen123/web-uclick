@@ -1,6 +1,6 @@
 <template>	
 	<div class="flow">
-		<head-er></head-er>
+		<head-er class="headnav"></head-er>
 		<flow-nav ></flow-nav>
 		<router-view class="content" ></router-view>
 		<phone-ui class="ph-none"></phone-ui>	
@@ -79,5 +79,10 @@
 		display: none
 	}
 }
-
+.headnav{
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 10;
+}
 </style>

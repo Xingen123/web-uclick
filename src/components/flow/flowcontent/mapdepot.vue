@@ -150,7 +150,7 @@ import vueCropper from '@/components/login/vue-cropper'
 
 			Videochange(){
 				var docElm = document.getElementById('video'); 
-				console.log(docElm)
+			
 				//W3C
 				if(docElm.requestFullscreen){
 
@@ -269,7 +269,7 @@ import vueCropper from '@/components/login/vue-cropper'
 							let param = new FormData(); //创建form对象
 						    var tokenone =sessionStorage.getItem('encryptToken');
 						    var pictureid =sessionStorage.getItem('pictureid');
-						    console.log(data)
+						    
 						    param.append('id',pictureid); 
 						  	param.append('token',tokenone);
 						    param.append('imageFile',data);//通过append向form对象添加数据
@@ -328,7 +328,7 @@ import vueCropper from '@/components/login/vue-cropper'
 			    param.append('id',detailId); 
 			  	param.append('token',tokenone);
 			    this.$ajax.post('query/webRecommendPicture',param).then(response=>{
-			    	console.log(response.data.recomemndPictureInfoList)
+			    	
 			    	if (response.data.videoUrl) {
 			    		_this.videoB = response.data.videoUrl
 			    		_this.vid = true
@@ -390,7 +390,6 @@ import vueCropper from '@/components/login/vue-cropper'
 				 //        // }
 				 //    })
 				    this.$ajax.post('create/webRecommendPicture',param).then(response=>{
-				    	console.log(response.loaded)
 				    	if (response.data.recomemndPictureInfoList.length==6) {
 				    		_this.none=false
 				    	}
@@ -410,7 +409,7 @@ import vueCropper from '@/components/login/vue-cropper'
 				
     			this.$ajax.post('sort/webRecommendPicture',param).then(function (response) {
 
-    				console.log(response)
+    				
 
     			}).catch(function (error) {
 

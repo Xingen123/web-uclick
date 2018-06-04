@@ -109,7 +109,7 @@
 			  param.append('token',tokenone);
 			  param.append('id',this.$route.params.id);
 			  this.$ajax.post('query/webRecommendTime',param).then(function (response) {
-			  	console.log(response)
+			  	
 			  	if (response.data.complete=="SUCCESS"){
 			  		_this.num=response.data.defaultAmount
 			  		_this.events=response.data.webTimeInfoList
@@ -225,7 +225,7 @@
 				  		_this.name=response.data.name
 				  		_this.eventsday=response.data.times
 				  	}
-				  	console.log(response)
+				  	
 				  }).catch(function (error) {
 				      console.log(error);
 				  });

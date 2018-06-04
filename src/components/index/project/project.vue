@@ -4,7 +4,8 @@
 		<div class="box" v-for="(item,index) in project" :key="index">
 			<div class="status">
 				<el-progress :text-inside="true" :stroke-width="17" :percentage="item.completeAmount" ></el-progress>
-				<img style="position:absolute;top:2px;left0;z-index:-1;width:100%;height:100%;border-radius:5px;" v-lazy="item.fileServer+'/'+item.imageUrl" alt="" :onerror="defaultImg">
+				<img style="position:absolute;top:2px;left0;z-index:-1;width:100%;height:100%;border-radius:5px;" v-if="!item.imageUrl" v-lazy="" alt="" :onerror="defaultImg">
+				<img style="position:absolute;top:2px;left0;z-index:-1;width:100%;height:100%;border-radius:5px;" v-if="item.imageUrl" v-lazy="item.fileServer+'/'+item.imageUrl" alt="" :onerror="defaultImg">
 			</div>
 			<div class="content">
 				<div style="font-size:25px;">{{item.title}}</div>

@@ -74,7 +74,6 @@
 		watch:{ 
 		  '$route' (to, from) {  
 		    // data数据操作  
-		    console.log(to,from)
 		    this.allState()
 		  }  
 		},
@@ -87,7 +86,6 @@
               var recommend =sessionStorage.getItem('recommendId');
               param.append('id',recommend);  
               this.$ajax.post('query/webConvoy',param).then(function (response) {
-              	console.log(response)
                 if (response.data.complete=="SUCCESS"){
                 	if (response.data.addressDetail) {
                 		_this.addressDetail=response.data.addressDetail
