@@ -30,7 +30,7 @@
 				</div>
 			</div>
 			
-			<el-dropdown trigger="click" style="margin-top:25px;">
+			<el-dropdown trigger="click" style="margin-top:25px;" :placement="localtion">
 			      <span class="el-dropdown-link">
 			       <i class="el-icon-more"></i>
 			      </span>
@@ -52,12 +52,15 @@
 			return{
 				defaultImg: 'this.src="' + require('../img/logo.png') + '"',
 				project:[],
-				smallbox:null
+				smallbox:null,
+				localtion:'bottom-end'
 			}
 		},
 		props: {},
 		watch:{
-
+			localtion:function(val){
+				console.log(1)
+			}
 		},
 		methods:{
 			revocation(id){
@@ -170,16 +173,20 @@
 		            type: 'info',
 		            message: '已取消删除'
 		          });          
-		        });
-			 
-			  
-		      
+		        });	      
+			},
+			clientWidth(){
+				let width = document.body.clientWidth;
+				if(width<600){
+					this.localtion='right-end'
+				}
 			},
 			time(id){
 				this.$router.push({
 		       	 path: '/calendar/'+id
 		      	})
 			}
+
 		},
 		computed:{
 
@@ -187,6 +194,8 @@
 		created () {},
 		mounted () {
 			this.dsds()
+			this.clientWidth()
+			
 		},
 	  	destroyed () {}
 	} 

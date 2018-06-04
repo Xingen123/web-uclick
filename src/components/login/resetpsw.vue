@@ -75,22 +75,22 @@
 	.login{
 		width: 100%;
 	}
-.box{
+	.box{
 		width:33%;
 		max-width: 500px;
-		min-width: 300px;
 		height: 350px;
 		background: rgba(0,0,0,0.4);
 		color: white;
 		margin:0 auto;
-		/*position: absolute;*/
 		margin-top: 150px;
 		border-radius: 5px;
 		padding: 35px;
 	}
 	@media screen and (max-width:600px) {
 	    .box{
-	      height: 300px;
+	    	width:70%;
+	    	margin-top: 100px;
+	        height: 300px;
 	    }
 	}
 	 input::-webkit-input-placeholder{

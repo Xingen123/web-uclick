@@ -1,4 +1,4 @@
-@font-face {font-family:"syml";src:url('fonts/PingFang_Regular.ttf');}
+@font-face {font-family:"syml";src:url('fonts/PingFang_Regular.ttf') format('truetype');}
 * {
     margin:0;
     padding:0;

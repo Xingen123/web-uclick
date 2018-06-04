@@ -158,19 +158,19 @@ import axios from 'axios'
 	.box{
 		width:33%;
 		max-width: 500px;
-		min-width: 300px;
 		height: 350px;
 		background: rgba(0,0,0,0.4);
 		color: white;
 		margin:0 auto;
-		/*position: absolute;*/
 		margin-top: 150px;
 		border-radius: 5px;
 		padding: 35px;
 	}
 	@media screen and (max-width:600px) {
 	    .box{
-	      height: 300px;
+	    	width:70%;
+	    	margin-top: 100px;
+	        height: 300px;
 	    }
 	}
 	.el-input{
@@ -267,7 +267,7 @@ import axios from 'axios'
 		.yzm{
 			width: 112px;
 			height: 35px;
-			margin-left: 50px;
+			margin-left: 12px;
 	    	line-height: 10px;
 		}
 	    .width{
