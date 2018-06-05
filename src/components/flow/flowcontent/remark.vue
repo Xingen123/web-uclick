@@ -33,7 +33,10 @@ import global from '@/components/flow/global/global'
 		methods:{
 			descInput(){
 				var txtVal = this.input.length;
- 				this.number =250 - txtVal;
+				if (txtVal<251) {
+					this.number =250 - txtVal;
+				}
+ 				
  				if (txtVal>0) {
 					this.disabled=false
 				}else{

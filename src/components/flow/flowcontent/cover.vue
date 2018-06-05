@@ -137,7 +137,10 @@ import axios from 'axios'
 			},
 			descInput(){
 				var txtVal = this.input.length;
- 				this.number =30 - txtVal;
+				if (txtVal<31) {
+					this.number =30 - txtVal;
+				}
+ 				
  				if (txtVal>0) {
 					this.disabled=false
 				}else{

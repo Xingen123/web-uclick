@@ -52,7 +52,10 @@ import global from '@/components/flow/global/global'
 			},
 			descInput(){
 				var txtVal = this.exet.length;
- 				this.number =100 - txtVal;
+				if (txtVal<101) {
+					this.number = 100 - txtVal;
+				}
+ 				
 			},
 			require(){
 			  var _this=this
