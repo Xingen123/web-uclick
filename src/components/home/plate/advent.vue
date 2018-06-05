@@ -2,7 +2,7 @@
 	<div>
 		<div class="advent">
 		<div style="font-size:28px;">即将到来的体验</div>
-		<div style="width:100%;height:300px;margin-top:10px;">
+		<div style="width:100%;margin-top:10px;">
 		  	<el-table
 		    :data="tableData5"
 		    style="width: 100%;border:1px solid #DCDFE6;"
@@ -19,14 +19,17 @@
 		      width="120">
 		    </el-table-column>
 		    <el-table-column
+
 		      prop="endTime"
 		      label="时间"
 		      width="120">
 		    </el-table-column>
 		    <el-table-column
-		      prop="personAmount"
 		      label="参与人数"
 		      width="120">
+		      	<template slot-scope="scope">
+			      	<a style="color:#409EFF;cursor:pointer;" @click="details(scope)">{{scope.row.personAmount}}</a>
+			    </template>	
 		    </el-table-column>
 		    <el-table-column
 		      prop="address"
@@ -39,14 +42,16 @@
 		      width="150">
 		    </el-table-column>
 		    <el-table-column
-		      prop="amount"
+		    	 
+		         prop="amount"
 		      label="预计收益"
 		      width="300">
+		     
 		    </el-table-column>
 		    <el-table-column
 		      fixed="right"
-		      label="操作"
-		      >
+		      label="操作">
+
 		      <template slot-scope="scope">
 
 		        <el-button
@@ -74,7 +79,7 @@
 
 		<div class="record">
 			<div style="font-size:28px;">交易记录</div>
-			<div style="width:100%;height:300px;margin-top:10px;overflow-x:hidden;">
+			<div style="width:100%;margin-top:10px;overflow-x:hidden;">
 			  	<el-table
 			    :data="tableData4"
 			    style="width: 100%;border:1px solid #DCDFE6;"
@@ -96,9 +101,12 @@
 			      width="120">
 			    </el-table-column>
 			    <el-table-column
-			      prop="personAmount"
 			      label="参与人数"
 			      width="120">
+				 <template slot-scope="scope">
+			      	<a style="color:#409EFF;cursor:pointer;" @click="details(scope)">{{scope.row.personAmount}}</a>
+			    </template>	
+
 			    </el-table-column>
 			    <el-table-column
 			      prop="address"
@@ -125,6 +133,39 @@
 		  		</el-table>
 			</div>
 		</div>
+
+
+
+		<el-dialog
+		  title="提示"
+		  :visible.sync="dialogVisible"
+		  width="30%">
+		  <template>
+			  <el-table
+			    :data="tableData3"
+			    height="250"
+			    border
+			    style="width: 100%">
+			    <el-table-column
+			      prop="name"
+			      label="姓名"
+			      width="180">
+			    </el-table-column>
+			    <el-table-column
+			      prop="mobile"
+			      label="电话"
+			      width="180">
+			    </el-table-column>
+			    <el-table-column
+			      prop="comment"
+			      label="备注">
+			    </el-table-column>
+			  </el-table>
+			</template>
+		  
+		</el-dialog>
+
+
 	</div>
 </template>
 <script>
@@ -133,8 +174,10 @@
 		},
 		data(){
 			return{
+				 tableData3: [],
 				 tableData4: [],
-				 tableData5: []
+				 tableData5: [],
+				 dialogVisible: false
 			}
 		},
 		props: {},
@@ -142,6 +185,27 @@
 
 		},
 		methods:{
+			//点击人数
+			details(scope){
+				console.log()
+				this.dialogVisible = true
+				var _this=this
+			    let param = new FormData();
+			    var tokenone =sessionStorage.getItem('encryptToken');
+				param.append('token',tokenone);
+				param.append('id',scope.row.recommendId);
+				this.$ajax.post('query/orderUserData',param).then(function (response) {
+					console.log(response);
+					if (response.data.complete=="SUCCESS"){
+						_this.tableData3=response.data.orderUserList
+					}
+				}).catch(function (error) {
+				      console.log(error);
+				});
+			},
+			handleClose(done) {
+
+		    },
 			deleteRow(index, rows){
 				var _this=this
 				
@@ -158,7 +222,6 @@
 		        });
       		},
       		removei(id){
-      		  console.log(id)
       		  var _this=this
 		      let param = new FormData();
 		      var tokenone =sessionStorage.getItem('encryptToken');
@@ -200,21 +263,13 @@
 </script>
 <style scoped>
 	.advent{
-		position: absolute;
-		top: 350px;
-		left: 0;
-		right: 0;
 		margin: 0 auto;
+		margin-top: 300px;
 		width: 80%;
-		height: 310px;
 	}
 	.record{
-		position: absolute;
-		bottom: 280px;
-		left: 0;
-		right: 0;
 		margin: 0 auto;
+        margin-top:30px;
 		width: 80%;
-		height: 200px;
 	}
 </style>

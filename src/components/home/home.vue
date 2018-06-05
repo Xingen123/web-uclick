@@ -46,6 +46,5 @@
 	.home{
 		width: 100%;
 		height: 1200px;
-		position: relative;
 	}
 </style>

@@ -232,7 +232,7 @@
 </script>
 <style scoped>
 	.with{
-
+		
 		position: absolute;
 	    top: 80px;
 		left:60%;
