@@ -79,4 +79,9 @@
 		width:30%;
 		height: 250px;
 	}
+	@media screen and (max-width:600px) {
+	    .per{
+	    	width:40%;
+	    }
+	}
 </style>

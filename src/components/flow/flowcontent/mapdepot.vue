@@ -1,7 +1,7 @@
 <template>	
 	<div class="mapdepot">
 		<div style="font-size: 28px;">添加更多照片</div>
-		<p style="margin-top:25px;color:#505050;width:550px;">根据数据显示，配有6张以上图片的体验往往更受欢迎。去添加更多图片让体验获得更多预定吧！</p>
+		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">根据数据显示，配有6张以上图片的体验往往更受欢迎。去添加更多图片让体验获得更多预定吧！</p>
 
 		
 		
@@ -22,22 +22,19 @@
 			</div>
 		</div>
 		<!-- 视频 -->
-		<!-- <div style="margin-top:50px;color:#505050;font-size: 18px;">视频</div>
+		<div style="margin-top:50px;color:#505050;font-size: 18px;">视频</div>
 
 
 		<a  class="upVideo" style="margin-top:10px;">
 			<i class="el-icon-upload"></i>
 			<video class="videoB" :src="videoB"   autoplay loop id="video"></video>
-    		<input class="chVideo" type="file" v-show="videoBox" accept="video/*"  @change="upVideo($event)"/> -->
+    		<input class="chVideo" type="file" v-show="videoBox" accept="video/*"  @change="upVideo($event)"/>
 
     		<!-- 有视频悬浮 -->
-    		<!-- <div v-show="vid" class="smallVideo" @click="Videochange" >
+    		<div v-show="vid" class="smallVideo" @click="Videochange" >
 				预览<div class="Videoremove" @click.stop="Videoremove()"></div>
 			</div>
-		</a> -->
-	
-
-
+		</a>	
 		<!-- 图片 -->
 		<div style="margin-top:50px;color:#505050;font-size: 18px;">图库</div>
 		<div class="photo" >
@@ -226,8 +223,6 @@ import vueCropper from '@/components/login/vue-cropper'
 				param.append('token',tokenone);
 
 				param.append('videoFile',videoFile);
-
-				console.log('id',detailId,'token',tokenone,'videoFile',videoFile)	
 				_this.$ajax.post('create/webRecommendVideo',param).then(response=>{
 					
 					if (response.data.complete=="SUCCESS") {
@@ -433,7 +428,7 @@ import vueCropper from '@/components/login/vue-cropper'
 </script>
 <style scoped>
 .bg{
-	z-index: 2;
+	z-index:10;
 	width: 100%;
 	height: 100%;
 	position: fixed;
@@ -573,7 +568,7 @@ import vueCropper from '@/components/login/vue-cropper'
 	margin-right: 200px;
 	}
     .mapdepot{
-    	position: absolute;
+    	/*position: absolute;*/
     }
 	.photo{
 		margin-top: 10px;
@@ -709,5 +704,37 @@ import vueCropper from '@/components/login/vue-cropper'
     top: 0;
     opacity: 0;
 }
-
+@media screen and (max-width: 600px) {
+	.text_p{
+		width: 100% !important;
+	}
+	.photo{
+		width: 100%;
+	}
+	.text,.rotate,.back{
+		display: none;
+	}
+	.btn,.btn2{
+		top: 2px;
+	}
+	.wrapper{
+		width: 100% !important;
+		height: 500px !important;
+		float: left;
+		margin-top: 100px;
+	}
+	.btn3{
+		left:270px !important;
+	}
+	.btn4{
+		left: 100px;	
+	}
+	.btn3,.btn4{
+	    width: 40px;
+	    height: 40px;
+	    line-height: 40px;
+	    top: 85px;
+	    z-index: 100;
+	}
+}
 </style>

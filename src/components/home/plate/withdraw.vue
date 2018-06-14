@@ -6,13 +6,13 @@
 			<div style="padding:20px;">
 				<div style="font-size:17px;">当前收益</div>
 				<div style="font-size:27px;">￥{{input}}</div>
-				<div style="margin-top:70px;">提现方式：支付宝<span style="color:#409EFF;float:right;cursor:pointer;" @click="withdOne">提现</span></div>
+				<div class="withdOne" style="margin-top:70px;">提现方式：支付宝<span style="color:#409EFF;float:right;cursor:pointer;" @click="withdOne">提现</span></div>
 			</div>
 		</div>
 
 
 		<!-- 提现记录 -->
-		<el-dialog
+			<el-dialog
 		  title="提现记录"
 		  :visible.sync="dialogVisible"
 		  width="30%">
@@ -46,7 +46,7 @@
 			   <div style="margin-top:-30px;font-weight: bold;">提现金额</div>
 			  <el-input v-model="money" type="number" style="width:250px;" placeholder="请输入内容"></el-input>
 			  <div>当前可提现￥{{input}}</div>
-			  <p style="color:#00A0E8;">根据相关条款，Blueglass 扣除 20% 服务费，<br>预计到账金额 ￥{{inputtwo|capitalize}}</p>
+			  <!-- <p style="color:#00A0E8;">根据相关条款，Blueglass 扣除 20% 服务费，<br>预计到账金额 ￥{{inputtwo|capitalize}}</p> -->
 			   <div style="font-weight: bold;margin-top:20px;">提现账号</div>
 			  <el-input v-model="number" placeholder="请输入内容"  style="width:200px;"></el-input><el-button style="margin-left:20px;color:red;" type="text" @click="open">删除</el-button>
 			  <el-button  style="margin-top:30px;width:250px;" @click="withdraw">提现</el-button>
@@ -57,7 +57,6 @@
 		  <!-- 提现成功 -->
 		  	<div v-show="over" style="font-weight: bold;">恭喜您提现成功</div>
 		</el-dialog>
-
 	</div>
 </template>
 <script>
@@ -69,7 +68,7 @@
 		data(){
 			return{
 				number:"",//支付宝名字
-				input: '',//余额
+				input:"",//余额
 				inputtwo:"",
 				money:"",//输入的提现金额
 				recordItem:[],//提现记录
@@ -238,5 +237,15 @@
 		left:60%;
 		width: 30%;
 		height: 250px;
+	}
+    @media screen and (max-width:600px) {
+	    .with{
+	    	left: 55%;
+   			width: 40%;
+	    }
+	    .withdOne{
+	    	margin-top: 20px !important;
+	    }
+
 	}
 </style>

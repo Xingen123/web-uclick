@@ -7,11 +7,11 @@
 					<div style="font-size:25px;">欢迎来到Blueglass！</div>
 					<p>点击按钮编辑您的体验信息，祝您在体验中交到好友！</p>
 				</div>
-				<el-button type="primary" class="newidea" @click="index">编辑体验
-</el-button>
+				<el-button type="primary" class="newidea" @click="index">编辑体验</el-button>
 			</div>
 		</div>
 		<pro-ject></pro-ject>
+		
 	</div>
 </template>
 <script>
@@ -24,6 +24,7 @@
 		},
 		data(){
 			return{
+			
 			}
 		},
 		props: {},
@@ -88,10 +89,23 @@
 		font-size: 20px;
 		float: right;
 	}
+
 	@media screen and (max-width:600px) {
+
 	    .newidea{
-	     	float: left;
-	     	margin-top: 20px;
+	    	float: left;
+			
+			margin: 0 auto;
+			margin-left: 80px;
 	    }
+	    	.smallbox{
+     margin-top: 0px !important; 
+	}
+.title{
+	text-align: center;
+	justify-content: center;
+	    width: 90% !important; 
+     margin-top: 0px !important; 
+	}
 	}
 </style>

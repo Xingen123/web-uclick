@@ -1,10 +1,10 @@
 <template>	
 	<div class="self">
 		<head-er></head-er>
-		<div style="padding:70px 50px 50px 400px">
+		<div class="self_box">
 			<div style="font-size:28px;">个人资料</div>
 			<div style="margin-top:50px;"><span style="width:100px;display:inline-block;">姓名</span><el-input type="text" :maxlength="6"  style="margin-left:50px;width:200px;height:20px;" v-model="name"></el-input></div>
-			<div style="margin-top:50px;"><span style="width:100px;display:inline-block;">年龄</span><el-input type="number" @input="descInput"  onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"  style="margin-left:50px;width:200px;height:20px;" v-model="age"></el-input><span style="margin-left:15px;color:#409EFF;">(选填)</span></div>
+			<div style="margin-top:50px;"><span style="width:100px;display:inline-block;">年龄</span><el-input type="number" @input="descInput"  onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"  style="margin-left:50px;width:200px;height:20px;" v-model="age"></el-input><span class="hint" style="margin-left:15px;color:#409EFF;">(选填)</span></div>
 			<div style="margin-top:50px;"><span style="width:100px;display:inline-block;">职业</span><el-input style="margin-left:50px;width:200px;height:20px;" type="text" :maxlength="10" v-model="profession"></el-input></div>
 
 			<div style="margin-top:50px;">
@@ -36,7 +36,7 @@
 			<!-- 标签 -->
 			<div style="margin-top:50px;">	
 				<div style="font-size:28px;margin-top:20px;">为自己贴签</div>
-				<p style="margin-top:15px;color:#505050;width:550px;">贴合并且醒目的标签可以让用户更快的了解你,并对体验产生兴趣。</p>
+				<p style="margin-top:15px;color:#505050;">贴合并且醒目的标签可以让用户更快的了解你,并对体验产生兴趣。</p>
 				<el-tag
 				style="margin-top:15px;"
 				  :key="tag"
@@ -59,7 +59,6 @@
 				</el-input>
 				<el-button  v-else class="button-new-tag" size="small"  @click="showInput">+ New Tag</el-button>				
 			</div>
-
 
 
 			<el-button type="primary" style="width:100px;margin-top:50px;display:block;" @click="submit">提交</el-button>
@@ -229,6 +228,21 @@
 	.self{
 		width: 100%;
 	}
+	.self_box{
+		padding: 70px 50px 50px 400px;
+	}
+	@media screen and (max-width:600px) {
+	    .self_box{
+	    	padding: 20px 0 10px 20px;
+	    }
+	    .hint{
+	    	display: none;
+	    }
+	    .el-input{
+	    	margin-left: 0 !important;
+	    }
+	}
+	
 	.imghead{
 		display: block;
 		margin-left: 150px;

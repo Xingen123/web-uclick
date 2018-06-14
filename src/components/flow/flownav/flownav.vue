@@ -1,14 +1,20 @@
 <template>  
     <div class="flownav">
-        <ul class="box">
+        <div class="listfather"  >
+            <div class="list" @click="box=true">
+                
+            </div>
+            <div class="gohome" @click="gohome">
+                
+            </div>
+        </div>
+        <ul class="box" v-show="box">
             <li class="frist">
                 <div class="fristdiv" style="font-size:28px;">
                     提交体验
                 </div>
             </li>
-<!--             <li>
-                <div class="name">基本信息</div>
-            </li> -->
+
             <li>
                 <router-link to="/flow/sort">
                     <div>
@@ -17,9 +23,7 @@
                     </div>
                 </router-link>
             </li>
-<!--             <li>
-                <div class="name">黄淘淘是只鸭子</div>
-            </li> -->
+
             <li>
                 <router-link to="/flow/cover">
                     <div>
@@ -139,9 +143,9 @@
                     </div>
                 </router-link>
             </li>          
-             <li>
+             <div class="back" @click="box=false" >
                
-            </li>
+            </div>
         </ul>
     </div>
 </template>
@@ -152,6 +156,7 @@ import global from '@/components/flow/global/global'
         },
         data(){
             return{
+              box:false,
               one:false,
               two:false,
               three:false,
@@ -171,13 +176,24 @@ import global from '@/components/flow/global/global'
         },
         props: { },
         watch:{
-
+            '$route' (to, from) {  
+                let width = document.body.clientWidth;
+                if(width<600){
+                    this.box=false
+                }   
+            }  
         },
         methods:{
-            index (){
+            gohome(){
                 this.$router.push({
                 path: '/index'
                 })
+            },
+            clientWidth(){
+                let width = document.body.clientWidth;
+                if(width>600){
+                    this.box=true
+                }
             },
             allState(){
               var _this=this
@@ -265,6 +281,7 @@ import global from '@/components/flow/global/global'
                _this.tenFive=tenFive
             })
            this.allState()
+           this.clientWidth()
         },
         destroyed () {}
     } 
@@ -286,18 +303,19 @@ import global from '@/components/flow/global/global'
                 transform: translateZ(0);
             }
     }
+    
     .box{
         width:230px;
         height:100%;
         position: fixed;
         left: 0;
-        z-index: 1;
-        top:60px;
+        z-index: 11;
+        top:61px;
         overflow:scroll;
         overflow-x:hidden;
         padding-left: 40px;
+        background: white;
     }
-
 
     .right{
         width:25px;
@@ -335,14 +353,6 @@ import global from '@/components/flow/global/global'
         margin: 20px auto;
         margin-left: -5px;
     }
-/*    .fristdiv{
-        cursor:pointer;
-        width: 80%;
-        height: 50px;
-        margin:0 auto;
-        background: url(../img/logo.png) no-repeat;
-        background-size: 80% 50px;
-    }*/
     .name{
         font-size: 20px;
         color: #BBBBBB;
@@ -355,4 +365,78 @@ import global from '@/components/flow/global/global'
         color: black;
         font-weight: bold;
     }
+    @media screen and (max-width: 600px) {
+        .right{
+            width: 20px;
+            height: 20px;
+            margin-top: 3px;
+        }
+        .box{
+            width: 100%;
+            top: 0px !important;
+            padding-left:0px !important;
+            overflow-y: hidden;
+        }
+        .box>li{
+            float: left;
+            width: 25%;
+            /*padding: 5px;*/
+            border: 1px solid gray;
+            margin-left: 20px;
+            margin-top: 10px;
+            font-size: 10px;
+            line-height: 30px;
+
+            text-align: center;
+        }
+        .frist{
+            width: 100% !important;
+            text-align:left !important;
+            border: none !important;
+            margin: 0 ;
+            margin-top: 30px !important;
+        }
+        .back{
+    clear: both;
+    position: relative;
+    bottom:20px;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    margin: 0 auto;
+    width: 30px !important;
+    height: 30px !important;
+    background: url(../img/back.png) no-repeat;
+    background-size: 100% 100%;
+    border: none !important;
+}
+.listfather{
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #DCDFE6;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.list{
+    width:35px;
+    height: 35px;
+    margin-left: 10px;
+    background: url(../img/list.png) no-repeat;
+    background-size: 100% 100%;
+
+}
+.gohome{
+    width:35px;
+    height: 35px;
+    margin-right: 10px;
+    background: url(../img/home.png) no-repeat;
+    background-size: 100% 100%;
+}
+}
 </style>

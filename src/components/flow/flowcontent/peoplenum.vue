@@ -91,4 +91,9 @@ import global from '@/components/flow/global/global'
 	} 
 </script>
 <style scoped>
+@media screen and (max-width: 600px) {
+	.text_p,.el-input{
+		width: 100% !important;
+	}
+}
 </style>

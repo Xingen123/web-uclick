@@ -1,7 +1,7 @@
 <template>	
 	<div class="cover">
 		<div style="font-size: 28px;">体验封面</div>
-		<p style="margin-top:25px;color:#505050;width:550px;">清晰且独特的封面可以帮助您吸引更多的朋友，以下一些建议能帮助您获得良好的第一印象。</p>
+		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">清晰且独特的封面可以帮助您吸引更多的朋友，以下一些建议能帮助您获得良好的第一印象。</p>
 		<p class="tishi"  @click="fun">提示和实列 {{msg}}</p>
 		<div v-show="code" class="box">
 			<div class="small">
@@ -494,7 +494,7 @@ import axios from 'axios'
 	position:fixed;
 	width: 100%;
 	height: 100%;
-	z-index: 2;
+	z-index: 10;
 	top: 0;
 	left:0;
 	background: #000000;
@@ -531,4 +531,70 @@ import axios from 'axios'
     /*opacity: 0;*/
 }
 
+	.btn3{
+	width: 50px;
+	height: 50px;
+	font-size: 20px;
+	background:black;
+	line-height: 50px;
+	outline:none;
+	color: white;
+	border-radius: 5px;
+	border:2px solid white;
+	position: absolute;
+	top: 450px;
+	left: 200px;
+}
+.btn4{
+	width: 50px;
+	height: 50px;
+	font-size: 20px;
+	background:black;
+	line-height: 50px;
+	outline:none;
+	color: white;
+	border-radius: 5px;
+	border:2px solid white;
+	position: absolute;
+	top: 450px;
+	left: 270px;
+}
+
+@media screen and (max-width: 600px) {
+	.text_p{
+		width: 100% !important;
+	}
+	.el-input{
+		width: 100% !important;
+	}
+	.cover{
+		margin-bottom: 50px;
+	}
+
+	.text,.rotate,.back{
+		display: none;
+	}
+	.btn,.btn2{
+		top: 2px;
+	}
+	.wrapper{
+		width: 100% !important;
+		height: 500px !important;
+		float: left;
+		margin-top: 100px;
+	}
+	.btn3{
+		left:270px !important;
+	}
+	.btn4{
+		left: 100px;	
+	}
+	.btn3,.btn4{
+	    width: 40px;
+	    height: 40px;
+	    line-height: 40px;
+	    top: 85px;
+	    z-index: 100;
+	}
+}
 </style>

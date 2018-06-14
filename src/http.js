@@ -20,39 +20,40 @@ if (process.env.NODE_ENV === 'development') {
 // axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 axios.defaults.headers = {'Content-Type': 'multipart/form-data'}
 
-axios.defaults.timeout = 5000
+axios.defaults.timeout = 9000
 
 // http请求拦截器
-var loadinginstace
-axios.interceptors.request.use(config => {
+// var loadinginstace
+
+// axios.interceptors.request.use(config => {
 
 
-// console.log(config.url)
- // element ui Loading方法
-if (config.url != "sort/webRecommendPicture") {
-	 loadinginstace = Loading.service({ fullscreen: true ,text:"loading..."})
-}
+// // console.log(config.url)
+//  // element ui Loading方法
+// if (config.url != "sort/webRecommendPicture") {
+// 	 loadinginstace = Loading.service({ fullscreen: true ,text:"loading..."})
+// }
 
- return config;
-}, error => {
- loadinginstace.close()
- Message.error({
- message: '加载超时'
- })
- return Promise.reject(error)
-})
+//  return config;
+// }, error => {
+//  loadinginstace.close()
+//  Message.error({
+//  message: '加载超时'
+//  })
+//  return Promise.reject(error)
+// })
 
-// http响应拦截器
-axios.interceptors.response.use(data => {// 响应成功关闭loading
- loadinginstace.close()
+// // http响应拦截器
+// axios.interceptors.response.use(data => {// 响应成功关闭loading
+//  loadinginstace.close()
 
- return data
-}, error => {
- loadinginstace.close()
- Message.error({
- message: '加载失败'
- })
- return Promise.reject(error)
-})
+//  return data
+// }, error => {
+//  loadinginstace.close()
+//  Message.error({
+//  message: '加载失败'
+//  })
+//  return Promise.reject(error)
+// })
  
 export default axios

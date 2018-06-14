@@ -61,9 +61,9 @@
 }
 .content{
     width:100%;
-    height:100%;
-    position:fixed;
-    left:0px;
+    /*height:100%;*/
+    /*position:fixed;*/
+    /*left:0px;*/
     padding:50px;
     padding-top: 80px;
     padding-left:300px;
@@ -77,6 +77,17 @@
 @media screen and (max-width: 1400px) {
     .ph-none{
 		display: none
+	}
+}
+@media screen and (max-width: 600px) {
+    .content{
+    	width: 90% !important;	
+    	margin: 0 auto;
+    	margin-top: 61px !important;	 
+		padding:0px !important;	 
+	}
+	.headnav{
+		display: none;
 	}
 }
 .headnav{

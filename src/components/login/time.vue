@@ -16,6 +16,8 @@
             <el-main>Main</el-main>
           </el-container>
         </el-container>
+        <input class="change"  name="file" ref="file" type="file"  accept="image/png,image/gif,image/jpeg" @change="finishphoto($event, 1)"/>
+       
     </div>
 
 </template>
@@ -24,31 +26,42 @@
 export default {
     data () {
         return {
-			colors: [
-                    {id: '1', sequence: 'https://www.baidu.com/img/bd_logo1.png'},
-                    {id: '2', sequence: 'https://fengyuanchen.github.io/cropper/images/picture.jpg'},
-                    {id: '3', sequence: 'http://ofyaji162.bkt.clouddn.com/touxiang.jpg'},
-                    {id: '4', sequence: 'http://ofyaji162.bkt.clouddn.com/bg1.jpg'},
-                    {id: '5', sequence: 'https://o90cnn3g2.qnssl.com/0C3ABE8D05322EAC3120DDB11F9D1F72.png'},
-                    {id: '6', sequence: ''}
+			      colors: [
+                {id: '1', sequence: 'https://www.baidu.com/img/bd_logo1.png'},
+                {id: '2', sequence: 'https://fengyuanchen.github.io/cropper/images/picture.jpg'},
+                {id: '3', sequence: 'http://ofyaji162.bkt.clouddn.com/touxiang.jpg'},
+                {id: '4', sequence: 'http://ofyaji162.bkt.clouddn.com/bg1.jpg'},
+                {id: '5', sequence: 'https://o90cnn3g2.qnssl.com/0C3ABE8D05322EAC3120DDB11F9D1F72.png'},
+                {id: '6', sequence: ''}
             ]
         }
     },
     methods: {
-        order(){
-          var param = {
+        finishphoto(e){
+          var _this=this
+          let file = e.target.files[0];
+         
+                let param = new FormData();
 
-                        "header": {
-                            "faceCode": "user.userLogin", 
-                            "token": "3252af018d851ba3a7af2a3881feb282",
-                            "terminal": "IOS",
-                            "version": "1.0"
-                        },
-                        "body": {
-                            "mobile": "13888888888",
-                            "verifyCode":"1029"
-                        }
+                param.append('token','35fa38636ae559e1a9c574054e1741a9');
+                param.append('id','95E7AD33-E0B0-4564-87B2-3EB5C9A4C10F');
+                param.append("imageFile",file) 
+              
+                // var config = {
+                //     onUploadProgress: progressEvent => {
+                //         console.log(progressEvent,12)
+                //     }
+                // }
+                console.log(param)
+                _this.$ajax.post('create/webRecommend',param).then(function (response) {
+                    console.log(response);
+                  if (response.data.complete=="SUCCESS") {
+       
                   }
+               })
+        },
+        order(){
+           let param = new FormData();
 
           this.$ajax.post('http://124.205.200.90/user/login',{
             param
@@ -66,7 +79,7 @@ export default {
         		var _this=this  
 
 		        let param = new FormData();
-                let itemsId = this.colors.map(item =>item.id)
+            let itemsId = this.colors.map(item =>item.id)
 		        // let a =JSON.stringify(itemsId);
 		        param.append('pictureSort',itemsId);
 				

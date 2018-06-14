@@ -1,8 +1,8 @@
 <template>	
 	<div class="sort">
-		<div style="font-size: 28px;">您提供的体验是什么类型的？</div>
-		<p style="color:#505050;width:550px;">一个清晰的体验类别可以帮助您交到更合拍的朋友。如果您的体验同时也属于其他类别，便请再添加一个类别。</p>
-		<el-select v-model="value" placeholder="请选择" style="margin-top:40px;width:400px;" v-on:input="inputFunc">
+		<div class="sortp" style="font-size: 28px;">您提供的体验是什么类型的？</div>
+		<p  class="text">一个清晰的体验类别可以帮助您交到更合拍的朋友。如果您的体验同时也属于其他类别，便请再添加一个类别。</p>
+		<el-select v-model="value" placeholder="请选择" class="sortinput"  v-on:input="inputFunc">
 	    <el-option
 	      v-for="item in options"
 	      :key="item.id"
@@ -10,7 +10,7 @@
 	      :value="item.id">
 	    </el-option>
 	  </el-select>
-	  <el-button type="primary"  style="display:block;margin-top:300px;width:100px;" :disabled="disabled" @click="cover">下一步</el-button>
+	  <el-button type="primary"  style="display:block;margin-top:100px;width:100px;" :disabled="disabled" @click="cover">下一步</el-button>
 	</div>
 </template>
 <script>
@@ -119,4 +119,27 @@ import global from '@/components/flow/global/global'
 	} 
 </script>
 <style scoped>
+.text{
+	color:#505050;
+	width:550px;
+}
+.sortinput{
+	margin-top:40px;
+	width:400px;
+}
+@media screen and (max-width: 600px) {
+    .content{
+		 padding-left: 30px !important;
+
+	}
+	.sortp{
+		font-size: 25px !important;
+	}
+	.text{	
+		width:90% !important;
+	}
+	.sortinput{
+		width:200px !important;
+	}
+}
 </style>

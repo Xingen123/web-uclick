@@ -1,7 +1,7 @@
 <template>	
 	<div class="sort">
 		<div style="font-size: 28px;">请确认将提供的内容</div>
-		<p style="margin-top: 25px;width:550px;">如果您为体验者准备了详细的体验用品请在此页描述出来，如咖啡、小吃、住宿等。每一个细心之处都是体验者选择再次参加体验的原因。</p>
+		<p style="margin-top: 25px;width:550px;" class="text_p">如果您为体验者准备了详细的体验用品请在此页描述出来，如咖啡、小吃、住宿等。每一个细心之处都是体验者选择再次参加体验的原因。</p>
 		<el-select v-model="value5" placeholder="请选择" multiple style="margin-top:40px;width:400px;"  @input="descInput">
 	    <el-option
 	      v-for="item in options"
@@ -10,7 +10,7 @@
 	      :value="item.value">
 	    </el-option>
 	  </el-select>
-	  <el-button type="primary"  style="display:block;margin-top:300px;width:100px;" :disabled="disabled" @click="thing">下一步</el-button>
+	  <el-button type="primary"  style="display:block;margin-top:300px;width:100px;" class="next" :disabled="disabled" @click="thing">下一步</el-button>
 	</div>
 </template>
 <script>
@@ -116,4 +116,15 @@ import global from '@/components/flow/global/global'
 	} 
 </script>
 <style scoped>
+@media screen and (max-width: 600px) {
+	.text_p{
+		width: 100% !important;
+	}
+	.el-select{
+		width: 100% !important;
+	}
+	.next{
+		margin-top:150px !important;
+	}
+}
 </style>

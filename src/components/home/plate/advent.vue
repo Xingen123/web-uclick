@@ -28,7 +28,8 @@
 		      label="参与人数"
 		      width="120">
 		      	<template slot-scope="scope">
-			      	<a style="color:#409EFF;cursor:pointer;" @click="details(scope)">{{scope.row.personAmount}}</a>
+			      	<a style="" v-if="scope.row.personAmount==0" >{{scope.row.personAmount}}</a>
+			      	<a style="color:#409EFF;cursor:pointer;" v-else="scope.row.personAmount" @click="details(scope)">{{scope.row.personAmount}}</a>
 			    </template>	
 		    </el-table-column>
 		    <el-table-column
@@ -104,7 +105,8 @@
 			      label="参与人数"
 			      width="120">
 				 <template slot-scope="scope">
-			      	<a style="color:#409EFF;cursor:pointer;" @click="details(scope)">{{scope.row.personAmount}}</a>
+				 	<a style="" v-if="scope.row.personAmount==0" >{{scope.row.personAmount}}</a>
+			      	<a style="color:#409EFF;cursor:pointer;" v-else="scope.row.personAmount" @click="details(scope)">{{scope.row.personAmount}}</a>
 			    </template>	
 
 			    </el-table-column>

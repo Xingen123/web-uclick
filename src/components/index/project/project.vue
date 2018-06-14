@@ -3,14 +3,14 @@
 	<div class="project">
 		<div class="box" v-for="(item,index) in project" :key="index">
 			<div class="status">
-				<el-progress :text-inside="true" :stroke-width="17" :percentage="item.completeAmount" ></el-progress>
-				<img style="position:absolute;top:2px;left0;z-index:-1;width:100%;height:100%;border-radius:5px;" v-if="!item.imageUrl" v-lazy="" alt="" :onerror="defaultImg">
-				<img style="position:absolute;top:2px;left0;z-index:-1;width:100%;height:100%;border-radius:5px;" v-if="item.imageUrl" v-lazy="item.fileServer+'/'+item.imageUrl" alt="" :onerror="defaultImg">
+				<el-progress style="line-height:0;"  :text-inside="true" :stroke-width="17" :percentage="item.completeAmount" ></el-progress>
+				<img style="position:absolute;top:0px;left0;z-index:-1;width:100%;height:100%;border-radius:5px;" v-if="!item.imageUrl" v-lazy="" alt="" :onerror="defaultImg">
+				<img style="position:absolute;top:0px;left0;z-index:-1;width:100%;height:100%;border-radius:5px;" v-if="item.imageUrl" v-lazy="item.fileServer+'/'+item.imageUrl" alt="" :onerror="defaultImg">
 			</div>
 			<div class="content">
 				<div style="font-size:25px;">{{item.title}}</div>
 				<p>在您提交体验前,还需要完成几个步骤。</p>
-				<div style="margin-top:25px;">
+				<div style="margin-top:25px;margin-left: 70px;">
 
 					<!-- 创建中 -->
 					<el-button type="primary"  class="next" v-if="item.completeAmount<100" @click="nextFlow(item.id)">继续</el-button>
@@ -30,7 +30,7 @@
 				</div>
 			</div>
 			
-			<el-dropdown trigger="click" style="margin-top:25px;" :placement="localtion">
+			<el-dropdown trigger="click" style="margin-top:25px;margin-left:90px;" :placement="localtion">
 			      <span class="el-dropdown-link">
 			       <i class="el-icon-more"></i>
 			      </span>
@@ -58,9 +58,7 @@
 		},
 		props: {},
 		watch:{
-			localtion:function(val){
-				console.log(1)
-			}
+
 		},
 		methods:{
 			revocation(id){
@@ -222,7 +220,16 @@
 	position: relative;
 	background-repeat: no-repeat;
 	background-size:100% 100%; 
+	overflow: hidden;
 }
+.status>img{
+
+	border: none;
+	transition: all 0.6s;
+}
+.status:hover>img{  	
+   	transform: scale(1.2);
+}  
 .content{
 	width: 480px;
 	height: 170px;
@@ -234,9 +241,7 @@
 .content>p{
 	line-height: 50px;
 }
-/*.button{
-	text-align: center;
-}*/
+
 .removebox{
 	width: 200px;
 	height: 100px;
@@ -247,6 +252,10 @@
 	width: 100px;
 }
 @media screen and (max-width:600px) {
+.project{
+	border-top: 1px solid #E4E7ED;
+	margin-top: 20px;
+}
 	.content{
 	    padding-left: 0;
 	}

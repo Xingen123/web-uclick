@@ -1,7 +1,7 @@
 <template>	
-	<div class="slogan">
+	<div class="what">
 		<div style="font-size: 28px;">描述体验的内容</div>
-		<p style="margin-top:25px;color:#505050;width:550px;">除了个人魅力，体验本身是另一个吸引体验者的主要因素。有趣的活动、详细的流程、贴心的提示以及体验中随机出现的小惊喜都能让每个体验者爱上此次体验。
+		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">除了个人魅力，体验本身是另一个吸引体验者的主要因素。有趣的活动、详细的流程、贴心的提示以及体验中随机出现的小惊喜都能让每个体验者爱上此次体验。
 </p>
 		<el-input type="textarea"
   :rows="8"  placeholder="例：作为时尚博主，我认为的“高级”拍照大法除了时尚博主类型的街拍，就是在咖啡店或艺术展的高级摆拍了：） 这次体验我会带你去逛北京最适合拍照的3家咖啡店，喝咖啡吃甜点，享受的同时你也会收获一组时尚博主质感的街拍。
@@ -110,5 +110,15 @@ import global from '@/components/flow/global/global'
 	} 
 </script>
 <style scoped>
-	
+	  	@media screen and (max-width: 600px) {
+	.text_p{
+		width: 100% !important;
+	}
+	.el-textarea{
+		width: 100% !important;
+	}
+	.what{
+		margin-bottom: 50px;
+	}
+}
 </style>

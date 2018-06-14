@@ -1,7 +1,7 @@
 <template>	
 	<div class="price">
 		<div style="font-size: 28px;">设置每位体验者的体验价格</div>
-		<el-input type="number" v-model="input" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="display:block;margin-top:50px;width:400px;" @input="descInput" placeholder="请输入价格"></el-input>
+		<el-input type="number"  v-model="input" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="display:block;margin-top:50px;width:300px;" @input="descInput" placeholder="请输入价格"></el-input>
 	 
 
 	  <div class="counter">
@@ -17,7 +17,7 @@
 
 	  </div>
 
-	   <el-button type="primary"  style="display:block;margin-top:150px;width:120px;" :disabled="disabled" @click="cover">保存并继续</el-button>
+	   <el-button type="primary"  style="display:block;margin-top:150px;width:120px;" class="next" :disabled="disabled" @click="cover">保存并继续</el-button>
 	</div>
 </template>
 <script>
@@ -113,7 +113,7 @@ import global from '@/components/flow/global/global'
 </script>
 <style scoped>
 .price{
-	height: 500px;
+	margin-bottom: 50px;
 }
 
 .counter{
@@ -126,8 +126,13 @@ import global from '@/components/flow/global/global'
 }
 @media screen and (max-width: 600px) {
      .counter{
+     	width: 90%;
        top: 500px;
     }
+   
+	.next{
+		margin-top: 50px;
+	}
 }
 .apiece{
 	margin-top: 30px;

@@ -1,7 +1,7 @@
 <template>	
-	<div class="slogan">
+	<div class="require">
 		<div style="font-size: 28px;">您对体验者有哪些特殊需要？</div>
-		<p style="margin-top:25px;color:#505050;width:550px;">预定此次体验的体验者可能会为他人预定名额，为保证这个体验的安全，请您添加此次体验参与者的需求。例如年龄、技能水平、证书证明或需自带物品等需求。</p>
+		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">预定此次体验的体验者可能会为他人预定名额，为保证这个体验的安全，请您添加此次体验参与者的需求。例如年龄、技能水平、证书证明或需自带物品等需求。</p>
 		<div class="age">
 			<div style="font-size:18px;">最低年龄</div>
 			<p style="line-height:40px;">为参与者设定年龄限制，未成年人必须有监护人的陪同下可参加。</p>
@@ -126,4 +126,15 @@ import global from '@/components/flow/global/global'
 	.age{
 		margin-top: 50px;
 	}
+			@media screen and (max-width: 600px) {
+	.text_p{
+		width: 100% !important;
+	}
+	.el-textarea{
+		width: 100% !important;
+	}
+	.require{
+		margin-bottom: 50px;
+	}
+}
 </style>

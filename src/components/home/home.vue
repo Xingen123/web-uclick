@@ -45,6 +45,6 @@
 <style scoped>
 	.home{
 		width: 100%;
-		height: 1200px;
+		margin-bottom: 50px;
 	}
 </style>

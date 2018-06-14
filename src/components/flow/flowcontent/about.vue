@@ -1,7 +1,7 @@
 <template>	
 	<div class="about">
 		<div style="font-size: 28px;">一段真诚的话介绍您自己</div>
-		<p style="margin-top:25px;color:#505050;width:550px;">用一段能够表达您性格的语言来介绍一下您自己，这是您与体验者的第一次正面沟通。告诉大家为何您是开展此次体验的最佳人选，有趣的个性和真诚的语言能让体验者更愿意与您交朋友。
+		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">用一段能够表达您性格的语言来介绍一下您自己，这是您与体验者的第一次正面沟通。告诉大家为何您是开展此次体验的最佳人选，有趣的个性和真诚的语言能让体验者更愿意与您交朋友。
 </p>
 		<el-input type="textarea"
   :rows="8"  placeholder="例：Hello，我是尚珈丞，一家甲方公司的高管。Work-Life balance是我们“斜杠青年”的目标，带你看看我的标签：type A工作狂/北京网红店收割机可能是最年轻副总裁/美国运动委员会CPT/兼职时博/业余摄影师。
@@ -165,4 +165,15 @@ import global from '@/components/flow/global/global'
     width: 250px;
     vertical-align: bottom;
   }
+  	@media screen and (max-width: 600px) {
+	.text_p{
+		width: 100% !important;
+	}
+	.el-textarea{
+		width: 100% !important;
+	}
+	.about{
+		margin-bottom: 50px;
+	}
+}
 </style>

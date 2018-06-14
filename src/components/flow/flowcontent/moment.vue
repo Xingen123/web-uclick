@@ -1,7 +1,7 @@
 <template>	
 	<div class="time">
 		<div style="font-size: 28px;">您的体验最想要在哪个时间段开设？</div>
-		<p style="margin-top:25px;color:#505050;width:500px;">为了保证您的体验能够给体验者带去更多快乐和幸福感，请提前设定您的意向体验时间。我们会帮您测试时间段与体验内容是否适配。
+		<p style="margin-top:25px;color:#505050;width:500px;" class="text_p">为了保证您的体验能够给体验者带去更多快乐和幸福感，请提前设定您的意向体验时间。我们会帮您测试时间段与体验内容是否适配。
 </p>
 
 		<div class="box">
@@ -120,4 +120,12 @@ import global from '@/components/flow/global/global'
 	.box{
 		margin-top: 50px;
 	}
+		@media screen and (max-width: 600px) {
+	.text_p{
+		width: 100% !important;
+	}
+	.el-input{
+		width: 40% !important;
+	}
+}
 </style>

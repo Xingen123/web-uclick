@@ -1,7 +1,7 @@
 <template>	
 	<div class="gather">
 		<div style="font-size: 28px;">添加集合地点</div>
-		<p style="margin-top:25px;color:#505050;width:550px;">一个易于寻找的见面地点能让体验者提前预计路线，参与者确认预订之后，我们才会分享确切的体验地址。</p>
+		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">一个易于寻找的见面地点能让体验者提前预计路线，参与者确认预订之后，我们才会分享确切的体验地址。</p>
 
 		<div style="margin-top:25px;color:#505050;">第一步：提供地址</div>
 		<div style="margin-top:25px;color:#505050;">地点名称</div>
@@ -13,7 +13,7 @@
 
 		<input type="text" placeholder="请输入地址" id="suggestId" name="address_detail"   v-model="address_detail" @input="descInput" class="input_style" style="width:500px;margin-top:25px;outline:none;height:25px;background:none;border:0px;border:1px solid #dcdfe6;" :class="{'active':tive==true,'unactive':tive==false}">
 		<div style="margin-top:25px;color:#505050;">公寓、 套房、 大厦 (选填)</div>
-		<el-input placeholder="街道" style="width:500px;margin-top:25px;color:black;" v-model="form.specificAddress"></el-input>
+		<el-input placeholder="街道"  style="width:500px;margin-top:25px;color:black;" v-model="form.specificAddress"></el-input>
 
 		<div class="box">
 			<div style="margin-top:25px;color:#505050;">第二步：在地图上标记</div>	
@@ -185,10 +185,17 @@ import global from '@/components/flow/global/global'
 	} 
 </script>
 <style scoped>
-	.gather{
-		position: absolute;
-		height: 1300px;
+	@media screen and (max-width: 600px) {
+	.text_p{
+		width: 100% !important;
 	}
+	.el-input,#suggestId{
+		width: 100% !important;
+	}
+	.gather{
+		margin-bottom: 50px;
+	}
+}
 	#allmap{
 		margin-top: 10px;
 		width: 350px;
