@@ -4,7 +4,7 @@
 		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">您将带大家去哪些地点？这些体验地点有哪些别人未发现的独特之处？细心地告诉大家乘车路线会为体验加分。</p>
 		<el-input type="textarea"
   :rows="8"  placeholder="如果您能带体验者进入体验者无法自行找到或进入的地方，整个体验都会充满惊喜与快乐。" style="margin-top:50px;width:500px;font-size:20px;" v-model="input"  :maxlength="1500"  @input="descInput"></el-input>
-		<p  style="line-height:40px;">还剩{{number}}个字</p>
+		<!-- <p  style="line-height:40px;">还剩{{number}}个字</p> -->
 		<div style="margin-top:50px;" >
 			<el-button type="primary"  style="width:120px;" :disabled="disabled" @click="save">保存并继续</el-button>
 		</div>

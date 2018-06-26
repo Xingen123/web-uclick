@@ -8,7 +8,7 @@
 				<div class="right"></span>选择与标题描述一致的图片</div>
 				<div class="right"></span>图片尺寸比例为3:2，大小需小于1M</div>
 				<div class="right"></span>图片以人物为主，人物场景图片最佳</div>
-				<div class="right"></span>选择有感染力、姿势自然的图片</div>
+				<div class="right"></span>选择姿势自然的体验图片</div>
 			</div>
 			<div class="smalltwo">
 				<div class="not"></span>不要使用闪光灯或太厚重的滤镜</div>
@@ -19,9 +19,9 @@
 		</div>
 		<!-- 标题 -->
 		<div style="margin-top:60px;font-size: 20px;">体验标题</div>
-		<p style="margin-top:5px;color:#505050;">例：尚珈丞 | 在网红咖啡店拍出最时尚的你</p>
-		<el-input v-model="input" @input="descInput" placeholder="请输入内容" :maxlength="30" style="margin-top:20px;width:500px;"></el-input>
-		<p  style="line-height:40px;">还剩{{number}}个字</p>
+		<p style="margin-top:5px;color:#505050;">一个能吸引更多目光的标题应当简介清晰且描述性强，以第一人称为主会更佳亲切哦。</p>
+		<el-input v-model="input" @input="descInput" placeholder="尚珈丞 | 在网红咖啡店拍出最时尚的你" :maxlength="30" style="margin-top:20px;width:500px;"></el-input>
+		<p  style="line-height:40px;">最多30个字</p>
 		<div style="margin-top:60px;font-size: 20px;">封面照片</div>
 		<!-- 图片 -->
 		<div v-show="photo" style="margin-top:10px;font-size:20px;">缩略图</div>
@@ -494,7 +494,7 @@ import axios from 'axios'
 	position:fixed;
 	width: 100%;
 	height: 100%;
-	z-index: 10;
+	z-index: 100;
 	top: 0;
 	left:0;
 	background: #000000;

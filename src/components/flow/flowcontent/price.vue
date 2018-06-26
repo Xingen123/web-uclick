@@ -9,11 +9,13 @@
 	  	<div class="apiece"><span style="color:#606266;font-size:18px;">每位价格</span><span style="float:right;padding-right:10px;">￥{{input}}</span></div>
 	  	<div class="peoplenum"><span style="color:#606266;font-size:18px;">参与者人数</span><el-input style="width:70px;float:right;margin-top:-10px;padding-right:10px;" v-model="num" type="number"></el-input></div>
 	  	<div style="line-height:50px;"><span style="font-size:18px;">您将获得</span><span style="float:right;padding-right:10px;">￥{{input*num*0.8 | priceNumber}}</span></div>
-	  	<p>这是免去20%
-<el-tooltip content="这是免去20%服务费之后，您收获的金额
-" placement="bottom" effect="light">
-<el-button type="text" style="font-size:16px;">服务费</el-button>
-</el-tooltip>之后，您收获的金额</p>
+	  	<p>这是免去20%服务费之后，您收获的金额
+<!-- <el-tooltip content="这是免去20%服务费之后，您收获的金额
+" placement="bottom" effect="light"> -->
+
+<!-- </el-tooltip> -->
+
+</p>
 
 	  </div>
 

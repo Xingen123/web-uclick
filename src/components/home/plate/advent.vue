@@ -189,15 +189,15 @@
 		methods:{
 			//点击人数
 			details(scope){
-				console.log()
+				console.log(scope)
 				this.dialogVisible = true
 				var _this=this
 			    let param = new FormData();
 			    var tokenone =sessionStorage.getItem('encryptToken');
 				param.append('token',tokenone);
-				param.append('id',scope.row.recommendId);
+				param.append('id',scope.row.id);
 				this.$ajax.post('query/orderUserData',param).then(function (response) {
-					console.log(response);
+					
 					if (response.data.complete=="SUCCESS"){
 						_this.tableData3=response.data.orderUserList
 					}

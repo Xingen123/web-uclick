@@ -18,7 +18,7 @@
     			<input class="change"  name="file" ref="file" type="file"  accept="image/png,image/gif,image/jpeg" @change="updat"/>
 			</a>
 			<div style=" position:absolute;top:500px;margin-top:20px;" v-show="again"><span>重新上传正面照片</span><span style="margin-left:260px;">重新上传反面照片</span></div>
-			<div style="position:absolute;top:550px;">
+			<div class="nextbox">
 				<el-button  type="primary"  style="display:block; width:150px; margin-top:50px;" :disabled="disabled" @click="next">下一步  ＞</el-button>
 			</div>
 		</div>
@@ -206,5 +206,20 @@ import Header from "@/components/head/head"
 }
 .uploadtwo{
 	margin-left: 20px;
+}
+.nextbox{
+	clear: both;
+	margin-top: 520px;
+	margin-bottom: 50px;
+}
+@media screen and (max-width: 600px) {
+	.card{
+		width: 90%;
+		padding-top: 10px;
+		padding-left:10px;
+	}
+	.uploadtwo{
+		margin-left: 0;
+	}
 }
 </style>

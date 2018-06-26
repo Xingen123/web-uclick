@@ -1,13 +1,13 @@
 <template>	
 	<div class="index">
-		<head-er></head-er>
+		<head-er class="header_index"></head-er>
 		<div class="smallbox">
 			<div class="title">
 				<div class="text">
 					<div style="font-size:25px;">欢迎来到Blueglass！</div>
 					<p>点击按钮编辑您的体验信息，祝您在体验中交到好友！</p>
 				</div>
-				<el-button type="primary" class="newidea" @click="index">编辑体验</el-button>
+				<el-button type="primary" class="newidea" @click="index">新增体验</el-button>
 			</div>
 		</div>
 		<pro-ject></pro-ject>
@@ -89,14 +89,18 @@
 		font-size: 20px;
 		float: right;
 	}
-
+.header_index{
+	position: fixed;
+	top: 0;
+	z-index: 10;
+}
 	@media screen and (max-width:600px) {
 
 	    .newidea{
-	    	float: left;
-			
+	    	float: none;
+			clear: both;			
 			margin: 0 auto;
-			margin-left: 80px;
+			
 	    }
 	    	.smallbox{
      margin-top: 0px !important; 

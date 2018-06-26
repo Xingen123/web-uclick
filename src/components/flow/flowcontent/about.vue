@@ -9,7 +9,7 @@
 主业之余我还是一名时尚博主，有大量拍摄需求，于是想到了在咖啡店拍照的方式，也因此收割了北京80%以上的“网红店”，甚至知道每家店的哪个座位能拍出时尚大片。
 ……
 " style="margin-top:50px;width:500px;font-size:20px;" v-model="input"  :maxlength="1500"  @input="descInput"></el-input>
-		<p  style="line-height:40px;">还剩{{number}}个字</p>
+		<!-- <p  style="line-height:40px;">还剩{{number}}个字</p> -->
 
 <!-- 
 		<div style="font-size: 28px;margin-top:50px;">为自己贴标签</div>

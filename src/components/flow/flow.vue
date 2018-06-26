@@ -2,7 +2,9 @@
 	<div class="flow">
 		<head-er class="headnav"></head-er>
 		<flow-nav ></flow-nav>
-		<router-view class="content" ></router-view>
+		<transition name="component-fade" mode="out-in">
+			<router-view class="content" ></router-view>
+		</transition>	
 		<phone-ui class="ph-none"></phone-ui>	
 	</div>
 </template>
@@ -73,7 +75,13 @@
 	top: 20px;
 	right: 200px;
 }
-
+.component-fade-enter-active, .component-fade-leave-active {
+  transition: opacity .2s ease;
+}
+.component-fade-enter, .component-fade-leave-to
+/* .component-fade-leave-active for below version 2.1.8 */ {
+  opacity: 0;
+}
 @media screen and (max-width: 1400px) {
     .ph-none{
 		display: none

@@ -27,7 +27,7 @@
 			  param.append('token',tokenone);
 			  //获取cookie里面的recommenid
 		      var recommend =sessionStorage.getItem('recommendId');
-			  param.append('id',recommend);  
+			  param.append('id',recommend);
 			  param.append('examineType',true);  
 			  this.$ajax.post('create/webRecommend',param).then(function (response) {		
 			  	if (response.data.complete=="SUCCESS") {

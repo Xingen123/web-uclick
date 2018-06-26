@@ -1,7 +1,7 @@
 <template>	
 	<div class="with">
 		<div style="font-size:28px;">我的钱包</div>
-		<div style="width:100%;height:200px;border:1px solid #DCDFE6;margin-top:10px;">
+		<div style="width:100%;height:200px;border:1px solid #DCDFE6;margin-top:10px;overflow: hidden;">
 			<p style="border-bottom:1px solid #DCDFE6;text-align:right;padding-right:15px;color:#409EFF;cursor:pointer;" @click="record">提现记录</p>
 			<div style="padding:20px;">
 				<div style="font-size:17px;">当前收益</div>
@@ -15,7 +15,7 @@
 			<el-dialog
 		  title="提现记录"
 		  :visible.sync="dialogVisible"
-		  width="30%">
+		  :width="width">
 		  <div style="margin-top:-30px;font-weight: bold;"><span>时间</span><span style="margin-left:240px;">提现金额</span></div>
 
 		  <div v-for="(item,index) in recordItem">
@@ -26,7 +26,7 @@
 		<!-- 提现 -->
 		<el-dialog
 		  :visible.sync="dialog"
-		  width="25%"
+		  :width="width"
 		  style="text-align:center;">
 		 
 		 	<!--未绑定  -->
@@ -67,6 +67,7 @@
 		},
 		data(){
 			return{
+				width:"50%",
 				number:"",//支付宝名字
 				input:"",//余额
 				inputtwo:"",
@@ -202,7 +203,12 @@
 					      console.log(error);
 					  });
 			},
-
+			clientWidth(){
+                let width = document.body.clientWidth;
+                if(width<600){
+                    this.width="95%"
+                }
+            },
 			open() {	
 			var _this=this 	
 	        this.$alert('删除后您需要重新绑定才能提现', '确认删除', {
@@ -225,6 +231,7 @@
 		created () {},
 		mounted () {
 			this.personage()
+			this.clientWidth()
 		},
 	  	destroyed () {}
 	} 

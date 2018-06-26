@@ -7,7 +7,7 @@
   :rows="8"  placeholder="例：作为时尚博主，我认为的“高级”拍照大法除了时尚博主类型的街拍，就是在咖啡店或艺术展的高级摆拍了：） 这次体验我会带你去逛北京最适合拍照的3家咖啡店，喝咖啡吃甜点，享受的同时你也会收获一组时尚博主质感的街拍。
   ……
 " style="margin-top:50px;width:500px;font-size:20px;" v-model="input"  :maxlength="1500"  @input="descInput"></el-input>
-		<p v-show="button" style="line-height:40px;">还剩{{number}}个字</p>
+		<!-- <p v-show="button" style="line-height:40px;">还剩{{number}}个字</p> -->
 		<el-button type="primary" plain style="width:100px;margin-top:50px;display:block;" @click="go" v-show="next">下一步</el-button>
 		<div style="margin-top:50px;" v-show="button">
 			<el-button type="primary"  style="width:100px;"  :disabled="disabled" @click="save">保存</el-button>

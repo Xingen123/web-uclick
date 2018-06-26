@@ -8,9 +8,9 @@
 				<img style="position:absolute;top:0px;left0;z-index:-1;width:100%;height:100%;border-radius:5px;" v-if="item.imageUrl" v-lazy="item.fileServer+'/'+item.imageUrl" alt="" :onerror="defaultImg">
 			</div>
 			<div class="content">
-				<div style="font-size:25px;">{{item.title}}</div>
+				<div style="font-size:25px;height:40px;">{{item.title}}</div>
 				<p>在您提交体验前,还需要完成几个步骤。</p>
-				<div style="margin-top:25px;margin-left: 70px;">
+				<div style="margin-top:25px;" class="phonenext">
 
 					<!-- 创建中 -->
 					<el-button type="primary"  class="next" v-if="item.completeAmount<100" @click="nextFlow(item.id)">继续</el-button>
@@ -30,7 +30,7 @@
 				</div>
 			</div>
 			
-			<el-dropdown trigger="click" style="margin-top:25px;margin-left:90px;" :placement="localtion">
+			<el-dropdown trigger="click" style="margin-top:25px;margin-left:90px;" class="phonetitle" :placement="localtion">
 			      <span class="el-dropdown-link">
 			       <i class="el-icon-more"></i>
 			      </span>
@@ -176,7 +176,7 @@
 			clientWidth(){
 				let width = document.body.clientWidth;
 				if(width<600){
-					this.localtion='right-end'
+					this.localtion='bottom-end'
 				}
 			},
 			time(id){
@@ -213,6 +213,7 @@
 .box>div{
 	float: left;
 }
+
 .status{
 	width: 200px;
 	height: 150px;
@@ -221,6 +222,7 @@
 	background-repeat: no-repeat;
 	background-size:100% 100%; 
 	overflow: hidden;
+	box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 4px !important;
 }
 .status>img{
 
@@ -239,7 +241,7 @@
 	font-size: 28px;
 }
 .content>p{
-	line-height: 50px;
+
 }
 
 .removebox{
@@ -252,12 +254,44 @@
 	width: 100px;
 }
 @media screen and (max-width:600px) {
+	.el-button+.el-button{
+	margin-left: 0px !important;
+	margin-top: 10px;
+}
+	.box{
+		padding: 0px !important;
+		position: relative;
+	}
+	.status{
+		height: 180px;
+	}
+	.status,
+	.content{
+		width: 100% !important;
+	}
+	.phonenext{
+		margin-top:30px !important;
+		margin-left: 0 !important;
+	}
+	.phonetitle{
+		position: absolute;
+		margin-top: 0px !important;
+	    top: 200px;
+	    right: 0;
+		margin-left: 0 !important;
+	}
 .project{
 	border-top: 1px solid #E4E7ED;
 	margin-top: 20px;
 }
 	.content{
+		height: 180px;
+		margin-top: 10px;
 	    padding-left: 0;
+	    padding-bottom: 50px;
+	}
+	.el-button--primary {
+    width: 100%;
 	}
 }
 </style>

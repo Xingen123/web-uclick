@@ -1,152 +1,164 @@
 <template>  
     <div class="flownav">
         <div class="listfather"  >
-            <div class="list" @click="box=true">
+<!--             <div class="list" @click="box=true,hasError=true,isActive=false">
                 
-            </div>
+            </div> -->
+            
+            <div id="list" @click="list_on"> 
+                <div class="app fris" v-bind:class="{ frist_: listbox.isfrist_, frist_to: listbox.isfrist_to }"></div>
+                <div class="app play" v-bind:class="{ play_: listbox.isplay_, play_to: listbox.isplay_to }"></div>
+                <div class="app two"  v-bind:class="{ two_: listbox.istwo_, two_to: listbox.istwo_to }"></div>
+            </div>    
+
+
             <div class="gohome" @click="gohome">
                 
             </div>
         </div>
-        <ul class="box" v-show="box">
-            <li class="frist">
-                <div class="fristdiv" style="font-size:28px;">
-                    提交体验
-                </div>
-            </li>
+        <transition name="bounce">
+            <ul class='box' v-show="box"  >
+                <li class="frist">
+                    <div class="fristdiv" style="font-size:28px;">
+                        提交体验
+                    </div>
+                </li>
 
-            <li>
-                <router-link to="/flow/sort">
-                    <div>
-                        <span>类别</span>
-                        <span v-show="one" class="right"></span>
-                    </div>
-                </router-link>
-            </li>
+                <li>
+                    <router-link to="/flow/sort">
+                        <div>
+                            <span>类别</span>
+                            <span v-show="one" class="right"></span>
+                        </div>
+                    </router-link>
+                </li>
 
-            <li>
-                <router-link to="/flow/cover">
-                    <div>
-                        <span>封面与标题</span>
-                        <span v-show="two" class="right"></span>
-                    </div>
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/flow/slogan">
-                    <div>
-                        <span>副标题</span>
-                        <span v-show="five" class="right"></span>
-                    </div>
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/flow/mapdepot">
-                    <div>
-                        <span>图库</span>
-                        <span v-show="three" class="right"></span>
-                    </div>
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/flow/about">
-                    <div>
-                        <span>介绍您自己</span>
-                        <span v-show="tenOne" class="right"></span>
-                    </div>
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/flow/what">
-                    <div>
-                        <span>体验内容</span>
-                        <span v-show="six" class="right"></span>
-                    </div>
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/flow/moment">
-                    <div>
-                        <span>意向时间</span>
-                        <span v-show="four" class="right"></span>
-                    </div>
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/flow/thing">
-                    <div>
-                        <span>体验包含的东西</span>
-                        <span v-show="nine" class="right"></span>
-                    </div>
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/flow/gather">
-                    <div>
-                        <span>集合地点</span>
-                        <span v-show="seven" class="right"></span>
-                    </div>
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/flow/experience">
-                    <div>
-                        <span>体验地点</span>
-                        <span v-show="eight" class="right"></span>
-                    </div>
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/flow/require">
-                    <div>
-                        <span>对体验者的要求</span>
-                        <span v-show="tenTwo" class="right"></span>
-                    </div>
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/flow/peoplenum">
-                    <div>
-                        <span>体验人数</span>
-                        <span v-show="tenThree" class="right"></span>
-                    </div>
-                </router-link>
-            </li> 
-            <li>
-                <router-link to="/flow/lastTime">
-                    <div>
-                        <span>最后报名时间</span>
-                        <span v-show="tenFive"  class="right"></span>
-                    </div>
-                </router-link>
-            </li>                         
-            <li>
-                <router-link to="/flow/remark">
-                    <div>
-                        <span>体验前的叮嘱</span>
-                        <span v-show="ten" class="right"></span>
-                    </div>
-                </router-link>
-            </li>
-            <li>
-                <router-link to="/flow/price">
-                    <div>
-                        <span>价格</span>
-                        <span v-show="tenFour" class="right"></span>
-                    </div>
-                </router-link>
-            </li>
-            <li style="margin-bottom:50px;">
-                <router-link to="/flow/submit">
-                    <div>
-                        <span>提交</span>
-                    </div>
-                </router-link>
-            </li>          
-             <div class="back" @click="box=false" >
-               
-            </div>
-        </ul>
+                <li>
+                    <router-link to="/flow/cover">
+                        <div>
+                            <span>封面与标题</span>
+                            <span v-show="two" class="right"></span>
+                        </div>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/flow/slogan">
+                        <div>
+                            <span>副标题</span>
+                            <span v-show="five" class="right"></span>
+                        </div>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/flow/mapdepot">
+                        <div>
+                            <span>图库</span>
+                            <span v-show="three" class="right"></span>
+                        </div>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/flow/about">
+                        <div>
+                            <span>介绍您自己</span>
+                            <span v-show="tenOne" class="right"></span>
+                        </div>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/flow/what">
+                        <div>
+                            <span>体验内容</span>
+                            <span v-show="six" class="right"></span>
+                        </div>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/flow/moment">
+                        <div>
+                            <span>意向时间</span>
+                            <span v-show="four" class="right"></span>
+                        </div>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/flow/thing">
+                        <div>
+                            <span>体验包含的东西</span>
+                            <span v-show="nine" class="right"></span>
+                        </div>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/flow/gather">
+                        <div>
+                            <span>集合地点</span>
+                            <span v-show="seven" class="right"></span>
+                        </div>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/flow/experience">
+                        <div>
+                            <span>体验地点</span>
+                            <span v-show="eight" class="right"></span>
+                        </div>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/flow/require">
+                        <div>
+                            <span>对体验者的需求</span>
+                            <span v-show="tenTwo" class="right"></span>
+                        </div>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/flow/peoplenum">
+                        <div>
+                            <span>体验人数</span>
+                            <span v-show="tenThree" class="right"></span>
+                        </div>
+                    </router-link>
+                </li> 
+                <li>
+                    <router-link to="/flow/lastTime">
+                        <div>
+                            <span>最后报名时间</span>
+                            <span v-show="tenFive"  class="right"></span>
+                        </div>
+                    </router-link>
+                </li>                         
+                <li>
+                    <router-link to="/flow/remark">
+                        <div>
+                            <span>体验包含的独特东西</span>
+                            <span v-show="ten" class="right"></span>
+                        </div>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/flow/price">
+                        <div>
+                            <span>价格</span>
+                            <span v-show="tenFour" class="right"></span>
+                        </div>
+                    </router-link>
+                </li>
+                <li style="margin-bottom:50px;">
+                    <router-link to="/flow/submit">
+                        <div>
+                            <span>提交</span>
+                        </div>
+                    </router-link>
+                </li>          
+                <!-- <div class="back"></div> -->
+                <li >
+                  
+                </li>  
+            </ul>
+        </transition>
+
     </div>
 </template>
 <script>
@@ -156,6 +168,17 @@ import global from '@/components/flow/global/global'
         },
         data(){
             return{
+                listbox:{
+                    isfrist_:false,
+                    isplay_:false,
+                    istwo_:false,
+                    isfrist_to:false,
+                    isplay_to:false,
+                    istwo_to:false,
+                },    
+                isActive:false,
+                hasError:false,
+           
               box:false,
               one:false,
               two:false,
@@ -180,13 +203,39 @@ import global from '@/components/flow/global/global'
                 let width = document.body.clientWidth;
                 if(width<600){
                     this.box=false
+                    this.listbox.isplay_to=true
+                    this.listbox.istwo_to=true
+                    this.listbox.isfrist_to=true
+                    this.listbox.isplay_=false
+                    this.listbox.istwo_=false
+                    this.listbox.isfrist_=false
                 }   
             }  
         },
         methods:{
+            list_on(){
+                if (this.box==true) {
+                    this.listbox.isplay_to=true
+                    this.listbox.istwo_to=true
+                    this.listbox.isfrist_to=true
+                    this.listbox.isplay_=false
+                    this.listbox.istwo_=false
+                    this.listbox.isfrist_=false
+                    this.box=false
+                }else{
+                    this.box=true
+                    this.listbox.isplay_to=false
+                    this.listbox.istwo_to=false
+                    this.listbox.isfrist_to=false
+                    this.listbox.isplay_=true
+                    this.listbox.istwo_=true
+                    this.listbox.isfrist_=true
+                }
+            },
+
             gohome(){
                 this.$router.push({
-                path: '/index'
+                    path: '/index'
                 })
             },
             clientWidth(){
@@ -287,22 +336,25 @@ import global from '@/components/flow/global/global'
     } 
 </script>
 <style scoped>
-    .box{
-        animation-duration: 0.5s;
-        animation-name: key;
-        animation-fill-mode: both;
-    }
-    @keyframes key{
+.bounce-enter-active {
+  animation: bounce-in .5s;
+}
+.bounce-leave-active {
+  animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in {
         0% {
             -webkit-transform: translate3d(-100%,0,0);
             transform: translate3d(-100%,0,0);
             visibility: visible;
             }
-            100% {
+        100% {
                 -webkit-transform: translateZ(0);
                 transform: translateZ(0);
-            }
-    }
+        }
+}
+
+
     
     .box{
         width:230px;
@@ -362,6 +414,7 @@ import global from '@/components/flow/global/global'
         margin-left: -20px;
     }
     .router-link-active>div>span{
+        /*width: 20px;*/
         color: black;
         font-weight: bold;
     }
@@ -369,11 +422,14 @@ import global from '@/components/flow/global/global'
         .right{
             width: 20px;
             height: 20px;
-            margin-top: 3px;
+            position:absolute;
+            right: 0;
+            left: 0;
+            margin: 0 auto;
         }
         .box{
             width: 100%;
-            top: 0px !important;
+            top: 51px !important;
             padding-left:0px !important;
             overflow-y: hidden;
         }
@@ -385,7 +441,7 @@ import global from '@/components/flow/global/global'
             margin-left: 20px;
             margin-top: 10px;
             font-size: 10px;
-            line-height: 30px;
+
 
             text-align: center;
         }
@@ -396,6 +452,10 @@ import global from '@/components/flow/global/global'
             margin: 0 ;
             margin-top: 30px !important;
         }
+        .box>li>a>div{
+            position: relative;
+        }
+       
         .back{
     clear: both;
     position: relative;
@@ -411,25 +471,23 @@ import global from '@/components/flow/global/global'
     border: none !important;
 }
 .listfather{
-    width: 100%;
-    height: 50px;
-    border-bottom: 1px solid #DCDFE6;
-    background-color: white;
+        background-color: white;
     position: fixed;
     top: 0;
     left: 0;
     z-index:4;
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #DCDFE6;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 4px !important;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.list{
-    width:35px;
-    height: 35px;
+#list{
+    height: 30px;
     margin-left: 10px;
-    background: url(../img/list.png) no-repeat;
-    background-size: 100% 100%;
-
 }
 .gohome{
     width:35px;
@@ -439,4 +497,76 @@ import global from '@/components/flow/global/global'
     background-size: 100% 100%;
 }
 }
+
+        .app{
+            width:30px;
+            height: 3px;
+            background-color: black;
+            margin-top:5px;   
+        }
+
+        @keyframes myfirst{
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(32deg);
+
+            }
+        }
+        @keyframes myfirst-over{
+            from {
+                transform: rotate(32deg);
+            }
+            to {
+                transform: rotate(0deg);
+
+            }
+        }
+
+        @keyframes myfirst—two{
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(-32deg);
+
+            }
+        }
+        @keyframes myfirst-fist{
+            from {
+                transform: rotate(-32deg);
+            }
+            to {
+                transform: rotate(0deg);
+
+            }
+        }
+        .frist_{
+            animation: myfirst .4s;
+            animation-fill-mode:forwards;
+            transform-origin:0% 50%;
+        }
+        .play_{
+            visibility:hidden;
+        }
+        .two_{
+           animation:myfirst—two  .4s;
+           animation-fill-mode:forwards;
+           transform-origin:0% 50%;
+        }
+
+        .frist_to{
+            animation: myfirst-over .4s;
+            animation-fill-mode:forwards;
+            transform-origin:0% 50%;
+        }
+        .play_to{
+            visibility:visible;
+        }
+        .two_to{
+           animation:myfirst-fist  .4s;
+           animation-fill-mode:forwards;
+           transform-origin:0% 50%;
+        }
 </style>

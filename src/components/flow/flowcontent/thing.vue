@@ -1,7 +1,7 @@
 <template>	
 	<div class="sort">
-		<div style="font-size: 28px;">请确认将提供的内容</div>
-		<p style="margin-top: 25px;width:550px;" class="text_p">如果您为体验者准备了详细的体验用品请在此页描述出来，如咖啡、小吃、住宿等。每一个细心之处都是体验者选择再次参加体验的原因。</p>
+		<div style="font-size: 28px;">填写体验中您提供的东西</div>
+		<p style="margin-top: 25px;width:550px;" class="text_p">如果您为体验者准备了体验必备用品或食宿交通，请在此页勾选出来。一个为体验者解决必要需求的体验会更受大家欢迎。</p>
 		<el-select v-model="value5" placeholder="请选择" multiple style="margin-top:40px;width:400px;"  @input="descInput">
 	    <el-option
 	      v-for="item in options"

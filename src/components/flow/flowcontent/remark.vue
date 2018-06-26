@@ -1,10 +1,10 @@
 <template>	
 	<div class="remark">
-		<div style="font-size: 28px;">体验前的叮嘱</div>
-		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">对于此次体验，您还需要体验者提前做好什么准备？提前告知体验者体验中可能遇到的问题，体验者会切身感受到被重视。</p>
+		<div style="font-size: 28px;">填写体验中您提供的独特东西</div>
+		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">如果您还为体验者准备了其他贴心且特殊的东西，请在此页描述出来。如一份独特的甜品、能带走收藏的小惊喜等，每一个细心之处都是体验者选择再次参加体验的原因。</p>
 		<el-input type="textarea"
-  :rows="8"  placeholder="例： 1、本次体验费用不包含探店时的餐饮消费哦。2、参加体验的途中注意行车安全，你的安全比手作皮具更让我关心。" style="margin-top:50px;width:500px;font-size:20px;" v-model="input"  :maxlength="250"  @input="descInput"></el-input>
-		<p v-show="button" style="line-height:40px;">还剩{{number}}个字</p>
+  :rows="8"  placeholder="例：本次体验还包含一杯北京最大杯酸奶、一套精致优雅的餐具、一份专门为你准备的甜品，还有能为你拍出最美照片的专业设备。" style="margin-top:50px;width:500px;font-size:20px;" v-model="input"  :maxlength="250"  @input="descInput"></el-input>
+		<p v-show="button" style="line-height:40px;">最多250个字</p>
 		<el-button type="primary" plain style="width:100px;margin-top:50px;display:block;" @click="go" v-show="next">下一步</el-button>
 		<div style="margin-top:50px;" v-show="button">
 			<el-button type="primary"  style="width:100px;" :disabled="disabled" @click="save">保存</el-button>

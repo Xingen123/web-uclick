@@ -14,12 +14,15 @@
 				<div @click="myself">个人资料</div>
 				<div @click="login">登出</div>
 			</div>
+
 		</div>
 		<!-- 确认退出 -->
-		<el-dialog
+
+			<el-dialog
+					:modal="false"
 		  title="提示"
 		  :visible.sync="dialogVisible"
-		   width="30%"
+		   :width="width" 
 		  :before-close="handleClose">
 		  <span>确认退出吗？</span>
 		  <span slot="footer" class="dialog-footer">   
@@ -35,6 +38,7 @@
 		},
 		data(){
 			return{
+				width:"30%",
 				logohead:"",
 				logoerror: 'this.src="' + require('./img/imghead.png') + '"',
 				seen:false,
@@ -106,7 +110,13 @@
 			  }).catch(function (error) {
 			      console.log(error);
 			  });
-			}
+			},
+			clientWidth(){
+                let width = document.body.clientWidth;
+                if(width<600){
+                    this.width="80%"
+                }
+            }
 		},
 		computed:{
 
@@ -114,6 +124,7 @@
 		created () {},
 		mounted () {
 			this.personage()
+			this.clientWidth()
 		},
 	  	destroyed () {}
 	} 
@@ -125,12 +136,16 @@ background: white;
 /*position: fixed;*/
 /*top:0;*/
 /*left: 0;*/
-/*z-index: 100;*/
+z-index: 12;
+}
+.el-dialog__wrapper{
+	background: rgba(0,0,0,0.5);
 }
 	.header{
 		width: 100%;
 		height: 60px;
 		border-bottom: 1px solid #DCDFE6;
+		    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 4px !important;
 	}
 
 	.logo{
@@ -151,12 +166,11 @@ background: white;
 		cursor:pointer;
 		width:50px;
 		font-size: 20px;
-		/*transition: 0.4s all;*/
 		padding-left: 15px;	
 		position: absolute;
-		padding-bottom: 10px;
+		padding-bottom: 13px;
 		left:135px;
-		top: 20px;
+		top: 17px;
 	}
 	.headimg{
 		width: 50px;
@@ -167,7 +181,6 @@ background: white;
 		top: 5px;
 		cursor:pointer;
 		padding-bottom: 3px;
-		/*transition: 0.4s all;*/
 	}
 
 	.tiyan:hover{		
@@ -179,8 +192,6 @@ background: white;
 		width: 50px;
 		height: 50px;
 		border-radius: 25px;
-	/*	background: url(img/head.png) no-repeat;
-		background-size: 100% 100%;*/
 	}
 	.aside{
 		width: 100px;
@@ -208,20 +219,17 @@ background: white;
 		color: red;
 	}
 	@media screen and (max-width:600px) {
-/*    .logo {
+    .logo {
        width:35%;
+       background-size:100% 100%;
+	   background-position: 0px;
     }
-    .head{
-    	width:65%;
-   	}
-   	.tiyan{
-		left: 35%;
-	}*/
 	.headimg{
 		right:10px;
 	}
 	.aside{
 		right: 10px;
 	}
+
 }
 </style>

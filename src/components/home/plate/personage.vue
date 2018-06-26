@@ -1,7 +1,7 @@
 <template>	
 	<div class="per">
 		<div style="font-size:28px;">个人资料</div>
-		<div style="width:100%;height:200px;border:1px solid #DCDFE6;margin-top:10px;">
+		<div style="width:100%;height:200px;border:1px solid #DCDFE6;margin-top:10px;overflow: hidden;">
 			<p style="border-bottom:1px solid #DCDFE6;text-align:right;padding-right:15px;color:#409EFF;cursor:pointer;" @click="myself">编辑</p>
 			<div style="padding:20px;">
 				<div style="margin-top:5px;"><span style="width:100px;display:inline-block;">姓名</span ><span v-text="name"></span></div>
@@ -78,6 +78,7 @@
 		left:10%;
 		width:30%;
 		height: 250px;
+		
 	}
 	@media screen and (max-width:600px) {
 	    .per{

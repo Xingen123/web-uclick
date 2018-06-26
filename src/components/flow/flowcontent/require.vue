@@ -11,9 +11,9 @@
 			<div style="font-size:18px;">其他要求</div>
 			<el-input v-model="exet" type="textarea"
   :rows="5"
-  placeholder="例：记得穿你最好看的衣服来。" style="margin-top:10px;width:500px;" :maxlength="100"  @input="descInput"></el-input>
+  placeholder="例：记得穿你最好看的衣服来。" style="margin-top:10px;width:500px;" :maxlength="300"  @input="descInput"></el-input>
 		</div>
-		<p  style="line-height:40px;">还剩{{number}}个字</p>
+		<p  style="line-height:40px;">最多300个字</p>
 		<el-button type="primary " plain style="margin-top:50px;width:120px;" :disabled="disabled" @click="sort">下一步</el-button>
 	</div>
 </template>
@@ -27,7 +27,7 @@ import global from '@/components/flow/global/global'
 				disabled:true,
 				age:"",
 				exet:"",
-				number:100,
+				number:300,
 				min:0,
 				max:70
 			}
@@ -52,8 +52,8 @@ import global from '@/components/flow/global/global'
 			},
 			descInput(){
 				var txtVal = this.exet.length;
-				if (txtVal<101) {
-					this.number = 100 - txtVal;
+				if (txtVal<301) {
+					this.number = 300 - txtVal;
 				}
  				
 			},
@@ -76,7 +76,7 @@ import global from '@/components/flow/global/global'
 				  		
 			  		}
 			  		if (response.data.joinerReqire) {
-			  			_this.number=100-response.data.joinerReqire.length
+			  			_this.number=300-response.data.joinerReqire.length
 			  		}
 			  	}
 			  	

@@ -5,7 +5,7 @@
 			<div>还没有账号？ <span style="color:#409EFF;margin-left10px;cursor:pointer;font-weight:bold;" @click="register">注册</span></div>
 			<el-form ref="form" :model="form">
 				<input type="text" class="width" placeholder="手机号" v-model="phone" >
-				<input type="password" class="width" placeholder="密码" v-model="password" @keyup.enter.native="next">
+				<input type="password" class="width" placeholder="密码" v-model="password" @keyup.enter="next">
 				<el-form-item>
 					<el-checkbox style="font-weight:bold;" v-model="form.checked">记住我</el-checkbox>
 					<span style="color:#409EFF;float:right;margin-right:30px;cursor:pointer;font-weight:bold;"  @click="reset">忘记密码</span>
@@ -78,7 +78,8 @@
 			  	if (response.data.complete=="SUCCESS") {	
 			  		 _this.$message({
 					    message: 'UClick欢迎您的到来',
-					    type: 'success'
+					    type: 'success',
+					    duration:1000
 					 })	  		
 	        		 _this.$router.push({
 			        	path: '/index'
@@ -100,21 +101,24 @@
 		    	if (!this.phone) {
 		    		this.$message({
 					    message: '请填写账号',
-					    type: 'error'
+					    type: 'error',
+					    duration:1000
 					 })	
 		    		return false;
 		    	}
 		    	else if(!reg.test(this.phone)){
 		    		this.$message({
 					    message: '手机号码格式不正确',
-					    type: 'error'
+					    type: 'error',
+					    duration:1000
 					 })	
 		    		return false;
                 }
 		    	else if(!this.password) {
 		    		this.$message({
 					    message: '请输入密码',
-					    type: 'error'
+					    type: 'error',
+					    duration:1000
 					 })	
 		    		return false;
 		    	}
@@ -202,6 +206,7 @@
     -ms-transition: all .2s;
 	} 
 	@media screen and (max-width:600px) {
+
 	    .width{
 	    	height: 35px;
 	    }

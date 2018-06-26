@@ -1,6 +1,6 @@
 <template>	
 	<div class="mapdepot">
-		<div style="font-size: 28px;">添加更多照片</div>
+		<div style="font-size: 28px;">添加更多图片</div>
 		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">根据数据显示，配有6张以上图片的体验往往更受欢迎。去添加更多图片让体验获得更多预定吧！</p>
 
 		
@@ -12,7 +12,7 @@
 				<div class="right"></span>选择与标题描述一致的图片</div>
 				<div class="right"></span>图片尺寸比例为3:4，大小需小于500KB</div>
 				<div class="right"></span>图片以人物为主，人物场景图片最佳</div>
-				<div class="right"></span>选择有感染力、姿势自然的图片</div>
+				<div class="right"></span>选择姿势自然的体验图片</div>
 			</div>
 			<div class="smalltwo">
 				<div class="not"></span>不要使用闪光灯或太厚重的滤镜</div>
@@ -428,7 +428,7 @@ import vueCropper from '@/components/login/vue-cropper'
 </script>
 <style scoped>
 .bg{
-	z-index:10;
+	z-index:100;
 	width: 100%;
 	height: 100%;
 	position: fixed;
