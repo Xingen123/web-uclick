@@ -2,16 +2,23 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 //登录注册
+import Show from '@/components/login/show'
 import Login from '@/components/login/login'
 import Register from '@/components/login/register'
 import Reset from '@/components/login/reset'
 import Resetpsw from '@/components/login/resetpsw'
 import Time from '@/components/login/time'
-
+import Perfect from '@/components/login/perfect'
+import Gohome from '@/components/login/gohome'
 //主页
 import Index from '@/components/index/index'
 import Calendar from '@/components/index/calendar/calendar'
 import Calendartwo from '@/components/index/calendar/Calendartwo'
+
+//问题
+
+import Question from '@/components/question/question'
+
 
 //个人
 import Home from '@/components/home/home'
@@ -20,6 +27,8 @@ import Verification from '@/components/home/verification'
 //流程
 import Flow from '@/components/flow/flow'
 //步骤
+
+import repertoire from '@/components/flow/flowcontent/repertoire'
 import About from '@/components/flow/flowcontent/about'
 import LastTime from '@/components/flow/flowcontent/lastTime'
 import Cover from '@/components/flow/flowcontent/cover'
@@ -44,7 +53,22 @@ export default new Router({
   	//重定项
   	{
     	path:"/",
-    	redirect:'/login'
+    	redirect:'/show'
+    },
+        {
+      path: '/repertoire',
+      component: repertoire,
+      meta: {
+        title: 'demo'
+      }
+    },
+    //展示
+    {
+      path: '/show',
+      component:Show,
+      meta: {
+        title: '展示'
+      }
     },
      // 登录
 	  {
@@ -54,6 +78,30 @@ export default new Router({
         title: '登录'
       }
     },
+    //常见问题 
+    {
+      path: '/question',
+      component:Question,
+      meta: {
+        title: '常见问题'
+      }
+    },
+    // 移动端点击登录
+    {
+      path: '/gohome',
+      component: Gohome,
+      meta: {
+        title: '通往世界的大门'
+      }
+    },
+    {
+      path: '/perfect',
+      component: Perfect,
+      meta: {
+        title: '完善个人信息'
+      }
+    },
+    
     {
       path: '/register',
       component: Register,

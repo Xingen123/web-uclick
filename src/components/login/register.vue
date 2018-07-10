@@ -1,21 +1,24 @@
 <template>	
 	<div class="login">
+		<div class="logoshow"  @click="$router.push({path: '/show'})"></div>
 		<div class="box">
-			<div style="font-size:25px;">手机号注册</div>
-			<div>已有账号？ <span style="color:#409EFF;margin-left10px;cursor:pointer;font-weight:bold;" @click="routerLogin">登录</span></div>
-			<input type="text" class="width" placeholder="手机号" v-model="phone">
-			<div>
-				<input type="text" class="yzminput" placeholder="请输入验证码" v-model="verifyCode">
-				<el-button type="primary" class="yzm"  @click="disabled()"  :disabled="!show">
+			<div style="font-size:25px;">注册</div>
+			
+			<input type="text" class="width" placeholder="请输入手机号" maxlength="11" v-model="phone">
+			<div style="position:relative;">
+				<input maxlength="4" class="yzminput" placeholder="验证码" v-model="verifyCode">
+				<button class="yzm"  @click="disabled()"  :disabled="!show">
 					<span v-show="show">获取验证码</span>
          			<span v-show="!show" class="count">{{count}} s</span>
-				</el-button>
+				</button>
 			</div>
-			<input type="password" class="width" placeholder="请输入6-16位密码" :minlength="6" :maxlength="16" v-model="password" @keyup.enter.native="next">
+			<input type="password" class="width" style="margin-top:20px;" placeholder="输入密码" :minlength="6" :maxlength="16" v-model="password" @keyup.enter.native="next">
 			
-			<el-button type="primary" class="submit" @click="next">Sign in</el-button>
+			<el-button type="primary" class="submit" @click="next">提交</el-button>
+
+			<div style="text-align:center;margin-top:20px;">已有账号？<span style="color:rgb(0,160,232);margin-left:5px;cursor:pointer;" @click="routerLogin">点击立即登录吧！</span></div>
 		</div>
-		<p class="bottomtext" style="color:white;font-size:3.5em;text-align:center;font-weight:bold;margin-top:80px;">去和有意思的人成为朋友</p>
+		
 	</div>
 </template>
 <script>
@@ -44,7 +47,7 @@ import axios from 'axios'
 				this.$router.push({
 			        path: '/login'
 			    })
-			},		
+			},	
 			login () {
 			  let param = new FormData();
 			  param.append('mobile', this.phone);
@@ -53,7 +56,7 @@ import axios from 'axios'
 			  }).catch(function (error) {
 			      console.log(error);
 			  });
-		    },
+		    },	
 		    getCode(){
 	            if (!this.timer) {
 	                this.count = TIME_COUNT;
@@ -72,9 +75,17 @@ import axios from 'axios'
         	disabled (){
         		let reg=11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/;
         		if(!this.phone){
-                   this.$message('请输入手机号码')
+                  	this.$message({
+					    message: '请填写账号',
+					    type: 'error',
+					    duration:1000
+					})	
                 }else if(!reg.test(this.phone)){
-                    this.$message('手机号码格式不正确')
+                    this.$message({
+					    message: '请填写账号',
+					    type: 'error',
+					    duration:1000
+					})	
                 }else{
                     this.TIME_COUNT=60;
                     this.disabled=true;
@@ -92,7 +103,8 @@ import axios from 'axios'
 					  	if (response.data.complete=="SUCCESS") {
 					  		_this.$message({
 							    message: '注册成功',
-							    type: 'success'
+							    type: 'success',
+							    duration:1000
 							})
 			        		 _this.$router.push({
 					        		path: '/login'
@@ -110,7 +122,8 @@ import axios from 'axios'
         		if (!this.phone) {
 		    		this.$message({
 					    message: '请填写账号',
-					    type: 'error'
+					    type: 'error',
+					    duration:1000
 					 })	
 		    		return false;        			
         		}
@@ -120,22 +133,22 @@ import axios from 'axios'
         		else if (!this.verifyCode){
         			this.$message({
 					    message: '请输入验证码',
-					    type: 'error'
+					    type: 'error',
+					    duration:1000
 					})	
 		    		return false;  
         		}
         		else if (!this.password){
         			this.$message({
 					    message: '请输入密码',
-					    type: 'error'
+					    type: 'error',
+					    duration:1000
 					})	
 		    		return false;  
         		}
         		else if (this.phone && this.verifyCode && this.password) {
         			this.register()
         		}
-
-
         	}
 		},
 		computed:{
@@ -156,21 +169,24 @@ import axios from 'axios'
 <style scoped>
 
 	.box{
-		width:33%;
-		max-width: 500px;
-		height: 350px;
+		width: 300px;
+		height: 400px;
+		    position: fixed;
+    top: 150px;
+    right: 10%;
 		background: rgba(0,0,0,0.4);
 		color: white;
-		margin:0 auto;
-		margin-top: 150px;
+
 		border-radius: 5px;
 		padding: 35px;
 	}
 	@media screen and (max-width:600px) {
 	    .box{
-	    	width:70%;
-	    	margin-top: 100px;
-	        height: 300px;
+	    	background: none;
+	    	top: 60px;
+	    	right: 0;
+	    	left: 0;
+	    	margin: 0 auto;
 	    }
 	}
 	.el-input{
@@ -179,33 +195,30 @@ import axios from 'axios'
 		border:0;
 	}
 	.yzminput{
-		width: 240px;
-		height: 42px;
-	margin-top: 20px;
-    padding: 0 15px;
-    background: #2d2d2d;
-    background: rgba(45,45,45,.5);
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-    border: 1px solid #3d3d3d;
-    border: 1px solid rgba(255,255,255,.15);
-    -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
-    -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
-    box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
-    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+	width:100%;
+	height: 42px;
+	background: rgba(45,45,45,0);
+	margin-top:20px;
+	border: none;
+	border-bottom: 1px solid white;
     font-size: 14px;
     color: #fff;
     text-shadow: 0 1px 2px rgba(0,0,0,.1);
     -o-transition: all .2s;
-    -moz-transition: all .2s;
-    -webkit-transition: all .2s;
 	}
 
 	.yzm{
-		width: 170px;
-		margin-left: 30px;
+		width: 100px;
+		height: 50px;
+		background-color: rgba(0,0,0,0);
+		border: none;
+		color: white;
+		position: absolute;
+    	bottom: 0;
+    	right: 0px;
+    	cursor: pointer;
 	}
+	 .yzm:focus{outline:0;} 
 	@media screen and (max-width:1450px) {
 	    .yzm{
 	     margin-left: 0;
@@ -225,35 +238,25 @@ import axios from 'axios'
             color:#fff;
         }
 	.width{
-	width:90%;
+	width:100%;
 	height: 42px;
-	margin-top: 20px;
-    padding: 0 15px;
-    background: #2d2d2d;
-    background: rgba(45,45,45,.5);
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-    border: 1px solid #3d3d3d;
-    border: 1px solid rgba(255,255,255,.15);
-    -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
-    -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
-    box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
-    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+	background: rgba(45,45,45,0);
+	margin-top:40px;
+	border: none;
+
+	border-bottom: 1px solid white;
     font-size: 14px;
     color: #fff;
     text-shadow: 0 1px 2px rgba(0,0,0,.1);
     -o-transition: all .2s;
-    -moz-transition: all .2s;
-    -webkit-transition: all .2s;
 	}
 
 .submit{
-		width:98%;
-		margin-top: 10px;
+		width:100%;
+		margin-top: 50px;
 		/*font-weight: bold;*/
 		font-size: 18px;
-		    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+		text-shadow: 0 1px 2px rgba(0,0,0,.1);
     -o-transition: all .2s;
     -moz-transition: all .2s;
     -webkit-transition: all .2s;
@@ -261,7 +264,7 @@ import axios from 'axios'
 	} 
 	@media screen and (max-width:600px) {
 		.yzminput{
-			width: 100px;
+			width: 100%;
 			height: 35px;
 		}
 		.yzm{

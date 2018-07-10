@@ -56,7 +56,7 @@ import global from '@/components/flow/global/global'
 			  param.append('id',detailId);
 			  this.$ajax.post('query/webRecommendDetail',param).then(function (response) {
 			  	if (response.data.title!=null) {
-			  		global.$emit("tabfive",true)
+			  		global.$emit("tabthree",true)
 			  		_this.disabled=false
 			  		_this.input=response.data.title
 			  		_this.number=50-response.data.title.length	
@@ -79,7 +79,7 @@ import global from '@/components/flow/global/global'
 			  param.append('title',this.input);
 			  this.$ajax.post('create/webRecommendDetail',param).then(function (response) {
 			  	if (response.data.complete=="SUCCESS") {
-			  		global.$emit("tabfive",true)
+			  		global.$emit("tabthree",true)
 			  		_this.button=false
 					_this.next=true
 			  	}

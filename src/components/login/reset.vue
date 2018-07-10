@@ -1,20 +1,21 @@
 <template>	
 	<div class="login">
+		<div class="logoshow"  @click="$router.push({path: '/show'})"></div>
 		<div class="box">
 			<div style="font-size:25px;">重置密码</div>
-			<div style="margin-top:20px;font-size:18px;">请输入与您的账号相关的手机号码,我们会给您发送验证码来重置密码</div>
+			<div style="margin-top:20px;font-size:18px;">请输入正确的账号绑定手机号码，以便第一时间获取验证码来重置密码。</div>
 			<el-form ref="form" :model="form">
-				<input type="text" class="width" placeholder="手机号" v-model="form.phone">
-				<input type="text" class="widthtwo" placeholder="请输入验证码" v-model="form.yzm" @keyup.enter.native="next">
-				<el-button type="primary"  class="yzm"  @click="disabled()" :disabled="!form.show">
+				<input type="text" class="width" placeholder="输入手机号" v-model="form.phone">
+				<input type="text" class="widthtwo" placeholder="验证码" v-model="form.yzm" @keyup.enter.native="next">
+				<button   class="yzm"  @click="disabled()" :disabled="!form.show">
 					<span v-show="form.show">获取验证码</span>
 	         		<span v-show="!form.show">{{form.count}} s</span>
-				</el-button>
+				</button>
 	
-				<el-button type="primary" class="submit" @click="next">下一步</el-button>
+				<el-button type="primary" class="submit" style="margin-top:30px;" @click="next">下一步</el-button>
 			</el-form>
 		</div>
-		<p class="bottomtext" style="color:white;font-size:3.5em;text-align:center;font-weight:bold;margin-top:80px;">去和有意思的人成为朋友</p>
+		
 	</div>
 </template>
 <script>
@@ -148,55 +149,55 @@ const TIME_COUNT = 60;
 		width: 100%;
 	}
 	.box{
-		width:33%;
-		max-width: 500px;
-		height: 350px;
+		width: 300px;
+		height: 400px;
+		    position: fixed;
+    top: 150px;
+    right:10%;
 		background: rgba(0,0,0,0.4);
 		color: white;
-		margin:0 auto;
-		margin-top: 150px;
+
 		border-radius: 5px;
 		padding: 35px;
 	}
 	@media screen and (max-width:600px) {
 	    .box{
-	    	width:70%;
-	    	margin-top: 100px;
-	        height: 300px;
+	    	background: none;
+	    	top: 60px;
+	    	right: 0;
+	    	left: 0;
+	    	margin: 0 auto;
 	    }
 	}
+	.yzm:focus{outline:0;} 
 	.el-input{
 		height: 50px;
 		border:0;
 	}
 	.widthtwo{
-		width:200px;
-		height: 42px;
-		line-height: 42px;
-		display:inline-block;
-		margin-top: 20px;
-    padding: 0 15px;
-    background: #2d2d2d;
-    background: rgba(45,45,45,.5);
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-    border: 1px solid #3d3d3d;
-    border: 1px solid rgba(255,255,255,.15);
-    -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
-    -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
-    box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
-    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+	width:100%;
+	height: 42px;
+	background: rgba(45,45,45,0);
+	margin-top:20px;
+	border: none;
+	border-bottom: 1px solid white;
     font-size: 14px;
     color: #fff;
     text-shadow: 0 1px 2px rgba(0,0,0,.1);
     -o-transition: all .2s;
-    -moz-transition: all .2s;
-    -webkit-transition: all .2s;
 	}
+	.el-form{position: relative;}
 	.yzm{
-		width: 170px;
-		margin-left: 70px;
+				width: 100px;
+		height: 50px;
+		position:absolute;
+		 bottom:70px;
+    	right: 0;
+		cursor: pointer;
+		background: rgba(0,0,0,0);
+   		 border: none;
+    	color: white;
+
 	}
 		        input::-webkit-input-placeholder{
             color:#fff;
@@ -211,38 +212,26 @@ const TIME_COUNT = 60;
             color:#fff;
         }
 	.width{
-	width:90%;
+	width:100%;
 	height: 42px;
-	margin-top: 20px;
-    padding: 0 15px;
-    background: #2d2d2d;
-    background: rgba(45,45,45,.5);
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-    border: 1px solid #3d3d3d;
-    border: 1px solid rgba(255,255,255,.15);
-    -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
-    -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
-    box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
-    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+	background: rgba(0,0,0,0);
+	margin-top:50px;
+	border: none;
+	border-bottom:1px solid white;
     font-size: 14px;
     color: #fff;
     text-shadow: 0 1px 2px rgba(0,0,0,.1);
     -o-transition: all .2s;
-    -moz-transition: all .2s;
-    -webkit-transition: all .2s;
+    
 	}
 	.submit{
-		width:99%;
-		margin-top:30px;
-		margin-left:-2px; 
-		display:block;
-		font-sizefont-size: 18px;
+			width:100%;
+	    	height: 40px;
 	}
+.el-button+.el-button{margin-left: 0 !important;}
 	@media screen and (max-width:1450px) {
 			.yzm{
-				width: 170px;
+				width: 100px;
 				margin-left: 0px;
 				margin-top: 15px;
 			}
@@ -252,11 +241,11 @@ const TIME_COUNT = 60;
 	    	height: 35px;
 	    }
 	    .widthtwo{
-	    	width:100px;
+	    	width:100%;
 	    	height: 35px;
 	    }
 	    .yzm{
-			width: 112px;
+			width: 100px;
 			height: 35px;
 			line-height: 10px;
 			margin-left: 12px;

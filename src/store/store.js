@@ -7,13 +7,17 @@ Vue.use(Vuex)
 
 
 var state = {
-  isLogin:0,     //初始时候给一个 isLogin=0 表示用户未登录
+  isBg:false,     //初始时候给一个 isLogin=0 表示用户未登录
+  value:0
 };
 
 const mutations = {
-  changeLogin(state,data){
-    state.isLogin = data;
-  }
+ 		onOff(state){
+            state.isBg = !state.isBg;
+            if (!state.isBg) {
+            	state.value=0
+            }
+        }
 
 };
  // 下面这个相当关键了，所有模块，记住是所有，注册才能使用

@@ -8,12 +8,12 @@
 				<img style="position:absolute;top:0px;left0;z-index:-1;width:100%;height:100%;border-radius:5px;" v-if="item.imageUrl" v-lazy="item.fileServer+'/'+item.imageUrl" alt="" :onerror="defaultImg">
 			</div>
 			<div class="content">
-				<div style="font-size:25px;height:40px;">{{item.title}}</div>
+				<div style="font-size:25px;">{{item.title}}</div>
 				<p>在您提交体验前,还需要完成几个步骤。</p>
 				<div style="margin-top:25px;" class="phonenext">
 
 					<!-- 创建中 -->
-					<el-button type="primary"  class="next" v-if="item.completeAmount<100" @click="nextFlow(item.id)">继续</el-button>
+					<el-button type="primary"  class="next" v-if='item.examineType=="INITIALIZATION"' @click="nextFlow(item.id)">继续</el-button>
 
 					<!-- 审核中 -->
 					<el-button type="primary"  class="next" v-if='item.examineType=="SUBMIT_EXAMINE" && item.completeAmount==100' @click="nextFlow(item.id)">继续</el-button>
@@ -23,20 +23,20 @@
 
 
 					<!-- 审核完成 -->		
-					<el-button type="primary"  plain class="next" v-if='item.examineType=="EXAMINE_PASS" && item.completeAmount==100' @click="time(item.detailId)">体验时间</el-button>			
-					<el-button type="primary" plain v-if='item.examineType=="EXAMINE_PASS" && item.completeAmount==100'  @click="Flow(item.id)">查看体验创意</el-button>
+					<el-button type="primary"  plain class="next" v-if='item.examineType=="EXAMINE_PASS"' @click="time(item.detailId)">体验时间</el-button>			
+					<el-button type="primary" plain v-if='item.examineType=="EXAMINE_PASS"'  @click="Flow(item.id)">修改体验创意</el-button>
 
 
 				</div>
 			</div>
 			
-			<el-dropdown trigger="click" style="margin-top:25px;margin-left:90px;" class="phonetitle" :placement="localtion">
+			<el-dropdown trigger="click" style="margin-top:25px;margin-left:90px;cursor: pointer;" class="phonetitle" :placement="localtion">
 			      <span class="el-dropdown-link">
 			       <i class="el-icon-more"></i>
 			      </span>
 			      <el-dropdown-menu slot="dropdown" >
 			        <el-dropdown-item v-if="item.isNotDelete==true" ><el-button type="text" @click="remove(item.id)">删除体验</el-button></el-dropdown-item>
-			        <el-dropdown-item v-if='item.examineType=="EXAMINE_PASS"'><el-button type="text"  @click="revocation(item.id)">申请修改体验信息</el-button></el-dropdown-item>
+			        <el-dropdown-item v-if='item.examineType=="EXAMINE_PASS"'><el-button type="text"  @click="revocation(item.id)">申请下架体验</el-button></el-dropdown-item>
 			        <el-dropdown-item v-if="item.isNotDelete==false" :disabled="true" >无法删除体验</el-dropdown-item>
 			      </el-dropdown-menu>
 			</el-dropdown>
@@ -50,7 +50,7 @@
 		},
 		data(){
 			return{
-				defaultImg: 'this.src="' + require('../img/logo.png') + '"',
+				defaultImg: 'this.src="' + require('../img/loading.gif') + '"',
 				project:[],
 				smallbox:null,
 				localtion:'bottom-end'
@@ -101,7 +101,7 @@
 			  this.$ajax.post('query/webConvoy',param).then(function (response) {
 			  	if (response.data.complete=="SUCCESS") {
 			  		_this.$router.push({
-			       	 path: '/calendartwo'
+			       	 path: '/flow/sort'
 			      	})
 				  	sessionStorage.setItem('detailId',response.data.detailId)
 				  	sessionStorage.setItem('recommendId',response.data.id)
@@ -131,12 +131,20 @@
 			},
 			//查询用户的体验
 			dsds(){
+				const loading = this.$loading({
+			      lock: true,
+			      text: 'Loading',
+			      target: document.querySelector('.box')
+			    });
+
 			  var _this=this
 		      let param = new FormData();
 		      var tokenone =sessionStorage.getItem('encryptToken');
 			  param.append('token',tokenone);  
 			  this.$ajax.post('query/webRecommendByUser',param).then(function (response) {
+			  	
 			  	if (response.data.webRecommendInfoList!="") {
+			  		loading.close();
 			  		_this.project=response.data.webRecommendInfoList
 			  	}
 			  }).catch(function (error) {
@@ -212,6 +220,7 @@
 }
 .box>div{
 	float: left;
+	
 }
 
 .status{
@@ -279,6 +288,7 @@
 	    top: 200px;
 	    right: 0;
 		margin-left: 0 !important;
+
 	}
 .project{
 	border-top: 1px solid #E4E7ED;

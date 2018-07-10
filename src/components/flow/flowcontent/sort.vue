@@ -94,6 +94,7 @@ import global from '@/components/flow/global/global'
 			  param.append('token',tokenone);
 			  param.append('recommendType',this.value);
 			  this.$ajax.post('create/webRecommend',param).then(function (response) {
+			  	console.log(response)
 			  	if (response.data.complete=="SUCCESS") {
 			  		global.$emit("tabone",true)
 			  		_this.one=true

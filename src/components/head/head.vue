@@ -2,8 +2,27 @@
 	<div class="index">
 		<div class="header">
 
-			<div class="logo" @click="index"></div>
-			<div class="tiyan">体验</div>
+			<div class="logo" @click="$router.push({
+		        	path: '/home'
+		     	})"></div>
+			<ul class="link">
+				<li >
+					<router-link to="/index">
+                        体验
+                    </router-link>
+				</li>
+				<li >
+					<router-link to="/question">
+						常见问题
+					</router-link>
+				</li>
+				<li>
+					<router-link to="/self">
+                      个人信息
+                    </router-link>
+				</li>
+			</ul>
+			
 			<div class="head">	
 				<div class="headimg" @click="funon" @mouseenter="enter" @mouseleave="leave">
 					<img  :src="logohead" alt="" :onerror="logoerror"  class="headimgicon">
@@ -60,7 +79,7 @@
 				sessionStorage.removeItem("detailId");
 				sessionStorage.removeItem("encryptToken");
 				this.$router.push({
-		        	path: '/login'
+		        	path: '/show'
 		     	})	
 			},
 			no(){
@@ -79,11 +98,7 @@
 		        	path: '/home'
 		     	})
 			},
-			index (){
-				this.$router.push({
-		        path: '/index'
-		     	})
-			},
+
 			funon (){
 		        this.seen=!this.seen;
 		        if(this.seen==true){this.aside=true;}
@@ -138,6 +153,12 @@ background: white;
 /*left: 0;*/
 z-index: 12;
 }
+.link{
+	position: absolute;
+	left:135px;
+	top: 17px;
+	font-size: 20px;
+}
 .el-dialog__wrapper{
 	background: rgba(0,0,0,0.5);
 }
@@ -164,13 +185,7 @@ z-index: 12;
 	}
 	.tiyan{
 		cursor:pointer;
-		width:50px;
-		font-size: 20px;
-		padding-left: 15px;	
-		position: absolute;
-		padding-bottom: 13px;
-		left:135px;
-		top: 17px;
+		/*padding-bottom: 13px;*/
 	}
 	.headimg{
 		width: 50px;
@@ -182,11 +197,22 @@ z-index: 12;
 		cursor:pointer;
 		padding-bottom: 3px;
 	}
-
-	.tiyan:hover{		
-		border-bottom: 2px solid #DCDFE6;
+	.link>li{
+		float: left;
+		margin-left: 40px;
 	}
+	.link>li>a{
+		color: rgb(72,72,72);
+		text-decoration: none;
+	}
+	.link>li:hover{
 
+		padding-bottom: 13px;	
+		border-bottom: 2px solid rgb(0,162,232);
+	}
+.router-link-active{
+	color:rgb(0,162,232) !important;
+}
 	.headimgicon{
 		display: block;
 		width: 50px;

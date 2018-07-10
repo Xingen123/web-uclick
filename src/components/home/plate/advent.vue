@@ -4,6 +4,8 @@
 		<div style="font-size:28px;">即将到来的体验</div>
 		<div style="width:100%;margin-top:10px;">
 		  	<el-table
+		  	    v-loading="loading"
+
 		    :data="tableData5"
 		    style="width: 100%;border:1px solid #DCDFE6;"
 		    max-height="300" >
@@ -79,10 +81,11 @@
 
 
 		<div class="record">
-			<div style="font-size:28px;">交易记录</div>
+			<div style="font-size:28px;">已完成的体验</div>
 			<div style="width:100%;margin-top:10px;overflow-x:hidden;">
 			  	<el-table
 			    :data="tableData4"
+			    v-loading="loading"
 			    style="width: 100%;border:1px solid #DCDFE6;"
 			    max-height="300" >
 				<el-table-column
@@ -137,7 +140,6 @@
 		</div>
 
 
-
 		<el-dialog
 		  title="提示"
 		  :visible.sync="dialogVisible"
@@ -166,8 +168,6 @@
 			</template>
 		  
 		</el-dialog>
-
-
 	</div>
 </template>
 <script>
@@ -179,6 +179,7 @@
 				 tableData3: [],
 				 tableData4: [],
 				 tableData5: [],
+				 loading: true,
 				 dialogVisible: false
 			}
 		},
@@ -245,6 +246,8 @@
 			  param.append('token',tokenone);
 			  this.$ajax.post('query/webRecommendOrder',param).then(function (response) {
 			  	if (response.data.complete=="SUCCESS"){
+			  		setTimeout(function(){_this.loading=false},500)
+			  		
 			  		_this.tableData5=response.data.orderUnfinishedList
 			  		_this.tableData4=response.data.orderCompleteList
 			  	}

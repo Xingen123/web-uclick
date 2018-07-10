@@ -106,7 +106,7 @@ import global from '@/components/flow/global/global'
 			  this.$ajax.post('query/webRecommend',param).then(function (response) {			
 			  	if (response.data.complete=="SUCCESS") {
 			  		if (response.data.creatorBrief!=null) {
-			  			global.$emit("tabtenO",true)
+			  			global.$emit("tabfive",true)
 			  			_this.disabled=false
 			  			_this.input=response.data.creatorBrief
 			  			_this.number=1500-response.data.creatorBrief.length
@@ -128,7 +128,7 @@ import global from '@/components/flow/global/global'
 			  param.append('creatorBrief',this.input);  
 			  this.$ajax.post('create/webRecommend',param).then(function (response) {			
 			  	if (response.data.complete=="SUCCESS") {
-			  		global.$emit("tabtenO",true)
+			  		global.$emit("tabfive",true)
 			  		 _this.$router.push({
 				        path: '/flow/what'
 				      })

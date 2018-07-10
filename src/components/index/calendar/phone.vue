@@ -178,6 +178,9 @@
 	background-size: 100% 100%;
 	margin: 10px auto;
 	margin-top: 80px;
+	    border-radius: 28px;
+    -moz-box-shadow: 4px 5px 20px #8C8C8C;
+    box-shadow: 4px 5px 20px #8C8C8C;
 }
 .small{	
 	width:300px;

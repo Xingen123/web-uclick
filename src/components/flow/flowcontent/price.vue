@@ -70,7 +70,7 @@ import global from '@/components/flow/global/global'
 			  	if (response.data.complete=="SUCCESS") {
 			  		if (response.data.price!=null) {
 				  		var pric = response.data.price.split(".0");	
-				  		global.$emit("tabtenF",true)
+				  		global.$emit("tabten",true)
 				  		_this.input=pric[0]
 				  		_this.disabled=false
 			  		}
@@ -92,7 +92,7 @@ import global from '@/components/flow/global/global'
 			  param.append('price',this.input);
 			  this.$ajax.post('create/webRecommendDetail',param).then(function (response) {			
 			  	if (response.data.complete=="SUCCESS") {
-			  		global.$emit("tabtenF",true)
+			  		global.$emit("tabten",true)
 			  	_this.$router.push({
 			        path: '/flow/submit'
 			    })
@@ -121,7 +121,8 @@ import global from '@/components/flow/global/global'
 .counter{
 	width: 380px;
 	height:310px;
-	border: 1px solid #DBDBDB;
+	box-shadow: 4px 5px 20px #8C8C8C;
+	-moz-box-shadow: 4px 5px 20px #8C8C8C;
 	border-radius: 5px;
 	padding: 20px;
 	margin-top: 50px;

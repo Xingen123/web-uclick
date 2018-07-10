@@ -45,7 +45,7 @@ import global from '@/components/flow/global/global'
 			  this.$ajax.post('query/webRecommendDetail',param).then(function (response) {
 			  	
 			  	if (response.data.readyTime) {
-			  		global.$emit("tabtenFive",true)
+			  		global.$emit("tabnine",true)
 			  		_this.disabled=false
 			  		_this.lasttime = response.data.readyTime
 			  	}
@@ -70,9 +70,9 @@ import global from '@/components/flow/global/global'
 			  param.append('readyTime',this.lasttime);
 			  this.$ajax.post('create/webRecommendDetail',param).then(function (response) {
 			  	if (response.data.complete=="SUCCESS") {
-			  		global.$emit("tabtenFive",true)
+			  		global.$emit("tabnine",true)
 			  		 _this.$router.push({
-				        path: '/flow/remark'
+				        path: '/flow/price'
 				    })
 			  	}
 			  }).catch(function (error) {

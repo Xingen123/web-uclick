@@ -1,17 +1,17 @@
 <template>	
 	<div class="login">
+		<div class="logoshow"  @click="$router.push({path: '/show'})"></div>
 		<div class="box">
-			<div style="font-size:25px;">重置您的密码</div>
+			<div style="font-size:25px;">重置密码</div>
 			<el-form ref="form" :model="form">
-				<input type="password" class="width" v-model="form.psw" placeholder="请输入6-16位密码">
-				<input type="password" class="width" v-model="form.password" placeholder="请再输入一次密码" @keyup.enter.native="next">
+				<input type="password" class="width" v-model="form.psw" placeholder="输入新密码">
+				<input type="password" class="width" style="margin-top:20px;" v-model="form.password" placeholder="确认新密码" @keyup.enter.native="next">
 				<el-form-item>
-					<el-button type="primary" class="submit" @click="next">保存并继续</el-button>
+					<el-button type="primary" class="submit" @click="next">完成</el-button>
 				</el-form-item>
 			</el-form>
-			<p style="margin-top:20px;text-align:center;">点击“保存并继续”,即表示您确认接收服务条款喝隐私政策。</p>
 		</div>
-		<p class="bottomtext" style="color:white;font-size:3.5em;text-align:center;font-weight:bold;margin-top:80px;">去和有意思的人成为朋友</p>
+		
 	</div>
 </template>
 <script>
@@ -76,21 +76,24 @@
 		width: 100%;
 	}
 	.box{
-		width:33%;
-		max-width: 500px;
-		height: 350px;
+		width: 300px;
+		height: 400px;	
+		    position: fixed;
+    top: 150px;
+    right:10%;	
 		background: rgba(0,0,0,0.4);
 		color: white;
-		margin:0 auto;
-		margin-top: 150px;
+
 		border-radius: 5px;
 		padding: 35px;
 	}
 	@media screen and (max-width:600px) {
 	    .box{
-	    	width:70%;
-	    	margin-top: 100px;
-	        height: 300px;
+	    	background: none;
+	    	top: 60px;
+	    	right: 0;
+	    	left: 0;
+	    	margin: 0 auto;
 	    }
 	}
 	 input::-webkit-input-placeholder{
@@ -106,32 +109,21 @@
             color:#fff;
         }
 	.width{
-	width:90%;
+			width:100%;
 	height: 42px;
-	margin-top: 20px;
-    padding: 0 15px;
-    background: #2d2d2d;
-    background: rgba(45,45,45,.5);
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-    border: 1px solid #3d3d3d;
-    border: 1px solid rgba(255,255,255,.15);
-    -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
-    -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
-    box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
-    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+	background: rgba(45,45,45,0);
+	margin-top:50px;
+	border: none;
+	border-bottom: 1px solid white;
     font-size: 14px;
     color: #fff;
     text-shadow: 0 1px 2px rgba(0,0,0,.1);
     -o-transition: all .2s;
-    -moz-transition: all .2s;
-    -webkit-transition: all .2s;
 	}
 
 	.submit{
-		width:98%;
-		margin-top: 10px;
+		width:100%;
+		margin-top: 50px;
 		/*font-weight: bold;*/
 		font-size: 18px;
 		    text-shadow: 0 1px 2px rgba(0,0,0,.1);

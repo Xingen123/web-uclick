@@ -28,7 +28,7 @@
 		<p v-show="photo">调整封面图，按您的喜好出现</p>
 		<div v-show="photo" style="width:300px;height:200px;position:relative;" class="bigbox">
 			<img v-lazy="img"   style="width:300px;height:200px;position:absolute;top:0;left:0;border:none;border-radius:5px;" alt="" >
-			<div style="width:300px;height:200px;background:black;color:white;text-align:center;line-height:200px;border-radius:5px;position:absolute;cursor:pointer;z-index:1;" class="smallbox" @click="bgtrue"><div class="remove" @click.stop="dialogVisible=true"></div>编辑</div>
+			<div class="smallbox" @click="compile"><div class="remove" @click.stop="dialogVisible=true"></div>编辑</div>
 		</div>
 
 		<!-- 确认删除上传图片的弹框 -->
@@ -54,44 +54,26 @@
 
 
 		<!-- 截图区域 -->
-		<div class="bg" v-if="bg">
-			<!-- x -->
-			<div class="back" @click="bg=false"></div>
-			<div class="text">编辑封面照片</div>	
-
-			<button  class="btn3"  @click="fin(-1)" >-</button>
-			   <!-- 	 <el-slider  class="btn5"  @change="slider" v-model="value3"  :min="-10" :max='10' ></el-slider> -->
-			<button  class="btn4"  @click="fin(+1)" >+</button>
-			<div class="rotate" @click="rotateLeft">旋转90度</div>
-			<button  class="btn" @click="finish('blob')" >保存</button>
-			<button  class="btn2" @click="bg=false" >取消</button>
-			<div class="wrapper">
-				<vueCropper
-					ref="cropper2"
-					:img="example2.img"
-					:full="example2.full"
-					:outputSize="example2.size"
-					:outputType="example2.outputType"
-					:info="example2.info"
-					:canScale="example2.canScale"
-					:autoCrop="example2.autoCrop"
-					:autoCropWidth="example2.autoCropWidth"
-					:autoCropHeight="example2.autoCropHeight"
-					:fixed="example2.fixed"
-					:fixedBox="example2.fixedBox"
-					:fixedNumber="example2.fixedNumber"
-				></vueCropper>			
-			</div>
-		</div>
+		<repertoire 
+					 v-on:imgfun="imgfun"
+                    :bg="$store.state.isBg"                   
+                    :autoCropWidth="autoCropWidth" 
+                    :autoCropHeight="autoCropHeight" 
+                    :widthData="widthData" 
+                    :heightData="heightData" 
+                    :img="exampleimg">
+                      
+       </repertoire>
 	</div>
 </template>
 <script>
 import global from '@/components/flow/global/global'
-import vueCropper from '@/components/login/vue-cropper'
+import store from '@/store/store'
+import repertoire from '@/components/flow/flowcontent/repertoire'
 import axios from 'axios'
 	export default{
 		components:{
-			vueCropper
+			repertoire
 		},
 		data(){
 			return{
@@ -100,31 +82,17 @@ import axios from 'axios'
 				//标题
 				dialogVisible: false,
 				photo:false,
-				bg:false,
 				input:"",
 				//提示和实列
 				msg:"...",
 				code:false,
 				str:false,
-				//
 				img:"",
-				example2: {
-					full:true,
-					img: '',
-					info: true,
-					size: 1,
-					outputType: 'jpeg',
-					canScale:true,
-					autoCrop: true,
-					// 只有自动截图开启 宽度高度才生效
-					autoCropWidth: 300,
-					autoCropHeight: 200,
-					// 开启宽度和高度比例
-					fixed: true,
-					fixedBox:true,
-					fixedNumber: [3,2]
-					// original:true
-				}
+				autoCropWidth:300,
+            	autoCropHeight:400,
+            	widthData:0,
+           	 	heightData:0,
+				exampleimg:''					
 			}
 		},
 		props: {},
@@ -132,8 +100,49 @@ import axios from 'axios'
 
 		},
 		methods:{
-			fin(val){
-				this.$refs.cropper2.changeScale(val)
+
+			//拿到截取到的图片
+			imgfun(data){
+					var _this=this
+					let param = new FormData();
+					var tokenone =sessionStorage.getItem('encryptToken');
+					var recommend =sessionStorage.getItem('recommendId');
+
+					param.append('token',tokenone);
+					param.append('id',recommend);
+					param.append("imageFile",data);
+
+					_this.$ajax.post('create/webRecommend',param).then(function (response) {
+						
+						if (response.data.complete=="SUCCESS") {
+								
+								_this.$store.commit('onOff')
+						  		_this.img = window.URL.createObjectURL(data)
+						  		_this.photo=true			  		
+						}
+
+					})
+			},
+			//编辑
+			compile(){
+				let _this = this
+
+           	 	
+           	 	let image = new Image();
+           	 	image.src = this.img ;
+
+           	 	console.log(image.src)
+
+           	 	let w = image.width;
+           	 	let h = image.height
+
+           	 	this.autoCropWidth = w-2
+            	this.autoCropHeight = h-2
+            	this.widthData = w
+           	 	this.heightData = h
+		        
+				this.exampleimg = image.src;
+				this.$store.commit('onOff')
 			},
 			descInput(){
 				var txtVal = this.input.length;
@@ -153,30 +162,28 @@ import axios from 'axios'
 				if(this.str==true){this.code=true;this.msg=""}
 		        if(this.str==false){this.code=false;this.msg="..."}
 			},
-			//进入页面获取用户输入的title
+			//进入页面获取标题和图片
 			next () {			  
 			  var _this=this
 		      let param = new FormData();
-		      //获取cookie里面的token
 		      var tokenone =sessionStorage.getItem('encryptToken');
-			  param.append('token',tokenone);
-			  //获取cookie里面的recommenid
 		      var recommend =sessionStorage.getItem('recommendId');
-			  param.append('id',recommend);   
+
+			  param.append('token',tokenone);   
+			  param.append('id',recommend);
+
 			  this.$ajax.post('query/webRecommend',param).then(function (response) { 
 			  		
-			  	if (response.data.complete=="SUCCESS") {  	
-			  		_this.input=response.data.title
+			  	if (response.data.complete=="SUCCESS") { 
 			  		if (response.data.title) {
-			  			_this.number=30-response.data.title.length
-			  		}	
+			  			_this.input=response.data.title
+			  		} 
+			  		
 			  		if (response.data.imageUrl!=null && response.data.title!="") {
+			  			let imgUrl =  response.data.fileServer+'/'+response.data.imageUrl;
 			  			global.$emit("tabtwo",true)
 			  			_this.photo=true			  
-        				_this.img =response.data.fileServer+'/'+response.data.imageUrl
-        				_this.example2.img =response.data.fileServer+'/'+response.data.imageUrl
-    			  										
-        											  			
+        				_this.img = imgUrl   											  			
 			  		}		  
 			  	}
 			  
@@ -184,31 +191,22 @@ import axios from 'axios'
 			      console.log(error);
 			  })
 			},
-			//编辑按钮点击
-			bgtrue(){
-				console.log(this.img)
-				// this.img=this.example2.img
-				this.bg=true
-			},
-			//旋转
-			rotateLeft(){
-				this.$refs.cropper2.rotateLeft()
-			},
 		    //删除确认
 		    removeto() {
 		    	this.photo=false
-		    	this.example2.img = ""
+		    	this.exampleimg = ""
 		    	this.dialogVisible=false
 		    	var _this=this
 			    let param = new FormData();
-			      //获取cookie里面的token
+
 			    var tokenone =sessionStorage.getItem('encryptToken');
-				param.append('token',tokenone);
-				  //获取cookie里面的recommenid
 			    var recommend =sessionStorage.getItem('recommendId');
+
+			    param.append('token',tokenone);
 				param.append('id',recommend);
 				param.append("longPicture",true)
 				param.append("hrizontalPicture",true)   
+
 				this.$ajax.post('delete/recommendDate',param).then(function (response) {
 					if (response.data.complete=="SUCCESS") {
 						global.$emit("tabtwo",false)
@@ -221,82 +219,93 @@ import axios from 'axios'
 		      	this.dialogVisible=false
 		    },
 		   //点击上传图片
-			update(e,num){
-				var _this=this
-			    let file = e.target.files[0];
-			    const isLt2M = file.size / 1024 / 1024 < 1;
-		        if (!isLt2M) {
-		          this.$message.error('上传图片大小不能超过 1MB!');
-		          return false
-		        }else{
-		          this.bg=true
-		          this.photo=true
-		          this.img=window.URL.createObjectURL(file);  
-		          this.example2.img=window.URL.createObjectURL(file);  
-		        }		
-		        var reader = new FileReader()
+		   update(e, num){
+		          var _this =this  
+		          var file = e.target.files[0]
+		          const isLt2M = file.size / 1024 / 1024 < 1;
+		          this.createReader(file, function (w, h) {
+		            let pictureWidth;     //图片长度
+		            let pictureHeight;    //图片高度
+		            let picturescale;     //图片长度 / 高度
+		            if ( w < 480 || h <720 ) {
+		               	_this.$message({
+						   	message: '照片像素至少要达到480x720。请上传一张更高质量的照片。您的照片像素为'+ w +'x'+ h +'',
+						    type: 'warning',
+						    duration:1500
+						});
+		               return false;
+		            } else if (!isLt2M) {
+		            	_this.$message({
+						    message: '上传图片大小不能超过 1MB!',
+						    type: 'warning',
+						    duration:1500
+						});
+		          		return false;
+		        	}else{
+		                _this.$store.commit('onOff')
+		                if (w > 600 ){
+		                  pictureWidth = 600;
+		                  pictureHeight = 800 ;
+		                  picturescale = w/h;
 
-				reader.onload = (e) => {
-					let data
-					if (typeof e.target.result === 'object') {
-						// 把Array Buffer转化为blob 如果是base64不需要
-						data = window.URL.createObjectURL(new Blob([e.target.result]))
-					} 
-					else if (num === 1) {
-						_this.example2.img = data
-						console.log(2)
-					} else {
-						console.log(3)
-						data = e.target.result
-					}
-				    reader.readAsDataURL(file)  
-				    	         
-				}
-			},
-			finishphoto(data){
-				var _this=this
-					let param = new FormData();
-					      //获取cookie里面的token
-					      var tokenone =sessionStorage.getItem('encryptToken');
-						  param.append('token',tokenone);
-						  //获取cookie里面的recommenid
-					      var recommend =sessionStorage.getItem('recommendId');
-						  param.append('id',recommend);
-						  // param.append("title",this.input)  
-						  param.append("imageFile",data) 
-						  _this.$ajax.post('create/webRecommend',param).then(function (response) {
+		                  if (picturescale < 1.5 ) {
+		                     _this.autoCropWidth = pictureWidth-2        //截图框_长度 = 图片长度
+		                     _this.autoCropHeight = pictureWidth/1.5  //截图框_高度/固定比例
+		                  }else{                    
+		                      _this.autoCropHeight = pictureHeight-2     //截图框_高度 = 图片高度
+		                      _this.autoCropWidth  = pictureHeight*1.5   //截图框_长度 = 截图框_高度*固定比例
+		                  }
 
-						  	if (response.data.complete=="SUCCESS") {
-						  		_this.example2.img = window.URL.createObjectURL(data)
-						  		_this.img = window.URL.createObjectURL(data)
-						  		_this.bg=false				  		
-						  	}
-						 })
-			},
-			//截图确认
-			finish (type) {
-			// 输出
-				if (type === 'blob') {
-					this.$refs.cropper2.getCropBlob((data) => {				
-						this.finishphoto(data)
-					})
-				}
-			},
+
+		              }
+
+		              else{
+		                  pictureWidth = w ;
+		                  pictureHeight = h ;
+		                  picturescale = w/h;
+
+		                  if (picturescale < 1.5 ) {
+		                  _this.autoCropWidth = pictureWidth-2        //截图框_长度 = 图片长度
+		                  _this.autoCropHeight = pictureWidth/1.5  //截图框_高度/固定比例
+		                  }else{
+		                      
+		                      _this.autoCropHeight = pictureHeight-2     //截图框_高度 = 图片高度
+		                      _this.autoCropWidth  = pictureHeight*1.5   //截图框_长度 = 截图框_高度*固定比例
+		                  }
+		              } 
+		            }
+		            
+		            _this.widthData =pictureWidth   
+		            _this.heightData=pictureHeight 
+		          });
+		          this.exampleimg=window.URL.createObjectURL(file)
+		    },
+		    createReader(file, whenReady) {
+		          var reader = new FileReader;
+		          reader.onload = function (evt) {
+		              var image = new Image();
+		              image.onload = function () {
+		                  var width = this.width+2;
+		                  var height = this.height+2;
+		                  if (whenReady) whenReady(width, height);
+		              };
+		              image.src = evt.target.result;
+		          };          
+		          reader.readAsDataURL(file);       
+		    },
 			//点击保存并继续
 			cover(){
 				var _this=this
-
 				//如果显示图片不等于空并且标题大于0
-				if(this.img!="" && this.input.length>0) {				
+				if(this.img!="" && this.input.length>0) {
+
 				  let param = new FormData();
-			      //获取cookie里面的token
 			      var tokenone =sessionStorage.getItem('encryptToken');
-				  param.append('token',tokenone);
-				  //获取cookie里面的recommenid
 			      var recommend =sessionStorage.getItem('recommendId');
+
+			      param.append('token',tokenone);
 				  param.append('id',recommend);
 				  param.append("title",this.input)  
-				  // param.append("imageFile",this.$refs.file.files[0]) 
 				  _this.$ajax.post('create/webRecommend',param).then(function (response) {
 				  	if (response.data.complete=="SUCCESS"){
 				  		global.$emit("tabtwo",true)
@@ -328,7 +337,9 @@ import axios from 'axios'
 	} 
 </script>
 <style scoped>
-
+.el-message{
+	top: 500px !important;
+}
 .remove{
 	z-index: 2;
 	position: absolute;
@@ -358,6 +369,16 @@ import axios from 'axios'
 }
 .smallbox{
 	display: none;
+	width:300px;
+	height:200px;
+	background:black;
+	color:white;
+	text-align:center;
+	line-height:200px;
+	border-radius:5px;
+	position:absolute;
+	cursor:pointer;
+	z-index:1;
 }
 .bigbox:hover .smallbox{
 	display:block;
@@ -440,6 +461,7 @@ import axios from 'axios'
 	}
 	/*.cover::-webkit-scrollbar {display:none}*/
 	.tishi{
+		cursor: pointer;
 		font-size: 16px;
 		margin-top:15px;
 		color:#409EFF;
@@ -522,13 +544,14 @@ import axios from 'axios'
     text-decoration: none;
     text-indent: 0;
     line-height: 40px;
+    cursor: pointer;
 }
 .file input {
     position: absolute;
     font-size: 100px;
     right: 0;
     top: 0;
-    /*opacity: 0;*/
+   cursor: pointer;
 }
 
 	.btn3{

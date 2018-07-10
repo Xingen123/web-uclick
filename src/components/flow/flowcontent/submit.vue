@@ -3,9 +3,12 @@
 		<div style="font-size: 28px;">别粗心，提交体验之前最后再检查一遍吧！</div>
 
 		 <el-button type="primary" style="margin-top:200px;width:150px;" :disabled="disabled" @click="next">提交</el-button>
+		  <!-- <button @click='$store.commit("add")'>+</button>
+		 <div>{{$store.state.isLogin}}</div> -->
 	</div>
 </template>
 <script>
+	// import store from '@/store/store'
 	export default{
 		components:{
 		},
@@ -33,10 +36,10 @@
 			  	if (response.data.complete=="SUCCESS") {
 			  		//判断用户是否填写完14个input
 			  		_this.$notify({
-		          title: '提交成功',
-		          message: '请等待审核',
-		          duration: 2000,
-		          type: 'success'
+			          title: '提交成功',
+			          message: '请等待审核',
+			          duration: 2000,
+			          type: 'success'
 			        });
 					_this.$router.push({
 			        	  path: '/index'
@@ -55,7 +58,8 @@
 			  //获取cookie里面的recommenid
 		      var recommend =sessionStorage.getItem('recommendId');
 			  param.append('id',recommend);  
-			  this.$ajax.post('query/webConvoySelected',param).then(function (response) {		
+			  this.$ajax.post('query/webConvoySelected',param).then(function (response) {
+			  
 			  	if (response.data.complete=="SUCCESS") {
 
 			  		//判断用户是否填写完14个input

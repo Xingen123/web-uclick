@@ -1,7 +1,7 @@
 <template>
     <div>
         
-          <div class="color-list">
+<!--           <div class="color-list">
         <div class="color-item"  v-for="color in colors" v-dragging="{ item: color, list: colors, group: 'color' }" :key="color.id">
               <img :src="color.sequence" alt="">            
           </div>
@@ -15,93 +15,113 @@
             <el-aside width="200px">Aside</el-aside>
             <el-main>Main</el-main>
           </el-container>
-        </el-container>
-        <input class="change"  name="file" ref="file" type="file"  accept="image/png,image/gif,image/jpeg" @change="finishphoto($event, 1)"/>
-       
+        </el-container> -->
+        <!-- <input class="change"  name="file" ref="file" type="file"  accept="image/png,image/gif,image/jpeg" @change="finishphoto($event, 1)"/> -->
+
+        <input  type="file" @change="update($event, 1)">
+        <repertoire 
+                    :bg="$store.state.isBg"                   
+                    :autoCropWidth="autoCropWidth" 
+                    :autoCropHeight="autoCropHeight" 
+                    :widthData="widthData" 
+                    :heightData="heightData" 
+                    :img="img">
+                      
+       </repertoire>
+   
     </div>
 
 </template>
 
 <script>
+import store from '@/store/store'
+import repertoire from '@/components/flow/flowcontent/repertoire'
 export default {
+    components:{
+      repertoire
+    }, 
     data () {
         return {
-			      colors: [
-                {id: '1', sequence: 'https://www.baidu.com/img/bd_logo1.png'},
-                {id: '2', sequence: 'https://fengyuanchen.github.io/cropper/images/picture.jpg'},
-                {id: '3', sequence: 'http://ofyaji162.bkt.clouddn.com/touxiang.jpg'},
-                {id: '4', sequence: 'http://ofyaji162.bkt.clouddn.com/bg1.jpg'},
-                {id: '5', sequence: 'https://o90cnn3g2.qnssl.com/0C3ABE8D05322EAC3120DDB11F9D1F72.png'},
-                {id: '6', sequence: ''}
-            ]
+            autoCropWidth:300,
+            autoCropHeight:400,
+            widthData:0,
+            heightData:0,
+            img:""
         }
     },
     methods: {
-        finishphoto(e){
-          var _this=this
-          let file = e.target.files[0];
-         
-                let param = new FormData();
 
-                param.append('token','35fa38636ae559e1a9c574054e1741a9');
-                param.append('id','95E7AD33-E0B0-4564-87B2-3EB5C9A4C10F');
-                param.append("imageFile",file) 
-              
-                // var config = {
-                //     onUploadProgress: progressEvent => {
-                //         console.log(progressEvent,12)
-                //     }
-                // }
-                console.log(param)
-                _this.$ajax.post('create/webRecommend',param).then(function (response) {
-                    console.log(response);
-                  if (response.data.complete=="SUCCESS") {
-       
+        update(e, num){
+          var _this =this  
+          var file = e.target.files[0]
+          
+          this.createReader(file, function (w, h) {
+            let pictureWidth;     //图片长度
+            let pictureHeight;    //图片高度
+            let picturescale;     //图片长度 / 高度
+            if ( w < 480 || h <720 ) {
+              alert('照片像素至少要达到480x720。请上传一张更高质量的照片。您的照片像素为'+ w +'x'+ h +' ')
+            }else{
+                _this.$store.commit('onOff')
+                if (w > 600 ){
+                  pictureWidth = 600;
+                  pictureHeight = 800 ;
+                  picturescale = w/h;
+
+                  if (picturescale < 1.5 ) {
+                     _this.autoCropWidth = pictureWidth-2        //截图框_长度 = 图片长度
+                     _this.autoCropHeight = pictureWidth/1.5  //截图框_高度/固定比例
+                  }else{                    
+                      _this.autoCropHeight = pictureHeight-2     //截图框_高度 = 图片高度
+                      _this.autoCropWidth  = pictureHeight*1.5   //截图框_长度 = 截图框_高度*固定比例
                   }
-               })
-        },
-        order(){
-           let param = new FormData();
 
-          this.$ajax.post('http://124.205.200.90/user/login',{
-            param
-          }).then(function (response) {
-                
-                console.log(response)
 
-            }).catch(function (error) {
+              }
 
-                console.log(error)
+              else{
+                  pictureWidth = w ;
+                  pictureHeight = h ;
+                  picturescale = w/h;
 
-            });
-        },
-    	register(){
-        		var _this=this  
-
-		        let param = new FormData();
-            let itemsId = this.colors.map(item =>item.id)
-		        // let a =JSON.stringify(itemsId);
-		        param.append('pictureSort',itemsId);
-				
-    				this.$ajax.post('sort/webRecommendPicture',param).then(function (response) {
-
-    					console.log(response)
-
-    				}).catch(function (error) {
-
-    					console.log(error)
-
-    				});
-		  }
+                  if (picturescale < 1.5 ) {
+                  _this.autoCropWidth = pictureWidth-2        //截图框_长度 = 图片长度
+                  _this.autoCropHeight = pictureWidth/1.5  //截图框_高度/固定比例
+                  }else{
+                      
+                      _this.autoCropHeight = pictureHeight-2     //截图框_高度 = 图片高度
+                      _this.autoCropWidth  = pictureHeight*1.5   //截图框_长度 = 截图框_高度*固定比例
+                  }
+              } 
+            }
+            
+            _this.widthData =pictureWidth   
+            _this.heightData=pictureHeight-4    
+          });
+          this.img=window.URL.createObjectURL(file)
+      },
+      createReader(file, whenReady) {
+          var reader = new FileReader;
+          reader.onload = function (evt) {
+              var image = new Image();
+              image.onload = function () {
+                  var width = this.width+2;
+                  var height = this.height+2;
+                  if (whenReady) whenReady(width, height);
+              };
+              image.src = evt.target.result;
+          };          
+          reader.readAsDataURL(file);       
+      }
     },
     //这里挺重要的，因为我们一般排序完要重新提交排序后的数据给后台保存，以便下一次安装我们所需要的顺序显示，这里的list就可以帮我们做到这一点，但是我们需要给数据添加一个uniqueId标志。然后在排序完后或者列表对应的顺序和uniqueId提交给后台，我也不知道我说的咋样。
     mounted () {
-        this.$dragging.$on('dragged', ({ value }) => {
+        // this.$dragging.$on('dragged', ({ value }) => {
 
-        })
-        this.$dragging.$on('dragend', () => {
-          this.register()
-        })
+        // })
+        // this.$dragging.$on('dragend', () => {
+        //   this.register()
+        // })
     }
 }
 </script>

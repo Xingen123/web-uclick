@@ -45,7 +45,7 @@
                     <router-link to="/flow/slogan">
                         <div>
                             <span>副标题</span>
-                            <span v-show="five" class="right"></span>
+                            <span v-show="three" class="right"></span>
                         </div>
                     </router-link>
                 </li>
@@ -53,7 +53,7 @@
                     <router-link to="/flow/mapdepot">
                         <div>
                             <span>图库</span>
-                            <span v-show="three" class="right"></span>
+                            <span v-show="four" class="right"></span>
                         </div>
                     </router-link>
                 </li>
@@ -61,7 +61,7 @@
                     <router-link to="/flow/about">
                         <div>
                             <span>介绍您自己</span>
-                            <span v-show="tenOne" class="right"></span>
+                            <span v-show="five" class="right"></span>
                         </div>
                     </router-link>
                 </li>
@@ -73,7 +73,7 @@
                         </div>
                     </router-link>
                 </li>
-                <li>
+              <!--   <li>
                     <router-link to="/flow/moment">
                         <div>
                             <span>意向时间</span>
@@ -88,64 +88,64 @@
                             <span v-show="nine" class="right"></span>
                         </div>
                     </router-link>
-                </li>
+                </li> -->
                 <li>
                     <router-link to="/flow/gather">
                         <div>
-                            <span>集合地点</span>
+                            <span>体验地点</span>
                             <span v-show="seven" class="right"></span>
                         </div>
                     </router-link>
                 </li>
-                <li>
+                <!-- <li>
                     <router-link to="/flow/experience">
                         <div>
                             <span>体验地点</span>
                             <span v-show="eight" class="right"></span>
                         </div>
                     </router-link>
-                </li>
+                </li> -->
                 <li>
                     <router-link to="/flow/require">
                         <div>
                             <span>对体验者的需求</span>
-                            <span v-show="tenTwo" class="right"></span>
+                            <span v-show="eight" class="right"></span>
                         </div>
                     </router-link>
                 </li>
-                <li>
+               <!--  <li>
                     <router-link to="/flow/peoplenum">
                         <div>
                             <span>体验人数</span>
                             <span v-show="tenThree" class="right"></span>
                         </div>
                     </router-link>
-                </li> 
+                </li>  -->
                 <li>
                     <router-link to="/flow/lastTime">
                         <div>
                             <span>最后报名时间</span>
-                            <span v-show="tenFive"  class="right"></span>
+                            <span v-show="nine"  class="right"></span>
                         </div>
                     </router-link>
                 </li>                         
-                <li>
+               <!--  <li>
                     <router-link to="/flow/remark">
                         <div>
                             <span>体验包含的独特东西</span>
                             <span v-show="ten" class="right"></span>
                         </div>
                     </router-link>
-                </li>
+                </li> -->
                 <li>
                     <router-link to="/flow/price">
                         <div>
                             <span>价格</span>
-                            <span v-show="tenFour" class="right"></span>
+                            <span v-show="ten" class="right"></span>
                         </div>
                     </router-link>
                 </li>
-                <li style="margin-bottom:50px;">
+                <li v-if="status=='INITIALIZATION'" style="margin-bottom:50px;">
                     <router-link to="/flow/submit">
                         <div>
                             <span>提交</span>
@@ -153,9 +153,9 @@
                     </router-link>
                 </li>          
                 <!-- <div class="back"></div> -->
-                <li >
+                <!-- <li >
                   
-                </li>  
+                </li>   -->
             </ul>
         </transition>
 
@@ -168,6 +168,7 @@ import global from '@/components/flow/global/global'
         },
         data(){
             return{
+                status:"",
                 listbox:{
                     isfrist_:false,
                     isplay_:false,
@@ -189,12 +190,12 @@ import global from '@/components/flow/global/global'
               seven:false,
               eight:false,
               nine:false,
-              ten:false,
-              tenOne:false,
-              tenTwo:false,
-              tenThree:false,
-              tenFour:false,
-              tenFive:false
+              ten:false
+              // tenOne:false,
+              // tenTwo:false,
+              // tenThree:false,
+              // tenFour:false,
+              // tenFive:false
             }
         },
         props: { },
@@ -248,12 +249,17 @@ import global from '@/components/flow/global/global'
               var _this=this
               let param = new FormData();
               var tokenone =sessionStorage.getItem('encryptToken');
-              param.append('token',tokenone);
+              
               var recommend =sessionStorage.getItem('recommendId');
-              param.append('id',recommend);  
-              this.$ajax.post('query/webConvoySelected',param).then(function (response) {
 
+
+              param.append('id',recommend); 
+              param.append('token',tokenone);
+
+              this.$ajax.post('query/webConvoySelected',param).then(function (response) {
+                console.log(response)
                 if (response.data.complete=="SUCCESS"){
+                    _this.status = response.data.status
                     _this.one=response.data.completeAmount[0]
                     _this.two=response.data.completeAmount[1] 
                     _this.three=response.data.completeAmount[2] 
@@ -264,11 +270,11 @@ import global from '@/components/flow/global/global'
                     _this.eight=response.data.completeAmount[7] 
                     _this.nine=response.data.completeAmount[8] 
                     _this.ten=response.data.completeAmount[9]     
-                    _this.tenOne=response.data.completeAmount[10] 
-                    _this.tenTwo=response.data.completeAmount[11] 
-                    _this.tenThree=response.data.completeAmount[12] 
-                    _this.tenFour=response.data.completeAmount[13]     
-                    _this.tenFive=response.data.completeAmount[14]   
+                    // _this.tenOne=response.data.completeAmount[10] 
+                    // _this.tenTwo=response.data.completeAmount[11] 
+                    // _this.tenThree=response.data.completeAmount[12] 
+                    // _this.tenFour=response.data.completeAmount[13]     
+                    // _this.tenFive=response.data.completeAmount[14]   
                 }
               }).catch(function (error) {
                   console.log(error);
@@ -314,21 +320,21 @@ import global from '@/components/flow/global/global'
             global.$on("tabten",function(ten) {
                _this.ten=ten
             })
-            global.$on("tabtenO",function(tenOne) {
-               _this.tenOne=tenOne
-            })
-            global.$on("tabtenT",function(tenTwo) {
-               _this.tenTwo=tenTwo
-            })
-            global.$on("tabtenTR",function(tenThree) {
-               _this.tenThree=tenThree
-            })
-            global.$on("tabtenF",function(tenFour) {
-               _this.tenFour=tenFour
-            })
-            global.$on("tabtenFive",function(tenFive) {
-               _this.tenFive=tenFive
-            })
+            // global.$on("tabtenO",function(tenOne) {
+            //    _this.tenOne=tenOne
+            // })
+            // global.$on("tabtenT",function(tenTwo) {
+            //    _this.tenTwo=tenTwo
+            // })
+            // global.$on("tabtenTR",function(tenThree) {
+            //    _this.tenThree=tenThree
+            // })
+            // global.$on("tabtenF",function(tenFour) {
+            //    _this.tenFour=tenFour
+            // })
+            // global.$on("tabtenFive",function(tenFive) {
+            //    _this.tenFive=tenFive
+            // })
            this.allState()
            this.clientWidth()
         },
@@ -361,7 +367,7 @@ import global from '@/components/flow/global/global'
         height:100%;
         position: fixed;
         left: 0;
-        z-index: 11;
+        z-index:9;
         top:61px;
         overflow:scroll;
         overflow-x:hidden;

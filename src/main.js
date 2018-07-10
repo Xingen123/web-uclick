@@ -49,7 +49,7 @@ router.beforeEach((to, from, next) => {
 	else {     
 	//进入的不是登录路由
 		if(to.meta.requiresAuth && !sessionStorage.getItem('encryptToken')) {
-			next({ path: '/login' })
+			next({ path: '/show' })
 		}else { 
 			next() //如果不需要登录验证，或者已经登录成功，则直接放行
 		}

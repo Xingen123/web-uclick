@@ -3,20 +3,20 @@
 		<div style="font-size: 28px;">添加集合地点</div>
 		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">一个易于寻找的见面地点能让体验者提前预计路线，参与者确认预订之后，我们才会分享确切的体验地址。</p>
 
-		<div style="margin-top:25px;color:#505050;">第一步：提供地址</div>
+	<!-- 	<div style="margin-top:25px;color:#505050;">第一步：提供地址</div>
 		<div style="margin-top:25px;color:#505050;">地点名称</div>
-		<el-input placeholder="办公室" style="width:500px;margin-top:25px;color:black;display:block;" v-model="form.specificAddress" ></el-input>
-		<el-input placeholder="城市" style="width:500px;margin-top:25px;color:black;" v-model="form.city" ></el-input>
+		<el-input placeholder="办公室" style="width:500px;margin-top:25px;color:black;display:block;" v-model="specificAddress" ></el-input>
+		<el-input placeholder="城市" style="width:500px;margin-top:25px;color:black;" v-model="form.city" ></el-input> -->
 		<div style="margin-top:25px;color:#505050;">街道地址</div>
 		<!-- <el-input ></el-input> -->
 
 
 		<input type="text" placeholder="请输入地址" id="suggestId" name="address_detail"   v-model="address_detail" @input="descInput" class="input_style" style="width:500px;margin-top:25px;outline:none;height:25px;background:none;border:0px;border:1px solid #dcdfe6;" :class="{'active':tive==true,'unactive':tive==false}">
 		<div style="margin-top:25px;color:#505050;">公寓、 套房、 大厦 (选填)</div>
-		<el-input placeholder="街道"  style="width:500px;margin-top:25px;color:black;" v-model="form.specificAddress"></el-input>
+		<el-input placeholder="街道"  style="width:500px;margin-top:25px;color:black;" v-model="specificAddress"></el-input>
 
 		<div class="box">
-			<div style="margin-top:25px;color:#505050;">第二步：在地图上标记</div>	
+			<!-- <div style="margin-top:25px;color:#505050;">第二步：在地图上标记</div>	 -->
 			<div style="margin-top:25px;color:#505050;">地图针<br>拖动地图查看位置</div>
 			<div id="allmap"></div>
 		</div>
@@ -34,10 +34,7 @@ import global from '@/components/flow/global/global'
 			return{
 				tive:false,
 				disabled:true,
-				form:{
-					city:"",
-					specificAddress:""//办公室地址
-				},
+				specificAddress:"",//办公室地址
 				address_detail:null,//定位地址
                	userlocation:{lng:116.404,lat:39.915}
 			}
@@ -48,8 +45,8 @@ import global from '@/components/flow/global/global'
 		},
 		methods:{
 			descInput(){  
-				// var txtVal = this.address_detail.length;
- 				if (this.address_detail.length>0) {
+				var txtVal = this.address_detail.length;
+ 				if (txtVal>0) {
 					this.disabled=false
 				}else{
 					this.disabled=true
@@ -59,12 +56,12 @@ import global from '@/components/flow/global/global'
 			gather(){
 			  var _this=this
 		      let param = new FormData();
-		      //获取cookie里面的token
 		      var tokenone =sessionStorage.getItem('encryptToken');
-			  param.append('token',tokenone);
-			  //获取cookie里面的recommendetailId
  			  var detailId=sessionStorage.getItem('detailId');   
+
+ 			  param.append('token',tokenone);
  			  param.append('id',detailId);  
+ 			  
 			  this.$ajax.post('query/webRecommendDetail',param).then(function (response) {
 			  	if (response.data.complete=="SUCCESS") {
 			  		if (response.data.addressDetail!=null){
@@ -74,11 +71,8 @@ import global from '@/components/flow/global/global'
 			  			_this.userlocation.lng=response.data.longitude
 			  			_this.userlocation.lat=response.data.latitude  	
 			  		}
-			  		if(response.data.city!="undefined"){
-			  			_this.form.city=response.data.city
-			  		}
 			  		if(response.data.specificAddress!="undefined") {
-			  			_this.form.specificAddress=response.data.specificAddress
+			  			_this.specificAddress=response.data.specificAddress
 			  		}		
 			  	}
 			  }).catch(function (error) {
@@ -91,22 +85,21 @@ import global from '@/components/flow/global/global'
 			      let param = new FormData();
 			      //获取cookie里面的token
 			      var tokenone =sessionStorage.getItem('encryptToken');
-				  param.append('token',tokenone);
-				  //获取cookie里面的recommenid
 			      var detailId=sessionStorage.getItem('detailId');
+
 				  param.append('id',detailId);
-				  param.append('city',this.form.city);
-				  param.append('specificAddress',this.form.specificAddress);
+				  param.append('token',tokenone);
+				  param.append('specificAddress',this.specificAddress);
 				  param.append('addressDetail',this.address_detail);
 				  param.append('longitude',this.userlocation.lng);
 				  param.append('latitude',this.userlocation.lat);
-				  console.log(this.form.city,this.form.specificAddress,this.address_detail)
+
 				  this.$ajax.post('create/webRecommendDetail',param).then(function (response) {
 
 				  	if (response.data.complete=="SUCCESS") {
 				  		global.$emit("tabseven",true)
 				  		_this.$router.push({
-			       			 path: '/flow/experience'
+			       			 path: '/flow/require'
 			      		})
 				  	}
 				  }).catch(function (error) {
@@ -115,7 +108,7 @@ import global from '@/components/flow/global/global'
 			},
 			//保存标题
 			next(){
-				console.log(this.form.specificAddress)
+				
 				// alert(this.userlocation.lat)
 				if (this.tive==true) {
 					this.mapgo()	
@@ -139,9 +132,6 @@ import global from '@/components/flow/global/global'
                    // 创建Map实例
                    var map = new BMap.Map("allmap");
                    // 初始化地图,设置中心点坐标，
-                   // var lng =sessionStorage.getItem('lng');
-		    	   // var lat =sessionStorage.getItem('lat');
-		    	   // console.log(th.userlocation.lng)
 		    	   var point = new BMap.Point(th.userlocation.lng,th.userlocation.lat); // 创建点坐标，汉得公司的经纬度坐标
                    map.centerAndZoom(point, 15);
                    map.enableScrollWheelZoom();
