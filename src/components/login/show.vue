@@ -1,14 +1,14 @@
 <template>	
 	<div class="show">
-
-		<div class="boxshow ">
-			<img src="../../../static/img/1.png">
-	        <div class="logoimg"></div>
+		<div class="headnav" :style="{background:colorbg}">
+			<div class="logoimg"></div>
 	        <div style="position: absolute;top: 10px;right:5%;">
 	        	<div class="loginshow" style="float:left;margin-right:10px;"  @click="login">登录</div>
 	       	 	<div class="resetshow" style="float:left;" @click="register">注册</div>
 	        </div>
-
+		</div>
+		<div class="boxshow ">
+			<img src="../../../static/img/1.png">
 	        <div class="one" @click="register">成为体验达人</div>
 	    </div>
 	    <div class="boxshow">
@@ -36,7 +36,7 @@
 	    	<img src="../../../static/img/6.png">
 	    </div>
 	    <div class="footer" >
-	    	<div class="ask" style="margin-bottom:150px;">
+	    	<div class="ask" style="margin-bottom:50px;">
 	    		<div  style="margin-top:25px;font-size:50px;margin-left: 15%;font-weight: bold;" v-text="ask"></div>
 	    		<div class="askbox"   v-for="(item,index) in askcontent" :key="index">
 	    			<div >{{item.title}}</div>
@@ -46,16 +46,18 @@
 	    	</div>
 
 	    </div>
+	    <Footer></Footer>
 	</div>
 </template>
 <script>
-
+import Footer from "@/components/footer/footer"
 	export default{
 		components:{
-
+			Footer
 		},
 		data(){
 			return{
+				colorbg:"transparent",
 				title:"加入体验达人社区",
 				p1:"体验达人社区不仅仅是达人交流的平台，这里还包括水彩画师、音乐编导、传统手艺人等各种有意思的达人和体验者。",
 				p2:"达人用独一无二的体验带体验者感受一生一次的体验，体验者用真诚友好的反馈帮助达人建立更优化的体验。",
@@ -111,14 +113,22 @@
 		      this.$router.push({
 		        path: '/login'
 		      })
-			}	
+			},
+			handleScroll () {
+			  var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+			  if (scrollTop>60) {
+			  		this.colorbg = 'white'
+			  }else{
+			  		this.colorbg = "transparent"
+			  }
+			}
 		},
 		computed:{
 
 		},
 		created () {},
 		mounted () {
-			
+			 window.addEventListener('scroll', this.handleScroll)
 		},
 	  	destroyed () {}
 			
@@ -133,6 +143,7 @@
     margin: 0 auto;height: 340px;text-align: center;color: rgb(72,72,72);}
 	.content>div{font-size:50px;font-weight: bold;margin-top: 40px;}
 	.content>p{font-size:25px;line-height: 60px;}
+	.headnav{width: 100%; position: fixed;z-index: 10;height: 60px;background-color: white;padding-bottom: 10px;transition: all .5s;}
     .logoimg{width: 167px; height: 50px;background: url(../../../static/img/logo.png) no-repeat;background-size:100% 100%;position: absolute;top: 10px;left:5%;cursor:pointer;}
     .loginshow{width: 98px;height: 48px;line-height: 48px;text-align: center;color: white;background: rgba(0,0,0,0.5);border: 1px solid white; border-radius: 5px;font-size: 24px;font-size:16px;cursor:pointer;}
     .resetshow{width: 100px;height: 50px;line-height: 50px;text-align: center;color: white;background: rgb(0,162,233);border-radius: 5px;font-size: 16px;cursor:pointer;}
@@ -140,7 +151,7 @@
     left: 13%;cursor:pointer;}
 	.two{width:150px;height: 50px;line-height: 50px;text-align: center;color: white;background: rgb(0,162,233);border-radius: 5px;font-size: 18px;position: absolute;bottom:30%;left:45%;cursor:pointer;}
 	.three{width:150px;height: 50px;line-height: 50px;text-align: center;color: white;background: rgb(0,162,233);border-radius: 5px;font-size: 18px;position: absolute;bottom:20%;left:45%;cursor:pointer;}
-	.footer{width:100%;height:600px;color: rgb(72,72,72);}
+	.footer{width:100%;color: rgb(72,72,72);}
 	.askbox{margin-left: 15%;margin-right: 15%;margin-top: 40px;}
 	.askbox>div{font-size: 20px;font-weight: bold;}
 	.askbox>p{font-size: 16px;}

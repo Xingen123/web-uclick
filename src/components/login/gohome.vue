@@ -1,6 +1,7 @@
 <template>	
 	<div class="gohome">
-		<a href="http://wb.clicksdiy.com/#/show" class="go">前往体验官网 >></a>		
+		<div class="go">官网链接：http://wb.clicksdiy.com</div>
+		<div class="g">(长按复制)</div>		
 	</div>
 </template>
 <script>
@@ -36,7 +37,7 @@
 .gohome{
     width:100%;
     height:100%;
-    background:url(img/smallbg.png) no-repeat ;
+    background:url(img/smallbg.jpg) no-repeat ;
     overflow: hidden;
     background-size:100%;
     position:absolute;
@@ -50,6 +51,15 @@
 	display: block;
 	margin-left:8%;
 	margin-top:280px;
+	font-size: 14px;
+	text-decoration: none;
+	color: white;
+}
+.g{
+
+	display: block;
+	margin-left:8%;
+	margin-top:10px;
 	font-size: 14px;
 	text-decoration: none;
 	color: white;

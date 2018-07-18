@@ -81,21 +81,24 @@ import global from '@/components/flow/global/global'
 			  })
 			},
 			cover(){
-			  var _this=this
+			  let _this=this
 		      let param = new FormData();
 		      //获取cookie里面的token
-		      var tokenone =sessionStorage.getItem('encryptToken');
+		      let tokenone =sessionStorage.getItem('encryptToken');
 			  param.append('token',tokenone);
 			  //获取cookie里面的recommendetailId
-		      var detailId=sessionStorage.getItem('detailId');
+		      let detailId=sessionStorage.getItem('detailId');
+		      let status=sessionStorage.getItem('status');
 			  param.append('id',detailId);
 			  param.append('price',this.input);
 			  this.$ajax.post('create/webRecommendDetail',param).then(function (response) {			
 			  	if (response.data.complete=="SUCCESS") {
 			  		global.$emit("tabten",true)
-			  	_this.$router.push({
-			        path: '/flow/submit'
-			    })
+			  		if (status == "INITIALIZATION") {
+					  	_this.$router.push({
+					        path: '/flow/submit'
+					    })
+					}
 			  	}
 			  	
 			  }).catch(function (error) {

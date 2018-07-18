@@ -9,7 +9,7 @@
 
 			<div style="margin-top:50px;">
 				<span style="width:100px;display:inline-block;">头像</span>
-				<img  class="imghead" :src="head" alt="">
+				<img  class="imghead" :src="exampleimg" alt="">
 				<a  class="upload">
 				添加头像					
     				<input class="change"  name="file" ref="file" type="file"  accept="image/png,image/gif,image/jpeg" @change="update"/>
@@ -63,18 +63,30 @@
 
 			<el-button type="primary" style="width:100px;margin-top:50px;display:block;" @click="submit">提交</el-button>
 		</div>
-
+		<!-- 截图区域 -->
+		<repertoire 
+					 v-on:imgfun="imgfun"
+                    :bg="$store.state.isBg"                   
+                    :autoCropWidth="autoCropWidth" 
+                    :autoCropHeight="autoCropHeight" 
+                    :widthData="widthData" 
+                    :heightData="heightData" 
+                    :img="exampleimg">
+                      
+       </repertoire>
 	</div>
 </template>
 <script>
+	import store from '@/store/store'
+	import repertoire from '@/components/flow/flowcontent/repertoire'
 	import Header from "@/components/head/head"
 	export default{
 		components:{
-			"head-er":Header
+			"head-er":Header,
+			repertoire
 		},
 		data(){
 			return{
-				head:"",
 				name:"",
 				age:"",
 				profession:"",
@@ -84,7 +96,14 @@
 				yz:"",
 				dynamicTags: [],
 		        inputVisible: false,
-		        inputValue: ''
+		        inputValue: '',
+		        headfile:"",
+				//	头像截图控制
+				autoCropWidth:0,
+            	autoCropHeight:0,
+            	widthData:0,
+           	 	heightData:0,
+				exampleimg:''	        
 			}
 		},
 		props: {},
@@ -92,6 +111,11 @@
 
 		},
 		methods:{
+			imgfun(data){
+				this.$store.commit('onOff')
+				this.exampleimg = window.URL.createObjectURL(data);
+				this.headfile=data
+			},
 			descInput(){
 				if (this.age.length>3) {
 					this.age=""
@@ -154,9 +178,69 @@
 			update(e){
 				var _this=this
 			    let file = e.target.files[0];
-			     this.head=window.URL.createObjectURL(file);  
-			                      
+			    this.exampleimg=window.URL.createObjectURL(file);  			     
+			    this.$store.commit('onOff')   
+			    this.createReader(file, function (w, h) {
+			    	_this.adaptation(w,h)
+		        })          
 			},
+			adaptation(x,y){
+
+				 let _this = this;
+				
+			     let dolW = window.innerWidth / 3 ;  // 窗口的宽 
+			     let dolH = window.innerHeight- 40;	// 窗口的高
+
+			     var XoY = x/y;
+
+			     
+
+				if (XoY > 1 && x >= dolW) {
+					_this.widthData  = dolW; 
+				    _this.heightData = dolW/XoY;
+				    _this.autoCropWidth  = dolW/XoY - 2;
+				    _this.autoCropHeight = dolW/XoY - 2;
+				    console.log(dolW,dolH,'框的宽：'+ dolW ,'框的高：'+ dolW/XoY,'图片的宽：'+x,'图片的高：'+y,'图片的宽高比：'+ x/y)
+				}else if (XoY > 1 && x < dolW){
+					_this.widthData  = x; 
+				    _this.heightData = y;
+				    _this.autoCropWidth  = y - 2;
+				    _this.autoCropHeight = y - 2;
+				}
+
+				// if(XoY < 1 && y >= dolH){
+				// 	_this.widthData  = dolW*XoY; 
+				//     _this.heightData = dolH;
+				//     _this.autoCropWidth  = dolW*XoY;
+				//     _this.autoCropHeight = dolW*XoY;
+				// }else if (XoY < 1 && y < dolH){
+				// 	_this.widthData  = x; 
+				//     _this.heightData = y;
+				//     _this.autoCropWidth  = X;
+				//     _this.autoCropHeight = X;
+				// }
+
+				// else{
+				// 	_this.widthData  = dolH; 
+				//     _this.heightData = dolH;
+				//     _this.autoCropWidth  = dolH;
+				//     _this.autoCropHeight = dolH;
+				// }
+
+			},
+			createReader(file, whenReady) {
+		          var reader = new FileReader;
+		          reader.onload = function (evt) {
+		              var image = new Image();
+		              image.onload = function () {
+		                  var width = this.width+2;
+		                  var height = this.height+2;
+		                  if (whenReady) whenReady(width, height);
+		              };
+		              image.src = evt.target.result;
+		          };          
+		          reader.readAsDataURL(file);       
+		    },
 			//获取用户资料
 			personage(){
 			  var _this=this
@@ -170,7 +254,7 @@
 			  		_this.myself=response.data.title
 			  		_this.textarea=response.data.content
 			  		_this.dynamicTags=response.data.relateTitle
-			  		_this.head=response.data.fileServer+"/"+response.data.weedfsId
+			  		_this.exampleimg=response.data.fileServer+"/"+response.data.weedfsId
 			  		_this.profession=response.data.job
 			  		_this.age=response.data.age
 			  		if (response.data.cardFront==null && response.data.cardBack==null) {
@@ -185,14 +269,13 @@
 			},
 			submit(){
 			  var _this=this
-			  var headimg = this.$refs.file.files[0]
 		      let param = new FormData();
 		      var tokenone =sessionStorage.getItem('encryptToken');
 			  param.append('token',tokenone);
 			  param.append('name',this.name);//姓名
 			  param.append('age',this.age);//年龄
 			  param.append('job',this.profession);//职业
-			  param.append('nextImageFile',headimg);//头像
+			  param.append('nextImageFile',this.headfile);//头像
 			  param.append('title',this.myself);//个人介绍
 			  param.append('content',this.textarea);//体验传递什么			  
 			  param.append('relateTitle',this.dynamicTags);//标签

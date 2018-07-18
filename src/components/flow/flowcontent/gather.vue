@@ -1,18 +1,23 @@
 <template>	
 	<div class="gather">
-		<div style="font-size: 28px;">添加集合地点</div>
-		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">一个易于寻找的见面地点能让体验者提前预计路线，参与者确认预订之后，我们才会分享确切的体验地址。</p>
+		<div style="font-size: 28px;">添加体验地点</div>
+		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">告诉大家体验地点在哪里，让体验者提前了解情况、查找路线，更好地为
+体验做准备。</p>
 
 	<!-- 	<div style="margin-top:25px;color:#505050;">第一步：提供地址</div>
 		<div style="margin-top:25px;color:#505050;">地点名称</div>
 		<el-input placeholder="办公室" style="width:500px;margin-top:25px;color:black;display:block;" v-model="specificAddress" ></el-input>
 		<el-input placeholder="城市" style="width:500px;margin-top:25px;color:black;" v-model="form.city" ></el-input> -->
-		<div style="margin-top:25px;color:#505050;">街道地址</div>
+		<div style="margin-top:25px;color:#505050;">详细地址</div>
 		<!-- <el-input ></el-input> -->
 
 
-		<input type="text" placeholder="请输入地址" id="suggestId" name="address_detail"   v-model="address_detail" @input="descInput" class="input_style" style="width:500px;margin-top:25px;outline:none;height:25px;background:none;border:0px;border:1px solid #dcdfe6;" :class="{'active':tive==true,'unactive':tive==false}">
-		<div style="margin-top:25px;color:#505050;">公寓、 套房、 大厦 (选填)</div>
+		<input type="text" placeholder="请输入地址" id="suggestId" name="address_detail"   v-model="address_detail" @input="descInput" class="input_style" style="width: 465px;
+    border-radius: 5px;padding:0 15px; margin-top:25px;outline:none;height:40px;background:none;border:0px;border:1px solid #dcdfe6;" :class="{'active':tive==true,'unactive':tive==false}">
+		<div style="margin-top:25px;color:#505050;">地点备注</div>
+		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">如果您的体验地址不太好找，可以告诉它们一些找到的小技巧，如“在一家
+咖啡馆对面”；您也可以在这里设定一个易于找到的集合地点，然后带领大家一起
+到体验地点。</p>
 		<el-input placeholder="街道"  style="width:500px;margin-top:25px;color:black;" v-model="specificAddress"></el-input>
 
 		<div class="box">

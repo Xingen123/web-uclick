@@ -1,26 +1,28 @@
 <template>	
 	<div class="cover">
 		<div style="font-size: 28px;">体验封面</div>
-		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">清晰且独特的封面可以帮助您吸引更多的朋友，以下一些建议能帮助您获得良好的第一印象。</p>
+		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">清晰且独特的封面可以帮助您吸引更多的朋友，以下一些建议能帮助您为创造良好的第一印象。</p>
 		<p class="tishi"  @click="fun">提示和实列 {{msg}}</p>
 		<div v-show="code" class="box">
 			<div class="small">
 				<div class="right"></span>选择与标题描述一致的图片</div>
 				<div class="right"></span>图片尺寸比例为3:2，大小需小于1M</div>
 				<div class="right"></span>图片以人物为主，人物场景图片最佳</div>
-				<div class="right"></span>选择姿势自然的体验图片</div>
+				<div class="right"></span>面带笑容的照片是最佳的社交利器</div>
 			</div>
 			<div class="smalltwo">
 				<div class="not"></span>不要使用闪光灯或太厚重的滤镜</div>
 				<div class="not"></span>请勿上传模糊或失真的照片</div>
 				<div class="not"></span>为保证视觉效果，尽量不要使用内容过于拥挤的图片</div>
+				<div class="not"></span>照片主体不要残缺</div>
 				<div class="not"></span>图片主题不可突出儿童、标识、酒类或裸体</div>
 			</div>
 		</div>
 		<!-- 标题 -->
 		<div style="margin-top:60px;font-size: 20px;">体验标题</div>
-		<p style="margin-top:5px;color:#505050;">一个能吸引更多目光的标题应当简介清晰且描述性强，以第一人称为主会更佳亲切哦。</p>
-		<el-input v-model="input" @input="descInput" placeholder="尚珈丞 | 在网红咖啡店拍出最时尚的你" :maxlength="30" style="margin-top:20px;width:500px;"></el-input>
+		<p style="margin-top:5px;color:#505050;">一个能吸引更多目光的标题应当简介清晰且描述性强，标题中尽量含有明确的动词。
+<br>例如：去童话般四层玻璃楼房，瓜分京城超大杯酸奶</p>
+		<el-input v-model="input" @input="descInput" :maxlength="30" style="margin-top:20px;width:500px;"></el-input>
 		<p  style="line-height:40px;">最多30个字</p>
 		<div style="margin-top:60px;font-size: 20px;">封面照片</div>
 		<!-- 图片 -->
@@ -131,15 +133,15 @@ import axios from 'axios'
            	 	let image = new Image();
            	 	image.src = this.img ;
 
-           	 	console.log(image.src)
+        	
 
            	 	let w = image.width;
            	 	let h = image.height
-
-           	 	this.autoCropWidth = w-2
-            	this.autoCropHeight = h-2
-            	this.widthData = w
-           	 	this.heightData = h
+           	 	
+           	 	this.autoCropWidth = 600-2
+            	this.autoCropHeight = 400-2
+            	this.widthData = 600
+           	 	this.heightData = 400
 		        
 				this.exampleimg = image.src;
 				this.$store.commit('onOff')
@@ -227,7 +229,7 @@ import axios from 'axios'
 		            let pictureWidth;     //图片长度
 		            let pictureHeight;    //图片高度
 		            let picturescale;     //图片长度 / 高度
-		            if ( w < 480 || h <720 ) {
+		            if ( w < 240 || h <360 ) {
 		               	_this.$message({
 						   	message: '照片像素至少要达到480x720。请上传一张更高质量的照片。您的照片像素为'+ w +'x'+ h +'',
 						    type: 'warning',
@@ -243,41 +245,62 @@ import axios from 'axios'
 		          		return false;
 		        	}else{
 		                _this.$store.commit('onOff')
-		                if (w > 600 ){
-		                  pictureWidth = 600;
-		                  pictureHeight = 800 ;
+						if (w > 900 ){	
+		                          	
+		                	picturescale = w/h;
+	 
+			                if (picturescale < 1.51 && picturescale > 1.49) {
+			                	
+				                _this.widthData = 900   
+				            	_this.heightData = 600	
+				                _this.autoCropWidth =  900-2        //截图框_长度 = 图片长度
+				                _this.autoCropHeight = 600-2  //截图框_高度/固定比例
+			                }else if(picturescale < 1.5){
+			                	 
+		                  		_this.widthData = 600*picturescale   
+				           		_this.heightData = 600	
+				           		_this.autoCropWidth =  600*picturescale-2     //截图框_长度 = 图片长度
+				          		_this.autoCropHeight = 600*picturescale/1.5  //截图框_高度/固定比例
+			                }else if(picturescale > 2){
+			                	 
+		                  		_this.widthData = 900   
+				           		_this.heightData = 900/picturescale
+				           		_this.autoCropWidth =   900/picturescale*1.5    //截图框_长度 = 图片长度
+				          		_this.autoCropHeight = 900/picturescale-2  //截图框_高度/固定比例
+			                }
+			                else{
+			                	 
+			                	_this.widthData =  600*picturescale   //容器的宽
+			            		_this.heightData =  600      //容器的高
+			            		
+			               		_this.autoCropWidth =  200-2
+			                	_this.autoCropHeight = 300-2
+			                  }
+			                 
+		                }else{	
+
 		                  picturescale = w/h;
+		                  if (picturescale < 1.51 && picturescale > 1.49) {
+			                
+				                _this.widthData = w   
+				            	_this.heightData = h	
+				                _this.autoCropWidth =  w - 2       //截图框_长度 = 图片长度
+				                _this.autoCropHeight = h - 2//截图框_高度/固定比例
+			                }else if (picturescale < 1.5 ) {
+		                  	  
+		                  		_this.widthData = 600*picturescale   
+				           		_this.heightData = 600	
+				           		_this.autoCropWidth =  600*picturescale-2     //截图框_长度 = 图片长度
+				          		_this.autoCropHeight = 600*picturescale/1.5  //截图框_高度/固定比例
+		                  }else{ 
 
-		                  if (picturescale < 1.5 ) {
-		                     _this.autoCropWidth = pictureWidth-2        //截图框_长度 = 图片长度
-		                     _this.autoCropHeight = pictureWidth/1.5  //截图框_高度/固定比例
-		                  }else{                    
-		                      _this.autoCropHeight = pictureHeight-2     //截图框_高度 = 图片高度
-		                      _this.autoCropWidth  = pictureHeight*1.5   //截图框_长度 = 截图框_高度*固定比例
+		                     	_this.widthData = w   
+				            	_this.heightData = h 
 		                  }
+		              	} 	
 
-
-		              }
-
-		              else{
-		                  pictureWidth = w ;
-		                  pictureHeight = h ;
-		                  picturescale = w/h;
-
-		                  if (picturescale < 1.5 ) {
-		                  _this.autoCropWidth = pictureWidth-2        //截图框_长度 = 图片长度
-		                  _this.autoCropHeight = pictureWidth/1.5  //截图框_高度/固定比例
-		                  }else{
-		                      
-		                      _this.autoCropHeight = pictureHeight-2     //截图框_高度 = 图片高度
-		                      _this.autoCropWidth  = pictureHeight*1.5   //截图框_长度 = 截图框_高度*固定比例
-		                  }
-		              } 
-		            }
-		            
-		            _this.widthData =pictureWidth   
-		            _this.heightData=pictureHeight 
-		          });
+		            }     
+		        })      
 		          this.exampleimg=window.URL.createObjectURL(file)
 		    },
 		    createReader(file, whenReady) {

@@ -1,6 +1,6 @@
 <template>	
 	<div class="require">
-		<div style="font-size: 28px;">您对体验者有哪些特殊需要？</div>
+		<div style="font-size: 28px;">您对体验者有哪些特殊要求？</div>
 		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">预定此次体验的体验者可能会为他人预定名额，为保证这个体验的安全，请您添加此次体验参与者的需求。例如年龄、技能水平、证书证明或需自带物品等需求。</p>
 		<div class="age">
 			<div style="font-size:18px;">体验最多参与人数</div>
@@ -11,7 +11,7 @@
 			<div style="font-size:18px;">其他要求(选填)</div>
 			<el-input v-model="exet" type="textarea"
   :rows="5"
-  placeholder="例：记得穿你最好看的衣服来。" style="margin-top:10px;width:500px;" :maxlength="300"  @input="descInput"></el-input>
+  placeholder="例：为保障您的安全，登山体验需体验者穿着登山装和运动鞋。" style="margin-top:10px;width:500px;" :maxlength="300"  @input="descInput"></el-input>
 		</div>
 		<p  style="line-height:40px;">最多300个字</p>
 		<el-button type="primary " plain style="margin-top:50px;width:120px;" :disabled="disabled" @click="sort">下一步</el-button>

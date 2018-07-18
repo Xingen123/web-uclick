@@ -47,7 +47,7 @@ import store from '@/store/store'
 					autoCrop: true,
 					fixedBox: true,
 					canScale:false,
-					canMove:false
+					canMove:true
 				}
 			}
 		},
@@ -190,7 +190,7 @@ import store from '@/store/store'
 	outline:none;
 	border:none;
 	position: absolute;
-	top: 650px;
+	bottom: 100px;
 	left: 100px;
 }
 .btn2{
@@ -204,7 +204,7 @@ import store from '@/store/store'
 	border-radius: 5px;
 	border:2px solid white;
 	position: absolute;
-	top:650px;
+	bottom: 100px;
 	left: 210px;
 }
 .btn3{

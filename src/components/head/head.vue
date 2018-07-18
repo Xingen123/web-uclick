@@ -3,7 +3,7 @@
 		<div class="header">
 
 			<div class="logo" @click="$router.push({
-		        	path: '/home'
+		        	path: '/index'
 		     	})"></div>
 			<ul class="link">
 				<li >
@@ -13,11 +13,11 @@
 				</li>
 				<li >
 					<router-link to="/question">
-						常见问题
+						白皮书
 					</router-link>
 				</li>
 				<li>
-					<router-link to="/self">
+					<router-link to="/home">
                       个人信息
                     </router-link>
 				</li>
@@ -197,6 +197,9 @@ z-index: 12;
 		cursor:pointer;
 		padding-bottom: 3px;
 	}
+	.link{
+		overflow: hidden;
+	}
 	.link>li{
 		float: left;
 		margin-left: 40px;
@@ -246,9 +249,9 @@ z-index: 12;
 	}
 	@media screen and (max-width:600px) {
     .logo {
-       width:35%;
-       background-size:100% 100%;
-	   background-position: 0px;
+      /*/* */
+       /*background-size:100% 100%;*/
+	   /*background-position: 0px;*/
     }
 	.headimg{
 		right:10px;

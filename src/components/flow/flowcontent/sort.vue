@@ -1,7 +1,7 @@
 <template>	
 	<div class="sort">
 		<div class="sortp" style="font-size: 28px;">您提供的体验是什么类型的？</div>
-		<p  class="text">一个清晰的体验类别可以帮助您交到更合拍的朋友。如果您的体验同时也属于其他类别，便请再添加一个类别。</p>
+		<p  class="text">一个清晰明确的体验类别，可以让潜在的体验者更加快捷地找到您，也有助于您交到更合拍的朋友。</p>
 		<el-select v-model="value" placeholder="请选择" class="sortinput"  v-on:input="inputFunc">
 	    <el-option
 	      v-for="item in options"

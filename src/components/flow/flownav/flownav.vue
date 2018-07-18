@@ -52,7 +52,7 @@
                 <li>
                     <router-link to="/flow/mapdepot">
                         <div>
-                            <span>图库</span>
+                            <span>视频和图片</span>
                             <span v-show="four" class="right"></span>
                         </div>
                     </router-link>
@@ -257,8 +257,9 @@ import global from '@/components/flow/global/global'
               param.append('token',tokenone);
 
               this.$ajax.post('query/webConvoySelected',param).then(function (response) {
-                console.log(response)
+               
                 if (response.data.complete=="SUCCESS"){
+                    sessionStorage.setItem('status',response.data.status)
                     _this.status = response.data.status
                     _this.one=response.data.completeAmount[0]
                     _this.two=response.data.completeAmount[1] 

@@ -1,13 +1,10 @@
 <template>	
 	<div class="about">
 		<div style="font-size: 28px;">一段真诚的话介绍您自己</div>
-		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">用一段能够表达您性格的语言来介绍一下您自己，这是您与体验者的第一次正面沟通。告诉大家为何您是开展此次体验的最佳人选，有趣的个性和真诚的语言能让体验者更愿意与您交朋友。
+		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">用流畅的语言介绍您自己，告诉大家您的成长经历、性格、兴趣爱好、技能特长等等，说明为何您是开展此次体验的最佳人选。有趣的个性和真诚的语言能让人们更愿意参加您的体验，与有意思的您交朋友。
 </p>
 		<el-input type="textarea"
-  :rows="8"  placeholder="例：Hello，我是尚珈丞，一家甲方公司的高管。Work-Life balance是我们“斜杠青年”的目标，带你看看我的标签：type A工作狂/北京网红店收割机可能是最年轻副总裁/美国运动委员会CPT/兼职时博/业余摄影师。
-
-主业之余我还是一名时尚博主，有大量拍摄需求，于是想到了在咖啡店拍照的方式，也因此收割了北京80%以上的“网红店”，甚至知道每家店的哪个座位能拍出时尚大片。
-……
+  :rows="8"  placeholder="例：Hi，我是花椒。很多人问我为什么叫花椒，因为喜欢吃辣吗？因为是四川人吗？NoNoNo，其实是我几年前看到一本书，讲了花椒与辣椒口感的区别，花椒是麻的，带来的味觉更神秘更让人记忆深刻，所以我就叫花椒。我的好奇心很强，喜欢学习新鲜的东西，也喜欢探秘猎奇的事物，所以我对书籍、厨艺、健身、旅行、摄影、电影、搭配都了解一些……
 " style="margin-top:50px;width:500px;font-size:20px;" v-model="input"  :maxlength="1500"  @input="descInput"></el-input>
 		<!-- <p  style="line-height:40px;">还剩{{number}}个字</p> -->
 

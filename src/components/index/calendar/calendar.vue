@@ -203,11 +203,11 @@
 				var sRDate = new Date(sArr[0], sArr[1], sArr[2]);
 				var eRDate = new Date(eArr[0], eArr[1], eArr[2]);
 				var result = (eRDate-sRDate)/(24*60*60*1000);
-			 if (result>2) {
+			 // if (result>2) {
 			 	this.add()
-			 }else{
-			 	this.$message.error('请选择当前日期3天后的时间');
-			 }
+			 // }else{
+			 	// this.$message.error('请选择当前日期3天后的时间');
+			 // }
 			  
 			},
 			//查询添加的时间

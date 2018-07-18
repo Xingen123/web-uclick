@@ -1,20 +1,29 @@
 <template>	
 	<div class="mapdepot">
-		<div style="font-size: 28px;">添加更多图片</div>
-		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">根据数据显示，配有6张以上图片的体验往往更受欢迎。去添加更多图片让体验获得更多预定吧！</p>		
+		<div style="font-size: 28px;">用视频和图片描绘您的体验</div>
+		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">数据证明，通过视频或更多图片展现您的体验内容，将会获得更高的人气。快来添加精彩的视频和图片，来获得更多预定吧！</p>		
 		<!-- 提示 -->
 		<p class="tishi"  @click="fun">更多解释{{msg}}</p>
 		<div v-show="code" class="box">
 			<div class="small">
-				<div class="right"></span>选择与标题描述一致的图片</div>
-				<div class="right"></span>图片尺寸比例为3:4，大小需小于500KB</div>
-				<div class="right"></span>图片以人物为主，人物场景图片最佳</div>
-				<div class="right"></span>选择姿势自然的体验图片</div>
+				<div class="right"></span>视频时长1分钟之内，大小不超过10MB</div>
+				<div class="right"></span>视频比例为3:4</div>
+				<div class="right"></span>视频内容可辨别，最好同时展现达人与体验内容</div>
+				<div class="right"></span>视频可添加配乐，让画面更有感染力</div>
+				<div class="right"></span>上传与体验相关的图片</div>
+				<div class="right"></span>图片尺寸比例为3:4，大小需小于1M</div>
+				<div class="right"></span>图片以人物为主，人物+场景图片最佳</div>
+				<div class="right"></span>画面轻松自然，更能让人产生好感</div>
 			</div>
 			<div class="smalltwo">
-				<div class="not"></span>不要使用闪光灯或太厚重的滤镜</div>
-				<div class="not"></span>请勿上传模糊或失真的照片</div>
-				<div class="not"></span>为保证视觉效果，尽量不要使用内容过于拥挤的图片</div>
+				<div class="not"></span>视频画面太暗，内容不可辨</div>
+				<div class="not"></span>视频内容主体显示不全</div>
+				<div class="not"></span>视频运用了重度滤镜或夸张的特效</div>
+				<div class="not"></span>视频中含有裸露的人体元素</div>
+				<div class="not"></span>视频中含有其它违反Befriend体验价值观的内容</div>
+				<div class="not"></span>照片模糊或失真</div>
+				<div class="not"></span>画面内容较为拥挤，无法辨别主体</div>
+				<div class="not"></span>照片上添加水印或使用浓重的滤镜</div>
 				<div class="not"></span>图片主题不可突出儿童、标识、酒类或裸体</div>
 			</div>
 		</div>
@@ -25,7 +34,7 @@
 			<a  class="upVideo" style="margin-top:10px;">
 				<!-- <el-container v-loading="loading"> -->
 				<i :class="elicon"></i>
-				<video class="videoB" :src="videoB"   autoplay loop id="video"></video>
+				<video class="videoB" :src="videoB"    autoplay loop id="video"></video>
 	    		<input class="chVideo" type="file" v-show="videoBox" accept="video/*"  @change="upVideo($event)"/>
 	    		<!-- 有视频悬浮 -->
 	    		<div v-show="vid" class="smallVideo" @click="Videochange" >
@@ -34,7 +43,7 @@
 
 				<!-- </el-container> -->
 			</a>	
-
+			<!-- <video id="fixedvideo" :src="videoB"  autoplay loop></video> -->
 		<!-- 图片 -->
 		<div style="margin-top:50px;color:#505050;font-size: 18px;">图库</div>
 		<div class="photo" >
@@ -66,14 +75,17 @@
 <script>
 import global from '@/components/flow/global/global'
 import repertoire from '@/components/flow/flowcontent/repertoire'
+
+
 	export default{
 		components:{
 			repertoire
 		},
 		data(){
 			return{
+				// isActive:false,
 				elicon:"el-icon-upload",
-				// loading:true,
+				changevideo:"fill",
 				vid:false,
 				videoBox:true,
 				videoB:"",
@@ -93,9 +105,13 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 		},
 		props: {},
 		watch:{
+			//监听状态变化
+			 isActive(newval,oldval){   
 
+			 } 	  	
 		},
 		methods:{
+
 			//获取用户传的图片
 			photo(){  
 			    var _this =this      
@@ -148,7 +164,7 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 		            let pictureWidth;     //图片长度
 		            let pictureHeight;    //图片高度
 		            let picturescale;     //图片长度 / 高度
-		            if ( w < 480 || h <720 ) {
+		            if ( w < 300 || h <400 ) {
 		               	_this.$message({
 						   	message: '照片像素至少要达到480x720。请上传一张更高质量的照片。您的照片像素为'+ w +'x'+ h +'',
 						    type: 'warning',
@@ -180,25 +196,36 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 					      	_this.photo()
 					    })  
 		                _this.$store.commit('onOff')
-		                if (w > 600 ){		                	
+		                if (w > 600 ){	
+		                          	
 		                	picturescale = w/h;
-			                if (picturescale < 0.76) {
+
+			                if (picturescale < 0.76 && picturescale > 0.74) {
 			                	
 				                _this.widthData = 600   
 				            	_this.heightData = 800	
 				                _this.autoCropWidth =  600-2        //截图框_长度 = 图片长度
 				                _this.autoCropHeight = 800-2  //截图框_高度/固定比例
+			                }else if(picturescale < 0.76){
+			                	 
+		                  		_this.widthData = 800*picturescale   
+				           		_this.heightData = 800	
+				           		_this.autoCropWidth =  800*picturescale-2     //截图框_长度 = 图片长度
+				          		_this.autoCropHeight = 800*picturescale/0.75  //截图框_高度/固定比例
 			                }else{
-			                	// console.log(2)
-			                	_this.widthData = 600   
-			            		_this.heightData = 600*picturescale 
-			               		_this.autoCropWidth =  450  //截图框_长度 = 图片长度
-			                	_this.autoCropHeight = 600*picturescale-2
+			                	 
+			                	_this.widthData =  400*picturescale   //容器的宽
+			            		_this.heightData =  400      //容器的高
+			            		
+			               		_this.autoCropWidth =  300-2
+			                	_this.autoCropHeight = 400-2
 			                  }
-		                }else{
-		                	
+			                 
+		                }else{	
+
 		                  picturescale = w/h;
 		                  if (picturescale < 0.75 ) {
+		                  	     
 		                  		_this.widthData = 800*picturescale   
 				           		_this.heightData = 800	
 				           		_this.autoCropWidth =  800*picturescale-2     //截图框_长度 = 图片长度
@@ -207,7 +234,7 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 		                     	_this.widthData = w   
 				            	_this.heightData = h 
 		                  }
-		              } 
+		              	} 		              
 		            }
 
 		          });
@@ -244,25 +271,36 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
            	 	let h = image.height
            	 	let picturescale;
            	 	
-           	 	if (w > 600 ){		                	
+		                if (w > 600 ){	
+		                          	
 		                	picturescale = w/h;
-			                if (picturescale < 0.76) {
+
+			                if (picturescale < 0.76 && picturescale > 0.74) {
 			                	
 				                _this.widthData = 600   
 				            	_this.heightData = 800	
 				                _this.autoCropWidth =  600-2        //截图框_长度 = 图片长度
 				                _this.autoCropHeight = 800-2  //截图框_高度/固定比例
+			                }else if(picturescale < 0.76){
+			                	 
+		                  		_this.widthData = 800*picturescale   
+				           		_this.heightData = 800	
+				           		_this.autoCropWidth =  800*picturescale-2     //截图框_长度 = 图片长度
+				          		_this.autoCropHeight = 800*picturescale/0.75  //截图框_高度/固定比例
 			                }else{
-			                	// console.log(2)
-			                	_this.widthData = 600   
-			            		_this.heightData = 600*picturescale 
-			               		_this.autoCropWidth =  450  //截图框_长度 = 图片长度
-			                	_this.autoCropHeight = 600*picturescale-2
+			                	 
+			                	_this.widthData =  400*picturescale   //容器的宽
+			            		_this.heightData =  400      //容器的高
+			            		
+			               		_this.autoCropWidth =  300-2
+			                	_this.autoCropHeight = 400-2
 			                  }
-		        }else{
-		                	
+			                 
+		                }else{	
+
 		                  picturescale = w/h;
 		                  if (picturescale < 0.75 ) {
+		                  	     	 
 		                  		_this.widthData = 800*picturescale   
 				           		_this.heightData = 800	
 				           		_this.autoCropWidth =  800*picturescale-2     //截图框_长度 = 图片长度
@@ -271,7 +309,7 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 		                     	_this.widthData = w   
 				            	_this.heightData = h 
 		                  }
-		        } 
+		              	} 
 		        
 				this.exampleimg = image.src;
 				this.$store.commit('onOff')
@@ -336,7 +374,7 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 			},
 			//点击删除视频
 			Videoremove(){
-				console.log("删除")
+				
 				let _this = this
 
 				let param = new FormData(); //创建form对象
@@ -467,6 +505,7 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 		},
 		created () {},
 		mounted () {
+			
 			this.photo()
 			this.$dragging.$on('dragend', () => {
 	          this.register()
@@ -485,6 +524,13 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 	left: 0;
 	background: black;
 }
+/*#fixedvideo{
+	width: 60%;
+	height: 50%;
+	position: absolute;
+	top: 0;
+	left: 300px;
+}*/
 .back{
 	width: 25px;
 	height: 25px;
@@ -743,8 +789,11 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
     top: 0;
 	width: 200px;
 	height: 260px;
-	object-fit: fill;
+	object-fit:contain;
 }
+/*.active{
+	object-fit: contain !important;
+}*/
 .upVideo{
 		display: block;
 	width: 200px;

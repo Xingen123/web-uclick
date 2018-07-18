@@ -106,9 +106,19 @@ import axios from 'axios'
 							    type: 'success',
 							    duration:1000
 							})
-			        		 _this.$router.push({
+							let width = document.body.clientWidth;
+			  	    
+                			if(width>600){
+                				 _this.$router.push({
 					        		path: '/login'
-					        })
+					        	})
+                			}else{
+                				_this.$router.push({
+					         		path: '/gohome'
+					       	 	})
+                			}
+
+			        		
 					  	}else if(response.data.complete=="FAILED") {
 					  	 _this.$message(response.data.errorMessage)
 					  	}
@@ -171,7 +181,7 @@ import axios from 'axios'
 	.box{
 		width: 300px;
 		height: 400px;
-		    position: fixed;
+		    position: absolute;
     top: 150px;
     right: 10%;
 		background: rgba(0,0,0,0.4);

@@ -10,7 +10,7 @@
 				<input type="password" class="width" style="margin-top:20px;" placeholder="输入密码"  v-model="password" @keyup.enter="next">
 				<el-form-item>
 					<el-checkbox style="font-weight:bold;" v-model="form.checked"><span style="color:white;">下次自动登录</span></el-checkbox>
-					<span style="float:right;margin-right:0px;cursor:pointer;color:rgb(0,160,232);"  @click="reset">忘记密码</span>
+					<span style="float:right;margin-right:0px;cursor:pointer;color:white;"  @click="reset">忘记密码</span>
 				</el-form-item >
 				
 				<el-form-item>
@@ -81,10 +81,10 @@
 			  	var token =response.data.token;
 			  	sessionStorage.setItem('encryptToken',token)
 			  	//存放登录的token
-			  	console.log(response)
+			  	
 			  	if (response.data.complete=="SUCCESS") {
 			  	    let width = document.body.clientWidth;
-			  	    console.log(width)
+			  	    
                 	if(width>600){
                 		if (response.data.dataStatus==true) {
 				  			 _this.$message({
@@ -165,12 +165,11 @@
 	.box{
 		width: 300px;
 		height: 400px;
-		    position: fixed;
-    top: 150px;
-    right: 10%;
+		position: absolute;
+    	top: 150px;
+    	right: 10%;
 		background: rgba(0,0,0,0.4);
 		color: white;
-
 		border-radius: 5px;
 		padding: 35px;
 	}
@@ -198,9 +197,10 @@
 	.width{
 	width:100%;
 	height: 42px;
-	background: rgba(45,45,45,0);
+	background:transparent;
+
 	margin-top:50px;
-	border: none;
+	border:0;
 	border-bottom: 1px solid white;
     font-size: 14px;
     color: #fff;

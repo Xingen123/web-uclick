@@ -27,7 +27,7 @@
 		<el-dialog
 		  :visible.sync="dialog"
 		  :width="width"
-		  style="text-align:center;">
+		  style="text-align:center;width:55%;margin: 0 auto;">
 		 
 		 	<!--未绑定  -->
 		 	<div v-show="noBinding">
@@ -42,7 +42,7 @@
 		 	</div>
 			
 			<!-- 提现确认 -->
-			<div v-show="yesWithraw">
+			<div v-show="yesWithraw" >
 			   <div style="margin-top:-30px;font-weight: bold;">提现金额</div>
 			  <el-input v-model="money" type="number" style="width:250px;" placeholder="请输入内容"></el-input>
 			  <div>当前可提现￥{{input}}</div>
@@ -239,11 +239,15 @@
 <style scoped>
 	.with{
 		
+
 		position: absolute;
 	    top: 80px;
 		left:60%;
 		width: 30%;
 		height: 250px;
+	}
+	.el-dialog{
+		width: 25% !important;
 	}
     @media screen and (max-width:600px) {
 	    .with{

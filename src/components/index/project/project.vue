@@ -209,7 +209,7 @@
 <style scoped>
 .project{
 	width: 100%;
-	position:absolute;
+	
 }
 .box{
 	width: 60%;
@@ -261,6 +261,11 @@
 }
 .newidea{
 	width: 100px;
+}
+@media screen and (max-width:1167px) {
+	.content{
+		padding-left: 0px !important;
+	}
 }
 @media screen and (max-width:600px) {
 	.el-button+.el-button{

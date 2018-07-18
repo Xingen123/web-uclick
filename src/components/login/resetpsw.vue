@@ -78,7 +78,7 @@
 	.box{
 		width: 300px;
 		height: 400px;	
-		    position: fixed;
+		    position: absolute;
     top: 150px;
     right:10%;	
 		background: rgba(0,0,0,0.4);

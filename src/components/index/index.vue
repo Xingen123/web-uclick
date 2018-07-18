@@ -11,16 +11,18 @@
 			</div>
 		</div>
 		<pro-ject></pro-ject>
-		
+		<Footer></Footer>
 	</div>
 </template>
 <script>
 	import Header from "@/components/head/head"
 	import Project from "@/components/index/project/project"
+	import Footer from "@/components/footer/footer"
 	export default{
 		components:{
 			"head-er":Header,
-			"pro-ject":Project
+			"pro-ject":Project,
+			 Footer
 		},
 		data(){
 			return{
