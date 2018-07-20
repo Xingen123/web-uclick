@@ -11,10 +11,11 @@
 			</div>
 		</div>
 		<pro-ject></pro-ject>
-		<Footer></Footer>
+		<Footer v-show="$store.state.ischild"></Footer>
 	</div>
 </template>
 <script>
+	import store from '@/store/store'
 	import Header from "@/components/head/head"
 	import Project from "@/components/index/project/project"
 	import Footer from "@/components/footer/footer"

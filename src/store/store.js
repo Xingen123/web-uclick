@@ -8,7 +8,8 @@ Vue.use(Vuex)
 
 var state = {
   isBg:false,     //初始时候给一个 isLogin=0 表示用户未登录
-  value:0
+  value:0,
+  ischild:false
 };
 
 const mutations = {

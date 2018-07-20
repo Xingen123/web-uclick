@@ -1,5 +1,5 @@
 <template>	
-	<div>
+	<div style="margin-bottom: 150px;">
 		<div class="advent">
 		<div style="font-size:28px;">即将到来的体验</div>
 		<div style="width:100%;margin-top:10px;">

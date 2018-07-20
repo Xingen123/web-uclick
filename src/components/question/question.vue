@@ -82,6 +82,7 @@
 		cursor: pointer;
 		position: relative;
 		border-radius: 5px;
+		margin-left: 40px;
 		display: inline-block;
 		-moz-box-shadow:4px 2px 19px #9C9698; 
 		-webkit-box-shadow:4px 2px 19px #9C9698; 
@@ -90,12 +91,12 @@
 
 	}
 
-	.boxquestion:nth-child(2){
+	/*.boxquestion:nth-child(2){
 		margin: 0 40px;
 	}
 	.boxquestion:nth-child(3n-1){
 		margin: 0 40px;
-	}
+	}*/
 	.boxquestion:hover div{
 		z-index: 10;
 		display: block;
@@ -115,15 +116,16 @@
 				width: 300px;
 				height: 200px;
 				margin-top:40px !important;
+				margin-left:40px;
 			}
- 			.boxquestion:nth-child(2){
+ 			/*.boxquestion:nth-child(2){
 				margin-left:  40px !important;
 			} 
 			.boxquestion:nth-child(3n-1){
 
 				margin: 0 40px !important;
 
-			}
+			}*/
 	}
 	@media screen and (max-width:1788px) {
 

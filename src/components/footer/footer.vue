@@ -1,5 +1,14 @@
 <template>
 	<div class="footer">
+		<div class="footertext">
+			Blueglass除了有近30万人享用的一杯让人流口水的酸奶,<br>
+			还有很多关于Befriend体验达人的故事,<br>
+			我们有内容十分精彩Instagram账号、小红书账号、微博账号,<br>
+			<div style="margin-top:30px;">
+				欢迎点击右方图标关注,快来和有意思的人成为朋友吧 !
+			</div>
+		</div>
+
 		<div class="footerbox">
 			<a href="https://www.instagram.com/blueglassyogurt/"  class="smalllogo">
 				
@@ -57,12 +66,12 @@ a{
 	margin-top: 100px;
 	background:url(img/footerbg.png) no-repeat;
 	background-size:cover;
+	background-position: center;
 	position: relative;
 }
 .footerbox{
-	width: 25%;
+	width: 280px;
 	height: 300px;
-	
 	position: absolute;
 	right: 10%;
 }
@@ -73,7 +82,14 @@ a{
 	position: absolute;
 	bottom: 40px;
 }
-
+.footertext{
+	line-height: 45px;
+	color: white;
+	font-size: 22px;
+	position: absolute;
+	left: 100px;
+	top: 30px;
+}
 .smalllogo:nth-child(1){
 
 	left: 40px;
@@ -132,4 +148,32 @@ a{
 	background:url(img/2.jpg) no-repeat;	
 	transition: all .4s;
 }
+@media screen and (max-width:600px) {
+	.footer{
+		height: 50px;
+		margin-top: 100px;
+		margin-bottom:20px;
+		background:white;
+	}
+	.footerbox{
+		right: 0!important;
+		left: 0!important;
+		bottom: 0!important;
+		margin: 0 auto!important;
+	}
+	.smalllogo:nth-child(1){
+
+	left: 0;
+	
+	}
+	.smalllogo:nth-child(2){
+		left: 110px;
+		
+	}
+	.smalllogo:nth-child(3){
+		left: 220px;
+	
+	}
+}
+
 </style>

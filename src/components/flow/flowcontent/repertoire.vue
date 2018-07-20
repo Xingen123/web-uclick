@@ -21,6 +21,7 @@
 				:autoCropWidth="autoCropWidth"
 				:autoCropHeight="autoCropHeight"
 				:fixedBox="example.fixedBox"
+				
 				:canScale="example.canScale"
 				:canMove="example.canMove"
 				:info="example.info"
@@ -45,9 +46,11 @@ import store from '@/store/store'
 					outputType: 'png',					
 					info:false,
 					autoCrop: true,
+					// fixed:true,
 					fixedBox: true,
 					canScale:false,
 					canMove:true
+					// fixedNumber:[1,1]
 				}
 			}
 		},
@@ -76,7 +79,7 @@ import store from '@/store/store'
 				if (type === 'blob') {
 						
 					_this.$refs.cropper.getCropBlob((data) => {	
-						console.log(data)
+						
 						_this.$emit('imgfun',data)
 
 					})

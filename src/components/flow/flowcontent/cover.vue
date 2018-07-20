@@ -2,7 +2,7 @@
 	<div class="cover">
 		<div style="font-size: 28px;">体验封面</div>
 		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">清晰且独特的封面可以帮助您吸引更多的朋友，以下一些建议能帮助您为创造良好的第一印象。</p>
-		<p class="tishi"  @click="fun">提示和实列 {{msg}}</p>
+		<p class="tishi"  @click="fun">提示和实例 {{msg}}</p>
 		<div v-show="code" class="box">
 			<div class="small">
 				<div class="right"></span>选择与标题描述一致的图片</div>
@@ -48,7 +48,7 @@
 
 
 		<div class="file">
-			<input class="change"  name="file" ref="file" type="file"  accept="image/png,image/gif,image/jpeg" @change="update($event, 1)"/>
+			<input class="change"  name="file" ref="file" type="file" id="fileto" accept="image/png,image/gif,image/jpeg" @change="update($event, 1)"/>
 			选择图片
 		</div>
 
@@ -127,22 +127,11 @@ import axios from 'axios'
 			},
 			//编辑
 			compile(){
-				let _this = this
-
-           	 	
            	 	let image = new Image();
            	 	image.src = this.img ;
-
-        	
-
            	 	let w = image.width;
            	 	let h = image.height
-           	 	
-           	 	this.autoCropWidth = 600-2
-            	this.autoCropHeight = 400-2
-            	this.widthData = 600
-           	 	this.heightData = 400
-		        
+				this.adaptation(w,h,1)
 				this.exampleimg = image.src;
 				this.$store.commit('onOff')
 			},
@@ -225,84 +214,89 @@ import axios from 'axios'
 		          var _this =this  
 		          var file = e.target.files[0]
 		          const isLt2M = file.size / 1024 / 1024 < 1;
+		          document.getElementById('fileto').value = "";
 		          this.createReader(file, function (w, h) {
-		            let pictureWidth;     //图片长度
-		            let pictureHeight;    //图片高度
-		            let picturescale;     //图片长度 / 高度
-		            if ( w < 240 || h <360 ) {
+		          	if ( w < 300 || h <200 ) {
 		               	_this.$message({
-						   	message: '照片像素至少要达到480x720。请上传一张更高质量的照片。您的照片像素为'+ w +'x'+ h +'',
+						   	message: '照片像素至少要达到300x200。请上传一张更高质量的照片。您的照片像素为'+ w +'x'+ h +'',
 						    type: 'warning',
-						    duration:1500
+						    duration:2500
 						});
 		               return false;
-		            } else if (!isLt2M) {
+		            } 
+		            else if (!isLt2M) {
 		            	_this.$message({
 						    message: '上传图片大小不能超过 1MB!',
 						    type: 'warning',
-						    duration:1500
+						    duration:2500
 						});
 		          		return false;
-		        	}else{
+		        	}
+		        	else{	
 		                _this.$store.commit('onOff')
-						if (w > 900 ){	
-		                          	
-		                	picturescale = w/h;
-	 
-			                if (picturescale < 1.51 && picturescale > 1.49) {
-			                	
-				                _this.widthData = 900   
-				            	_this.heightData = 600	
-				                _this.autoCropWidth =  900-2        //截图框_长度 = 图片长度
-				                _this.autoCropHeight = 600-2  //截图框_高度/固定比例
-			                }else if(picturescale < 1.5){
-			                	 
-		                  		_this.widthData = 600*picturescale   
-				           		_this.heightData = 600	
-				           		_this.autoCropWidth =  600*picturescale-2     //截图框_长度 = 图片长度
-				          		_this.autoCropHeight = 600*picturescale/1.5  //截图框_高度/固定比例
-			                }else if(picturescale > 2){
-			                	 
-		                  		_this.widthData = 900   
-				           		_this.heightData = 900/picturescale
-				           		_this.autoCropWidth =   900/picturescale*1.5    //截图框_长度 = 图片长度
-				          		_this.autoCropHeight = 900/picturescale-2  //截图框_高度/固定比例
-			                }
-			                else{
-			                	 
-			                	_this.widthData =  600*picturescale   //容器的宽
-			            		_this.heightData =  600      //容器的高
-			            		
-			               		_this.autoCropWidth =  200-2
-			                	_this.autoCropHeight = 300-2
-			                  }
-			                 
-		                }else{	
-
-		                  picturescale = w/h;
-		                  if (picturescale < 1.51 && picturescale > 1.49) {
-			                
-				                _this.widthData = w   
-				            	_this.heightData = h	
-				                _this.autoCropWidth =  w - 2       //截图框_长度 = 图片长度
-				                _this.autoCropHeight = h - 2//截图框_高度/固定比例
-			                }else if (picturescale < 1.5 ) {
-		                  	  
-		                  		_this.widthData = 600*picturescale   
-				           		_this.heightData = 600	
-				           		_this.autoCropWidth =  600*picturescale-2     //截图框_长度 = 图片长度
-				          		_this.autoCropHeight = 600*picturescale/1.5  //截图框_高度/固定比例
-		                  }else{ 
-
-		                     	_this.widthData = w   
-				            	_this.heightData = h 
-		                  }
-		              	} 	
-
-		            }     
+		                _this.adaptation(w,h,1)
+		            }
+   
 		        })      
 		          this.exampleimg=window.URL.createObjectURL(file)
 		    },
+		    adaptation(x,y,than){
+
+				 let _this = this;
+				
+			     let dolW = window.innerWidth / 3 ;     // 窗口的宽 / 3 是容器的宽
+			     let dolH = window.innerHeight - 40;	// 窗口的高 -40 是容器的高
+
+			     var XoY = x/y;	//图片的宽高比值
+
+			     
+			     //长
+				if (XoY > than && x >= dolW) {
+					_this.widthData  = dolW; 
+				    _this.heightData = dolW/XoY;
+				    _this.autoCropWidth  = dolW/XoY/0.75 - 2;
+				    _this.autoCropHeight = dolW/XoY - 2;
+				    
+				}
+
+				else if (XoY > than && x < dolW){
+					_this.widthData  = x; 
+				    _this.heightData = y;
+				    _this.autoCropWidth  = x/0.75 - 2;
+				    _this.autoCropHeight = x - 2;
+				}
+
+				//竖
+				else if(XoY < than && y >= dolH){
+					_this.widthData  = dolH*XoY; 
+				    _this.heightData = dolH;
+				    _this.autoCropWidth  = dolH*XoY - 2;
+				    _this.autoCropHeight = dolH*XoY*0.75 - 2;
+				}
+
+				else if (XoY < than && y < dolH){
+					_this.widthData  = x; 
+				    _this.heightData = y;
+				    _this.autoCropWidth  = x - 2;
+				    _this.autoCropHeight = x*0.75 - 2;
+				}
+
+				//方
+				else if (XoY == than && y >= dolH){
+					_this.widthData  = dolH; 
+				    _this.heightData = dolH;
+				    _this.autoCropWidth  = dolH - 2;
+				    _this.autoCropHeight = dolH*0.75 - 2;
+				}
+
+				else if (XoY == than && y < dolH){
+					_this.widthData  = x; 
+				    _this.heightData = y;
+				    _this.autoCropWidth  = x - 2;
+				    _this.autoCropHeight = y*0.75 - 2;
+				}
+
+			},
 		    createReader(file, whenReady) {
 		          var reader = new FileReader;
 		          reader.onload = function (evt) {

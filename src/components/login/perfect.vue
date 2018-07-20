@@ -9,11 +9,10 @@
 				<input type="text" class="width" placeholder="输入您的昵称" v-model="name" >
 				<input type="text" class="width" style="margin-top:10px;" placeholder="输入您的职业" v-model="profession" @keyup.enter="next">
 
-				<div style="position:absolute;    top: 40px;
-    right: -10px;">
-					<a  class="upload" :style="{backgroundImage:'url(' + head + ')'}">
+				<div style="position:absolute;top: 40px;right: -10px;">
+					<a  class="upload" :style="{backgroundImage:'url(' + exampleimg + ')'}">
 					<div v-text="headtext"></div>		
-	    				<input class="change"  name="file" ref="file" type="file"  accept="image/png,image/gif,image/jpeg" @change="update"/>
+	    				<input class="change"  name="file" ref="file" type="file" id="fileto" accept="image/png,image/gif,image/jpeg" @change="update"/>
 					</a>
 				</div>
 			</div>
@@ -50,30 +49,54 @@
 
 			<el-button type="primary" class="submit" @click="submit">完成</el-button>
 		</div>
+		<!-- 截图区域 -->
+		<repertoire 
+					 v-on:imgfun="imgfun"
+                    :bg="$store.state.isBg"                   
+                    :autoCropWidth="autoCropWidth" 
+                    :autoCropHeight="autoCropHeight" 
+                    :widthData="widthData" 
+                    :heightData="heightData" 
+                    :img="exampleimg">
+                      
+       </repertoire>
 	</div> 
 </template>
 <script>
+	import store from '@/store/store'
+	import repertoire from '@/components/flow/flowcontent/repertoire'
 	export default{
 		components:{
-
+			repertoire
 		},
 		data(){
 			return{
 				headtext:"添加头像",
-				head:"black",
 				name:"",
 				profession:"",
 				inputbox:false,
 				inputContent: ['性情中人','戏精份子','无辣不欢','胡同串子','复古爱好者','一滴酒脸红','假正经','五音不全','旅行患者','聚会大厨','间歇文艺癌','大概路痴','酒腻子','相过亲','美食雷达','灵魂歌者','耳机发烧友','喝酸奶舔盖','办过演出','无敌麦霸','王者荣耀','业余摄影师','韩剧迷','美剧迷','运营喵','产品汪','策展人','手工艺人','大长腿','苦逼媒体人','安卓党','不资深影迷','自由职业','少年干过仗','无敌吃货'],
 				dynamicTags: [],
 		        inputVisible: false,
-		        inputValue: ''
+		        inputValue: '',
+		        headfile:"",
+				//	头像截图控制
+				autoCropWidth:0,
+            	autoCropHeight:0,
+            	widthData:0,
+           	 	heightData:0,
+				exampleimg:'black'
 			}
 		},
 		props: {},
 		watch:{
 		},
 		methods:{
+			imgfun(data){
+				this.$store.commit('onOff')
+				this.exampleimg = window.URL.createObjectURL(data);
+				this.headfile=data
+			},
 			personage(){
 			  var _this=this
 		      let param = new FormData();
@@ -86,27 +109,97 @@
 			  		if (response.data.weedfsId) {
 						_this.headtext="更换头像"
 			  		}
-			  		_this.head=response.data.fileServer+"/"+response.data.weedfsId
+			  		_this.exampleimg=response.data.fileServer+"/"+response.data.weedfsId
 			  		_this.profession=response.data.job
 			  	}
 			  }).catch(function (error) {
 			      console.log(error);
 			  });
 			},
-			update(e){
-				let _this=this
-				if (e) {
-    				let file = e.target.files[0];
-					
-			        this.head=window.URL.createObjectURL(file);
-			        this.headtext=""
-				}		                      
-			},
 
+			update(e){
+				var _this=this
+			    let file = e.target.files[0];
+			    this.exampleimg=window.URL.createObjectURL(file);  			     
+			    this.$store.commit('onOff')
+			    this.headtext=""   
+			    document.getElementById('fileto').value = "";
+			    this.createReader(file, function (w,h) {
+			    	_this.adaptation(w,h,1)
+		        })          
+			},
+			adaptation(x,y,than){
+
+				 let _this = this;
+				
+			     let dolW = window.innerWidth / 3 ;     // 窗口的宽 / 3 是容器的宽
+			     let dolH = window.innerHeight - 40;	// 窗口的高 -40 是容器的高
+
+			     var XoY = x/y;	//图片的宽高比值
+
+			     
+
+				if (XoY > than && x >= dolW) {
+					_this.widthData  = dolW; 
+				    _this.heightData = dolW/XoY;
+				    _this.autoCropWidth  = dolW/XoY - 2;
+				    _this.autoCropHeight = dolW/XoY - 2;
+				    
+				}
+
+				else if (XoY > than && x < dolW){
+					_this.widthData  = x; 
+				    _this.heightData = y;
+				    _this.autoCropWidth  = y - 2;
+				    _this.autoCropHeight = y - 2;
+				}
+
+				else if(XoY < than && y >= dolH){
+					_this.widthData  = dolH*XoY; 
+				    _this.heightData = dolH;
+				    _this.autoCropWidth  = dolH*XoY - 2;
+				    _this.autoCropHeight = dolH*XoY - 2;
+				}
+
+				else if (XoY < than && y < dolH){
+					_this.widthData  = x; 
+				    _this.heightData = y;
+				    _this.autoCropWidth  = x - 2;
+				    _this.autoCropHeight = x - 2;
+				}
+
+				else if (XoY == than && y >= dolH){
+					_this.widthData  = dolH; 
+				    _this.heightData = dolH;
+				    _this.autoCropWidth  = dolH - 2;
+				    _this.autoCropHeight = dolH - 2;
+				}
+
+				else if (XoY == than && y < dolH){
+					_this.widthData  = x; 
+				    _this.heightData = y;
+				    _this.autoCropWidth  = x - 2;
+				    _this.autoCropHeight = y - 2;
+				}
+
+			},
+			createReader(file, whenReady) {
+		          var reader = new FileReader;
+		          reader.onload = function (evt) {
+		              var image = new Image();
+		              image.onload = function () {
+		                  var width = this.width+2;
+		                  var height = this.height+2;
+		                  if (whenReady) whenReady(width, height);
+		              };
+		              image.src = evt.target.result;
+		          };          
+		          reader.readAsDataURL(file);       
+		    },
 			submit(){
 			  let _this=this
-			  var head = this.head;
-			  let headimg = _this.$refs.file.files[0];
+
+			  let headimg = this.headfile;
 			 
 			  
 		      let param = new FormData();
@@ -118,22 +211,22 @@
 		      		_this.$message('请填写名字') 
 				return false;
 		      }
-		      if (!profession) {
+		      else if (!profession) {
 		      		_this.$message('请填写职业') 
 				return false;
 		      }
-		      if (!headimg && !head) {
+		      else if (!headimg && !this.exampleimg) {
 		      		_this.$message('还没有上传头像') 
 				return false;
 		      }
-		      if (dynamicTags.length==0) {
+		      else if(dynamicTags.length==0) {
 		      		_this.$message('请选择您的标签') 
 				return false;
 		      }
 			  param.append('token',tokenone);
 			  param.append('name',this.name);//姓名
 			  param.append('job',this.profession);//职业
-			  param.append('nextImageFile',headimg);//头像	  
+			  param.append('nextImageFile',this.headfile);//头像	  
 			  param.append('relateTitle',this.dynamicTags);//标签
 			  this.$ajax.post('update/webUser',param).then(function (response) {
 

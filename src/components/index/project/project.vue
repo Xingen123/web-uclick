@@ -44,6 +44,7 @@
 	</div>
 </template>
 <script>
+import store from '@/store/store'
 	export default{
 		components:{
 
@@ -58,11 +59,16 @@
 		},
 		props: {},
 		watch:{
-
+			project: function() {
+				var _this=this
+			    this.$nextTick(function(){
+			        _this.$store.state.ischild = true
+			    })
+			}
 		},
 		methods:{
 			revocation(id){
-					var _this=this
+				var _this=this
 				this.$confirm('再次修改体验内容将会导致您的体验暂时下架，并且，再对修改的内容审核通过之前，您都无法在app中看到此体验，参与者也无法购买，是否继续?', '提示', {
 		          confirmButtonText: '确定',
 		          cancelButtonText: '取消',
@@ -142,7 +148,6 @@
 		      var tokenone =sessionStorage.getItem('encryptToken');
 			  param.append('token',tokenone);  
 			  this.$ajax.post('query/webRecommendByUser',param).then(function (response) {
-			  	
 			  	if (response.data.webRecommendInfoList!="") {
 			  		loading.close();
 			  		_this.project=response.data.webRecommendInfoList

@@ -12,7 +12,7 @@
 				<img  class="imghead" :src="exampleimg" alt="">
 				<a  class="upload">
 				添加头像					
-    				<input class="change"  name="file" ref="file" type="file"  accept="image/png,image/gif,image/jpeg" @change="update"/>
+    				<input class="change"  name="file" ref="file" type="file" id="fileto"  accept="image/png,image/gif,image/jpeg" @change="update"/>
 				</a>
 
 			</div>
@@ -121,19 +121,16 @@
 					this.age=""
 				}
 			},
-			handleClose(tag) {
-				
+			handleClose(tag) {	
 		        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
-		      },
-
-		      showInput() {
+		    },
+		    showInput() {
 		        this.inputVisible = true;
 		        this.$nextTick(_ => {
 		          this.$refs.saveTagInput.$refs.input.focus();
 		        });
-		      },
-
-		      handleInputConfirm() {
+		    },
+		    handleInputConfirm() {
 		        let inputValue = this.inputValue;
 		        let dynamicTags = this.dynamicTags.length;
 		        if (inputValue) {
@@ -149,9 +146,8 @@
 		        }
 		        this.inputVisible = false;
 		        this.inputValue = '';
-		      },
-
-		      label(name){
+		    },
+		    label(name){
 
 				let _this = this
 
@@ -168,7 +164,6 @@
 				})  
 
 			},
-
 			veri(){
 				this.$router.push({
 					path: '/verification'
@@ -180,52 +175,64 @@
 			    let file = e.target.files[0];
 			    this.exampleimg=window.URL.createObjectURL(file);  			     
 			    this.$store.commit('onOff')   
-			    this.createReader(file, function (w, h) {
-			    	_this.adaptation(w,h)
+			    document.getElementById('fileto').value = "";
+			    this.createReader(file, function (w,h) {
+			    	_this.adaptation(w,h,1)
 		        })          
 			},
-			adaptation(x,y){
+			adaptation(x,y,than){
 
 				 let _this = this;
 				
-			     let dolW = window.innerWidth / 3 ;  // 窗口的宽 
-			     let dolH = window.innerHeight- 40;	// 窗口的高
+			     let dolW = window.innerWidth / 3 ;     // 窗口的宽 / 3 是容器的宽
+			     let dolH = window.innerHeight - 40;	// 窗口的高 -40 是容器的高
 
-			     var XoY = x/y;
+			     var XoY = x/y;	//图片的宽高比值
 
 			     
 
-				if (XoY > 1 && x >= dolW) {
+				if (XoY > than && x >= dolW) {
 					_this.widthData  = dolW; 
 				    _this.heightData = dolW/XoY;
 				    _this.autoCropWidth  = dolW/XoY - 2;
 				    _this.autoCropHeight = dolW/XoY - 2;
-				    console.log(dolW,dolH,'框的宽：'+ dolW ,'框的高：'+ dolW/XoY,'图片的宽：'+x,'图片的高：'+y,'图片的宽高比：'+ x/y)
-				}else if (XoY > 1 && x < dolW){
+				    
+				}
+
+				else if (XoY > than && x < dolW){
 					_this.widthData  = x; 
 				    _this.heightData = y;
 				    _this.autoCropWidth  = y - 2;
 				    _this.autoCropHeight = y - 2;
 				}
 
-				// if(XoY < 1 && y >= dolH){
-				// 	_this.widthData  = dolW*XoY; 
-				//     _this.heightData = dolH;
-				//     _this.autoCropWidth  = dolW*XoY;
-				//     _this.autoCropHeight = dolW*XoY;
-				// }else if (XoY < 1 && y < dolH){
-				// 	_this.widthData  = x; 
-				//     _this.heightData = y;
-				//     _this.autoCropWidth  = X;
-				//     _this.autoCropHeight = X;
-				// }
+				else if(XoY < than && y >= dolH){
+					_this.widthData  = dolH*XoY; 
+				    _this.heightData = dolH;
+				    _this.autoCropWidth  = dolH*XoY - 2;
+				    _this.autoCropHeight = dolH*XoY - 2;
+				}
 
-				// else{
-				// 	_this.widthData  = dolH; 
-				//     _this.heightData = dolH;
-				//     _this.autoCropWidth  = dolH;
-				//     _this.autoCropHeight = dolH;
-				// }
+				else if (XoY < than && y < dolH){
+					_this.widthData  = x; 
+				    _this.heightData = y;
+				    _this.autoCropWidth  = x - 2;
+				    _this.autoCropHeight = x - 2;
+				}
+
+				else if (XoY == than && y >= dolH){
+					_this.widthData  = dolH; 
+				    _this.heightData = dolH;
+				    _this.autoCropWidth  = dolH - 2;
+				    _this.autoCropHeight = dolH - 2;
+				}
+
+				else if (XoY == than && y < dolH){
+					_this.widthData  = x; 
+				    _this.heightData = y;
+				    _this.autoCropWidth  = x - 2;
+				    _this.autoCropHeight = y - 2;
+				}
 
 			},
 			createReader(file, whenReady) {
@@ -286,7 +293,7 @@
 					    type: 'success'
 					})  
 			  		_this.$router.push({
-					path: '/home'
+						path: '/home'
 					}) 
 			  	}else{
 			  		_this.$message("提交失败")

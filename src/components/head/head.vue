@@ -154,10 +154,10 @@ background: white;
 z-index: 12;
 }
 .link{
-	position: absolute;
-	left:135px;
-	top: 17px;
-	font-size: 20px;
+float:left;
+margin-left: 113px;
+margin-top: -43px; 
+font-size: 20px;
 }
 .el-dialog__wrapper{
 	background: rgba(0,0,0,0.5);
@@ -248,11 +248,33 @@ z-index: 12;
 		color: red;
 	}
 	@media screen and (max-width:600px) {
-    .logo {
-      /*/* */
-       /*background-size:100% 100%;*/
-	   /*background-position: 0px;*/
+    .link{
+		width: 100%;
+		height:50px;
+		background: white;
+		border-top: 1px solid #E4E7ED;
+		position: fixed !important;
+		right: 0;
+	    left: 0;
+	    bottom: 0;
+	    margin: 0 auto;
+	    z-index: 100000;
+	    display: flex;
+	    justify-content: center;
     }
+	.link>li:nth-child(1){
+		margin-left:0!important;
+	}
+    .link>li{
+		float:left;
+		margin-left:40px;
+		margin-top:10px;
+		border:none;
+		text-align: center;
+	}
+	.link>li>a{
+		text-align: center;
+	}
 	.headimg{
 		right:10px;
 	}

@@ -35,7 +35,7 @@
 				<!-- <el-container v-loading="loading"> -->
 				<i :class="elicon"></i>
 				<video class="videoB" :src="videoB"    autoplay loop id="video"></video>
-	    		<input class="chVideo" type="file" v-show="videoBox" accept="video/*"  @change="upVideo($event)"/>
+	    		<input class="chVideo" type="file" v-show="videoBox" id="fileto" accept="video/*"  @change="upVideo($event)"/>
 	    		<!-- 有视频悬浮 -->
 	    		<div v-show="vid" class="smallVideo" @click="Videochange" >
 					预览<div class="Videoremove" @click.stop="Videoremove()"></div>
@@ -56,7 +56,7 @@
 			</div>
 		</div>
 		<a  class="upload" v-show="none"><i class="el-icon-picture-outline"></i>
-    		<input class="change"  name="file" type="file" accept="image/png,image/gif,image/jpeg,image/jpg" @change="update($event, 1)"/>
+    		<input class="change"  name="file" type="file" accept="image/png,image/gif,image/jpeg,image/jpg" @change="update"/>
 		</a>				
 		<el-button type="primary" plain style="margin:50px 0 ;font-size: 18px;" @click="next" :disabled="disabled">下一步</el-button>	
 		<!-- 截图区域 -->
@@ -83,7 +83,6 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 		},
 		data(){
 			return{
-				// isActive:false,
 				elicon:"el-icon-upload",
 				changevideo:"fill",
 				vid:false,
@@ -105,20 +104,16 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 		},
 		props: {},
 		watch:{
-			//监听状态变化
-			 isActive(newval,oldval){   
-
-			 } 	  	
+  	
 		},
 		methods:{
-
 			//获取用户传的图片
 			photo(){  
-			    var _this =this      
+			    let _this =this      
 			    let param = new FormData();
 
-			    var tokenone =sessionStorage.getItem('encryptToken');
-			    var detailId =sessionStorage.getItem('detailId');
+			    let tokenone =sessionStorage.getItem('encryptToken');
+			    let detailId =sessionStorage.getItem('detailId');
 
 			    param.append('id',detailId); 
 			  	param.append('token',tokenone);
@@ -153,35 +148,32 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 			    })     
 			},
 			//点击上传图片
-		   update(e, num){
-		          var _this =this  
-		          var file = e.target.files[0]
-		          if (file) {
-		          	var isLt2M = file.size / 1024 / 1024 < 1;
-		         
-		          
-		          _this.createReader(file, function (w, h) {
-		            let pictureWidth;     //图片长度
-		            let pictureHeight;    //图片高度
-		            let picturescale;     //图片长度 / 高度
-		            if ( w < 300 || h <400 ) {
+		    update(e){
+		        let _this =this  
+		        let file = e.target.files[0]
+		        let isLt2M = file.size / 1024 / 1024 < 1;
+		         _this.createReader(file, function (w, h) {
+		        document.getElementById('fileto').value = "";	
+		         	if ( w < 300 || h <400 ) {
 		               	_this.$message({
-						   	message: '照片像素至少要达到480x720。请上传一张更高质量的照片。您的照片像素为'+ w +'x'+ h +'',
+						   	message: '照片像素至少要达到300x400。请上传一张更高质量的照片。您的照片像素为'+ w +'x'+ h +'',
 						    type: 'warning',
-						    duration:1500
+						    duration:2500
 						});
 		               return false;
-		            } else if (!isLt2M) {
+		            } 
+		            else if (!isLt2M) {
 		            	_this.$message({
 						    message: '上传图片大小不能超过 1MB!',
 						    type: 'warning',
-						    duration:1500
+						    duration:2500
 						});
 		          		return false;
-		        	}else{
+		        	}
+		        	else{
 		        		let param = new FormData(); //创建form对象
-					    var tokenone =sessionStorage.getItem('encryptToken');
-					    var detailId =sessionStorage.getItem('detailId');
+					    let tokenone =sessionStorage.getItem('encryptToken');
+					    let detailId =sessionStorage.getItem('detailId');
 					    param.append('id',detailId); 
 					  	param.append('token',tokenone);
 					    param.append('imageFile',file);//通过append向form对象添加数据
@@ -196,58 +188,72 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 					      	_this.photo()
 					    })  
 		                _this.$store.commit('onOff')
-		                if (w > 600 ){	
-		                          	
-		                	picturescale = w/h;
-
-			                if (picturescale < 0.76 && picturescale > 0.74) {
-			                	
-				                _this.widthData = 600   
-				            	_this.heightData = 800	
-				                _this.autoCropWidth =  600-2        //截图框_长度 = 图片长度
-				                _this.autoCropHeight = 800-2  //截图框_高度/固定比例
-			                }else if(picturescale < 0.76){
-			                	 
-		                  		_this.widthData = 800*picturescale   
-				           		_this.heightData = 800	
-				           		_this.autoCropWidth =  800*picturescale-2     //截图框_长度 = 图片长度
-				          		_this.autoCropHeight = 800*picturescale/0.75  //截图框_高度/固定比例
-			                }else{
-			                	 
-			                	_this.widthData =  400*picturescale   //容器的宽
-			            		_this.heightData =  400      //容器的高
-			            		
-			               		_this.autoCropWidth =  300-2
-			                	_this.autoCropHeight = 400-2
-			                  }
-			                 
-		                }else{	
-
-		                  picturescale = w/h;
-		                  if (picturescale < 0.75 ) {
-		                  	     
-		                  		_this.widthData = 800*picturescale   
-				           		_this.heightData = 800	
-				           		_this.autoCropWidth =  800*picturescale-2     //截图框_长度 = 图片长度
-				          		_this.autoCropHeight = 800*picturescale/0.75  //截图框_高度/固定比例
-		                  }else{  
-		                     	_this.widthData = w   
-				            	_this.heightData = h 
-		                  }
-		              	} 		              
+						_this.adaptation(w,h,1) 		              
 		            }
-
 		          });
-		      }
-		          
 		    },
+		    adaptation(x,y,than){
+
+				 let _this = this;
+				
+			     let dolW = window.innerWidth / 3 ;     // 窗口的宽 / 3 是容器的宽
+			     let dolH = window.innerHeight - 40;	// 窗口的高 -40 是容器的高
+
+			     let XoY = x/y;	//图片的宽高比值
+
+			     
+
+				if (XoY > than && x >= dolW) {
+					_this.widthData  = dolW; 
+				    _this.heightData = dolW/XoY;
+				    _this.autoCropWidth  = dolW/XoY/1.5 - 2;
+				    _this.autoCropHeight = dolW/XoY - 2;
+				    
+				}
+
+				else if (XoY > than && x < dolW){
+					_this.widthData  = x; 
+				    _this.heightData = y;
+				    _this.autoCropWidth  = y/1.5 - 2;
+				    _this.autoCropHeight = y - 2;
+				}
+
+				else if(XoY < than && y >= dolH){
+					_this.widthData  = dolH*XoY; 
+				    _this.heightData = dolH;
+				    _this.autoCropWidth  = dolH*XoY - 2;
+				    _this.autoCropHeight = dolH*XoY*1.5 - 2;
+				}
+
+				else if (XoY < than && y < dolH){
+					_this.widthData  = x; 
+				    _this.heightData = y;
+				    _this.autoCropWidth  = x - 2;
+				    _this.autoCropHeight = x*1.5 - 2;
+				}
+
+				else if (XoY == than && y >= dolH){
+					_this.widthData  = dolH; 
+				    _this.heightData = dolH;
+				    _this.autoCropWidth  = dolH/1.5 - 2;
+				    _this.autoCropHeight = dolH - 2;
+				}
+
+				else if (XoY == than && y < dolH){
+					_this.widthData  = x; 
+				    _this.heightData = y;
+				    _this.autoCropWidth  = x/1.5 - 2;
+				    _this.autoCropHeight = y - 2;
+				}
+
+			},
 		    createReader(file, whenReady) {
-		          var reader = new FileReader;
+		          let reader = new FileReader;
 		          reader.onload = function (evt) {
-		              var image = new Image();
+		              let image = new Image();
 		              image.onload = function () {
-		                  var width = this.width+2;
-		                  var height = this.height+2;
+		                  let width = this.width+2;
+		                  let height = this.height+2;
 		                  if (whenReady) whenReady(width, height);
 		              };
 		              image.src = evt.target.result;
@@ -256,73 +262,21 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 		    },
 			//点击编辑
 			cropper(header,img,pictureid){
-				let _this = this
-				
-				// sessionStorage.removeItem('pictureid');
-				let autoCropWidth = this.autoCropWidth
-            	let autoCropHeight = this.autoCropHeight
-            	let widthData = this.widthData
-           	 	let heightData = this.heightData
-           	 	
            	 	let image = new Image();
            	 	image.src = header+'/'+img ;
-           	 	
            	 	let w = image.width;
            	 	let h = image.height
-           	 	let picturescale;
-           	 	
-		                if (w > 600 ){	
-		                          	
-		                	picturescale = w/h;
-
-			                if (picturescale < 0.76 && picturescale > 0.74) {
-			                	
-				                _this.widthData = 600   
-				            	_this.heightData = 800	
-				                _this.autoCropWidth =  600-2        //截图框_长度 = 图片长度
-				                _this.autoCropHeight = 800-2  //截图框_高度/固定比例
-			                }else if(picturescale < 0.76){
-			                	 
-		                  		_this.widthData = 800*picturescale   
-				           		_this.heightData = 800	
-				           		_this.autoCropWidth =  800*picturescale-2     //截图框_长度 = 图片长度
-				          		_this.autoCropHeight = 800*picturescale/0.75  //截图框_高度/固定比例
-			                }else{
-			                	 
-			                	_this.widthData =  400*picturescale   //容器的宽
-			            		_this.heightData =  400      //容器的高
-			            		
-			               		_this.autoCropWidth =  300-2
-			                	_this.autoCropHeight = 400-2
-			                  }
-			                 
-		                }else{	
-
-		                  picturescale = w/h;
-		                  if (picturescale < 0.75 ) {
-		                  	     	 
-		                  		_this.widthData = 800*picturescale   
-				           		_this.heightData = 800	
-				           		_this.autoCropWidth =  800*picturescale-2     //截图框_长度 = 图片长度
-				          		_this.autoCropHeight = 800*picturescale/0.75  //截图框_高度/固定比例
-		                  }else{  
-		                     	_this.widthData = w   
-				            	_this.heightData = h 
-		                  }
-		              	} 
-		        
+           	 	this.adaptation(w,h,1) 
 				this.exampleimg = image.src;
 				this.$store.commit('onOff')
-
 				sessionStorage.setItem('pictureid',pictureid);	
 			},
 			//拿到截取到的图片
 			imgfun(data){
 				let _this = this
 				let param = new FormData(); //创建form对象
-				var tokenone =sessionStorage.getItem('encryptToken');
-				var pictureid =sessionStorage.getItem('pictureid');
-						    
+				let tokenone =sessionStorage.getItem('encryptToken');
+				let pictureid =sessionStorage.getItem('pictureid');
 				param.append('id',pictureid); 
 				param.append('token',tokenone);
 				param.append('imageFile',data);//通过append向form对象添加数据
@@ -345,7 +299,7 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 			},
 			// 点击预览
 			Videochange(){
-				var docElm = document.getElementById('video'); 
+				let docElm = document.getElementById('video'); 
 			
 				//W3C
 				if(docElm.requestFullscreen){
@@ -407,7 +361,6 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 					let file = e.target.files[0]
 					this.Up(file)
 				}
-								
 			},
 			//上传视频
 			Up(videoFile){
@@ -439,14 +392,14 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 
 			//删除用户上传的图片
 			remove(id){
-				var _this =this     
+				let _this =this     
 				this.$alert('确认删除吗？', '删除', {
 			        confirmButtonText: '确定',
 			        callback: action => {
 					    if (action=="confirm") {
 					    	let param = new FormData();
 
-						    var tokenone =sessionStorage.getItem('encryptToken');
+						    let tokenone =sessionStorage.getItem('encryptToken');
 						   
 						    param.append('id',id); 
 						  	param.append('token',tokenone);
@@ -476,10 +429,9 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 					          }
 			          	}
 			    })
-
 			},
 			register(){
-        		var _this=this  
+        		let _this=this  
 		        let param = new FormData();
             	let itemsId = this.photoItem.map(item =>item.id)
 		        param.append('pictureSort',itemsId);
