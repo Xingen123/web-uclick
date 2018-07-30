@@ -87,6 +87,11 @@ import global from '@/components/flow/global/global'
 			  		global.$emit("tabten",true)
 			  		_this.button=false
 					_this.next=true
+					_this.$message({
+							type: 'success',
+							message: '保存成功!',
+							duration:1500
+					});
 			  	}
 			  	
 			  }).catch(function (error) {

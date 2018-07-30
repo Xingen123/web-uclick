@@ -73,6 +73,11 @@ import global from '@/components/flow/global/global'
 				  	_this.$router.push({
 				        path: '/flow/lastTime'
 				    })
+				    _this.$message({
+						type: 'success',
+						message: '保存成功!',
+						duration:1500
+				    });
 			  	}
 			  	
 			  }).catch(function (error) {

@@ -13,7 +13,7 @@
 				</li>
 				<li >
 					<router-link to="/question">
-						白皮书
+						攻略
 					</router-link>
 				</li>
 				<li>
@@ -158,6 +158,7 @@ float:left;
 margin-left: 113px;
 margin-top: -43px; 
 font-size: 20px;
+font-weight: bold;
 }
 .el-dialog__wrapper{
 	background: rgba(0,0,0,0.5);

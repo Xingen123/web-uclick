@@ -150,6 +150,7 @@ a{
 }
 @media screen and (max-width:600px) {
 	.footer{
+		display: none;
 		height: 50px;
 		margin-top: 100px;
 		margin-bottom:20px;

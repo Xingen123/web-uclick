@@ -74,7 +74,7 @@ const TIME_COUNT =60;
 	            }
         	},
         	disabled (){
-        		let reg=11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/;
+        		let reg=11 && /^((13|14|15|16|17|18)[0-9]{1}\d{8})$/;
         		if(!this.phone){
                   	this.$message({
 					    message: '请输入手机号码',

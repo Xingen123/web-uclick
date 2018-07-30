@@ -127,7 +127,10 @@
 
 			}*/
 	}
-	@media screen and (max-width:1788px) {
-
+	@media screen and (max-width:600px) {
+			.boxquestion{
+				
+				margin-left:0 !important;
+			}
 	}
 </style>

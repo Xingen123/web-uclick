@@ -10,6 +10,7 @@ import Resetpsw from '@/components/login/resetpsw'
 import Time from '@/components/login/time'
 import Perfect from '@/components/login/perfect'
 import Gohome from '@/components/login/gohome'
+import Deal from '@/components/login/deal'
 //主页
 import Index from '@/components/index/index'
 import Calendar from '@/components/index/calendar/calendar'
@@ -76,6 +77,13 @@ export default new Router({
       component: Login,
       meta: {
         title: '登录'
+      }
+    },
+    {
+      path: '/deal',
+      component:Deal,
+      meta: {
+        title: '协议'
       }
     },
     //常见问题 

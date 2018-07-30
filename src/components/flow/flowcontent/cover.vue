@@ -25,6 +25,7 @@
 		<el-input v-model="input" @input="descInput" :maxlength="30" style="margin-top:20px;width:500px;"></el-input>
 		<p  style="line-height:40px;">最多30个字</p>
 		<div style="margin-top:60px;font-size: 20px;">封面照片</div>
+		<popup :hint="hint" :column="column"></popup>
 		<!-- 图片 -->
 		<div v-show="photo" style="margin-top:10px;font-size:20px;">缩略图</div>
 		<p v-show="photo">调整封面图，按您的喜好出现</p>
@@ -71,14 +72,24 @@
 <script>
 import global from '@/components/flow/global/global'
 import store from '@/store/store'
+import popup from '@/components/flow/popup/popup'
 import repertoire from '@/components/flow/flowcontent/repertoire'
 import axios from 'axios'
 	export default{
 		components:{
-			repertoire
+			repertoire,
+			popup
 		},
 		data(){
 			return{
+				hint:"提示和实例",
+				column:[
+					{
+					img:"../../../../static/popup/cover.jpg",
+		            content:'封面是用户第一眼看到的照片，封面图片需要同时展现您本人的魅力及您所开展体验的独特性。让潜在的体验者对您及体验产生更多兴趣和信赖。',
+		            text:"数据证明，富有创意或魅力的照片能够带来更多预订。"
+					}
+				],
 				number:30,
 				imageData:"",
 				//标题
@@ -252,17 +263,19 @@ import axios from 'axios'
 			     
 			     //长
 				if (XoY > than && x >= dolW) {
+					
 					_this.widthData  = dolW; 
 				    _this.heightData = dolW/XoY;
-				    _this.autoCropWidth  = dolW/XoY/0.75 - 2;
+				    _this.autoCropWidth  = dolW/XoY/0.67 - 2;
 				    _this.autoCropHeight = dolW/XoY - 2;
 				    
 				}
 
 				else if (XoY > than && x < dolW){
+					
 					_this.widthData  = x; 
 				    _this.heightData = y;
-				    _this.autoCropWidth  = x/0.75 - 2;
+				    _this.autoCropWidth  = x/0.67 - 2;
 				    _this.autoCropHeight = x - 2;
 				}
 
@@ -271,14 +284,14 @@ import axios from 'axios'
 					_this.widthData  = dolH*XoY; 
 				    _this.heightData = dolH;
 				    _this.autoCropWidth  = dolH*XoY - 2;
-				    _this.autoCropHeight = dolH*XoY*0.75 - 2;
+				    _this.autoCropHeight = dolH*XoY*0.67 - 2;
 				}
 
 				else if (XoY < than && y < dolH){
 					_this.widthData  = x; 
 				    _this.heightData = y;
 				    _this.autoCropWidth  = x - 2;
-				    _this.autoCropHeight = x*0.75 - 2;
+				    _this.autoCropHeight = x*0.67 - 2;
 				}
 
 				//方
@@ -286,14 +299,14 @@ import axios from 'axios'
 					_this.widthData  = dolH; 
 				    _this.heightData = dolH;
 				    _this.autoCropWidth  = dolH - 2;
-				    _this.autoCropHeight = dolH*0.75 - 2;
+				    _this.autoCropHeight = dolH*0.67 - 2;
 				}
 
 				else if (XoY == than && y < dolH){
 					_this.widthData  = x; 
 				    _this.heightData = y;
 				    _this.autoCropWidth  = x - 2;
-				    _this.autoCropHeight = y*0.75 - 2;
+				    _this.autoCropHeight = y*0.67 - 2;
 				}
 
 			},
@@ -329,6 +342,11 @@ import axios from 'axios'
 				  		_this.$router.push({
 			        	  path: '/flow/slogan'
 			      		})
+			      		_this.$message({
+							type: 'success',
+							message: '保存成功!',
+							duration:1500
+						});
 				  	}			 
 					}).catch(function (error) {
 					    console.log(error);

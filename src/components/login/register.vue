@@ -17,6 +17,7 @@
 			<el-button type="primary" class="submit" @click="next">提交</el-button>
 
 			<div style="text-align:center;margin-top:20px;">已有账号？<span style="color:rgb(0,160,232);margin-left:5px;cursor:pointer;" @click="routerLogin">点击立即登录吧！</span></div>
+			<div class="deal" @click="$router.push({path: '/deal'})">用户注册代表同意《Uclick平台体验活动发起人协议》</div>
 		</div>
 		
 	</div>
@@ -73,7 +74,7 @@ import axios from 'axios'
 	            }
         	},
         	disabled (){
-        		let reg=11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/;
+        		let reg=11 && /^((13|14|15|16|17|18)[0-9]{1}\d{8})$/;
         		if(!this.phone){
                   	this.$message({
 					    message: '请填写账号',
@@ -128,7 +129,7 @@ import axios from 'axios'
 					  });
 			},
         	next(){
-        		let reg=11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/;
+        		let reg=11 && /^((13|14|15|16|17|18)[0-9]{1}\d{8})$/;
         		if (!this.phone) {
 		    		this.$message({
 					    message: '请填写账号',
@@ -260,7 +261,16 @@ import axios from 'axios'
     text-shadow: 0 1px 2px rgba(0,0,0,.1);
     -o-transition: all .2s;
 	}
-
+	.deal{
+	text-align:center;
+	margin-top:20px;
+	cursor:pointer;
+	color:rgb(255,255,255);
+	font-size:10px;
+	}
+.deal:hover{
+	color:rgb(0,160,232);
+}
 .submit{
 		width:100%;
 		margin-top: 50px;

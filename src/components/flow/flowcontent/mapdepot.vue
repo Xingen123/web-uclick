@@ -29,7 +29,7 @@
 		</div>
 		<!-- 视频 -->
 		<div style="margin-top:50px;color:#505050;font-size: 18px;">视频</div>
-		
+		<popup :hint="hint" :column="videoitem"></popup>
 
 			<a  class="upVideo" style="margin-top:10px;">
 				<!-- <el-container v-loading="loading"> -->
@@ -46,6 +46,7 @@
 			<!-- <video id="fixedvideo" :src="videoB"  autoplay loop></video> -->
 		<!-- 图片 -->
 		<div style="margin-top:50px;color:#505050;font-size: 18px;">图库</div>
+		<popup :hint="hint" :column="column"></popup>
 		<div class="photo" >
 			<div  class="imgbox"  v-for="items in photoItem" v-dragging="{ item: items, list: photoItem, group: 'color' }" :key="items.id">
 					<div class="smallbg" @click="cropper(items.fileServer,items.imgUrl,items.id)">
@@ -75,11 +76,13 @@
 <script>
 import global from '@/components/flow/global/global'
 import repertoire from '@/components/flow/flowcontent/repertoire'
-
+import popup from '@/components/flow/popup/popup'
 
 	export default{
 		components:{
-			repertoire
+			repertoire,
+			popup,
+			videodom:'<div></div>'
 		},
 		data(){
 			return{
@@ -99,7 +102,47 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
             	autoCropHeight:400,
             	widthData:0,
            	 	heightData:0,
-				exampleimg:''
+				exampleimg:'',
+				hint:"提示和实例",
+				videoitem:[
+		          {
+		            src:"../../../../static/popup/1.mp4",
+		            content:'Blueglass为您整理了非常清晰明确的视频标准：',
+		            content1:'1，时长：1分钟以内，',
+		            content2:'2，大小：10MB3，',
+
+		            content4:'3，画质：清晰可辨画面内容，',
+		            content5:'4，视频声音可以是原声，也可以是配乐，',
+ 					content6:'5，视频内容要与体验相关，最好要有人物出现。'
+		          }
+		        ],
+				column:[
+		          {
+		            img:"../../../../static/popup/1.jpg",
+		            content:'照片主体为体验达人本人，场景需与体验相关。',
+		            text:"如：您开展了篆刻体验，照片中最好出现篆刻相关的元素。"
+		          },
+		          {
+		            img:"../../../../static/popup/2.jpg",
+		            content:"照片主体为体验达人本人，换一种拍摄角度展现您与所开展的体验。"
+		          },
+		          {
+		            img:"../../../../static/popup/3.jpg",
+		            content:"照片主体为体验开展现场、体验者或体验细节。"
+		          },
+		          {
+		            img:"../../../../static/popup/4.jpg",
+		            content:"照片主体为体验事物的特写细节，或体验最终创作的作品。"
+		          },
+		          {
+		            img:"../../../../static/popup/5.jpg",
+		            content:"照片主体为达人，展现达人生活与爱好、特长有关的一面。用图片来展现您个人介绍里的内容。"
+		          },
+		          {
+		            img:"../../../../static/popup/6.jpg",
+		            content:"照片主体为达人，展现达人生活与爱好、特长有关的另一面。用图片来展现您个人介绍里的内容。"
+		          }
+		        ]
 			}
 		},
 		props: {},
@@ -152,8 +195,9 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 		        let _this =this  
 		        let file = e.target.files[0]
 		        let isLt2M = file.size / 1024 / 1024 < 1;
-		         _this.createReader(file, function (w, h) {
 		        document.getElementById('fileto').value = "";	
+		        _this.createReader(file, function (w, h) {
+		       
 		         	if ( w < 300 || h <400 ) {
 		               	_this.$message({
 						   	message: '照片像素至少要达到300x400。请上传一张更高质量的照片。您的照片像素为'+ w +'x'+ h +'',
@@ -199,50 +243,67 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 			     let dolW = window.innerWidth / 3 ;     // 窗口的宽 / 3 是容器的宽
 			     let dolH = window.innerHeight - 40;	// 窗口的高 -40 是容器的高
 
-			     let XoY = x/y;	//图片的宽高比值
-
+			     let XoY = (Math.round(x/y * 100) / 100);	//图片的宽高比值
 			     
-
 				if (XoY > than && x >= dolW) {
 					_this.widthData  = dolW; 
 				    _this.heightData = dolW/XoY;
-				    _this.autoCropWidth  = dolW/XoY/1.5 - 2;
+				    _this.autoCropWidth  = dolW/XoY*0.75 - 2;
 				    _this.autoCropHeight = dolW/XoY - 2;
 				    
 				}
 
 				else if (XoY > than && x < dolW){
+		
 					_this.widthData  = x; 
 				    _this.heightData = y;
-				    _this.autoCropWidth  = y/1.5 - 2;
+				    _this.autoCropWidth  = y/0.75 - 2;
 				    _this.autoCropHeight = y - 2;
 				}
-
 				else if(XoY < than && y >= dolH){
-					_this.widthData  = dolH*XoY; 
-				    _this.heightData = dolH;
-				    _this.autoCropWidth  = dolH*XoY - 2;
-				    _this.autoCropHeight = dolH*XoY*1.5 - 2;
+					if (XoY>0.75) {
+						
+						_this.widthData  = dolH*XoY; 
+					    _this.heightData = dolH;
+					    _this.autoCropWidth  = dolH*0.75 - 2;
+					    _this.autoCropHeight = dolH - 2;
+					}else{
+						
+						_this.widthData  = dolH*XoY; 
+					    _this.heightData = dolH;
+					    _this.autoCropWidth  = dolH*XoY - 2;
+					    _this.autoCropHeight = dolH*XoY/0.75 - 2;
+					}
+
+
+
 				}
 
 				else if (XoY < than && y < dolH){
-					_this.widthData  = x; 
-				    _this.heightData = y;
-				    _this.autoCropWidth  = x - 2;
-				    _this.autoCropHeight = x*1.5 - 2;
+					 if (XoY>0.75) {
+					 	_this.widthData  = x; 
+					    _this.heightData = y;
+					    _this.autoCropWidth  = y*0.75 - 2;
+					    _this.autoCropHeight = y - 2;
+					 }else{
+						_this.widthData  = x; 
+					    _this.heightData = y;
+					    _this.autoCropWidth  = x - 2;
+					    _this.autoCropHeight = x/0.75 - 2;
+					 }
 				}
 
 				else if (XoY == than && y >= dolH){
 					_this.widthData  = dolH; 
 				    _this.heightData = dolH;
-				    _this.autoCropWidth  = dolH/1.5 - 2;
+				    _this.autoCropWidth  = dolH*0.75 - 2;
 				    _this.autoCropHeight = dolH - 2;
 				}
 
 				else if (XoY == than && y < dolH){
 					_this.widthData  = x; 
 				    _this.heightData = y;
-				    _this.autoCropWidth  = x/1.5 - 2;
+				    _this.autoCropWidth  = x*0.75 - 2;
 				    _this.autoCropHeight = y - 2;
 				}
 
@@ -447,6 +508,11 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
     			});
 		  	},
 		  	next(){
+		  		this.$message({
+						type: 'success',
+						message: '保存成功!',
+						duration:1500
+				});
 				this.$router.push({
 				   path: '/flow/about'
 				})
@@ -627,11 +693,10 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 	}
 	.photo>div{
 		float: left;
+		
 	}
 	.photo>div>img{
-		width: 200px;
-		height: 260px;
-		
+		width: 200px;	
 		border-radius: 5px;
 	}
 
@@ -643,8 +708,6 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 		margin-left: 10px;
 		margin-bottom: 10px;
 		border-radius: 5px;
-
-
 	}
 	.imgbox:hover .smallbg{
 		cursor:pointer;
@@ -653,9 +716,7 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 	.bottomimg{
 		transition: all .4s;
 	}
-/*	.imgbox:hover .bottomimg{
-		transform: scale(1.2);
-	}*/
+
 	.smallbg{
 		color: white;
 		line-height:260px;
@@ -668,9 +729,7 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 		background: rgba(0,0,0,0.5);
 		position: absolute;
 	}
-/*	.smallVideo{
-		position: relative;
-	}*/
+
 	.smallVideo{
 		color: white;
 		line-height:260px;

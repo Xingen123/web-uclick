@@ -23,10 +23,10 @@
 2，精致优雅的餐具
 3，甜品
 4，有鲜花、绿植、懒人沙发、电视机……的超美环境
-5，单反相机" style="margin-top:50px;width:500px;font-size:20px;" :maxlength="250"  v-model="itemProvide"></el-input>
+5，单反相机" style="margin-top:50px;width:500px;font-size:20px;" :maxlength="250" v-model="itemProvide"  @input="descInputTO"></el-input>
 		<el-button type="primary" plain style="width:100px;margin-top:50px;display:block;" @click="go" v-show="next">下一步</el-button>
 		<div style="margin-top:50px;" v-show="button">
-			<el-button type="primary"  style="width:100px;"  :disabled="disabled" @click="save">保存</el-button>
+			<el-button type="primary"  style="width:100px;"  :disabled="disabled" @click="save(1)">保存</el-button>
 		</div>
 	</div>
 </template>
@@ -42,7 +42,8 @@ import global from '@/components/flow/global/global'
 				button:true,
 				itemContent:"",
 				itemProvide:"",
-				number:1500
+				number:1500,
+				timer:""
 			}
 		},
 		props: {},
@@ -50,15 +51,27 @@ import global from '@/components/flow/global/global'
 
 		},
 		methods:{
+
 			descInput(){
+				var _this = this
+				clearTimeout(this.timer)
 				var txtVal = this.itemContent.length;
+				this.timer =  setTimeout(function(){
+					 _this.save('2')		  		
+				},5000);
  				if (txtVal>0) {
 					this.disabled=false
 				}else{
 					this.disabled=true
 				}
 			},
-
+			descInputTO(){
+				var _this = this
+				clearTimeout(this.timer)
+				this.timer =  setTimeout(function(){
+					 _this.save('2')		  		
+				},5000);
+			},
 			//获取用户输入的值
 			what(){
 			  var _this = this
@@ -90,7 +103,7 @@ import global from '@/components/flow/global/global'
 			  })
 			},
 			//保存标题
-			save(){
+			save(num){
 			  var _this = this
 
 		      let param = new FormData();
@@ -107,11 +120,18 @@ import global from '@/components/flow/global/global'
 			  
 
 			  this.$ajax.post('create/webRecommendItem',param).then(function (response) {
-			  	console.log(response)
+			  	
 			  	if (response.data.complete=="SUCCESS") {
 			  		global.$emit("tabsix",true)
-			  		_this.button=false
-					_this.next=true
+			  		if (num == 1 ) {
+			  		 _this.button=false
+					 _this.next=true
+			  		}
+			  		_this.$message({
+						type: 'success',
+						message: '保存成功!',
+						duration:1500
+					});
 			  	}
 	
 			  }).catch(function (error) {
@@ -134,10 +154,12 @@ import global from '@/components/flow/global/global'
 		},
 		created () {
 
-			this.what()
+			
 
 		},
-		mounted () {},
+		mounted () {
+			this.what()
+		},
 	  	destroyed () {}
 	} 
 </script>

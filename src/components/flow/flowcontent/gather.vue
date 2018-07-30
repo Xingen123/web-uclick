@@ -13,7 +13,7 @@
 
 
 		<input type="text" placeholder="请输入地址" id="suggestId" name="address_detail"   v-model="address_detail" @input="descInput" class="input_style" style="width: 465px;
-    border-radius: 5px;padding:0 15px; margin-top:25px;outline:none;height:40px;background:none;border:0px;border:1px solid #dcdfe6;" :class="{'active':tive==true,'unactive':tive==false}">
+    border-radius: 5px; margin-top:25px;outline:none;height:40px;background:none;border:0px;border:1px solid #dcdfe6;" :class="{'active':tive==true,'unactive':tive==false}">
 		<div style="margin-top:25px;color:#505050;">地点备注</div>
 		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">如果您的体验地址不太好找，可以告诉它们一些找到的小技巧，如“在一家
 咖啡馆对面”；您也可以在这里设定一个易于找到的集合地点，然后带领大家一起
@@ -106,6 +106,11 @@ import global from '@/components/flow/global/global'
 				  		_this.$router.push({
 			       			 path: '/flow/require'
 			      		})
+			      		_this.$message({
+							type: 'success',
+							message: '保存成功!',
+							duration:1500
+						});
 				  	}
 				  }).catch(function (error) {
 				      console.log(error);
