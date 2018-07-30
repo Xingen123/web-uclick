@@ -1,7 +1,7 @@
 <template>
 <div>
   <div @click="popup=!popup" style="cursor:pointer;font-size:20px;margin-top:25px;color:gray;">
-   <i class="icon"></i> {{hint}}   
+   <i class="icon"></i><span class="hint">{{hint}}</span>
   </div>
   <div class="popup" v-show="popup" @click="aaa">
     <div class="swiper-container swiper-no-swiping" >
@@ -26,7 +26,7 @@
                         <span style="color:#767676;">{{item.profession}}</span>
                       </div>
                     </div>
-                    <section style="margin-top:30px;">
+                    <section style="margin-top:30px;color:#484848;font-size:18px;">
                       <div>{{item.introduce}}</div>
                       <div style="margin-top:30px;">{{item.motto}}</div>
                     </section>
@@ -73,7 +73,7 @@ export default {
     aaa(event){
       var el1 = event.currentTarget;
        var el2 = event.target;
-       console.log(el1 == el2)
+      
        if(el1 == el2){
            this.popup=!this.popup
        }  
@@ -92,7 +92,6 @@ export default {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-        effect : 'flip',
         observer:true,/*启动动态检查器，当改变swiper的样式（例如隐藏/显示）或者修改swiper的子元素时，自动初始化swiper。*/
         observeParents:true
         // 如果需要前进后退按钮
@@ -104,6 +103,9 @@ export default {
 </script>
 
 <style scoped>
+  .hint:hover{
+    color: rgb(0,162,232);
+  }
   .popup{
     
     width: 100%;
@@ -189,7 +191,7 @@ export default {
   background-size: 100% 100%;
   position: absolute;
   top: 30px;
-  right: 40px;
+  right: 20px;
   z-index: 1;
   cursor: pointer;
 }

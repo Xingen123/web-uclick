@@ -25,10 +25,9 @@
 		<el-input v-model="input" @input="descInput" :maxlength="30" style="margin-top:20px;width:500px;"></el-input>
 		<p  style="line-height:40px;">最多30个字</p>
 		<div style="margin-top:60px;font-size: 20px;">封面照片</div>
-		<popup :hint="hint" :column="column"></popup>
+		<popup :hint="hint" :column="column" :height="285" :imgwidth="470" :top="50" :left="30"></popup>
 		<!-- 图片 -->
-		<div v-show="photo" style="margin-top:10px;font-size:20px;">缩略图</div>
-		<p v-show="photo">调整封面图，按您的喜好出现</p>
+
 		<div v-show="photo" style="width:300px;height:200px;position:relative;" class="bigbox">
 			<img v-lazy="img"   style="width:300px;height:200px;position:absolute;top:0;left:0;border:none;border-radius:5px;" alt="" >
 			<div class="smallbox" @click="compile"><div class="remove" @click.stop="dialogVisible=true"></div>编辑</div>
@@ -85,11 +84,12 @@ import axios from 'axios'
 				hint:"提示和实例",
 				column:[
 					{
-					img:"../../../../static/popup/cover.jpg",
+					img:"../../../../static/popup/cover.png",
 		            content:'封面是用户第一眼看到的照片，封面图片需要同时展现您本人的魅力及您所开展体验的独特性。让潜在的体验者对您及体验产生更多兴趣和信赖。',
 		            text:"数据证明，富有创意或魅力的照片能够带来更多预订。"
 					}
 				],
+				
 				number:30,
 				imageData:"",
 				//标题

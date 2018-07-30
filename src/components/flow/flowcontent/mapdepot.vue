@@ -109,7 +109,7 @@ import popup from '@/components/flow/popup/popup'
 		            src:"../../../../static/popup/1.mp4",
 		            content:'Blueglass为您整理了非常清晰明确的视频标准：',
 		            content1:'1，时长：1分钟以内，',
-		            content2:'2，大小：10MB3，',
+		            content2:'2，大小：10MB，',
 
 		            content4:'3，画质：清晰可辨画面内容，',
 		            content5:'4，视频声音可以是原声，也可以是配乐，',
@@ -119,8 +119,8 @@ import popup from '@/components/flow/popup/popup'
 				column:[
 		          {
 		            img:"../../../../static/popup/1.jpg",
-		            content:'照片主体为体验达人本人，场景需与体验相关。',
-		            text:"如：您开展了篆刻体验，照片中最好出现篆刻相关的元素。"
+		            content:'照片主体为体验达人本人，场景需与体验相关。如：您开展了篆刻体验，照片中最好出现篆刻相关的元素。',
+		        
 		          },
 		          {
 		            img:"../../../../static/popup/2.jpg",
