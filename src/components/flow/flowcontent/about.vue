@@ -5,8 +5,7 @@
 		</p>
 		<popup :hint="hint" :column="column"></popup>
 		<el-input type="textarea"
-  :rows="8"  placeholder="例：Hi，我是花椒。很多人问我为什么叫花椒，因为喜欢吃辣吗？因为是四川人吗？NoNoNo，其实是我几年前看到一本书，讲了花椒与辣椒口感的区别，花椒是麻的，带来的味觉更神秘更让人记忆深刻，所以我就叫花椒。我的好奇心很强，喜欢学习新鲜的东西，也喜欢探秘猎奇的事物，所以我对书籍、厨艺、健身、旅行、摄影、电影、搭配都了解一些……
-" style="width:500px;font-size:20px;" v-model="input"  :maxlength="1500"  @input="descInput"  ></el-input>
+  :rows="8"  placeholder="" style="width:500px;font-size:20px;" v-model="input"  :maxlength="1500"  @input="descInput"  ></el-input>
 		<!-- <p  style="line-height:40px;">还剩{{number}}个字</p> -->
 		<div style="margin-top:50px;" >
 			<el-button type="primary"  style="width:120px;" :disabled="disabled" @click="sort('1')">保存并继续</el-button>

@@ -22,7 +22,7 @@
 		    </el-table-column>
 		    <el-table-column
 
-		      prop="endTime"
+		      prop="startTime"
 		      label="时间"
 		      width="120">
 		    </el-table-column>

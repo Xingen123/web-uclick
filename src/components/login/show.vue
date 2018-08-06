@@ -128,6 +128,15 @@ import Footer from "@/components/footer/footer"
 		},
 		created () {},
 		mounted () {
+			if(navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE7.0"){
+				alert("此浏览器版本较低，建议使用谷歌浏览器。")
+			}else if(navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE6.0"){
+				alert("此浏览器版本较低，建议使用谷歌浏览器。")
+			}else if(navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE5.0"){
+				alert("此浏览器版本较低，建议使用谷歌浏览器。")
+			}
+
+
 			 window.addEventListener('scroll', this.handleScroll)
 		},
 	  	destroyed () {}

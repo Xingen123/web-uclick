@@ -16,8 +16,9 @@
 		    >
 		</el-input>
 
-			<div style="font-size: 28px;margin-top:25px;">填写体验中您提供的独特东西(选填)</div>
-		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">如果您还为体验者准备了其他贴心且特殊的东西，请在此页描述出来。如一份独特的甜品、能带走收藏的小惊喜等，每一个细心之处都是体验者选择再次参加体验的原因。</p>
+			<div style="font-size: 28px;margin-top:25px;">此次活动体验者将获得什么？(选填)</div>
+		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">建议站在体验者的角度，把本次体验您提供的东西尽可能多地逐条描述，更有条理的描述有助于提高体验的购买量。体验者获得的东西不仅可以是具象的实物，还可以是抽象的，比如：收获一些志同道合的朋友以及一场刺激惊艳的视觉体验。
+Tips：为体验者准备一份额外的“秘密小惊喜”，会更容易获得好评哦！</p>
 		<el-input type="textarea"
   :rows="8"  placeholder="例：1，帝都巨大杯酸奶（原料：新鲜进口水果、酸奶鲜果乐、希腊酸奶冰激凌……）
 2，精致优雅的餐具

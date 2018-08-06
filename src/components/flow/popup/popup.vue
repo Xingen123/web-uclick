@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div @click="popup=!popup" style="cursor:pointer;font-size:20px;margin-top:25px;color:gray;">
+  <div @click="popup=!popup" style="cursor:pointer;font-size:20px;margin-top:25px;color:#00A0E8;">
    <i class="icon"></i> <span class="hint">{{hint}}</span>
   </div>
   <div class="popup" v-show="popup" @click="aaa">
