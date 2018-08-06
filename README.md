@@ -24,7 +24,7 @@
 ├── config                      // 配置
 │   ├── dev.env.js              // 开发环境
 │   ├── index.js                // 配置控制
-│   ├── prod.env.js      		// 生产环境
+│   ├── prod.env.js     // 生产环境
 │   └── test.env.js            
 ├── dist						// build包		
 ├── src                        
