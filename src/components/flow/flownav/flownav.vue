@@ -1,17 +1,11 @@
 <template>  
     <div class="flownav">
         <div class="listfather"  >
-<!--             <div class="list" @click="box=true,hasError=true,isActive=false">
-                
-            </div> -->
-            
             <div id="list" @click="list_on"> 
                 <div class="app fris" v-bind:class="{ frist_: listbox.isfrist_, frist_to: listbox.isfrist_to }"></div>
                 <div class="app play" v-bind:class="{ play_: listbox.isplay_, play_to: listbox.isplay_to }"></div>
                 <div class="app two"  v-bind:class="{ two_: listbox.istwo_, two_to: listbox.istwo_to }"></div>
             </div>    
-
-
             <div class="gohome" @click="gohome">
                 
             </div>
@@ -73,22 +67,7 @@
                         </div>
                     </router-link>
                 </li>
-              <!--   <li>
-                    <router-link to="/flow/moment">
-                        <div>
-                            <span>意向时间</span>
-                            <span v-show="four" class="right"></span>
-                        </div>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link to="/flow/thing">
-                        <div>
-                            <span>体验包含的东西</span>
-                            <span v-show="nine" class="right"></span>
-                        </div>
-                    </router-link>
-                </li> -->
+
                 <li>
                     <router-link to="/flow/gather">
                         <div>
@@ -97,14 +76,7 @@
                         </div>
                     </router-link>
                 </li>
-                <!-- <li>
-                    <router-link to="/flow/experience">
-                        <div>
-                            <span>体验地点</span>
-                            <span v-show="eight" class="right"></span>
-                        </div>
-                    </router-link>
-                </li> -->
+
                 <li>
                     <router-link to="/flow/require">
                         <div>
@@ -113,14 +85,7 @@
                         </div>
                     </router-link>
                 </li>
-               <!--  <li>
-                    <router-link to="/flow/peoplenum">
-                        <div>
-                            <span>体验人数</span>
-                            <span v-show="tenThree" class="right"></span>
-                        </div>
-                    </router-link>
-                </li>  -->
+
                 <li>
                     <router-link to="/flow/lastTime">
                         <div>
@@ -129,14 +94,7 @@
                         </div>
                     </router-link>
                 </li>                         
-               <!--  <li>
-                    <router-link to="/flow/remark">
-                        <div>
-                            <span>体验包含的独特东西</span>
-                            <span v-show="ten" class="right"></span>
-                        </div>
-                    </router-link>
-                </li> -->
+
                 <li>
                     <router-link to="/flow/price">
                         <div>
@@ -152,10 +110,7 @@
                         </div>
                     </router-link>
                 </li>          
-                <!-- <div class="back"></div> -->
-                <!-- <li >
-                  
-                </li>   -->
+
             </ul>
         </transition>
 
@@ -249,13 +204,9 @@ import global from '@/components/flow/global/global'
               var _this=this
               let param = new FormData();
               var tokenone =sessionStorage.getItem('encryptToken');
-              
               var recommend =sessionStorage.getItem('recommendId');
-
-
               param.append('id',recommend); 
               param.append('token',tokenone);
-
               this.$ajax.post('query/webConvoySelected',param).then(function (response) {
                
                 if (response.data.complete=="SUCCESS"){
@@ -271,11 +222,6 @@ import global from '@/components/flow/global/global'
                     _this.eight=response.data.completeAmount[7] 
                     _this.nine=response.data.completeAmount[8] 
                     _this.ten=response.data.completeAmount[9]     
-                    // _this.tenOne=response.data.completeAmount[10] 
-                    // _this.tenTwo=response.data.completeAmount[11] 
-                    // _this.tenThree=response.data.completeAmount[12] 
-                    // _this.tenFour=response.data.completeAmount[13]     
-                    // _this.tenFive=response.data.completeAmount[14]   
                 }
               }).catch(function (error) {
                   console.log(error);

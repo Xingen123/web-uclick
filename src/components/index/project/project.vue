@@ -197,7 +197,6 @@ import store from '@/store/store'
 		       	 path: '/calendar/'+id
 		      	})
 			}
-
 		},
 		computed:{
 

@@ -56,7 +56,7 @@ export default new Router({
     	path:"/",
     	redirect:'/show'
     },
-        {
+    {
       path: '/repertoire',
       component: repertoire,
       meta: {
@@ -91,7 +91,8 @@ export default new Router({
       path: '/question',
       component:Question,
       meta: {
-        title: '常见问题'
+        title: '常见问题',
+        requiresAuth: true
       }
     },
     // 移动端点击登录
@@ -153,8 +154,8 @@ export default new Router({
       path:"/time",
       component:Time,
       meta:{
-        title:"截图"
-        // requiresAuth: true
+        title:"截图",
+        requiresAuth: true
       }
     },
     {
@@ -208,7 +209,8 @@ export default new Router({
             	component: About,
               meta: {
                 title: '关于您',
-                requiresAuth: true
+                requiresAuth: true,
+                keepAlive: true
               }
             },
             { 

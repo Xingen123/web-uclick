@@ -8,23 +8,23 @@
 	        </div>
 		</div>
 		<div class="boxshow ">
-			<img src="../../../static/img/1.png">
+			<img src="../../../static/img/1.jpg">
 	        <div class="one" @click="register">成为体验达人</div>
 	    </div>
 	    <div class="boxshow">
-	    	<img src="../../../static/img/2.png">
+	    	<img src="../../../static/img/2.jpg">
 	    	<div class="two" @click="register">成为体验达人</div>
 	    </div>
 	    <div class="boxshow">
-	    	<img src="../../../static/img/3.png">
+	    	<img src="../../../static/img/3.jpg">
 
 	    </div>
 	    <div class="boxshow">
-	    	<img src="../../../static/img/4.png">
+	    	<img src="../../../static/img/4.jpg">
 	    	<div class="three" @click="register">成为体验达人</div>
 	    </div>
 	    <div class="boxshow">
-	    	<img src="../../../static/img/5.png">
+	    	<img src="../../../static/img/5.jpg">
 	    </div>
 	    <div class="content">
 	    	<div v-text="title"></div>
@@ -33,7 +33,7 @@
 	    	<p v-text="p3"></p>
 	    </div>
 	    <div class="boxshow">
-	    	<img src="../../../static/img/6.png">
+	    	<img src="../../../static/img/6.jpg">
 	    </div>
 	    <div class="footer" >
 	    	<div class="ask" style="margin-bottom:50px;">
@@ -153,7 +153,7 @@ import Footer from "@/components/footer/footer"
 	.content>div{font-size:50px;font-weight: bold;margin-top: 40px;}
 	.content>p{font-size:25px;line-height: 60px;}
 	.headnav{width: 100%; position: fixed;z-index: 10;height: 60px;background-color: white;padding-bottom: 10px;transition: all .5s;}
-    .logoimg{width: 167px; height: 50px;background: url(../../../static/img/logo.png) no-repeat;background-size:100% 100%;position: absolute;top: 10px;left:5%;cursor:pointer;}
+    .logoimg{width: 167px; height: 50px;background: url(../../../static/img/logo.png) no-repeat;background-size:100% 100%;position: absolute;top: 10px;left:5%;cursor:pointer;border-radius: 3px;}
     .loginshow{width: 98px;height: 48px;line-height: 48px;text-align: center;color: white;background: rgba(0,0,0,0.5);border: 1px solid white; border-radius: 5px;font-size: 24px;font-size:16px;cursor:pointer;}
     .resetshow{width: 100px;height: 50px;line-height: 50px;text-align: center;color: white;background: rgb(0,162,233);border-radius: 5px;font-size: 16px;cursor:pointer;}
     .one{width:150px;height: 50px;line-height: 50px;text-align: center;color: white;background: rgb(0,162,233);border-radius: 5px;font-size: 18px;position: absolute;    bottom: 43%;

@@ -38,7 +38,7 @@
 		<!-- 确认退出 -->
 
 			<el-dialog
-					:modal="false"
+		  :modal="false"
 		  title="提示"
 		  :visible.sync="dialogVisible"
 		   :width="width" 
@@ -158,7 +158,7 @@ float:left;
 margin-left: 113px;
 margin-top: -43px; 
 font-size: 20px;
-font-weight: bold;
+
 }
 .el-dialog__wrapper{
 	background: rgba(0,0,0,0.5);

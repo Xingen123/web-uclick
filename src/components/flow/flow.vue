@@ -2,8 +2,12 @@
 	<div class="flow">
 		<head-er class="headnav"></head-er>
 		<flow-nav ></flow-nav>
+
 		<transition name="component-fade" mode="out-in">
-			<router-view class="content" ></router-view>
+			<keep-alive>	
+				<router-view class="content" v-if="$route.meta.requiresAuth"></router-view>
+			</keep-alive>
+				<router-view v-if="!$route.meta.requiresAuth"></router-view>
 		</transition>	
 		<phone-ui class="ph-none"></phone-ui>	
 	</div>

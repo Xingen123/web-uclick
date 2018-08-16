@@ -12,12 +12,61 @@ html::-webkit-scrollbar {
 }
 
 body {
+    padding-right:0 !important;
     overflow:-Scroll;
     overflow-x:hidden;
     font-family:"PingFang-Regular";
 
 }
- .logoshow{width: 167px; height: 50px;background: url(img/logo.png) no-repeat;background-size:100% 100%;position: fixed;top: 10px;left:5%;cursor:pointer;}
+    .apply{
+      display: block;
+      padding:5px 10px ;
+      width:30%;
+      min-width:60px;
+      margin: 0 auto;
+      cursor: pointer;
+      border: 1px solid rgb(0,162,232);
+      background-color:rgb(0,128,186);
+      color: white;
+      font-size: 14px;
+      border-radius:3px;
+    }
+.el-table--scrollable-x .el-table__body-wrapper{
+    overflow-x: hidden;
+}
+.el-table th{
+    font-size: 17px;
+  
+}
+.el-table th,.el-table td{
+    text-align: center;
+    color: rgb(72,72,72);
+    
+}
+
+.el-collapse-item__arrow.is-active{
+     transform: rotate(270deg);
+}
+.el-collapse-item__arrow{
+    transform: rotate(90deg);
+}
+.el-collapse{
+    border:none;
+}
+.el-collapse-item__wrap{
+      border:none;
+}
+.el-collapse-item__header{
+    width: 90%;
+    min-width:600px; 
+    font-size: 15px;
+   
+    border-radius:5px; 
+    background-color:rgb(0,128,186);
+    color: white;
+    margin-top: 20px;
+}
+ .logoshow{width: 167px; height: 50px;border-radius: 3px; background: url(img/logo.png) no-repeat;background-size:100% 100%;position: fixed;top: 10px;left:5%;cursor:pointer;}
 .login {
     width:100%;
     height:100%;
