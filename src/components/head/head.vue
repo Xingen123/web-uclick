@@ -148,17 +148,14 @@
 .index{
 width: 100%;
 background: white;
-/*position: fixed;*/
-/*top:0;*/
-/*left: 0;*/
 z-index: 12;
 }
 .link{
 float:left;
-margin-left: 113px;
+margin-left: 143px;
 margin-top: -43px; 
 font-size: 20px;
-
+overflow: hidden;
 }
 .el-dialog__wrapper{
 	background: rgba(0,0,0,0.5);
@@ -169,15 +166,14 @@ font-size: 20px;
 		border-bottom: 1px solid #DCDFE6;
 		    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 4px !important;
 	}
-
 	.logo{
 		width:135px;
 		height: 60px;
 		cursor:pointer;
+		border-radius: 3px;
 		border-right: 1px solid #DCDFE6;
 		background: url(img/logo.png) no-repeat;
-		background-size:80% 80%;
-		background-position: 10px;
+		background-size:100% 100%;
 	}
 	.head{
 		position:absolute;
@@ -186,7 +182,6 @@ font-size: 20px;
 	}
 	.tiyan{
 		cursor:pointer;
-		/*padding-bottom: 13px;*/
 	}
 	.headimg{
 		width: 50px;
@@ -198,9 +193,7 @@ font-size: 20px;
 		cursor:pointer;
 		padding-bottom: 3px;
 	}
-	.link{
-		overflow: hidden;
-	}
+
 	.link>li{
 		float: left;
 		margin-left: 40px;

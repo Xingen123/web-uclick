@@ -102,6 +102,7 @@
 		color: rgb(0,161,232) !important;
 	}
 	.home-tabbox{
+		overflow-x: auto;
 		margin-top: 50px;
 	}
 	.tabs{

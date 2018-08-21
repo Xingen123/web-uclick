@@ -29,7 +29,7 @@
 		</div>
 		<!-- 视频 -->
 		<div style="margin-top:50px;color:#505050;font-size: 18px;">视频</div>
-		<!-- <popup :hint="hint" :column="videoitem"></popup> -->
+		<popup :hint="hint" :column="videoitem"></popup>
 
 			<a  class="upVideo" style="margin-top:10px;">
 				<!-- <el-container v-loading="loading"> -->
@@ -76,12 +76,12 @@
 <script>
 import global from '@/components/flow/global/global'
 import repertoire from '@/components/flow/flowcontent/repertoire'
-// import popup from '@/components/flow/popup/popup'
+import popup from '@/components/flow/popup/popup'
 
 	export default{
 		components:{
 			repertoire,
-			// popup,
+			popup,
 			videodom:'<div></div>'
 		},
 		data(){
@@ -231,8 +231,16 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 					    	}
 					      	_this.photo()
 					    })  
-		                _this.$store.commit('onOff')
-						_this.adaptation(w,h,1) 		              
+
+					    let dolW = window.innerWidth;
+		        		if (dolW > 600) {
+		        			 _this.$store.commit('onOff')
+		        			 _this.adaptation(w,h,1)
+		        		}else{
+		        			_this.imgfun(file)	
+		        		}
+		                // _this.$store.commit('onOff')
+						// _this.adaptation(w,h,1) 		              
 		            }
 		          });
 		    },
@@ -344,9 +352,12 @@ import repertoire from '@/components/flow/flowcontent/repertoire'
 				this.$ajax.post('update/webRecommendPicture',param).then(function (response) {
 
 					if (response.data.complete=="SUCCESS") {	
-
-						_this.$store.commit('onOff')
-						_this.photo()  
+								let dolW = window.innerWidth;
+				        		if (dolW > 600) {
+				        			 _this.$store.commit('onOff')
+						  		
+						  		}	
+								_this.photo()  
 
 					}
 

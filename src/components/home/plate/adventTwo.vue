@@ -60,7 +60,7 @@
 		
 		  :visible.sync="dialogVisible"
 
-		  width="30%">
+		  width="45%">
 		  <template>
 			  <el-table
 			    :data="tableData1"

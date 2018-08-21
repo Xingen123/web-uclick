@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'PingFang_Regular';
+    src: url('fonts/PingFang_Regular.eot');
+    src: url('fonts/PingFang_Regular.eot') format('embedded-opentype'),
+         url('fonts/PingFang_Regular.woff2') format('woff2'),
+         url('fonts/PingFang_Regular.woff') format('woff'),
+         url('fonts/PingFang_Regular.ttf') format('truetype'),
+         url('fonts/PingFang_Regular.svg#PingFang_Regular') format('svg');
+}

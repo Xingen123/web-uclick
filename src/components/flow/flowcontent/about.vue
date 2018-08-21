@@ -3,10 +3,9 @@
 		<div style="font-size: 28px;">一段真诚的话介绍您自己</div>
 		<p style="margin-top:25px;color:#505050;width:550px;" class="text_p">用流畅的语言介绍您自己，告诉大家您的成长经历、性格、兴趣爱好、技能特长等等，说明为何您是开展此次体验的最佳人选。有趣的个性和真诚的语言能让人们更愿意参加您的体验，与有意思的您交朋友。
 		</p>
-		<!-- <popup :hint="hint" :column="column"></popup> -->
+		<popup :hint="hint" :column="column"></popup>
 		<el-input type="textarea"
-  :rows="8"  placeholder="" style="width:500px;font-size:20px;" v-model="input"  :maxlength="1500"  @input="descInput"  ></el-input>
-		<!-- <p  style="line-height:40px;">还剩{{number}}个字</p> -->
+  :rows="8"  style="width:500px;font-size:20px;" v-model="input"  :maxlength="1500"  @input="descInput"  ></el-input>
 		<div style="margin-top:50px;" >
 			<el-button type="primary"  style="width:120px;" :disabled="disabled" @click="sort('1')">保存并继续</el-button>
 		</div>
@@ -14,11 +13,11 @@
 	</div>
 </template>
 <script>
-// import popup from '@/components/flow/popup/pAbout'
+import popup from '@/components/flow/popup/pAbout'
 import global from '@/components/flow/global/global'
 	export default{
 		components:{
-			// popup
+			popup
 		},
 		data(){
 			return{

@@ -187,13 +187,16 @@ import Header from "@/components/head/head"
 	width:360px;
 	height:240px;
 	margin-top: 10px;
-	/*margin-left: 150px;*/
+	
 	text-align: center;
     line-height:240px;
     position: relative;
     border: 1px solid #999;
     text-decoration: none;
 }
+	.upload>input{
+		cursor: pointer;
+	}
 .change{
 	/*display: none;*/
 	width:360px;

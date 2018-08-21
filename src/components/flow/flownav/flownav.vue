@@ -11,7 +11,7 @@
             </div>
         </div>
         <transition name="bounce">
-            <ul class='box' v-show="box"  >
+            <ul class='box' v-show="box"  @click="boxfun">
                 <li class="frist">
                     <div class="fristdiv" style="font-size:28px;">
                         提交体验
@@ -156,6 +156,11 @@ import global from '@/components/flow/global/global'
         props: { },
         watch:{
             '$route' (to, from) {  
+                this.boxfun()
+            }  
+        },
+        methods:{
+            boxfun(){
                 let width = document.body.clientWidth;
                 if(width<600){
                     this.box=false
@@ -166,9 +171,7 @@ import global from '@/components/flow/global/global'
                     this.listbox.istwo_=false
                     this.listbox.isfrist_=false
                 }   
-            }  
-        },
-        methods:{
+            },
             list_on(){
                 if (this.box==true) {
                     this.listbox.isplay_to=true

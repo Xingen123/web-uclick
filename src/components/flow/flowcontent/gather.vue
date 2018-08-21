@@ -69,6 +69,7 @@ import global from '@/components/flow/global/global'
  			  
 			  this.$ajax.post('query/webRecommendDetail',param).then(function (response) {
 			  	if (response.data.complete=="SUCCESS") {
+			  		console.log(1)
 			  		if (response.data.addressDetail!=null){
 			  			global.$emit("tabseven",true)
 			  			_this.disabled=false
@@ -84,7 +85,46 @@ import global from '@/components/flow/global/global'
 			      console.log(error);
 			  })
 			},
+			mapggg(){
+				 var th = this
+                   var map = new BMap.Map("allmap");
+                   // 初始化地图,设置中心点坐标，
+		    	   var point = new BMap.Point(th.userlocation.lng,th.userlocation.lat); // 创建点坐标，汉得公司的经纬度坐标
+                   map.centerAndZoom(point, 15);
+                   map.enableScrollWheelZoom();
+                   var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+                       {
+                           "input": "suggestId"
+                           , "location": map
+                       })
+                   var myValue
+                   ac.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
+                       var _value = e.item.value;
+                       th.tive=true
+                       myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+                       th.address_detail = myValue
+                       setPlace();
+                   });
+                   function setPlace() {
+                       map.clearOverlays();    //清除地图上所有覆盖物
+                       function myFun() {
+                           th.userlocation = local.getResults().getPoi(0).point;
+                           map.centerAndZoom(th.userlocation, 18);
+                           map.addOverlay(new BMap.Marker(th.userlocation));    //添加标注
+                       }
+                       var local = new BMap.LocalSearch(map, { //智能搜索
+                           onSearchComplete: myFun
+                       });
+                       local.search(myValue);
+                       //测试输出坐标（指的是输入框最后确定地点的经纬度）
+                       map.addEventListener("click",function(e){
+                           //经度
+                           //维度
+                           // console.log(e.userlocation.lat);
 
+                       })
+                   }
+			},
 			mapgo(){
 				  var _this=this
 			      let param = new FormData();
@@ -135,50 +175,17 @@ import global from '@/components/flow/global/global'
 		},
 		created () {},
 		mounted () {
-			this.gather()
-			this.$nextTick(function () {
-					// console.log(2)
-                   var th = this
+			
+			var th = this
+			this.$nextTick()
+				.then(function () {
+			  	 th.gather()
                    // 创建Map实例
-                   var map = new BMap.Map("allmap");
-                   // 初始化地图,设置中心点坐标，
-		    	   var point = new BMap.Point(th.userlocation.lng,th.userlocation.lat); // 创建点坐标，汉得公司的经纬度坐标
-                   map.centerAndZoom(point, 15);
-                   map.enableScrollWheelZoom();
-                   var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
-                       {
-                           "input": "suggestId"
-                           , "location": map
-                       })
-                   var myValue
-                   ac.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
-                       var _value = e.item.value;
-                       th.tive=true
-                       myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
-                       th.address_detail = myValue
-                       setPlace();
-                   });
-                   function setPlace() {
-                       map.clearOverlays();    //清除地图上所有覆盖物
-                       function myFun() {
-                           th.userlocation = local.getResults().getPoi(0).point;
-                           map.centerAndZoom(th.userlocation, 18);
-                           map.addOverlay(new BMap.Marker(th.userlocation));    //添加标注
-                       }
-                       var local = new BMap.LocalSearch(map, { //智能搜索
-                           onSearchComplete: myFun
-                       });
-                       local.search(myValue);
-                       //测试输出坐标（指的是输入框最后确定地点的经纬度）
-                       map.addEventListener("click",function(e){
-                           //经度
-                           //维度
-                           // console.log(e.userlocation.lat);
-
-                       })
-                   }
-                   
-           })
+                   console.log(3)
+			  }).then(function () {
+			  	  console.log(4)
+			   th.mapggg()
+			  })
 			
 		},
 	  	destroyed () {}

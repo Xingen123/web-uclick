@@ -2,7 +2,7 @@
 	<div class="footer">
 		<div class="footertext">
 			Blueglass除了有近30万人享用的一杯让人流口水的酸奶,<br>
-			还有很多关于Befriend体验达人的故事,<br>
+			还有很多关于Blueglass体验达人的故事,<br>
 			我们有内容十分精彩Instagram账号、小红书账号、微博账号,<br>
 			<div style="margin-top:30px;">
 				欢迎点击右方图标关注,快来和有意思的人成为朋友吧 !

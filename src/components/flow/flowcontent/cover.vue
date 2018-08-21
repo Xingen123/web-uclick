@@ -25,7 +25,7 @@
 		<el-input v-model="input" @input="descInput" :maxlength="30" style="margin-top:20px;width:500px;"></el-input>
 		<p  style="line-height:40px;">最多30个字</p>
 		<div style="margin-top:60px;font-size: 20px;">封面照片</div>
-		<!-- <popup :hint="hint" :column="column" :height="285" :imgwidth="470" :top="50" :left="30"></popup> -->
+		<popup :hint="hint" :column="column" :height="285" :imgwidth="470" :top="50" :left="30"></popup>
 		<!-- 图片 -->
 
 		<div v-show="photo" style="width:300px;height:200px;position:relative;" class="bigbox">
@@ -71,13 +71,13 @@
 <script>
 import global from '@/components/flow/global/global'
 import store from '@/store/store'
-// import popup from '@/components/flow/popup/popup'
+import popup from '@/components/flow/popup/popup'
 import repertoire from '@/components/flow/flowcontent/repertoire'
 import axios from 'axios'
 	export default{
 		components:{
 			repertoire,
-			// popup
+			popup
 		},
 		data(){
 			return{
@@ -128,10 +128,13 @@ import axios from 'axios'
 					_this.$ajax.post('create/webRecommend',param).then(function (response) {
 						
 						if (response.data.complete=="SUCCESS") {
-								
-								_this.$store.commit('onOff')
+								let dolW = window.innerWidth;
+				        		if (dolW > 600) {
+				        			 _this.$store.commit('onOff')
+						  		
+						  		}	
 						  		_this.img = window.URL.createObjectURL(data)
-						  		_this.photo=true			  		
+						  		_this.photo=true		  		
 						}
 
 					})
@@ -244,8 +247,15 @@ import axios from 'axios'
 		          		return false;
 		        	}
 		        	else{	
-		                _this.$store.commit('onOff')
-		                _this.adaptation(w,h,1)
+		        		let dolW = window.innerWidth;
+		        		if (dolW > 600) {
+		        			 _this.$store.commit('onOff')
+		        			 _this.adaptation(w,h,1)
+		        		}else{
+		        			_this.imgfun(file)	
+		        		}
+		               
+		                
 		            }
    
 		        })      

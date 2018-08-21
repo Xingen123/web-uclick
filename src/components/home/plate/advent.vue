@@ -38,7 +38,7 @@
                 </el-table-column>
                 <el-table-column
                   prop="amount"
-                  label="收益"
+                  label="预计收益"
                   >
                 </el-table-column>
                  <el-table-column

@@ -20,7 +20,7 @@
 				<div style="position: relative;top:85%;">绑定账号：{{number}}</div>
 			</div>
 			<div style="height:20%;text-align:center;">
-				<el-button v-if="drawbotton" type="primary" disabled style="width:120px;font-size:17px;height:35px;padding:0;line-height:5px;background:rgb(214,214,214);color:rgb(131,131,131);border:none;">已绑定</el-button>
+				<el-button v-if="drawbotton" type="primary"  style="width:120px;font-size:17px;height:35px;padding:0;line-height:5px;background:rgb(214,214,214);color:rgb(131,131,131);border:none;"  @click="open">解绑</el-button>
 				 <el-button type="primary" style="width:120px;text-align:center;font-size:17px;height:35px;line-height:5px;padding:0;background:rgb(0,128,186);" v-else @click="tiao">绑定支付宝</el-button>
 			</div>
 		</div>
@@ -28,12 +28,15 @@
 		<div class="detail">
 			<div style="height:10%;font-weight:bold;padding:10px 10px;">钱包明细</div>
 			<ul class="recordItem">
-				<li v-for="item in recordItem">
+				<li v-if="recordItem.length>0" v-for="item in recordItem">
 					<span style="display:inline-block;text-align:left; width:200px;">{{item.created }}</span>
 					
 					<span style="display:inline-block;text-align:center; width:200px;">{{item.type}}</span>
 
 					<span style="display:inline-block;text-align:center; width:200px;">{{item.actualAmount | amount}}</span>
+				</li>
+				<li  style="text-align:center;font-weight:none;margin-top:20px;" v-if="recordItem.length==0">
+					<span >暂无记录</span>
 				</li>
 			</ul>
 		</div>
@@ -44,7 +47,7 @@
 		  :closeOnClickModal="true"	
 		  :visible.sync="dialog"
 		  :width="width"
-		  style="width:30%;min-width:300px;margin: 0 auto;">
+		  style="width:30%;min-width:450px;margin: 0 auto;">
 			<!-- 提现确认 -->
 			<div >
 			   <div style="font-weight: bold;font-size:17px;">提现金额</div>
@@ -130,9 +133,10 @@
 		      var tokenone =sessionStorage.getItem('encryptToken');
 			  param.append('token',tokenone);
 			  this.$ajax.post('query/transferFundRecord',param).then(function (response) {
-			  	if (response.data.fundRecordList.length>0) {
+			  	// if (response.data.fundRecordList.length>0) {
 			  		_this.recordItem=response.data.fundRecordList
-			  	}
+			  	// }
+			  	console.log(response.data);
 			  	_this.dialogVisible=true	  	
 			  }).catch(function (error) {
 			      console.log(error);

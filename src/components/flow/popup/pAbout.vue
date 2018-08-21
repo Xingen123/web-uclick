@@ -84,14 +84,13 @@ export default {
 
       let mySwiper = new Swiper ('.swiper-container', {
       // 如果需要分页器
-        pagination: {
-          el: '.swiper-pagination',
-          type: 'fraction'
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
+        pagination: '.swiper-pagination',
+       paginationType: 'fraction',
+        // },
+        // navigation: {
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        // },
         observer:true,/*启动动态检查器，当改变swiper的样式（例如隐藏/显示）或者修改swiper的子元素时，自动初始化swiper。*/
         observeParents:true
         // 如果需要前进后退按钮

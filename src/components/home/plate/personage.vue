@@ -33,7 +33,7 @@
 
 					<div style="margin-top:15px;">
 						<span style="width:90px;display:inline-block;color:rgb(72,72,72);font-weight: bold;">标签：</span>
-						<span class="spantitle" v-for="relate in relateTitle" style="background:rgb(0,128,186); color:white;padding:2px; display:inline-block;border-radius:5px;margin-left: 10px;">{{relate}}</span>
+						<span class="spantitle" v-for="relate in relateTitle" style="background:rgb(0,128,186); color:white;padding:2px 10px;display:inline-block;border-radius:5px;margin: 10px;">{{relate}}</span>
 
 					</div>
 				</div>
@@ -48,7 +48,7 @@
 			</div>
 			<div style="margin-top:15px;">
 				<div style="margin-top:15px;font-weight: bold;">
-						个人介绍
+						通过体验传递什么
 				</div>
 				<div style="margin-top:15px;" >{{content | titlefunction}}</div>
 			</div>
@@ -145,10 +145,10 @@
 	}
 	.per-box{
 		width:100%;
-		height: 200px;
+		height: 220px;
 		overflow: hidden;
 		border-bottom:1px solid rgb(232,232,232);
-		padding: 20px 0;
+		padding: 30px 0;
 	}
 	.per-box>div{
 		box-sizing: border-box;
