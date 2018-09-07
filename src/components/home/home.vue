@@ -7,11 +7,13 @@
 					v-for="(item,index) in tab" 
 					v-text="item.name"
 					:key="index" 
-					@click="currentTab=item.tab" 
+					@click="move(item.tab)" 
 					:class="{cur:currentTab === item.tab}"> 
 								
 				</div>
 			</div>
+			<div class="bar" :class="barBorder"></div>
+
 			<div class="tabs">
 				<keep-alive>    
 					<component :is="currentTab"></component>
@@ -37,6 +39,8 @@
 		data(){
 			return{
 				currentTab:"Personage",
+				barBorder:"barone",
+
 				tab:[
 					{
 						tab:"Personage",			
@@ -62,7 +66,18 @@
 
 		},
 		methods:{
-
+			move(val){
+				this.currentTab=val
+				if (val === 'Personage') {
+		        	this.barBorder = 'barone';
+		     	} else if (val === 'AdventTwo') {
+		       		 this.barBorder = 'bartwo';
+		      	} else if (val === 'Advent') {
+		       		 this.barBorder = 'barthree';
+		      	} else{
+		      		 this.barBorder = 'barfour';
+		      	}
+			}
 		},
 		computed:{
 
@@ -77,6 +92,27 @@
 		width: 100%;
 		margin-bottom: 50px;
 	}
+.bar{
+	  width: 2px;
+      height: 25px;
+	  float: left;
+	  margin-top:20px;
+	  margin-left: -200px;
+      background: rgb(0,161,232);
+      transition: all 0.375s;
+}
+.barone{
+	transform: translate3d(0,0,0);
+}
+.bartwo{
+	 transform: translate3d(0,170%,0);
+}
+.barthree{
+	 transform: translate3d(0,340%,0);
+}
+.barfour{
+	 transform: translate3d(0,510%,0);
+}
 	.tab-title{
 		width: 200px;
 		height: 500px;
@@ -98,7 +134,6 @@
 		cursor: pointer;
 	}
 	.cur{
-		border-left: 2px solid  rgb(0,161,232);
 		color: rgb(0,161,232) !important;
 	}
 	.home-tabbox{
@@ -106,9 +141,58 @@
 		margin-top: 50px;
 	}
 	.tabs{
+
 		margin-left: 260px;
 		box-sizing:border-box;
 		-moz-box-sizing:border-box; /* Firefox */
 		-webkit-box-sizing:border-box; /* Safari */
+	}
+	@media screen and (max-width:600px) {
+		.home-tabbox{
+			margin-top:0;
+		}
+	   	.tab-title{
+			width:100%;
+			margin:0 auto;
+			height:58px;
+			background:rgb(248,248,248);
+			overflow:hidden;
+			float: none;
+			border:none;
+		}
+		.tab-title>div{
+			width: 25%;
+			float: left;
+			padding-left: 5px;
+    		text-align: center;
+			font-size: 10px;
+		}
+		.cur{
+		border-left: none;
+		color: rgb(0,161,232) !important;
+		}
+		.tabs{
+			margin-left: 0;
+			margin-top:15px;
+		}
+		.bar{
+		  width: 25%;
+	      height: 2px;
+		  float: left;
+		  margin-top:0;
+		  margin-left:0;
+		}
+		.barone{
+			transform: translate3d(0,0,0);
+		}
+		.bartwo{
+			 transform: translate3d(100%,0,0);
+		}
+		.barthree{
+			 transform: translate3d(200%,0,0);
+		}
+		.barfour{
+			 transform: translate3d(300%,0,0);
+		}
 	}
 </style>

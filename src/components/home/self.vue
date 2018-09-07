@@ -339,7 +339,7 @@
 		width: 100px;
 		height: 100px;
 		border-radius: 50px;
-		border: 1px solid gray;
+		/*border: 1px solid gray;*/
 	}
 	.upload{
 	cursor:pointer;	

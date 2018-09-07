@@ -3,7 +3,7 @@
 	<div class="project">
 		<div class="box" v-for="(item,index) in project" :key="index">
 			<div class="status">
-				<el-progress style="line-height:0;"  :text-inside="true" :stroke-width="17" :percentage="item.completeAmount" ></el-progress>
+				<!-- <el-progress style="line-height:0;"  :text-inside="true" :stroke-width="17" :percentage="item.completeAmount" ></el-progress> -->
 				<img style="position:absolute;top:0px;left0;z-index:-1;width:100%;height:100%;border-radius:5px;" v-if="!item.imageUrl" v-lazy="" alt="" :onerror="defaultImg">
 				<img style="position:absolute;top:0px;left0;z-index:-1;width:100%;height:100%;border-radius:5px;" v-if="item.imageUrl" v-lazy="item.fileServer+'/'+item.imageUrl" alt="" :onerror="defaultImg">
 			</div>
@@ -294,8 +294,8 @@ import store from '@/store/store'
 	.phonetitle{
 		position: absolute;
 		margin-top: 0px !important;
-	    top: 200px;
-	    right: 0;
+	    top:0;
+	    right: 5px;
 		margin-left: 0 !important;
 
 	}

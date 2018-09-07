@@ -46,7 +46,7 @@
 			<!-- <video id="fixedvideo" :src="videoB"  autoplay loop></video> -->
 		<!-- 图片 -->
 		<div style="margin-top:50px;color:#505050;font-size: 18px;">图库</div>
-		<!-- <popup :hint="hint" :column="column"></popup> -->
+		<popup :hint="hint" :column="column"></popup>
 		<div class="photo" >
 			<div  class="imgbox"  v-for="items in photoItem" v-dragging="{ item: items, list: photoItem, group: 'color' }" :key="items.id">
 					<div class="smallbg" @click="cropper(items.fileServer,items.imgUrl,items.id)">

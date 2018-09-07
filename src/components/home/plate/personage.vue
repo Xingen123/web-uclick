@@ -42,7 +42,7 @@
 					<div style="margin-top:15px;font-weight: bold;">
 						个人介绍
 					</div>
-					<div  style="margin-top:15px;text-align:justify;">{{title}}</div>
+					<div  style="margin-top:15px;text-align:justify;text-indent:2em;">{{title}}</div>
 				</div>
 
 			</div>
@@ -50,7 +50,7 @@
 				<div style="margin-top:15px;font-weight: bold;">
 						通过体验传递什么
 				</div>
-				<div style="margin-top:15px;" >{{content | titlefunction}}</div>
+				<div style="margin-top:15px;text-indent:2em;" >{{content | titlefunction}}</div>
 			</div>
 
 		</div>
@@ -164,7 +164,13 @@
 	}
 	@media screen and (max-width:600px) {
 	    .per{
-	    	width:40%;
+	    	width:90%;
+	    	min-width: 90%;
+	    	padding:5px;
+	    	margin: 20px auto;
+	    }
+	    .per-box{
+	    	height: 300px;
 	    }
 	}
 </style>

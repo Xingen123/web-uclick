@@ -85,7 +85,7 @@
 			  	if (response.data.complete=="SUCCESS") {
 			  	    let width = document.body.clientWidth;
 			  	    
-                	if(width>600){
+                	// if(width>600){
                 		if (response.data.dataStatus==true) {
 				  			 _this.$message({
 							    message: 'UClick欢迎您的到来',
@@ -100,11 +100,11 @@
 					         	path: '/perfect'
 					         })
 				  		 }			  		
-                	}else{
-                			_this.$router.push({
-					         	path: '/gohome'
-					        })
-                	}	
+             //    	}else{
+             //    			_this.$router.push({
+					        //  	path: '/gohome'
+					        // })
+             //    	}	
 			  		
 			  	}
 			  	else if(response.data.complete=="FAILED"){

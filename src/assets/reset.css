@@ -19,7 +19,25 @@ li {
 html::-webkit-scrollbar {
     display: none;
 }
-
+  .events-day:hover{
+  background:rgba(252,248,227,0.6);
+}
+.el-dialog{
+  min-width: 475px;
+} 
+.day-number{
+  text-align: center!important;
+  font-size: 18px!important;
+}
+.event-item{
+   background:rgb(0,128,186) !important;
+   color: white !important;
+}
+.el-breadcrumb__inner{
+  font-size:17px;
+  color: gray;
+  font-weight: 500;
+}
 body {
     padding-right:0 !important;
     overflow:-Scroll;
@@ -99,6 +117,17 @@ body {
     }
 }
 @media screen and (max-width:600px) {
+  .el-dialog,.el-message-box{
+  min-width:80% !important;
+} 
+  .el-collapse-item__header{
+     min-width:0; 
+     margin: 20px auto;
+     overflow: hidden;
+  }
+  .el-collapse-item__wrap{
+    overflow: auto;
+  }
      .logoshow{
          display: none;
      }

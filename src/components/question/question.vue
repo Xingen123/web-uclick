@@ -81,12 +81,11 @@
 		margin-top:40px !important;
 		cursor: pointer;
 		position: relative;
-		border-radius: 5px;
 		margin-left: 40px;
 		display: inline-block;
-		-moz-box-shadow:4px 2px 19px #9C9698; 
+/*		-moz-box-shadow:4px 2px 19px #9C9698; 
 		-webkit-box-shadow:4px 2px 19px #9C9698; 
-		box-shadow:4px 2px 19px #9C9698;
+		box-shadow:4px 2px 19px #9C9698;*/
 		overflow: hidden;
 
 	}
@@ -99,15 +98,15 @@
 	}*/
 	.boxquestion:hover div{
 		z-index: 10;
-		display: block;
+		bottom: 0;
 	}
 	.boxquestion:hover img{
-		transform: rotate(9deg) scale(1.2);
+		transform:scale(1.2);
 	
 	}
-	.boxquestion>a>img{width: 100%;height: 100%;display: block;border-radius: 5px;transition: all .8s;}
+	.boxquestion>a>img{width: 100%;height: 100%;display: block;transition: all .8s;}
 	.boxquestion>a{width: 100%;height:100%;text-decoration: none;transition: all .5s;}
-	.boxquestion>div{display:none;width: 100%;height:30px;line-height: 30px;position: absolute;bottom: 0px; color:white;text-align: center;background-color: rgba(0,0,0,.4);}
+	.boxquestion>div{width: 100%;height:30px;line-height: 30px;position: absolute;bottom: 300px; color:white;text-align: center;background-color: rgba(0,0,0,.4);transition: all .8s;}
 	@media screen and (max-width:1539px) {
 			.bigboxquestion{
 				margin-top:50px !important;
