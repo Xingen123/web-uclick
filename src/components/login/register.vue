@@ -107,17 +107,17 @@ import axios from 'axios'
 							    type: 'success',
 							    duration:1000
 							})
-							let width = document.body.clientWidth;
+							// let width = document.body.clientWidth;
 			  	    
-                			if(width>600){
+                			// if(width>600){
                 				 _this.$router.push({
 					        		path: '/login'
 					        	})
-                			}else{
-                				_this.$router.push({
-					         		path: '/gohome'
-					       	 	})
-                			}
+               //  			}else{
+               //  				_this.$router.push({
+					         	// 	path: '/gohome'
+					       	 	// })
+               //  			}
 
 			        		
 					  	}else if(response.data.complete=="FAILED") {

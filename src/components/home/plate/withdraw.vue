@@ -136,7 +136,6 @@
 			  	// if (response.data.fundRecordList.length>0) {
 			  		_this.recordItem=response.data.fundRecordList
 			  	// }
-			  	console.log(response.data);
 			  	_this.dialogVisible=true	  	
 			  }).catch(function (error) {
 			      console.log(error);
@@ -250,6 +249,7 @@
 	} 
 </script>
 <style scoped>
+
 	.money{
 		width: 35%;
 		min-width: 650px;
@@ -297,6 +297,16 @@
 		margin-left: 20px;
 	}
     @media screen and (max-width:600px) {
-	    
+	    .money{
+	    	width: 95%;
+			min-width: 0;
+			margin: 10px auto;
+	    }
+	    .recordItem>li{
+	   	 	text-align: center;
+			padding: 20px 0;
+			margin-left: 0;
+			border-top: 1px solid rgb(232,232,232);
+		}
 	}
 </style>

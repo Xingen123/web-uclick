@@ -1,6 +1,6 @@
+
 <template>  
     <div>
-
         <el-collapse v-model="activeName" accordion>
           <el-collapse-item v-if="tableData!=0" v-for="(item,index) in tableData" :key="index"  >
                 <span slot="title" style="padding-left:15px;">
@@ -11,7 +11,7 @@
                 border
                 v-loading="loading"
                 style="width: 90%;min-width:600px;"
-                max-height="300" >
+               >
                 <el-table-column
                   prop="date"
                   label="日期"
@@ -62,7 +62,7 @@
         <el-dialog
         
           :visible.sync="dialogVisible"
-          width="30%">
+          width="45%">
           <template>
               <el-table
                 :data="tableData1"
@@ -88,6 +88,11 @@
         </el-dialog>
     </div>
 </template>
+
+
+<!-- 已完成 -->
+
+
 <script>
     export default{
         components:{
@@ -108,7 +113,6 @@
         methods:{
             //点击人数
             details(scope){
-                console.log(scope)
                 this.dialogVisible = true
                 var _this=this
                 let param = new FormData();

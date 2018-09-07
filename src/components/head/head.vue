@@ -5,13 +5,14 @@
 			<div class="logo" @click="$router.push({
 		        	path: '/index'
 		     	})"></div>
+
 			<ul class="link">
-				<li >
-					<router-link to="/index">
+				<li  >
+					<router-link to="/index" >
                         体验
                     </router-link>
 				</li>
-				<li >
+				<li  >
 					<router-link to="/question">
 						攻略
 					</router-link>
@@ -21,8 +22,9 @@
                       个人信息
                     </router-link>
 				</li>
+
 			</ul>
-			
+
 			<div class="head">	
 				<div class="headimg" @click="funon" @mouseenter="enter" @mouseleave="leave">
 					<img  :src="logohead" alt="" :onerror="logoerror"  class="headimgicon">
@@ -70,6 +72,7 @@
 
 		},
 		methods:{
+			
 			//弹框确认按钮
 			yes(){
 				this.dialogVisible = true
@@ -157,6 +160,7 @@ margin-top: -43px;
 font-size: 20px;
 overflow: hidden;
 }
+
 .el-dialog__wrapper{
 	background: rgba(0,0,0,0.5);
 }

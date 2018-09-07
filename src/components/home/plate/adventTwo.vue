@@ -44,8 +44,8 @@
 		      fixed="right"
 		      label="操作">
 		      <template slot-scope="scope">
-		      	<a  class="detaletime"  v-if="scope.row.isNotDelete==true" @click="deleteRow(scope)">删除时间</a>
-			    <a  class="apply"		v-else="scope.row.isNotDelete==false" @click="details(scope)">报名信息</a>
+		      	<a  class="detaletime"  v-if="scope.row.personAmount==0" @click="deleteRow(scope)">删除时间</a>
+			    <a  class="apply"		v-else="scope.row.personAmount>0" @click="details(scope)">报名信息</a>
 		      </template>
 		    </el-table-column>
 		  </el-table>
@@ -86,6 +86,10 @@
 		</el-dialog>
 	</div>
 </template>
+
+
+<!-- 未完成 -->
+
 <script>
 	export default{
 		components:{

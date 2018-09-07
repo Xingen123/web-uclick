@@ -1,6 +1,26 @@
 <template>
 	<div class="bigbox">
 			<head-er></head-er>
+			<div style="margin:25px 10px;">
+
+				<el-breadcrumb separator-class="el-icon-arrow-right" style="float:left;">
+				  <el-breadcrumb-item :to="{ path: '/index' }" >{{recommendTitle}}</el-breadcrumb-item>
+				  <el-breadcrumb-item >时间管理</el-breadcrumb-item>
+				</el-breadcrumb>
+
+				 <el-popover
+				 style="float: right;"
+				    placement="bottom-start"
+				    width="250"
+				    trigger="hover">
+					<div>
+						<div v-for="item in gridData" style="overflow:hidden;margin-top:20px;"><span style="color:rgb(72,72,72);font-weight: bold;float:left;width:30%;">{{item.name}}</span><span style="float:right;width:68%;text-align:justify;">{{item.address}}</span></div>
+					</div>
+				    <el-button slot="reference" class="button">时间管理<i class="el-icon-question"></i></el-button>
+				  </el-popover>
+
+			</div>
+
 			<div class="calendar" style="padding-top:70px;">	
 		<fullCalendar :events="events" v-on:dayClick="day" v-on:eventClick="event1"></fullCalendar>
 		<el-dialog
@@ -78,6 +98,20 @@
 		},
 		data(){
 			return{
+			 gridData: [{
+			          name: '创建时间：',
+			          address: '点击具体日期即可创建当天体验时间。'
+			        }, {
+			          name: '添加价格：',
+			          address: '在创建体验时间时，您需要添加对应的价格。这意味着您可以给不同的体验时间设定不同的价格。'
+			        }, {
+			          name: '删除时间：',
+			          address: '当某一时间的体验没有体验者报名时，您可以酌情选择删除当天体验时间。但需要注意的是，一旦某一时间的体验有体验者报名，该时间的体验不能被删除。'
+			        },
+			        {
+			          name: '',
+			          address: '如果您由于特殊原因不得不调整体验时间，您可以通过App与体验者取得联系并获得他们的同意后，再联系App客服进行删除。'
+			        }],
 				price:"",
 				num:0,
 				yea:"",
@@ -86,6 +120,7 @@
 				creat:true,
 				//起止时间
 				startTime: '',
+				recommendTitle:"",
         		endTime: '',
         		//点击删除或修改当天的时间
 				remove:false,
@@ -109,11 +144,11 @@
 			  param.append('token',tokenone);
 			  param.append('id',this.$route.params.id);
 			  this.$ajax.post('query/webRecommendTime',param).then(function (response) {
-			  	
 			  	if (response.data.complete=="SUCCESS"){
 			  		_this.num=response.data.defaultAmount
 			  		_this.events=response.data.webTimeInfoList
 			  		_this.price=response.data.recommendAmount
+			  		_this.recommendTitle=response.data.recommendTitle
 			  	}
 			  }).catch(function (error) {
 			      console.log(error);
@@ -311,11 +346,24 @@
 <style scoped>
 	.calendar{
 		width: 100%;
-		/*height: 1000px;*/
-		/*position: relative;*/
+
+	}
+	.el-icon-question{
+		margin-left: 5px;
+
+	}
+	.button{
+		border:none;
+		font-size: 17px;
+		color: gray;
+	}
+	.button:hover{
+		background-color: white;
+		color:rgb(0,128,186);
 	}
 	.box{
 		margin-top: 20px;
 		text-align: center;
 	}
+
 </style>

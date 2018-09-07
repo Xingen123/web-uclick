@@ -2,50 +2,48 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 //登录注册
-import Show from '@/components/login/show'
-import Login from '@/components/login/login'
-import Register from '@/components/login/register'
-import Reset from '@/components/login/reset'
-import Resetpsw from '@/components/login/resetpsw'
-import Time from '@/components/login/time'
-import Perfect from '@/components/login/perfect'
-import Gohome from '@/components/login/gohome'
-import Deal from '@/components/login/deal'
+const Show = resolve => require(['@/components/login/show'], resolve)
+const Login = resolve => require(['@/components/login/login'], resolve)
+const Register = resolve => require(['@/components/login/register'], resolve)
+const Reset = resolve => require(['@/components/login/reset'], resolve)
+const Resetpsw = resolve => require(['@/components/login/resetpsw'], resolve)
+const Time = resolve => require(['@/components/login/time'], resolve)
+const Perfect = resolve => require(['@/components/login/perfect'], resolve)
+const Gohome = resolve => require(['@/components/login/gohome'], resolve)
+const Deal = resolve => require(['@/components/login/deal'], resolve)
 //主页
-import Index from '@/components/index/index'
-import Calendar from '@/components/index/calendar/calendar'
-import Calendartwo from '@/components/index/calendar/Calendartwo'
+const Index = resolve => require(['@/components/index/index'], resolve)
+const Calendar = resolve => require(['@/components/index/calendar/calendar'], resolve)
+const Calendartwo = resolve => require(['@/components/index/calendar/Calendartwo'], resolve)
 
 //问题
 
-import Question from '@/components/question/question'
-
-
+const Question = resolve => require(['@/components/question/question'], resolve)
 //个人
-import Home from '@/components/home/home'
-import Self from '@/components/home/self'
-import Verification from '@/components/home/verification'
+const Home = resolve => require(['@/components/home/home'], resolve)
+const Self = resolve => require(['@/components/home/self'], resolve)
+const Verification = resolve => require(['@/components/home/verification'], resolve)
 //流程
-import Flow from '@/components/flow/flow'
+const Flow = resolve => require(['@/components/flow/flow'], resolve)
 //步骤
 
-import repertoire from '@/components/flow/flowcontent/repertoire'
-import About from '@/components/flow/flowcontent/about'
-import LastTime from '@/components/flow/flowcontent/lastTime'
-import Cover from '@/components/flow/flowcontent/cover'
-import Experience from '@/components/flow/flowcontent/experience'
-import Gather from '@/components/flow/flowcontent/gather'
-import Mapdepot from '@/components/flow/flowcontent/mapdepot'
-import Peoplenum from '@/components/flow/flowcontent/peoplenum'
-import Price from '@/components/flow/flowcontent/price'
-import Remark from '@/components/flow/flowcontent/remark'
-import Require from '@/components/flow/flowcontent/require'
-import Slogan from '@/components/flow/flowcontent/slogan'
-import Sort from '@/components/flow/flowcontent/sort'
-import Moment from '@/components/flow/flowcontent/moment'
-import Thing from '@/components/flow/flowcontent/thing'
-import What from '@/components/flow/flowcontent/what'
-import Submit from '@/components/flow/flowcontent/submit'
+const repertoire = resolve => require(['@/components/flow/flowcontent/repertoire'], resolve)
+const About = resolve => require(['@/components/flow/flowcontent/about'], resolve)
+const LastTime = resolve => require(['@/components/flow/flowcontent/lastTime'], resolve)
+const Cover = resolve => require(['@/components/flow/flowcontent/cover'], resolve)
+const Experience = resolve => require(['@/components/flow/flowcontent/experience'], resolve)
+const Gather = resolve => require(['@/components/flow/flowcontent/gather'], resolve)
+const Mapdepot = resolve => require(['@/components/flow/flowcontent/mapdepot'], resolve)
+const Peoplenum = resolve => require(['@/components/flow/flowcontent/peoplenum'], resolve)
+const Price = resolve => require(['@/components/flow/flowcontent/price'], resolve)
+const Remark = resolve => require(['@/components/flow/flowcontent/remark'], resolve)
+const Require = resolve => require(['@/components/flow/flowcontent/require'], resolve)
+const Slogan = resolve => require(['@/components/flow/flowcontent/slogan'], resolve)
+const Sort = resolve => require(['@/components/flow/flowcontent/sort'], resolve)
+const Moment = resolve => require(['@/components/flow/flowcontent/moment'], resolve)
+const Thing = resolve => require(['@/components/flow/flowcontent/thing'], resolve)
+const What = resolve => require(['@/components/flow/flowcontent/what'], resolve)
+const Submit = resolve => require(['@/components/flow/flowcontent/submit'], resolve)
 Vue.use(Router)
 
 

@@ -103,6 +103,12 @@ import global from '@/components/flow/global/global'
 							message: '保存成功!',
 							duration:1500
 						});
+					}else{
+						 _this.$message({
+							type: 'success',
+							message: '保存成功!',
+							duration:1500
+						});
 					}
 			  	}
 			  	
