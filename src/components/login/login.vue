@@ -81,7 +81,7 @@
 			  	var token =response.data.token;
 			  	sessionStorage.setItem('encryptToken',token)
 			  	//存放登录的token
-			  	
+			  	console.log(response)
 			  	if (response.data.complete=="SUCCESS") {
 			  	    let width = document.body.clientWidth;
 			  	    

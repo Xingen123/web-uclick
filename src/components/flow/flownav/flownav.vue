@@ -103,7 +103,7 @@
                         </div>
                     </router-link>
                 </li>
-                <li v-if="status=='INITIALIZATION'" style="margin-bottom:50px;">
+                <li v-if="status !='EXAMINE_PASS'" style="margin-bottom:50px;">
                     <router-link to="/flow/submit">
                         <div>
                             <span>提交</span>
@@ -214,6 +214,7 @@ import global from '@/components/flow/global/global'
                
                 if (response.data.complete=="SUCCESS"){
                     sessionStorage.setItem('status',response.data.status)
+                    console.log(response.data.status)
                     _this.status = response.data.status
                     _this.one=response.data.completeAmount[0]
                     _this.two=response.data.completeAmount[1] 

@@ -101,6 +101,7 @@ import axios from 'axios'
 		        	  param.append('password', this.password);
 					  param.append('mobile', this.phone);
 					  this.$ajax.post('user/regiser',param).then(function (response) {
+					  	console.log(response)
 					  	if (response.data.complete=="SUCCESS") {
 					  		_this.$message({
 							    message: '注册成功',
