@@ -11,25 +11,18 @@
 				<div style="font-size:25px;">{{item.title}}</div>
 				<p>在您提交体验前,还需要完成几个步骤。</p>
 				<div style="margin-top:25px;" class="phonenext">
-
 					<!-- 创建中 -->
 					<el-button type="primary"  class="next" v-if='item.examineType=="INITIALIZATION"' @click="nextFlow(item.id)">继续</el-button>
-
 					<!-- 审核中 -->
 					<el-button type="primary"  class="next" v-if='item.examineType=="SUBMIT_EXAMINE" && item.completeAmount==100' @click="nextFlow(item.id)">继续</el-button>
 					<el-button type="primary" plain class="next" v-if='item.examineType=="SUBMIT_EXAMINE" && item.completeAmount==100' @click="$router.push({
 			       	 path: '/verification'
 			      	})">身份验证</el-button>
-
-
 					<!-- 审核完成 -->		
 					<el-button type="primary"  plain class="next" v-if='item.examineType=="EXAMINE_PASS"' @click="time(item.detailId)">体验时间</el-button>			
 					<el-button type="primary" plain v-if='item.examineType=="EXAMINE_PASS"'  @click="Flow(item.id)">修改体验创意</el-button>
-
-
 				</div>
 			</div>
-			
 			<el-dropdown trigger="click" style="margin-top:25px;margin-left:90px;cursor: pointer;" class="phonetitle" :placement="localtion">
 			      <span class="el-dropdown-link">
 			       <i class="el-icon-more"></i>

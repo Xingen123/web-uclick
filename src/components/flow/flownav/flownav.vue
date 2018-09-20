@@ -103,6 +103,8 @@
                         </div>
                     </router-link>
                 </li>
+
+                <!-- 只有审核通过之后不显示 -->
                 <li v-if="status !='EXAMINE_PASS'" style="margin-bottom:50px;">
                     <router-link to="/flow/submit">
                         <div>

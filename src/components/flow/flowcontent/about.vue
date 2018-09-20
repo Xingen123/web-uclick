@@ -5,7 +5,7 @@
 		</p>
 		<popup :hint="hint" :column="column"></popup>
 		<el-input type="textarea"
-  :rows="8"  style="width:500px;font-size:20px;" v-model="input"  :maxlength="1500"  @input="descInput"  ></el-input>
+  :rows="8"  style="width:500px;font-size:20px;" v-model="input"    @input="descInput"  ></el-input>
 		<div style="margin-top:50px;" >
 			<el-button type="primary"  style="width:120px;" :disabled="disabled" @click="sort('1')">保存并继续</el-button>
 		</div>

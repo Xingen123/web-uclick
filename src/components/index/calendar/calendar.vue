@@ -46,7 +46,7 @@
 		    v-model="startTime"
 		    :picker-options="{
 		      start: '00:00',
-		      step: '00:30',
+		      step: '00:15',
 		      end: '24:00'
 		    }">
 		  </el-time-select>
@@ -57,7 +57,7 @@
 		    v-model="endTime"
 		    :picker-options="{
 		      start: '00:00',
-		      step: '00:30',
+		      step: '00:15',
 		      end: '24:00',
 		      minTime: startTime
 		    }">

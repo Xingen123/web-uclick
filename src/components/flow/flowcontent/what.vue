@@ -24,7 +24,7 @@ Tips：为体验者准备一份额外的“秘密小惊喜”，会更容易获�
 2，精致优雅的餐具
 3，甜品
 4，有鲜花、绿植、懒人沙发、电视机……的超美环境
-5，单反相机" style="margin-top:50px;width:500px;font-size:20px;" :maxlength="250" v-model="itemProvide"  @input="descInputTO"></el-input>
+5，单反相机" style="margin-top:50px;width:500px;font-size:20px;"  v-model="itemProvide"  @input="descInputTO"></el-input>
 		<el-button type="primary" plain style="width:100px;margin-top:50px;display:block;" @click="go" v-show="next">下一步</el-button>
 		<div style="margin-top:50px;" v-show="button">
 			<el-button type="primary"  style="width:100px;"  :disabled="disabled" @click="save(1)">保存</el-button>

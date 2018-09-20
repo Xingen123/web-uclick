@@ -3,9 +3,9 @@
 		<head-er></head-er>
 		<div class="self_box">
 			<div style="font-size:28px;">个人资料</div>
-			<div style="margin-top:50px;"><span style="width:100px;display:inline-block;">姓名</span><el-input type="text" :maxlength="6"  style="margin-left:50px;width:200px;height:20px;" v-model="name"></el-input></div>
+			<div style="margin-top:50px;"><span style="width:100px;display:inline-block;">姓名</span><el-input type="text"   style="margin-left:50px;width:200px;height:20px;" v-model="name"></el-input></div>
 			<div style="margin-top:50px;"><span style="width:100px;display:inline-block;">年龄</span><el-input type="number" @input="descInput"  onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"  style="margin-left:50px;width:200px;height:20px;" v-model="age"></el-input><span class="hint" style="margin-left:15px;color:#409EFF;">(选填)</span></div>
-			<div style="margin-top:50px;"><span style="width:100px;display:inline-block;">职业</span><el-input style="margin-left:50px;width:200px;height:20px;" type="text" :maxlength="10" v-model="profession"></el-input></div>
+			<div style="margin-top:50px;"><span style="width:100px;display:inline-block;">职业</span><el-input style="margin-left:50px;width:200px;height:20px;" type="text" v-model="profession"></el-input></div>
 
 			<div style="margin-top:50px;">
 				<span style="width:100px;display:inline-block;">头像</span>
