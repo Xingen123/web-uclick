@@ -129,8 +129,7 @@
 		padding-left: 30px;
 		text-align: left;
 		margin-top: 20px;
-		padding-right
-		color:rgb(72,72,72);
+		color: rgb(72,72,72);
 		cursor: pointer;
 	}
 	.cur{

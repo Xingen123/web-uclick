@@ -164,6 +164,7 @@
                     _t = [],
                     // 临时的变量
                     _tmp;
+
                 // 按照特定的参数将数组排序将具有相同值得排在一起
                 arr = arr.sort(function(a, b) {
                     var s = a[str],
@@ -182,6 +183,7 @@
                     if ( arr[i][str] === _tmp ){
                         
                         _t.push( arr[i] );
+
                     } else {
                         _tmp = arr[i][str];
                         _arr.push( _t );
@@ -189,7 +191,10 @@
                     }
                 }
                 // 将最后的内容推出新数组
-                _arr.push( _t );
+                let new_t =  _t.sort(function(a,b){
+                    return Date.parse(b.date) - Date.parse(a.date);//时间正序
+                });    
+                _arr.push( new_t );
                 return _arr;
             },
             advent(){

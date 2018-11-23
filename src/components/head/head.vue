@@ -22,7 +22,11 @@
                       个人信息
                     </router-link>
 				</li>
-
+				<li v-if="activity">
+					<router-link to="/activity">
+                      页面后台修改
+                    </router-link>
+				</li>	
 			</ul>
 
 			<div class="head">	
@@ -64,7 +68,8 @@
 				logoerror: 'this.src="' + require('./img/imghead.png') + '"',
 				seen:false,
 				aside:false,
-				dialogVisible: false
+				dialogVisible: false,
+				activity:false
 			}
 		},
 		props: {},
@@ -134,6 +139,15 @@
                 if(width<600){
                     this.width="80%"
                 }
+            },
+            activityLogin(){
+            	var cookiePhone =sessionStorage.getItem('phone');
+
+            	if (cookiePhone == "15006786952") {
+            		 this.activity=true
+            	}else{
+            		 this.activity=false
+            	}
             }
 		},
 		computed:{
@@ -143,6 +157,7 @@
 		mounted () {
 			this.personage()
 			this.clientWidth()
+			this.activityLogin()
 		},
 	  	destroyed () {}
 	} 

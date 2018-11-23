@@ -382,6 +382,5 @@
   	display:block;
     width: 250px;
     margin-top: 15px;
-    vertical-align: bottom;
   }
 </style>

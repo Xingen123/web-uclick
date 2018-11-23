@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+
+//
+const Activity = resolve => require(['@/components/activity/activity'], resolve)
 //登录注册
 const Show = resolve => require(['@/components/login/show'], resolve)
 const Login = resolve => require(['@/components/login/login'], resolve)
@@ -54,6 +57,7 @@ export default new Router({
     	path:"/",
     	redirect:'/show'
     },
+
     {
       path: '/repertoire',
       component: repertoire,
@@ -61,6 +65,7 @@ export default new Router({
         title: 'demo'
       }
     },
+
     //展示
     {
       path: '/show',
@@ -75,6 +80,14 @@ export default new Router({
       component: Login,
       meta: {
         title: '登录'
+      }
+    },
+    // 活动后台
+    {
+      path: '/activity',
+      component: Activity,
+      meta: {
+        title: '活动后台'
       }
     },
     {

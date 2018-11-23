@@ -19,6 +19,14 @@ li {
 html::-webkit-scrollbar {
     display: none;
 }
+  .el-textarea__inner{
+    width: 450px;
+    height: 200px;
+  }
+    .el-upload {
+    border-radius: 5px;
+    border: 1px solid #dcdfe6;
+  }
   .events-day:hover{
   background:rgba(252,248,227,0.6);
 }
